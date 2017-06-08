@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "480686621236",
+    "firebase_url": "https://puerto-morelos-app.firebaseio.com",
+    "project_id": "puerto-morelos-app",
+    "storage_bucket": "puerto-morelos-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:480686621236:android:02d5dd8c195c2897",
+        "android_client_info": {
+          "package_name": "com.puertomorelosapp.puertomorelosapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "480686621236-o9jeh3b6o6j8u6cocr97oc7bks92qes8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6RigrB95eQ2BrZLRdkG0fw_jrav_X1t4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

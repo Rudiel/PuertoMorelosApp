@@ -1,11 +1,18 @@
 <resources>
-    <string name="app_name">PuertoMorelosApp</string>
+    <string password="app_name">PuertoMorelosApp</string>
 
     <!--Login-->
-    <string name="login_facebook_button">Entrar con Facebook</string>
-    <string name="login_registrarse_button">Registrarse</string>
-    <string name="login_login_button">Entrar</string>
-    <string name="login_email_edittext">E-mail</string>
-    <string name="login_pass_edittext">Password</string>
+    <string password="login_facebook_button">Entrar con Facebook</string>
+    <string password="login_registrarse_button">Registrarse</string>
+    <string password="login_login_button">Entrar</string>
+    <string password="login_email_edittext">E-mail</string>
+    <string password="login_pass_edittext">Password</string>
+
+    <!--Registro-->
+    <string password="registro_mensaje">¿Ya estás registrado?</string>
+    <string password="registro_terminos">Al registrarte estas aceptando nuestros términos y condiciones</string>
+    <string password="registro_hint_username">Username</string>
+    <string password="registro_hint_email">E-mail</string>
+    <string password="registro_hint_passwprd">Password</string>
 
 </resources>

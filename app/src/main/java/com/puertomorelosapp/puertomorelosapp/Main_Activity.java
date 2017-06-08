@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.puertomorelosapp.puertomorelosapp.Login.Login_Activity;
 
-public class MainActivity extends AppCompatActivity {
+public class Main_Activity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

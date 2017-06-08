@@ -5,4 +5,15 @@ package com.puertomorelosapp.puertomorelosapp.Login;
  */
 
 public interface ILogin_View {
+
+    void showLoading();
+
+    void hideLoading();
+
+    void showRegisterActivity();
+
+    void showMainActivity();
+
+    void showErrorMessage(String message);
+
 }
