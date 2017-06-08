@@ -2,10 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.puertomorelosapp.puertomorelosapp">
 
-    <uses-permission android:password="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:password=".Utils.PuertoMorelosApplication"
+        android:name=".Utils.PuertoMorelosApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -14,17 +14,17 @@
         android:theme="@style/AppTheme">
 
 
-        <activity android:password=".Main_Activity">
+        <activity android:name=".Login.Login_Activity">
             <intent-filter>
-                <action android:password="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:password="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
+        <activity android:name=".Register.Register_Activity" />
+        <activity android:name=".Main_Activity" />
 
-        <activity android:password=".Login.Login_Activity" />
-        <activity android:password=".Register.Register_Activity" />
 
     </application>
 

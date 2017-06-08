@@ -5,4 +5,12 @@ package com.puertomorelosapp.puertomorelosapp.Register;
  */
 
 public interface IRegister_View {
+
+    void showLoading();
+
+    void hideLoading();
+
+    void registerDone();
+
+    void showMessageError(String message);
 }

@@ -2,6 +2,8 @@ package com.puertomorelosapp.puertomorelosapp.Dagger;
 
 import com.puertomorelosapp.puertomorelosapp.Login.Login_Activity;
 import com.puertomorelosapp.puertomorelosapp.Login.Login_Presenter;
+import com.puertomorelosapp.puertomorelosapp.Register.Register_Activity;
+import com.puertomorelosapp.puertomorelosapp.Register.Register_Presenter;
 
 import javax.inject.Singleton;
 
@@ -18,5 +20,11 @@ public interface AppComponent {
     void inject(Login_Activity activity);
 
     void inject(Login_Presenter target);
+
+    //Register
+
+    void inject(Register_Activity activity);
+
+    void inject(Register_Presenter target);
 
 }

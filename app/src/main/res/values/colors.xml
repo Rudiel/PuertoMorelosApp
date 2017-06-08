@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color password="colorPrimary">#43becb</color>
-    <color password="colorPrimaryDark">#3eaab5</color>
-    <color password="colorAccent">@android:color/white</color>
+    <color name="colorPrimary">#43becb</color>
+    <color name="colorPrimaryDark">#3eaab5</color>
+    <color name="colorAccent">@android:color/white</color>
 </resources>

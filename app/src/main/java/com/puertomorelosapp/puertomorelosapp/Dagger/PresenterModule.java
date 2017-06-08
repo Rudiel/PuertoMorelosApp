@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.puertomorelosapp.puertomorelosapp.Login.ILogin_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Login.Login_Presenter;
+import com.puertomorelosapp.puertomorelosapp.Register.IRegister_Presenter;
+import com.puertomorelosapp.puertomorelosapp.Register.Register_Presenter;
 
 import javax.inject.Singleton;
 
@@ -20,6 +22,12 @@ public class PresenterModule {
     @Singleton
     ILogin_Presenter provideLoginPresenter(Context context) {
         return new Login_Presenter(context);
+    }
+
+    @Provides
+    @Singleton
+    IRegister_Presenter provideRegisterPresenter(Context context){
+        return new Register_Presenter(context);
     }
 
 }

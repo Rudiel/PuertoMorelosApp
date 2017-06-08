@@ -85,6 +85,7 @@ public class Login_Activity extends AppCompatActivity implements ILogin_View {
                 User user = new User();
                 user.setEmail("rudielap@gmail.com");
                 user.setPassword("Rudiel05");
+                user.setContext(Login_Activity.this);
 
                 presenter.loginWithPassandUser(auth, user);
             }

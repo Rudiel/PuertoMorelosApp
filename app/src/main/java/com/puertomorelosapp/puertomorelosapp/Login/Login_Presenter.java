@@ -19,13 +19,9 @@ public class Login_Presenter implements ILogin_Presenter {
 
     private ILogin_View view;
 
-    private Context context;
-
 
     public Login_Presenter(Context context) {
         ((PuertoMorelosApplication) context).getAppComponent().inject(this);
-
-        this.context = context;
     }
 
     @Override
@@ -42,13 +38,13 @@ public class Login_Presenter implements ILogin_Presenter {
     public void loginWithPassandUser(FirebaseAuth auth, User user) {
         view.showLoading();
 
-        auth.signInWithEmailAndPassword(user.getEmail(), user.getPassword()).addOnCompleteListener((Activity) context, new OnCompleteListener<AuthResult>() {
+        auth.signInWithEmailAndPassword(user.getEmail(), user.getPassword()).addOnCompleteListener((Activity) user.getContext(), new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     view.showMainActivity();
                 } else {
-                    view.showErrorMessage(task.toString());
+                    view.showErrorMessage(task.getException().getMessage());
                 }
                 view.hideLoading();
 
