@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">PuertoMorelosApp</string>
+
+    <!--Login-->
+    <string name="login_facebook_button">Entrar con Facebook</string>
+    <string name="login_registrarse_button">Registrarse</string>
+    <string name="login_login_button">Entrar</string>
+    <string name="login_email_edittext">E-mail</string>
+    <string name="login_pass_edittext">Password</string>
+
 </resources>

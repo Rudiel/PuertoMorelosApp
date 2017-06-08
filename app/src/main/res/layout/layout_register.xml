@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/ivBackLogin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/login_back" />
+
+
+    <TextView
+        android:id="@+id/tvTitleLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/login_margin_slides"
+        android:layout_marginRight="@dimen/login_margin_slides"
+        android:layout_marginTop="@dimen/login_margin_slides"
+        android:gravity="center"
+        android:text="Titulo De la App"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textColor="@color/colorAccent" />
+
+
+</RelativeLayout>
