@@ -40,16 +40,18 @@
             android:background="@drawable/white_edittext"
             android:drawableLeft="@android:drawable/ic_menu_camera"
             android:hint="@string/login_email_edittext"
+            android:cursorVisible="true"
             android:minHeight="50dp"
             android:textColor="@android:color/darker_gray"
             android:textColorHint="@android:color/darker_gray" />
 
         <EditText
             android:id="@+id/etPassword"
+            android:cursorVisible="true"
             android:layout_width="match_parent"
+            android:textCursorDrawable="@color/colorPrimaryDark"
             android:layout_height="wrap_content"
             android:background="@drawable/white_edittext"
-            android:drawableLeft="@android:drawable/ic_menu_camera"
             android:hint="@string/login_pass_edittext"
             android:minHeight="50dp"
             android:textColor="@android:color/darker_gray"

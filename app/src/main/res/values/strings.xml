@@ -15,4 +15,11 @@
     <string name="registro_hint_email">E-mail</string>
     <string name="registro_hint_passwprd">Password</string>
 
+    <!--Menu-->
+    <string name="menu_main">Menu Principal</string>
+    <string name="menu_myactivity">Mi Actividad</string>
+    <string name="menu_about">Acerca De</string>
+    <string name="menu_conditions">Términos y Condiciones</string>
+    <string name="menu_logout">Cerrar Sesión</string>
+
 </resources>

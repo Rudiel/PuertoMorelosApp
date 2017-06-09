@@ -23,7 +23,7 @@
         </activity>
 
         <activity android:name=".Register.Register_Activity" />
-        <activity android:name=".Main_Activity" />
+        <activity android:name=".Main.Main_Activity" />
 
 
     </application>

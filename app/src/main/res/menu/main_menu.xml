@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:id="@+id/gp1">
+        <item
+            android:id="@+id/menu_main"
+            android:icon="@android:drawable/ic_menu_camera"
+            android:title="@string/menu_main" />
+    </group>
+    <group android:id="@+id/gp2">
+        <item
+            android:id="@+id/menu_activity"
+            android:icon="@android:drawable/ic_menu_camera"
+            android:title="@string/menu_myactivity" />
+    </group>
+    <group android:id="@+id/gp3">
+        <item
+            android:id="@+id/menu_about"
+            android:icon="@android:drawable/ic_menu_camera"
+            android:title="@string/menu_about" />
+    </group>
+    <group android:id="@+id/gp4">
+        <item
+            android:id="@+id/menu_conditions"
+            android:icon="@android:drawable/ic_menu_camera"
+            android:title="@string/menu_conditions" />
+    </group>
+
+    <group android:id="@+id/gp5">
+        <item
+            android:id="@+id/menu_logout"
+            android:icon="@android:drawable/ic_menu_camera"
+            android:title="@string/menu_logout" />
+    </group>
+</menu>

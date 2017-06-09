@@ -5,4 +5,8 @@ package com.puertomorelosapp.puertomorelosapp.Recover;
  */
 
 public interface IRecover_View {
+
+    void showLoading();
+
+    void hideLoading();
 }

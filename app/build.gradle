@@ -47,6 +47,9 @@ dependencies {
     //Firebase auth
     compile "com.google.firebase:firebase-auth:9.0.0"
 
+    //Design
+    compile 'com.android.support:design:25.0.0'
+
 }
 
 apply plugin: 'com.google.gms.google-services'

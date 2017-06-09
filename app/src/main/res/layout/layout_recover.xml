@@ -3,19 +3,83 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/ivBackRecovery"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <TextView
-        android:id="@+id/tvTitleLogin"
+        android:id="@+id/tvTitleRecovery"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/login_margin_slides"
-        android:layout_marginRight="@dimen/login_margin_slides"
-        android:layout_marginTop="@dimen/login_margin_slides"
+        android:layout_marginTop="20dp"
         android:gravity="center"
-        android:text="Titulo De la App"
+        android:text="Aqui va el nombre de la App"
         android:textAppearance="?android:textAppearanceLarge"
         android:textColor="@color/colorAccent" />
 
+    <LinearLayout
+        android:id="@+id/llLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvTitleLogin"
+        android:layout_marginLeft="@dimen/login_margin_slides"
+        android:layout_marginRight="@dimen/login_margin_slides"
+        android:layout_marginTop="@dimen/login_margin_mainlogin_top"
+        android:orientation="vertical">
+
+
+        <EditText
+            android:id="@+id/etRecoveryMail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/white_edittext"
+            android:drawableLeft="@android:drawable/ic_menu_camera"
+            android:hint="@string/login_pass_edittext"
+            android:minHeight="50dp"
+            android:textColor="@android:color/darker_gray"
+            android:textColorHint="@android:color/darker_gray" />
+
+        <Button
+            android:id="@+id/btSenMail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/blue_button"
+            android:elevation="4dp"
+            android:text="@string/login_login_button"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/llLogin"
+        android:layout_marginLeft="@dimen/login_margin_slides"
+        android:layout_marginRight="@dimen/login_margin_slides"
+        android:layout_marginTop="@dimen/login_margin_secundarylogin_top"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btRecoveryLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/transparent_button"
+            android:text="@string/login_facebook_button"
+            android:textColor="@color/colorAccent" />
+
+        <Button
+            android:id="@+id/btRecoveryRegistrer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/transparent_button"
+            android:text="@string/login_registrarse_button"
+            android:textColor="@color/colorAccent" />
+
+    </LinearLayout>
 
 
 </RelativeLayout>
