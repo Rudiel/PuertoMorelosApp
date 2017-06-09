@@ -2,6 +2,8 @@ package com.puertomorelosapp.puertomorelosapp.Dagger;
 
 import com.puertomorelosapp.puertomorelosapp.Login.Login_Activity;
 import com.puertomorelosapp.puertomorelosapp.Login.Login_Presenter;
+import com.puertomorelosapp.puertomorelosapp.Recover.Recover_Activity;
+import com.puertomorelosapp.puertomorelosapp.Recover.Recover_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Register.Register_Activity;
 import com.puertomorelosapp.puertomorelosapp.Register.Register_Presenter;
 
@@ -26,5 +28,11 @@ public interface AppComponent {
     void inject(Register_Activity activity);
 
     void inject(Register_Presenter target);
+
+    //Recovery
+
+    void inject(Recover_Activity activity);
+
+    void inject(Recover_Presenter target);
 
 }

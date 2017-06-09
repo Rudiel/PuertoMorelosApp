@@ -10,86 +10,99 @@
         android:scaleType="centerCrop"
         android:src="@drawable/login_back" />
 
-
-    <TextView
-        android:id="@+id/tvTitleRegister"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/login_margin_slides"
-        android:layout_marginRight="@dimen/login_margin_slides"
-        android:layout_marginTop="@dimen/login_margin_slides"
-        android:gravity="center"
-        android:text="Titulo De la App"
-        android:textAppearance="?android:textAppearanceLarge"
-        android:textColor="@color/colorAccent" />
+        android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvTitleRegister"
-        android:layout_marginLeft="@dimen/login_margin_slides"
-        android:layout_marginRight="@dimen/login_margin_slides"
-        android:layout_marginTop="@dimen/login_margin_slides"
-        android:orientation="vertical">
-
-
-        <EditText
-            android:id="@+id/etUsernameRegister"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/white_edittext"
-            android:drawableLeft="@android:drawable/ic_menu_camera"
-            android:hint="@string/registro_hint_username"
-            android:minHeight="50dp"
-            android:textColor="@android:color/darker_gray"
-            android:textColorHint="@android:color/darker_gray" />
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvTitleRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/login_margin_slides"
+                android:layout_marginRight="@dimen/login_margin_slides"
+                android:layout_marginTop="@dimen/login_margin_slides"
+                android:gravity="center"
+                android:text="Titulo De la App"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:textColor="@color/colorAccent" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvTitleRegister"
+                android:layout_marginLeft="@dimen/login_margin_slides"
+                android:layout_marginRight="@dimen/login_margin_slides"
+                android:layout_marginTop="@dimen/login_margin_slides"
+                android:orientation="vertical">
 
 
-        <EditText
-            android:id="@+id/etEmailRegister"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/white_edittext"
-            android:drawableLeft="@android:drawable/ic_menu_camera"
-            android:hint="@string/login_email_edittext"
-            android:minHeight="50dp"
-            android:textColor="@android:color/darker_gray"
-            android:textColorHint="@android:color/darker_gray" />
-
-        <EditText
-            android:id="@+id/etPasswordRegister"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/white_edittext"
-            android:drawableLeft="@android:drawable/ic_menu_camera"
-            android:hint="@string/registro_hint_passwprd"
-            android:minHeight="50dp"
-            android:textColor="@android:color/darker_gray"
-            android:textColorHint="@android:color/darker_gray" />
-
-        <Button
-            android:id="@+id/btRegisterRegister"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/login_margin_slides"
-            android:background="@drawable/blue_button"
-            android:text="@string/login_registrarse_button"
-            android:textColor="@color/colorAccent"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/login_margin_slides"
-            android:gravity="center"
-            android:text="@string/registro_mensaje"
-            android:textAppearance="?android:textAppearanceMedium"
-            android:textColor="@color/colorAccent"
-            android:textStyle="bold" />
+                <EditText
+                    android:id="@+id/etUsernameRegister"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/white_edittext"
+                    android:drawableLeft="@android:drawable/ic_menu_camera"
+                    android:hint="@string/registro_hint_username"
+                    android:minHeight="50dp"
+                    android:textColor="@android:color/darker_gray"
+                    android:textColorHint="@android:color/darker_gray" />
 
 
-    </LinearLayout>
+                <EditText
+                    android:id="@+id/etEmailRegister"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/white_edittext"
+                    android:drawableLeft="@android:drawable/ic_menu_camera"
+                    android:hint="@string/login_email_edittext"
+                    android:inputType="textEmailAddress"
+                    android:minHeight="50dp"
+                    android:textColor="@android:color/darker_gray"
+                    android:textColorHint="@android:color/darker_gray" />
 
+                <EditText
+                    android:id="@+id/etPasswordRegister"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/white_edittext"
+                    android:drawableLeft="@android:drawable/ic_menu_camera"
+                    android:hint="@string/registro_hint_passwprd"
+                    android:inputType="textPassword"
+                    android:minHeight="50dp"
+                    android:textColor="@android:color/darker_gray"
+                    android:textColorHint="@android:color/darker_gray" />
+
+                <Button
+                    android:id="@+id/btRegisterRegister"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/login_margin_slides"
+                    android:background="@drawable/blue_button"
+                    android:text="@string/login_registrarse_button"
+                    android:textColor="@color/colorAccent"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/login_margin_slides"
+                    android:gravity="center"
+                    android:text="@string/registro_mensaje"
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textColor="@color/colorAccent"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+    </ScrollView>
 
     <TextView
         android:id="@+id/tvTermsandConditions"

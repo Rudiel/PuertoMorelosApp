@@ -65,14 +65,7 @@ public class Register_Activity extends AppCompatActivity implements IRegister_Vi
         (findViewById(R.id.btRegisterRegister)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Register register = new Register();
-                register.setEmail(etEmailRegister.getText().toString());
-                register.setPassword(etPasswordRegister.getText().toString());
-                register.setUsername(etUsernameRegister.getText().toString());
-                register.setContext(Register_Activity.this);
-
-                presenter.registerUser(register, auth);
+                startRegister();
             }
         });
 
@@ -97,8 +90,22 @@ public class Register_Activity extends AppCompatActivity implements IRegister_Vi
 
     @Override
     public void showMessageError(String message) {
-
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
 
+    private void startRegister() {
+
+        if (!etEmailRegister.getText().toString().isEmpty() &&
+                !etPasswordRegister.getText().toString().isEmpty() &&
+                !etUsernameRegister.getText().toString().isEmpty()) {
+
+            Register register = new Register();
+            register.setEmail(etEmailRegister.getText().toString());
+            register.setPassword(etPasswordRegister.getText().toString());
+            register.setUsername(etUsernameRegister.getText().toString());
+            register.setContext(Register_Activity.this);
+
+            presenter.registerUser(register, auth);
+        }
     }
 }

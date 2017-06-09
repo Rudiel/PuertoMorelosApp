@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
 import com.puertomorelosapp.puertomorelosapp.Models.User;
 import com.puertomorelosapp.puertomorelosapp.R;
+import com.puertomorelosapp.puertomorelosapp.Recover.Recover_Activity;
 import com.puertomorelosapp.puertomorelosapp.Register.Register_Activity;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
 import com.puertomorelosapp.puertomorelosapp.Utils.Utils;
@@ -45,6 +47,15 @@ public class Login_Activity extends AppCompatActivity implements ILogin_View {
 
     @Bind(R.id.pbLogin)
     ProgressBar pbLogin;
+
+    @Bind(R.id.tvForget)
+    TextView tvForget;
+
+    @Bind(R.id.etUser)
+    EditText etUserEmail;
+
+    @Bind(R.id.etPassword)
+    EditText etPassword;
 
     private FirebaseAuth auth;
 
@@ -81,13 +92,7 @@ public class Login_Activity extends AppCompatActivity implements ILogin_View {
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Validar Campos vacios y llamada a la api checar credenciales
-                User user = new User();
-                user.setEmail("rudielap@gmail.com");
-                user.setPassword("Rudiel05");
-                user.setContext(Login_Activity.this);
-
-                presenter.loginWithPassandUser(auth, user);
+                startLogin();
             }
         });
 
@@ -95,6 +100,13 @@ public class Login_Activity extends AppCompatActivity implements ILogin_View {
             @Override
             public void onClick(View v) {
                 //llamada a facebooks
+            }
+        });
+
+        tvForget.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.startRecoveryActivity();
             }
         });
     }
@@ -123,5 +135,21 @@ public class Login_Activity extends AppCompatActivity implements ILogin_View {
     @Override
     public void showErrorMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showRecoveryActivity() {
+        startActivity(new Intent(Login_Activity.this, Recover_Activity.class));
+    }
+
+    private void startLogin() {
+        if (!etPassword.getText().toString().isEmpty() && !etUserEmail.getText().toString().isEmpty()) {
+            User user = new User();
+            user.setEmail(etUserEmail.getText().toString());
+            user.setPassword(etPassword.getText().toString());
+            user.setContext(Login_Activity.this);
+
+            presenter.loginWithPassandUser(auth, user);
+        }
     }
 }

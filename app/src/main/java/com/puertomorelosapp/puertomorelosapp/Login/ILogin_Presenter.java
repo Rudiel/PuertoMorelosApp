@@ -14,4 +14,6 @@ public interface ILogin_Presenter {
     void starRegisterActivity();
 
     void loginWithPassandUser(FirebaseAuth auth, User user);
+
+    void startRecoveryActivity();
 }

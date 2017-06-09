@@ -52,4 +52,9 @@ public class Login_Presenter implements ILogin_Presenter {
         });
 
     }
+
+    @Override
+    public void startRecoveryActivity() {
+        view.showRecoveryActivity();
+    }
 }

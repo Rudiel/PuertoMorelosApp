@@ -16,4 +16,6 @@ public interface ILogin_View {
 
     void showErrorMessage(String message);
 
+    void showRecoveryActivity();
+
 }

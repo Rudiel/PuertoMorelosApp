@@ -9,4 +9,8 @@ public interface IRecover_View {
     void showLoading();
 
     void hideLoading();
+
+    void showErrorMessage(String message);
+
+    void onRecoveryAccountDone();
 }

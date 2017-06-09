@@ -13,4 +13,5 @@ public interface IRegister_View {
     void registerDone();
 
     void showMessageError(String message);
+
 }
