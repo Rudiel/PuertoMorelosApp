@@ -5,10 +5,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
@@ -17,6 +20,7 @@ import com.puertomorelosapp.puertomorelosapp.Models.Recovery;
 import com.puertomorelosapp.puertomorelosapp.R;
 import com.puertomorelosapp.puertomorelosapp.Register.Register_Activity;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
+import com.puertomorelosapp.puertomorelosapp.Utils.Utils;
 
 import javax.inject.Inject;
 
@@ -53,6 +57,10 @@ public class Recover_Activity extends AppCompatActivity implements IRecover_View
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.layout_recover);
 
         ((PuertoMorelosApplication) getApplication()).getAppComponent().inject(this);
@@ -64,6 +72,8 @@ public class Recover_Activity extends AppCompatActivity implements IRecover_View
         auth = FirebaseAuth.getInstance();
 
         Glide.with(this).load(R.drawable.login_back).centerCrop().into((ImageView) findViewById(R.id.ivBackRecovery));
+
+        ((TextView) findViewById(R.id.tvTitleRecovery)).setTypeface(Utils.getbukharisLetter(this));
 
         btSendMail.setOnClickListener(new View.OnClickListener() {
             @Override

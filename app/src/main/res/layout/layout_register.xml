@@ -26,7 +26,7 @@
                 android:layout_marginRight="@dimen/login_margin_slides"
                 android:layout_marginTop="@dimen/login_margin_slides"
                 android:gravity="center"
-                android:text="Titulo De la App"
+                android:text="@string/app_name"
                 android:textAppearance="?android:textAppearanceLarge"
                 android:textColor="@color/colorAccent" />
 
@@ -45,11 +45,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/white_edittext"
-                    android:drawableLeft="@android:drawable/ic_menu_camera"
+                    android:drawableLeft="@drawable/ic_person_black_24dp"
+                    android:drawablePadding="5dp"
+                    android:drawableTint="@android:color/darker_gray"
                     android:hint="@string/registro_hint_username"
                     android:minHeight="50dp"
+                    android:paddingLeft="5dp"
                     android:textColor="@android:color/darker_gray"
-                    android:textColorHint="@android:color/darker_gray" />
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textCursorDrawable="@drawable/cursor_editext" />
 
 
                 <EditText
@@ -57,24 +61,32 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/white_edittext"
-                    android:drawableLeft="@android:drawable/ic_menu_camera"
+                    android:drawableLeft="@drawable/ic_email_black_24dp"
+                    android:drawablePadding="5dp"
+                    android:drawableTint="@android:color/darker_gray"
                     android:hint="@string/login_email_edittext"
                     android:inputType="textEmailAddress"
                     android:minHeight="50dp"
+                    android:paddingLeft="5dp"
                     android:textColor="@android:color/darker_gray"
-                    android:textColorHint="@android:color/darker_gray" />
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textCursorDrawable="@drawable/cursor_editext" />
 
                 <EditText
                     android:id="@+id/etPasswordRegister"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/white_edittext"
-                    android:drawableLeft="@android:drawable/ic_menu_camera"
+                    android:drawableLeft="@drawable/ic_lock_black_24dp"
+                    android:drawablePadding="5dp"
+                    android:drawableTint="@android:color/darker_gray"
                     android:hint="@string/registro_hint_passwprd"
                     android:inputType="textPassword"
                     android:minHeight="50dp"
+                    android:paddingLeft="5dp"
                     android:textColor="@android:color/darker_gray"
-                    android:textColorHint="@android:color/darker_gray" />
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textCursorDrawable="@drawable/cursor_editext" />
 
                 <Button
                     android:id="@+id/btRegisterRegister"
@@ -110,8 +122,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="10dp"
-        android:layout_marginLeft="@dimen/login_margin_secundarylogin_top"
-        android:layout_marginRight="@dimen/login_margin_mainlogin_top"
+        android:layout_marginLeft="@dimen/login_margin_slides"
+        android:layout_marginRight="@dimen/login_margin_slides"
         android:gravity="center"
         android:text="@string/registro_terminos"
         android:textAppearance="?android:textAppearanceMedium"

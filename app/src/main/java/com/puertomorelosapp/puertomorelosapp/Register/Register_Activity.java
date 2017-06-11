@@ -5,9 +5,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -16,6 +19,7 @@ import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
 import com.puertomorelosapp.puertomorelosapp.Models.Register;
 import com.puertomorelosapp.puertomorelosapp.R;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
+import com.puertomorelosapp.puertomorelosapp.Utils.Utils;
 
 import javax.inject.Inject;
 
@@ -49,6 +53,10 @@ public class Register_Activity extends AppCompatActivity implements IRegister_Vi
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.layout_register);
 
         auth = FirebaseAuth.getInstance();
@@ -61,6 +69,8 @@ public class Register_Activity extends AppCompatActivity implements IRegister_Vi
 
 
         Glide.with(this).load(R.drawable.login_back).dontTransform().into((ImageView) findViewById(R.id.ivBackRegister));
+
+        ((TextView) findViewById(R.id.tvTitleRegister)).setTypeface(Utils.getbukharisLetter(this));
 
         (findViewById(R.id.btRegisterRegister)).setOnClickListener(new View.OnClickListener() {
             @Override

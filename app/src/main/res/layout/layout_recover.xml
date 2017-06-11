@@ -5,9 +5,9 @@
 
     <ImageView
         android:id="@+id/ivBackRecovery"
-        android:scaleType="centerCrop"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:gravity="center"
-                android:text="Aqui va el nombre de la App"
+                android:text="@string/app_name"
                 android:textAppearance="?android:textAppearanceLarge"
                 android:textColor="@color/colorAccent" />
 
@@ -43,12 +43,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/white_edittext"
-                    android:drawableLeft="@android:drawable/ic_menu_camera"
-                    android:hint="@string/login_pass_edittext"
-                    android:minHeight="50dp"
+                    android:drawableLeft="@drawable/ic_email_black_24dp"
+                    android:drawablePadding="5dp"
+                    android:drawableTint="@android:color/darker_gray"
+                    android:hint="@string/login_email_edittext"
                     android:inputType="textEmailAddress"
+                    android:minHeight="50dp"
+                    android:paddingLeft="5dp"
                     android:textColor="@android:color/darker_gray"
-                    android:textColorHint="@android:color/darker_gray" />
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textCursorDrawable="@drawable/cursor_editext" />
 
                 <Button
                     android:id="@+id/btSenMail"

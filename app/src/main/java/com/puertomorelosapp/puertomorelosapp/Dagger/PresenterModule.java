@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.puertomorelosapp.puertomorelosapp.Login.ILogin_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Login.Login_Presenter;
+import com.puertomorelosapp.puertomorelosapp.Main.IMain_Presenter;
+import com.puertomorelosapp.puertomorelosapp.Main.Main_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Recover.IRecover_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Recover.Recover_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Register.IRegister_Presenter;
@@ -36,6 +38,12 @@ public class PresenterModule {
     @Singleton
     IRecover_Presenter provideRecoverPresenter(Context context) {
         return new Recover_Presenter(context);
+    }
+
+    @Provides
+    @Singleton
+    IMain_Presenter provideMainPresenter(Context context) {
+        return new Main_Presenter(context);
     }
 
 }

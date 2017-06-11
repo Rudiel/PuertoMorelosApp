@@ -5,4 +5,8 @@ package com.puertomorelosapp.puertomorelosapp.Main;
  */
 
 public interface IMain_Presenter {
+
+    void setView(IMain_View view);
+
+    void getCategories();
 }

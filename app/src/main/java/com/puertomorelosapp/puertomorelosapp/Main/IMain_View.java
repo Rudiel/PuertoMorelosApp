@@ -5,4 +5,10 @@ package com.puertomorelosapp.puertomorelosapp.Main;
  */
 
 public interface IMain_View {
+
+    void showCategories();
+
+    void showLoading();
+
+    void hideLoading();
 }
