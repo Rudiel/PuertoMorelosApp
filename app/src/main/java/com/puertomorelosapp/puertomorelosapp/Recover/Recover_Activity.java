@@ -1,5 +1,6 @@
 package com.puertomorelosapp.puertomorelosapp.Recover;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,6 +16,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
+import com.puertomorelosapp.puertomorelosapp.Creators.Dialog_Creator;
+import com.puertomorelosapp.puertomorelosapp.Creators.IDialog_Creator;
 import com.puertomorelosapp.puertomorelosapp.Login.Login_Activity;
 import com.puertomorelosapp.puertomorelosapp.Models.Recovery;
 import com.puertomorelosapp.puertomorelosapp.R;
@@ -107,7 +110,8 @@ public class Recover_Activity extends AppCompatActivity implements IRecover_View
             recovery.setEmail(etRecoveryMail.getText().toString());
 
             presenter.recoveryAccount(recovery, auth);
-        }
+        } else
+            this.showErrorMessage(checkFieldsEmpty());
 
     }
 
@@ -124,11 +128,38 @@ public class Recover_Activity extends AppCompatActivity implements IRecover_View
 
     @Override
     public void showErrorMessage(String message) {
+        new Dialog_Creator().showAlertDialog(
+                this,
+                getString(R.string.title_register),
+                message,
+                new IDialog_Creator() {
+                    @Override
+                    public void didConfirm(Dialog dialog) {
 
+                    }
+
+                    @Override
+                    public void didCancel(Dialog dialog) {
+
+                    }
+
+                    @Override
+                    public void didOK(Dialog dialog) {
+                        dialog.dismiss();
+                    }
+                }
+        );
     }
 
     @Override
     public void onRecoveryAccountDone() {
 
+    }
+
+    private String checkFieldsEmpty() {
+
+        if (etRecoveryMail.getText().toString().trim().equals(""))
+            return getString(R.string.email_empty);
+        else return "";
     }
 }

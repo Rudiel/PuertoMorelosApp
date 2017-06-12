@@ -1,8 +1,10 @@
 package com.puertomorelosapp.puertomorelosapp.Register;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
@@ -15,6 +17,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
+import com.puertomorelosapp.puertomorelosapp.Creators.Dialog_Creator;
+import com.puertomorelosapp.puertomorelosapp.Creators.IDialog_Creator;
 import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
 import com.puertomorelosapp.puertomorelosapp.Models.Register;
 import com.puertomorelosapp.puertomorelosapp.R;
@@ -79,6 +83,13 @@ public class Register_Activity extends AppCompatActivity implements IRegister_Vi
             }
         });
 
+        (findViewById(R.id.tvRegisterDone)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
 
     }
 
@@ -100,14 +111,32 @@ public class Register_Activity extends AppCompatActivity implements IRegister_Vi
 
     @Override
     public void showMessageError(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        new Dialog_Creator().showAlertDialog(
+                this,
+                getString(R.string.title_register),
+                message,
+                new IDialog_Creator() {
+                    @Override
+                    public void didConfirm(Dialog dialog) {
+
+                    }
+
+                    @Override
+                    public void didCancel(Dialog dialog) {
+
+                    }
+
+                    @Override
+                    public void didOK(Dialog dialog) {
+                        dialog.dismiss();
+                    }
+                }
+        );
     }
 
     private void startRegister() {
 
-        if (!etEmailRegister.getText().toString().isEmpty() &&
-                !etPasswordRegister.getText().toString().isEmpty() &&
-                !etUsernameRegister.getText().toString().isEmpty()) {
+        if (checkFieldsEmpty().equalsIgnoreCase("")) {
 
             Register register = new Register();
             register.setEmail(etEmailRegister.getText().toString());
@@ -116,6 +145,20 @@ public class Register_Activity extends AppCompatActivity implements IRegister_Vi
             register.setContext(Register_Activity.this);
 
             presenter.registerUser(register, auth);
+        } else {
+            this.showMessageError(checkFieldsEmpty());
         }
+    }
+
+    private String checkFieldsEmpty() {
+
+        if (etEmailRegister.getText().toString().trim().equals(""))
+            return getString(R.string.email_empty);
+        else if (etPasswordRegister.getText().toString().trim().equals(""))
+            return getString(R.string.password_empty);
+        else if (etUsernameRegister.getText().toString().trim().equals(""))
+            return getString(R.string.user_empty);
+
+        else return "";
     }
 }

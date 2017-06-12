@@ -22,4 +22,14 @@
     <string name="menu_conditions">Términos y Condiciones</string>
     <string name="menu_logout">Cerrar Sesión</string>
 
+    <!--Utils-->
+    <string name="email_empty">El campo E-mail es requerido.Favor de completarlo e intentarlo nuevamente</string>
+    <string name="password_empty">El campo Password es requerido.Favor de completarlo e intentarlo nuevamente</string>
+    <string name="user_empty">El campo Usuario es requerido.Favor de completarlo e intentarlo nuevamente</string>
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_accept">Aceptar</string>
+    <string name="dialog_cancel">Cancelar</string>
+    <string name="title_register">Registrarse</string>
+    <string name="title_login">Iniciar Sesión</string>
+    <string name="title_recover">Recuperar</string>
 </resources>

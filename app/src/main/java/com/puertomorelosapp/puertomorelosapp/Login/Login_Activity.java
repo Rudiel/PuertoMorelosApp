@@ -1,5 +1,6 @@
 package com.puertomorelosapp.puertomorelosapp.Login;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,6 +17,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
+import com.puertomorelosapp.puertomorelosapp.Creators.Dialog_Creator;
+import com.puertomorelosapp.puertomorelosapp.Creators.IDialog_Creator;
 import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
 import com.puertomorelosapp.puertomorelosapp.Models.User;
 import com.puertomorelosapp.puertomorelosapp.R;
@@ -139,7 +142,27 @@ public class Login_Activity extends AppCompatActivity implements ILogin_View {
 
     @Override
     public void showErrorMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        new Dialog_Creator().showAlertDialog(
+                this,
+                getString(R.string.title_register),
+                message,
+                new IDialog_Creator() {
+                    @Override
+                    public void didConfirm(Dialog dialog) {
+
+                    }
+
+                    @Override
+                    public void didCancel(Dialog dialog) {
+
+                    }
+
+                    @Override
+                    public void didOK(Dialog dialog) {
+                        dialog.dismiss();
+                    }
+                }
+        );
     }
 
     @Override
@@ -155,6 +178,16 @@ public class Login_Activity extends AppCompatActivity implements ILogin_View {
             user.setContext(Login_Activity.this);
 
             presenter.loginWithPassandUser(auth, user);
-        }
+        } else
+            this.showErrorMessage(checkFieldsEmpty());
+    }
+
+    private String checkFieldsEmpty() {
+
+        if (etUserEmail.getText().toString().trim().equals(""))
+            return getString(R.string.email_empty);
+        else if (etPassword.getText().toString().trim().equals(""))
+            return getString(R.string.password_empty);
+        else return "";
     }
 }
