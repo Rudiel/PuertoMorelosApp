@@ -1,5 +1,6 @@
 package com.puertomorelosapp.puertomorelosapp.Main;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -9,11 +10,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.puertomorelosapp.puertomorelosapp.Fragments.AboutUs_Fragment;
+import com.puertomorelosapp.puertomorelosapp.Fragments.Activity_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Categories_Fragment;
+import com.puertomorelosapp.puertomorelosapp.Fragments.Conditions_Fragment;
+import com.puertomorelosapp.puertomorelosapp.Fragments.Fragment_Map;
+import com.puertomorelosapp.puertomorelosapp.Login.Login_Activity;
 import com.puertomorelosapp.puertomorelosapp.R;
 import com.puertomorelosapp.puertomorelosapp.Register.IRegister_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
+import com.puertomorelosapp.puertomorelosapp.Utils.Utils;
 
 import javax.inject.Inject;
 
@@ -34,11 +46,17 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
     @Inject
     IMain_Presenter presenter;
 
+    private TextView titleToolbar;
+
+    private FirebaseAuth auth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        auth = FirebaseAuth.getInstance();
 
         ((PuertoMorelosApplication) getApplication()).getAppComponent().inject(this);
 
@@ -52,7 +70,20 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
 
         presenter.getCategories();
 
+        setFragment(new Categories_Fragment(), false);
 
+        (toolbar.findViewById(R.id.ivMap)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setFragment(new Fragment_Map(), false);
+                setToolbarTitle(getString(R.string.app_name));
+            }
+        });
+
+        titleToolbar = (TextView) toolbar.findViewById(R.id.tvTitleToolbar);
+
+        titleToolbar.setTypeface(Utils.getbukharisLetter(this));
+        
 
     }
 
@@ -65,14 +96,27 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.menu_about:
+                        setFragment(new AboutUs_Fragment(), false);
+                        drawerLayout.closeDrawers();
+                        setToolbarTitle(getString(R.string.menu_about));
                         break;
                     case R.id.menu_activity:
+                        setFragment(new Activity_Fragment(), false);
+                        drawerLayout.closeDrawers();
+                        setToolbarTitle(getString(R.string.menu_myactivity));
                         break;
                     case R.id.menu_conditions:
+                        setFragment(new Conditions_Fragment(), false);
+                        drawerLayout.closeDrawers();
+                        setToolbarTitle(getString(R.string.menu_conditions));
                         break;
                     case R.id.menu_main:
+                        setFragment(new Categories_Fragment(), false);
+                        drawerLayout.closeDrawers();
+                        setToolbarTitle(getString(R.string.menu_main));
                         break;
                     case R.id.menu_logout:
+                        presenter.logout(auth);
                         break;
                 }
 
@@ -123,4 +167,16 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
     public void hideLoading() {
 
     }
+
+    @Override
+    public void logoutSesion() {
+        startActivity(new Intent(Main_Activity.this, Login_Activity.class));
+        finish();
+    }
+
+    public void setToolbarTitle(String title) {
+        titleToolbar.setText(title);
+    }
+
+
 }

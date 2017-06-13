@@ -1,7 +1,10 @@
 package com.puertomorelosapp.puertomorelosapp.Main;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
 
 /**
@@ -25,5 +28,12 @@ public class Main_Presenter implements IMain_Presenter {
     @Override
     public void getCategories() {
 
+    }
+
+    @Override
+    public void logout(FirebaseAuth auth) {
+        auth.signOut();
+
+        view.logoutSesion();
     }
 }

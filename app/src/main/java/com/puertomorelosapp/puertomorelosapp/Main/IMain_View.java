@@ -11,4 +11,6 @@ public interface IMain_View {
     void showLoading();
 
     void hideLoading();
+
+    void logoutSesion();
 }

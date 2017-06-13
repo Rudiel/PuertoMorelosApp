@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="2">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/gradient_background">
+
+        <ImageView
+            android:id="@+id/ivAboutLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ivAboutLogo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="version 1"
+            android:textColor="@color/colorAccent" />
+
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:background="@null"
+            android:drawableLeft="@mipmap/ic_launcher_round"
+            android:drawablePadding="10dp"
+            android:gravity="left|center_vertical"
+            android:minHeight="80dp"
+            android:text="Twitter"
+            android:textColor="@color/colorPrimary" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="60dp"
+            android:background="@color/colorPrimary" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:background="@null"
+            android:drawableLeft="@mipmap/ic_launcher_round"
+            android:drawablePadding="10dp"
+            android:gravity="left|center_vertical"
+            android:minHeight="80dp"
+            android:text="Twitter"
+            android:textColor="@color/colorPrimary" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="60dp"
+            android:background="@color/colorPrimary" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:background="@null"
+            android:drawableLeft="@mipmap/ic_launcher_round"
+            android:drawablePadding="10dp"
+            android:gravity="left|center_vertical"
+            android:minHeight="80dp"
+            android:text="Twitter"
+            android:textColor="@color/colorPrimary" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="60dp"
+            android:background="@color/colorPrimary" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:background="@null"
+            android:drawableLeft="@mipmap/ic_launcher_round"
+            android:drawablePadding="10dp"
+            android:gravity="left|center_vertical"
+            android:minHeight="80dp"
+            android:text="Twitter"
+            android:textColor="@color/colorPrimary" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="60dp"
+            android:background="@color/colorPrimary" />
+
+
+    </LinearLayout>
+
+</LinearLayout>
