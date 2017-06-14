@@ -3,8 +3,10 @@ package com.puertomorelosapp.puertomorelosapp.Login;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -16,7 +18,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.puertomorelosapp.puertomorelosapp.Creators.Dialog_Creator;
 import com.puertomorelosapp.puertomorelosapp.Creators.IDialog_Creator;
 import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
@@ -36,7 +51,7 @@ import butterknife.ButterKnife;
  * Created by rudielavilaperaza on 6/8/17.
  */
 
-public class Login_Activity extends AppCompatActivity implements ILogin_View {
+public class Login_Activity extends AppCompatActivity implements ILogin_View, FacebookCallback<LoginResult> {
 
     @Inject
     ILogin_Presenter presenter;
@@ -62,7 +77,13 @@ public class Login_Activity extends AppCompatActivity implements ILogin_View {
     @Bind(R.id.etPassword)
     EditText etPassword;
 
+    @Bind(R.id.blFacebook)
+    LoginButton lbFacebook;
+
     private FirebaseAuth auth;
+
+
+    private CallbackManager callbackManager;
 
 
     @Override
@@ -79,6 +100,8 @@ public class Login_Activity extends AppCompatActivity implements ILogin_View {
             finish();
         }
         setContentView(R.layout.layout_login);
+
+        FacebookSdk.sdkInitialize(getApplicationContext());
 
         ((PuertoMorelosApplication) getApplication()).getAppComponent().inject(this);
 
@@ -107,7 +130,7 @@ public class Login_Activity extends AppCompatActivity implements ILogin_View {
         btLoginFace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //llamada a facebooks
+                lbFacebook.performClick();
             }
         });
 
@@ -117,6 +140,14 @@ public class Login_Activity extends AppCompatActivity implements ILogin_View {
                 presenter.startRecoveryActivity();
             }
         });
+
+
+        callbackManager = CallbackManager.Factory.create();
+
+        lbFacebook.setReadPermissions("email", "public_profile");
+        lbFacebook.registerCallback(callbackManager, this);
+
+
     }
 
     @Override
@@ -190,4 +221,30 @@ public class Login_Activity extends AppCompatActivity implements ILogin_View {
             return getString(R.string.password_empty);
         else return "";
     }
+
+
+    @Override
+    public void onSuccess(LoginResult loginResult) {
+        presenter.loginWithFacebook(loginResult.getAccessToken(), auth, this);
+    }
+
+    @Override
+    public void onCancel() {
+
+    }
+
+    @Override
+    public void onError(FacebookException error) {
+        showErrorMessage(error.getMessage());
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Pass the activity result back to the Facebook SDK
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+
 }

@@ -135,16 +135,25 @@
             </LinearLayout>
 
 
-            <ProgressBar
-                android:id="@+id/pbLogin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:visibility="gone" />
+
 
         </RelativeLayout>
 
 
     </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/pbLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/blFacebook"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+     />
 
 </RelativeLayout>

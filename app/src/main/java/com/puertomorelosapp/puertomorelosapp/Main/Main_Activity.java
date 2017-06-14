@@ -11,19 +11,17 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.puertomorelosapp.puertomorelosapp.Fragments.AboutUs_Fragment;
+import com.puertomorelosapp.puertomorelosapp.Fragments.AboutUs.AboutUs_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Activity_Fragment;
-import com.puertomorelosapp.puertomorelosapp.Fragments.Categories_Fragment;
+import com.puertomorelosapp.puertomorelosapp.Fragments.Categories.Categories_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Conditions_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Fragment_Map;
 import com.puertomorelosapp.puertomorelosapp.Login.Login_Activity;
 import com.puertomorelosapp.puertomorelosapp.R;
-import com.puertomorelosapp.puertomorelosapp.Register.IRegister_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
 import com.puertomorelosapp.puertomorelosapp.Utils.Utils;
 
@@ -66,12 +64,6 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
 
         setmenuActions();
 
-        setFragment(new Categories_Fragment(), false);
-
-        presenter.getCategories();
-
-        setFragment(new Categories_Fragment(), false);
-
         (toolbar.findViewById(R.id.ivMap)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,7 +75,9 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
         titleToolbar = (TextView) toolbar.findViewById(R.id.tvTitleToolbar);
 
         titleToolbar.setTypeface(Utils.getbukharisLetter(this));
-        
+
+        setFragment(new Categories_Fragment(), false);
+        setToolbarTitle(getString(R.string.menu_main));
 
     }
 
@@ -154,11 +148,6 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
     }
 
     @Override
-    public void showCategories() {
-
-    }
-
-    @Override
     public void showLoading() {
 
     }
@@ -170,6 +159,7 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
 
     @Override
     public void logoutSesion() {
+        LoginManager.getInstance().logOut();
         startActivity(new Intent(Main_Activity.this, Login_Activity.class));
         finish();
     }

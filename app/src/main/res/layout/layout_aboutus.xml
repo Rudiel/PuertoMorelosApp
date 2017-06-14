@@ -38,6 +38,7 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/btAboutTwi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -57,6 +58,7 @@
             android:background="@color/colorPrimary" />
 
         <Button
+            android:id="@+id/btAboutFace"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -76,6 +78,7 @@
             android:background="@color/colorPrimary" />
 
         <Button
+            android:id="@+id/btAboutInsta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -95,6 +98,7 @@
             android:background="@color/colorPrimary" />
 
         <Button
+            android:id="@+id/btAboutContact"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"

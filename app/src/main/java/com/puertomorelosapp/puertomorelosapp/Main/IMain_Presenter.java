@@ -10,7 +10,5 @@ public interface IMain_Presenter {
 
     void setView(IMain_View view);
 
-    void getCategories();
-
     void logout(FirebaseAuth auth);
 }

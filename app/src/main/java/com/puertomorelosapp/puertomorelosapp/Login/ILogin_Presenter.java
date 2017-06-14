@@ -1,5 +1,8 @@
 package com.puertomorelosapp.puertomorelosapp.Login;
 
+import android.content.Context;
+
+import com.facebook.AccessToken;
 import com.google.firebase.auth.FirebaseAuth;
 import com.puertomorelosapp.puertomorelosapp.Models.User;
 
@@ -16,4 +19,6 @@ public interface ILogin_Presenter {
     void loginWithPassandUser(FirebaseAuth auth, User user);
 
     void startRecoveryActivity();
+
+    void loginWithFacebook(AccessToken token, FirebaseAuth auth, Context context);
 }

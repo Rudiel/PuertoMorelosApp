@@ -2,6 +2,10 @@ package com.puertomorelosapp.puertomorelosapp.Dagger;
 
 import android.content.Context;
 
+import com.puertomorelosapp.puertomorelosapp.Fragments.AboutUs.AboutUs_Presenter;
+import com.puertomorelosapp.puertomorelosapp.Fragments.AboutUs.IAboutUs_Presenter;
+import com.puertomorelosapp.puertomorelosapp.Fragments.Categories.Categories_Presenter;
+import com.puertomorelosapp.puertomorelosapp.Fragments.Categories.ICategories_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Login.ILogin_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Login.Login_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Main.IMain_Presenter;
@@ -45,5 +49,18 @@ public class PresenterModule {
     IMain_Presenter provideMainPresenter(Context context) {
         return new Main_Presenter(context);
     }
+
+    @Provides
+    @Singleton
+    IAboutUs_Presenter provideAboutUsPresenter(Context context) {
+        return new AboutUs_Presenter(context);
+    }
+
+    @Provides
+    @Singleton
+    ICategories_Presenter provideCategoriesPresenter(Context context) {
+        return new Categories_Presenter(context);
+    }
+
 
 }

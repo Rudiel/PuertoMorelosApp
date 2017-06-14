@@ -3,11 +3,16 @@ package com.puertomorelosapp.puertomorelosapp.Login;
 import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
+import com.facebook.AccessToken;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.puertomorelosapp.puertomorelosapp.Models.User;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
 
@@ -56,5 +61,31 @@ public class Login_Presenter implements ILogin_Presenter {
     @Override
     public void startRecoveryActivity() {
         view.showRecoveryActivity();
+    }
+
+    @Override
+    public void loginWithFacebook(AccessToken token, final FirebaseAuth auth, Context context) {
+
+            view.showLoading();
+            Log.d("FACE", "handleFacebookAccessToken:" + token);
+
+            AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+            auth.signInWithCredential(credential)
+                    .addOnCompleteListener((Activity) context, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                FirebaseUser user = auth.getCurrentUser();
+                                view.showMainActivity();
+                            } else {
+                                Log.w("FACE", "signInWithCredential:failure", task.getException());
+                                view.showErrorMessage(task.getException().getMessage());
+                            }
+
+                            view.hideLoading();
+
+                        }
+                    });
+
     }
 }

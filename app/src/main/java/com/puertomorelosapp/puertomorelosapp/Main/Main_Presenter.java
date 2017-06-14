@@ -25,10 +25,6 @@ public class Main_Presenter implements IMain_Presenter {
         this.view = view;
     }
 
-    @Override
-    public void getCategories() {
-
-    }
 
     @Override
     public void logout(FirebaseAuth auth) {

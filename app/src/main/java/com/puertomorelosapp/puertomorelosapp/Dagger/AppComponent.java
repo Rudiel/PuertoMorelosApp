@@ -1,5 +1,9 @@
 package com.puertomorelosapp.puertomorelosapp.Dagger;
 
+import com.puertomorelosapp.puertomorelosapp.Fragments.AboutUs.AboutUs_Fragment;
+import com.puertomorelosapp.puertomorelosapp.Fragments.AboutUs.AboutUs_Presenter;
+import com.puertomorelosapp.puertomorelosapp.Fragments.Categories.Categories_Fragment;
+import com.puertomorelosapp.puertomorelosapp.Fragments.Categories.Categories_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Login.Login_Activity;
 import com.puertomorelosapp.puertomorelosapp.Login.Login_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
@@ -42,5 +46,16 @@ public interface AppComponent {
     void inject(Main_Activity activity);
 
     void inject(Main_Presenter target);
+
+    //AboutUs
+    void inject(AboutUs_Fragment fragment);
+
+    void inject(AboutUs_Presenter target);
+
+    //Categories
+
+    void inject(Categories_Fragment fragment);
+
+    void inject(Categories_Presenter target);
 
 }
