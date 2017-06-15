@@ -8,8 +8,8 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:src="@mipmap/ic_launcher" />
+        android:layout_marginTop="30dp"
+        android:src="@drawable/avatar_deafult" />
 
     <TextView
         android:id="@+id/tvMenuUserName"
@@ -38,7 +38,8 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@drawable/ic_favorite_black_48dp"
+                android:tint="@color/colorAccent" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -60,14 +61,14 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@drawable/menu_comments" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
-                android:textAppearance="?android:textAppearanceMedium"
                 android:text="0"
+                android:textAppearance="?android:textAppearanceMedium"
                 android:textColor="@color/colorAccent" />
 
         </LinearLayout>

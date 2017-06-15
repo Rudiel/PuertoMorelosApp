@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.MapView;
@@ -61,6 +62,9 @@ public class Fragment_Map extends Fragment implements OnMapReadyCallback {
         MapsInitializer.initialize(getActivity());
         map = googleMap;
         setMarkers();
+
+        map.moveCamera( CameraUpdateFactory.newLatLngZoom(new LatLng(20.852656, -86.889002) , 13.0f) );
+
     }
 
     private void setMarkers() {
