@@ -1,123 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:weightSum="2">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@drawable/gradient_background">
-
-        <ImageView
-            android:id="@+id/ivAboutLogo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:src="@mipmap/ic_launcher" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/ivAboutLogo"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:text="version 1"
-            android:textColor="@color/colorAccent" />
-
-
-    </RelativeLayout>
-
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btAboutTwi"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:minHeight="300dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/aboutus_background" />
+
+            <ImageView
+                android:id="@+id/ivAboutLogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                android:id="@+id/tvAboutUsName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ivAboutLogo"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="@string/app_name"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@color/colorAccent" />
+
+            <TextView
+                android:id="@+id/tvAboutUsVersion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvAboutUsName"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:text="version 1"
+                android:textColor="@color/colorAccent" />
+
+
+        </RelativeLayout>
+
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="10dp"
-            android:background="@null"
-            android:drawableLeft="@mipmap/ic_launcher_round"
-            android:drawablePadding="10dp"
-            android:gravity="left|center_vertical"
-            android:minHeight="80dp"
-            android:text="Twitter"
-            android:textColor="@color/colorPrimary" />
+            android:orientation="vertical">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="60dp"
-            android:background="@color/colorPrimary" />
+            <Button
+                android:id="@+id/btAboutTwi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="10dp"
+                android:background="@null"
+                android:drawableLeft="@drawable/ic_social_twitt"
+                android:drawablePadding="10dp"
+                android:gravity="left|center_vertical"
+                android:minHeight="80dp"
+                android:text="@string/aboutus_twitter"
+                android:textColor="@color/colorPrimary" />
 
-        <Button
-            android:id="@+id/btAboutFace"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="10dp"
-            android:background="@null"
-            android:drawableLeft="@mipmap/ic_launcher_round"
-            android:drawablePadding="10dp"
-            android:gravity="left|center_vertical"
-            android:minHeight="80dp"
-            android:text="Twitter"
-            android:textColor="@color/colorPrimary" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="60dp"
+                android:background="@color/colorPrimary" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="60dp"
-            android:background="@color/colorPrimary" />
+            <Button
+                android:id="@+id/btAboutFace"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="10dp"
+                android:background="@null"
+                android:drawableLeft="@drawable/ic_social_face"
+                android:drawablePadding="10dp"
+                android:gravity="left|center_vertical"
+                android:minHeight="80dp"
+                android:text="@string/aboutus_face"
+                android:textColor="@color/colorPrimary" />
 
-        <Button
-            android:id="@+id/btAboutInsta"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="10dp"
-            android:background="@null"
-            android:drawableLeft="@mipmap/ic_launcher_round"
-            android:drawablePadding="10dp"
-            android:gravity="left|center_vertical"
-            android:minHeight="80dp"
-            android:text="Twitter"
-            android:textColor="@color/colorPrimary" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="60dp"
+                android:background="@color/colorPrimary" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="60dp"
-            android:background="@color/colorPrimary" />
+            <Button
+                android:id="@+id/btAboutInsta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="10dp"
+                android:background="@null"
+                android:drawableLeft="@drawable/ic_social_insta"
+                android:drawablePadding="10dp"
+                android:gravity="left|center_vertical"
+                android:minHeight="80dp"
+                android:text="@string/aboutus_insta"
+                android:textColor="@color/colorPrimary" />
 
-        <Button
-            android:id="@+id/btAboutContact"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="10dp"
-            android:background="@null"
-            android:drawableLeft="@mipmap/ic_launcher_round"
-            android:drawablePadding="10dp"
-            android:gravity="left|center_vertical"
-            android:minHeight="80dp"
-            android:text="Twitter"
-            android:textColor="@color/colorPrimary" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="60dp"
+                android:background="@color/colorPrimary" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="60dp"
-            android:background="@color/colorPrimary" />
+            <Button
+                android:id="@+id/btAboutContact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="10dp"
+                android:background="@null"
+                android:drawableLeft="@drawable/ic_social_mail"
+                android:drawablePadding="10dp"
+                android:gravity="left|center_vertical"
+                android:minHeight="80dp"
+                android:text="@string/aboutus_contact"
+                android:textColor="@color/colorPrimary" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="60dp"
+                android:background="@color/colorPrimary" />
+
+
+        </LinearLayout>
 
 
     </LinearLayout>
 
-</LinearLayout>
+
+</ScrollView>

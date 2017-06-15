@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
 import com.puertomorelosapp.puertomorelosapp.R;
 
 /**
@@ -24,6 +25,9 @@ public class Conditions_Fragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        ((Main_Activity) getActivity()).ivMap.setVisibility(View.GONE);
+
     }
 
 

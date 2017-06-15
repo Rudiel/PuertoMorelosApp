@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
 import com.puertomorelosapp.puertomorelosapp.Models.Categorie;
 import com.puertomorelosapp.puertomorelosapp.R;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
@@ -51,6 +52,8 @@ public class Categories_Fragment extends Fragment implements ICategories_View {
         super.onActivityCreated(savedInstanceState);
 
         presenter.getCategories();
+
+        ((Main_Activity) getActivity()).ivMap.setVisibility(View.VISIBLE);
     }
 
     @Override

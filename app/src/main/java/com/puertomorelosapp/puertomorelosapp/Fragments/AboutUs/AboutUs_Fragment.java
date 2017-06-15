@@ -7,9 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
+import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
 import com.puertomorelosapp.puertomorelosapp.R;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
+import com.puertomorelosapp.puertomorelosapp.Utils.Utils;
 
 import javax.inject.Inject;
 
@@ -37,10 +40,11 @@ public class AboutUs_Fragment extends Fragment implements IAboutUs_View {
     @Bind(R.id.btAboutTwi)
     Button btTwit;
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view= inflater.inflate(R.layout.layout_aboutus, container, false);
+        View view = inflater.inflate(R.layout.layout_aboutus, container, false);
 
         ((PuertoMorelosApplication) getActivity().getApplication()).getAppComponent().inject(this);
         ButterKnife.bind(this, view);
@@ -54,6 +58,11 @@ public class AboutUs_Fragment extends Fragment implements IAboutUs_View {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        ((TextView) getActivity().findViewById(R.id.tvAboutUsName)).setTypeface(Utils.getbukharisLetter(getActivity()));
+
+        ((Main_Activity) getActivity()).ivMap.setVisibility(View.GONE);
+
         btInsta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

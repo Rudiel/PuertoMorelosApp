@@ -13,6 +13,7 @@ import com.puertomorelosapp.puertomorelosapp.Adpaters.Activities_Adapter;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Activities.Comentarios_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Activities.Megusta_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Activities.Selfies_Fragment;
+import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
 import com.puertomorelosapp.puertomorelosapp.Models.Activity;
 import com.puertomorelosapp.puertomorelosapp.R;
 
@@ -56,6 +57,8 @@ public class Activity_Fragment extends Fragment {
         setFragmentsDefault();
 
         tlActivities.setupWithViewPager(viewPager);
+
+        ((Main_Activity) getActivity()).ivMap.setVisibility(View.GONE);
 
 
     }

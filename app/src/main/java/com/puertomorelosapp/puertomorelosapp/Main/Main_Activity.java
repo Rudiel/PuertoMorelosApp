@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.facebook.login.LoginManager;
@@ -48,6 +49,8 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
 
     private FirebaseAuth auth;
 
+    public ImageView ivMap;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +67,9 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
 
         setmenuActions();
 
-        (toolbar.findViewById(R.id.ivMap)).setOnClickListener(new View.OnClickListener() {
+        ivMap = (ImageView) toolbar.findViewById(R.id.ivMap);
+
+        ivMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setFragment(new Fragment_Map(), false);

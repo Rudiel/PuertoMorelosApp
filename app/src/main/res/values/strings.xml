@@ -22,6 +22,12 @@
     <string name="menu_conditions">Términos y Condiciones</string>
     <string name="menu_logout">Cerrar Sesión</string>
 
+    <!--About Us -->
+    <string name="aboutus_face">Facebook</string>
+    <string name="aboutus_twitter">Twitter</string>
+    <string name="aboutus_insta">Instagram</string>
+    <string name="aboutus_contact">Contacto</string>
+
     <!--Utils-->
     <string name="email_empty">El campo E-mail es requerido.Favor de completarlo e intentarlo nuevamente</string>
     <string name="password_empty">El campo Password es requerido.Favor de completarlo e intentarlo nuevamente</string>
