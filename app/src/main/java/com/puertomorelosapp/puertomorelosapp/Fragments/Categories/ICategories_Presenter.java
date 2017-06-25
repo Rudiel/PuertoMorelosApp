@@ -1,5 +1,7 @@
 package com.puertomorelosapp.puertomorelosapp.Fragments.Categories;
 
+import android.content.Context;
+
 import com.puertomorelosapp.puertomorelosapp.Models.Categorie;
 
 import java.util.List;
@@ -12,5 +14,6 @@ public interface ICategories_Presenter {
 
     void setView(ICategories_View view);
 
-    void getCategories();
+    void getCategories(Context context);
+
 }

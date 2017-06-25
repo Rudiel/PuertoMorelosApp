@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.facebook.login.LoginManager;
@@ -20,11 +21,15 @@ import com.puertomorelosapp.puertomorelosapp.Fragments.AboutUs.AboutUs_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Activity_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Categories.Categories_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Conditions_Fragment;
-import com.puertomorelosapp.puertomorelosapp.Fragments.Fragment_Map;
+import com.puertomorelosapp.puertomorelosapp.Fragments.Map.Fragment_Map;
 import com.puertomorelosapp.puertomorelosapp.Login.Login_Activity;
+import com.puertomorelosapp.puertomorelosapp.Models.Categorie;
 import com.puertomorelosapp.puertomorelosapp.R;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
 import com.puertomorelosapp.puertomorelosapp.Utils.Utils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -50,6 +55,11 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
     private FirebaseAuth auth;
 
     public ImageView ivMap;
+
+    public List<Categorie> categorieList;
+
+    @Bind(R.id.pbMain)
+    ProgressBar pbMain;
 
 
     @Override
@@ -81,8 +91,11 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
 
         titleToolbar.setTypeface(Utils.getbukharisLetter(this));
 
-        setFragment(new Categories_Fragment(), false);
+        categorieList = new ArrayList<>();
+
         setToolbarTitle(getString(R.string.menu_main));
+
+        setFragment(new Categories_Fragment(), false);
 
     }
 
@@ -138,7 +151,7 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
         actionBarDrawerToggle.syncState();
     }
 
-    private void setFragment(Fragment fragment, boolean isBackStack) {
+    public void setFragment(Fragment fragment, boolean isBackStack) {
         if (isBackStack)
             getSupportFragmentManager()
                     .beginTransaction()
@@ -154,12 +167,12 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
 
     @Override
     public void showLoading() {
-
+        pbMain.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoading() {
-
+        pbMain.setVisibility(View.GONE);
     }
 
     @Override

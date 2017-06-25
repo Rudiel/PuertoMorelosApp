@@ -1,4 +1,4 @@
-package com.puertomorelosapp.puertomorelosapp.Fragments.Activities;
+package com.puertomorelosapp.puertomorelosapp.Fragments.Secundary_Main;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,17 +7,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.puertomorelosapp.puertomorelosapp.R;
-
 /**
- * Created by rudielavilaperaza on 6/13/17.
+ * Created by rudielavilaperaza on 6/24/17.
  */
 
-public class Comentarios_Fragment extends Fragment {
+public class SecundaryMain_Fragment extends Fragment {
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.layout_activities_comments, container, false);
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     @Override

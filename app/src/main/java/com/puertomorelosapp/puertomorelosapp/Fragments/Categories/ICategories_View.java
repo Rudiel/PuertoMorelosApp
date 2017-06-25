@@ -15,4 +15,5 @@ public interface ICategories_View {
     void hideLoading();
 
     void showCategories(List<Categorie> categories);
+
 }

@@ -11,4 +11,5 @@ public interface IMain_Presenter {
     void setView(IMain_View view);
 
     void logout(FirebaseAuth auth);
+
 }

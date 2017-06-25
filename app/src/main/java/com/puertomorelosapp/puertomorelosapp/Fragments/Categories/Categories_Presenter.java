@@ -2,11 +2,18 @@ package com.puertomorelosapp.puertomorelosapp.Fragments.Categories;
 
 import android.content.Context;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
 import com.puertomorelosapp.puertomorelosapp.Models.Categorie;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
+import com.puertomorelosapp.puertomorelosapp.Utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * Created by rudielavilaperaza on 6/13/17.
@@ -15,6 +22,7 @@ import java.util.List;
 public class Categories_Presenter implements ICategories_Presenter {
 
     private ICategories_View view;
+
 
     public Categories_Presenter(Context context) {
 
@@ -27,32 +35,76 @@ public class Categories_Presenter implements ICategories_Presenter {
     }
 
     @Override
-    public void getCategories() {
+    public void getCategories(Context context) {
 
-        List<Categorie> categorieList = new ArrayList<>();
+        view.showLoading();
 
-        Categorie eventos= new Categorie();
-        eventos.setName("Eventos");
+        final List<Categorie> categorieList = new ArrayList<>();
 
-        Categorie historia= new Categorie();
-        historia.setName("Historia");
+        FirebaseDatabase.getInstance().getReference().child(Utils.CATE_URL)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            final Categorie categorie = new Categorie();
+                            categorie.setName(snapshot.getValue().toString());
 
-        Categorie lugares= new Categorie();
-        lugares.setName("Lugares");
+                            if (snapshot.getValue().toString().equals("Hoteles")) {
+                                FirebaseDatabase.getInstance().getReference().child(Utils.CATE_URL_BACK + "/Servicios/" + snapshot.getValue().toString() + "/Background")
+                                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(DataSnapshot data) {
+                                                categorie.setImage(data.getValue().toString());
+                                            }
 
-        Categorie restaurantes= new Categorie();
-        restaurantes.setName("Restaurantes");
+                                            @Override
+                                            public void onCancelled(DatabaseError databaseError) {
 
-        Categorie gym= new Categorie();
-        gym.setName("Gym");
+                                            }
+                                        });
+                            } else if (snapshot.getValue().toString().equals("Restaurantes") ||
+                                    snapshot.getValue().toString().equals("Comida rapida")) {
 
-        categorieList.add(eventos);
-        categorieList.add(historia);
-        categorieList.add(lugares);
-        categorieList.add(restaurantes);
-        categorieList.add(gym);
+                                FirebaseDatabase.getInstance().getReference().child(Utils.CATE_URL_BACK + "/Comercios/" + snapshot.getValue().toString() + "/Background")
+                                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(DataSnapshot data) {
+                                                categorie.setImage(data.getValue().toString());
+                                            }
 
-        view.showCategories(categorieList);
+                                            @Override
+                                            public void onCancelled(DatabaseError databaseError) {
+
+                                            }
+                                        });
+                            } else {
+                                FirebaseDatabase.getInstance().getReference().child(Utils.CATE_URL_BACK + "/" + snapshot.getValue().toString() + "/Background")
+                                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(DataSnapshot data) {
+                                                categorie.setImage(data.getValue().toString());
+                                            }
+
+                                            @Override
+                                            public void onCancelled(DatabaseError databaseError) {
+
+                                            }
+                                        });
+                            }
+
+
+                            categorieList.add(categorie);
+                        }
+
+                        view.hideLoading();
+                        view.showCategories(categorieList);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
+
     }
 
 

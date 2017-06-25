@@ -1,4 +1,4 @@
-package com.puertomorelosapp.puertomorelosapp.Fragments;
+package com.puertomorelosapp.puertomorelosapp.Fragments.Map;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,21 +18,35 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
+import com.puertomorelosapp.puertomorelosapp.Models.Places;
 import com.puertomorelosapp.puertomorelosapp.R;
+import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
+
+import java.util.List;
+
+import javax.inject.Inject;
 
 /**
  * Created by rudielavilaperaza on 6/11/17.
  */
 
-public class Fragment_Map extends Fragment implements OnMapReadyCallback {
+public class Fragment_Map extends Fragment implements OnMapReadyCallback, IMap_View {
 
     private GoogleMap map;
     private MapView mapView;
+
+    @Inject
+    IMap_Presenter presenter;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.layout_map, container, false);
+
+        ((PuertoMorelosApplication) getActivity().getApplication()).getAppComponent().inject(this);
+
+        presenter.setView(this);
+
         return v;
     }
 
@@ -41,6 +55,8 @@ public class Fragment_Map extends Fragment implements OnMapReadyCallback {
         super.onActivityCreated(savedInstanceState);
 
         ((Main_Activity) getActivity()).ivMap.setVisibility(View.GONE);
+
+        presenter.getPlaces();
 
     }
 
@@ -63,7 +79,7 @@ public class Fragment_Map extends Fragment implements OnMapReadyCallback {
         map = googleMap;
         setMarkers();
 
-        map.moveCamera( CameraUpdateFactory.newLatLngZoom(new LatLng(20.852656, -86.889002) , 13.0f) );
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(20.852656, -86.889002), 13.0f));
 
     }
 
@@ -121,4 +137,8 @@ public class Fragment_Map extends Fragment implements OnMapReadyCallback {
 
     }
 
+    @Override
+    public void showPlaces(List<Places> places) {
+
+    }
 }

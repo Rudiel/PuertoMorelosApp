@@ -1,10 +1,14 @@
 package com.puertomorelosapp.puertomorelosapp.Fragments;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,17 +60,32 @@ public class Activity_Fragment extends Fragment {
 
         setFragmentsDefault();
 
-        tlActivities.setupWithViewPager(viewPager);
-
         ((Main_Activity) getActivity()).ivMap.setVisibility(View.GONE);
 
+
+        tlActivities.setupWithViewPager(viewPager);
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
     }
 
     private void setUpViewPager() {
         Activities_Adapter adapter = new Activities_Adapter(getFragmentManager(), activities);
         viewPager.setAdapter(adapter);
-
     }
 
 

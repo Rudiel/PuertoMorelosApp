@@ -9,8 +9,27 @@ import android.graphics.Typeface;
 
 public class Utils {
 
+    private static final String BASE_URL = "https://puerto-morelos-app.firebaseio.com/";
+
+    public static final String CATE_URL = "PuertoMorelos/Idiomas/Español/Menu";
+
+    public static final String PLACES_URL = "PuertoMorelos/Idiomas/Español";
+
+    public static final String CATE_URL_BACK = "PuertoMorelos/imagenesURL/Header";
+
     public static Typeface getbukharisLetter(Context context) {
         return Typeface.createFromAsset(context.getAssets(), "fonts/bukhariscript.ttf");
     }
+
+    public static final String HISTORIA_BACKGROUND = "PuertoMorelos/imagenesURL/Header/Historia";
+    public static final String EVENTOS_BACKGROUND = "";
+    public static final String LUGARES_BACKGROUND = "";
+    public static final String ATRACTIVOS_BACKGROUND = "";
+    public static final String HOTELES_BACKGROUND = "";
+    public static final String RESTAURANTES_BACKGROUND = "";
+    public static final String COMIDA_BACKGROUND = "";
+    public static final String COMERCIOS_BACKGROUND = "";
+    public static final String SERVICIOS_BACKGROUND = "";
+
 
 }
