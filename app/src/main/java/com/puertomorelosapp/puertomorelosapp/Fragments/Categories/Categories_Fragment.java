@@ -5,12 +5,14 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.puertomorelosapp.puertomorelosapp.Adpaters.Categories_Adapter;
+import com.puertomorelosapp.puertomorelosapp.Fragments.Secundary_Main.SecundaryMain_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
 import com.puertomorelosapp.puertomorelosapp.Models.Categorie;
 import com.puertomorelosapp.puertomorelosapp.R;
@@ -27,7 +29,7 @@ import butterknife.ButterKnife;
  * Created by rudielavilaperaza on 6/9/17.
  */
 
-public class Categories_Fragment extends Fragment implements ICategories_View {
+public class Categories_Fragment extends Fragment implements ICategories_View, IOnclickCategories {
 
     @Inject
     ICategories_Presenter presenter;
@@ -74,7 +76,6 @@ public class Categories_Fragment extends Fragment implements ICategories_View {
             showCategories(((Main_Activity) getActivity()).categorieList);
 
 
-
     }
 
     @Override
@@ -89,7 +90,7 @@ public class Categories_Fragment extends Fragment implements ICategories_View {
 
     @Override
     public void showCategories(List<Categorie> categories) {
-        mAdapter = new Categories_Adapter(categories, getActivity());
+        mAdapter = new Categories_Adapter(categories, getActivity(), this);
 
         rvCategories.setAdapter(mAdapter);
 
@@ -98,4 +99,14 @@ public class Categories_Fragment extends Fragment implements ICategories_View {
     }
 
 
+    @Override
+    public void onClickCategory(Categorie categoria) {
+
+        Log.d("CATE_SELECTED", categoria.getName());
+
+        ((Main_Activity) getActivity()).category = categoria;
+
+        ((Main_Activity) getActivity()).setFragment(new SecundaryMain_Fragment(), true);
+
+    }
 }

@@ -6,9 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.puertomorelosapp.puertomorelosapp.Fragments.Categories.IOnclickCategories;
 import com.puertomorelosapp.puertomorelosapp.Models.Categorie;
 import com.puertomorelosapp.puertomorelosapp.R;
 
@@ -22,31 +24,35 @@ public class Categories_Adapter extends RecyclerView.Adapter<Categories_Adapter.
 
     private List<Categorie> categorieList;
     private Context context;
+    private IOnclickCategories listener;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         public TextView tvCategoryName;
         public ImageView ivImageCategory;
+        public RelativeLayout rlContainer;
 
         public ViewHolder(View v) {
             super(v);
             tvCategoryName = (TextView) v.findViewById(R.id.tvCategoryName);
             ivImageCategory = (ImageView) v.findViewById(R.id.ivImageCategoryBack);
+            rlContainer = (RelativeLayout) v.findViewById(R.id.rlCategoryContainer);
         }
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public Categories_Adapter(List<Categorie> categories, Context context) {
+    public Categories_Adapter(List<Categorie> categories, Context context, IOnclickCategories listener) {
         this.categorieList = categories;
         this.context = context;
+        this.listener = listener;
     }
 
     // Create new views (invoked by the layout manager)
     @Override
     public Categories_Adapter.ViewHolder onCreateViewHolder(ViewGroup parent,
-                                         int viewType) {
+                                                            int viewType) {
 
-        LayoutInflater inflater= LayoutInflater.from(parent.getContext());
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.layout_item_categories, parent, false);
         return new ViewHolder(view);
 
@@ -54,12 +60,18 @@ public class Categories_Adapter extends RecyclerView.Adapter<Categories_Adapter.
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         holder.tvCategoryName.setText(categorieList.get(position).getName());
 
         Glide.with(context).load(categorieList.get(position).getImage()).centerCrop().into(holder.ivImageCategory);
+        holder.rlContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onClickCategory(categorieList.get(position));
+            }
+        });
 
     }
 

@@ -17,6 +17,7 @@ public class Utils {
 
     public static final String CATE_URL_BACK = "PuertoMorelos/imagenesURL/Header";
 
+
     public static Typeface getbukharisLetter(Context context) {
         return Typeface.createFromAsset(context.getAssets(), "fonts/bukhariscript.ttf");
     }

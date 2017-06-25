@@ -61,6 +61,7 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
     @Bind(R.id.pbMain)
     ProgressBar pbMain;
 
+    public Categorie category;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
