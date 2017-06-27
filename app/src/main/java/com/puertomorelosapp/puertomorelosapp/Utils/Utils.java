@@ -17,6 +17,10 @@ public class Utils {
 
     public static final String CATE_URL_BACK = "PuertoMorelos/imagenesURL/Header";
 
+    public static final String COMMENTS_URL = "PuertoMorelos/SocialAPP/Comments/";
+
+    public static final String LIKES_URL = "PuertoMorelos/SocialAPP/Loves/";
+
 
     public static Typeface getbukharisLetter(Context context) {
         return Typeface.createFromAsset(context.getAssets(), "fonts/bukhariscript.ttf");

@@ -1,5 +1,6 @@
 package com.puertomorelosapp.puertomorelosapp.Fragments.Categories;
 
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.widget.ProgressBar;
 
 import com.puertomorelosapp.puertomorelosapp.Adpaters.Categories_Adapter;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Secundary_Main.SecundaryMain_Fragment;
+import com.puertomorelosapp.puertomorelosapp.Fragments.Thrid_Main.Third_Main_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
 import com.puertomorelosapp.puertomorelosapp.Models.Categorie;
 import com.puertomorelosapp.puertomorelosapp.R;
@@ -75,6 +77,10 @@ public class Categories_Fragment extends Fragment implements ICategories_View, I
         else
             showCategories(((Main_Activity) getActivity()).categorieList);
 
+        ((Main_Activity) getActivity()).setToolbarTitle(getActivity().getString(R.string.descubre_title));
+
+        pbCategories.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.MULTIPLY);
+
 
     }
 
@@ -106,7 +112,13 @@ public class Categories_Fragment extends Fragment implements ICategories_View, I
 
         ((Main_Activity) getActivity()).category = categoria;
 
-        ((Main_Activity) getActivity()).setFragment(new SecundaryMain_Fragment(), true);
+        if (categoria.getName().equals("Comercios") || categoria.getName().equals("Servicios")) {
+            ((Main_Activity) getActivity()).setFragment(new Third_Main_Fragment(), true);
+
+        } else {
+            ((Main_Activity) getActivity()).setFragment(new SecundaryMain_Fragment(), true);
+        }
+
 
     }
 }

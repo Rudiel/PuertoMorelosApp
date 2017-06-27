@@ -38,7 +38,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_favorite_black_48dp"
+                android:src="@drawable/ic_favorite_white_48dp"
                 android:tint="@color/colorAccent" />
 
             <TextView
@@ -61,7 +61,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/menu_comments" />
+                android:src="@drawable/ic_chat_bubble_white_48dp" />
 
             <TextView
                 android:layout_width="wrap_content"

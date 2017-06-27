@@ -3,27 +3,35 @@
     android:id="@+id/rlCategoryContainer"
     android:layout_width="match_parent"
     android:layout_height="200dp"
-    android:minHeight="200dp">
+    >
 
     <ImageView
         android:id="@+id/ivImageCategoryBack"
         android:layout_width="match_parent"
-        android:layout_height="200dp" />
+        android:minHeight="200dp"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:src="@color/transparent"
+        android:layout_height="match_parent" />
 
     <ImageView
         android:id="@+id/ivCateItem"
+        android:elevation="4dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:src="@mipmap/ic_launcher_round" />
+        android:src="@drawable/ic_account_balance_white_48dp" />
 
     <TextView
         android:id="@+id/tvCategoryName"
+        android:elevation="4dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/ivCateItem"
         android:layout_centerHorizontal="true"
-        android:text="Category"
+        android:textStyle="bold"
         android:textAppearance="?android:textAppearanceMedium"
         android:textColor="@color/colorAccent" />
 

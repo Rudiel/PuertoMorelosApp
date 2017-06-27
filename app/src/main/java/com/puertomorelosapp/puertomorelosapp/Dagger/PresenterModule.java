@@ -10,6 +10,8 @@ import com.puertomorelosapp.puertomorelosapp.Fragments.Map.IMap_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Map.Map_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Secundary_Main.ISecundaryMain_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Secundary_Main.SecundaryMain_Presenter;
+import com.puertomorelosapp.puertomorelosapp.Fragments.Thrid_Main.IThird_Main_Presenter;
+import com.puertomorelosapp.puertomorelosapp.Fragments.Thrid_Main.Third_Main_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Login.ILogin_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Login.Login_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Main.IMain_Presenter;
@@ -76,6 +78,12 @@ public class PresenterModule {
     @Singleton
     ISecundaryMain_Presenter provideSecundaryPresenter(Context context) {
         return new SecundaryMain_Presenter(context);
+    }
+
+    @Provides
+    @Singleton
+    IThird_Main_Presenter provideThirdPresenter(Context context) {
+        return new Third_Main_Presenter(context);
     }
 
 

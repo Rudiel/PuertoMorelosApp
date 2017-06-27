@@ -2,8 +2,12 @@ package com.puertomorelosapp.puertomorelosapp.Register;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -19,6 +23,7 @@ import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.puertomorelosapp.puertomorelosapp.Creators.Dialog_Creator;
 import com.puertomorelosapp.puertomorelosapp.Creators.IDialog_Creator;
+import com.puertomorelosapp.puertomorelosapp.Login.Login_Activity;
 import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
 import com.puertomorelosapp.puertomorelosapp.Models.Register;
 import com.puertomorelosapp.puertomorelosapp.R;
@@ -90,6 +95,8 @@ public class Register_Activity extends AppCompatActivity implements IRegister_Vi
             }
         });
 
+        setDrawableHint(android.R.color.darker_gray);
+
 
     }
 
@@ -160,5 +167,31 @@ public class Register_Activity extends AppCompatActivity implements IRegister_Vi
             return getString(R.string.user_empty);
 
         else return "";
+    }
+
+    private void setDrawableHint(int color) {
+        Drawable hintEmail = this.getResources().getDrawable(R.drawable.ic_email_black_24dp);
+        hintEmail.setColorFilter(ContextCompat.getColor(Register_Activity.this, color),
+                PorterDuff.Mode.SRC_IN);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            etEmailRegister.setCompoundDrawablesRelativeWithIntrinsicBounds(hintEmail, null, null, null);
+        }
+
+        Drawable hintPin = this.getResources().getDrawable(R.drawable.ic_lock_black_24dp);
+        hintPin.setColorFilter(ContextCompat.getColor(Register_Activity.this, color),
+                PorterDuff.Mode.SRC_IN);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            etPasswordRegister.setCompoundDrawablesRelativeWithIntrinsicBounds(hintPin, null, null, null);
+        }
+
+        Drawable hintUser = this.getResources().getDrawable(R.drawable.ic_person_black_24dp);
+        hintUser.setColorFilter(ContextCompat.getColor(Register_Activity.this, color),
+                PorterDuff.Mode.SRC_IN);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            etUsernameRegister.setCompoundDrawablesRelativeWithIntrinsicBounds(hintUser, null, null, null);
+        }
     }
 }

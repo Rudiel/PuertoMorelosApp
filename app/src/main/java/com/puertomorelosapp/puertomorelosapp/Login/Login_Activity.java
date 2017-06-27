@@ -2,9 +2,13 @@ package com.puertomorelosapp.puertomorelosapp.Login;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -147,6 +151,8 @@ public class Login_Activity extends AppCompatActivity implements ILogin_View, Fa
         lbFacebook.setReadPermissions("email", "public_profile");
         lbFacebook.registerCallback(callbackManager, this);
 
+        setDrawableHint(android.R.color.darker_gray);
+
 
     }
 
@@ -244,6 +250,24 @@ public class Login_Activity extends AppCompatActivity implements ILogin_View, Fa
 
         // Pass the activity result back to the Facebook SDK
         callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void setDrawableHint(int color) {
+        Drawable hintEmail = this.getResources().getDrawable(R.drawable.ic_email_black_24dp);
+        hintEmail.setColorFilter(ContextCompat.getColor(Login_Activity.this, color),
+                PorterDuff.Mode.SRC_IN);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            etUserEmail.setCompoundDrawablesRelativeWithIntrinsicBounds(hintEmail, null, null, null);
+        }
+
+        Drawable hintPin = this.getResources().getDrawable(R.drawable.ic_lock_black_24dp);
+        hintPin.setColorFilter(ContextCompat.getColor(Login_Activity.this, color),
+                PorterDuff.Mode.SRC_IN);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            etPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(hintPin, null, null, null);
+        }
     }
 
 

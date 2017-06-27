@@ -6,6 +6,8 @@ package com.puertomorelosapp.puertomorelosapp.Models;
 
 public class SubCategory {
 
+    private String id;
+
     private String activo;
     private int comentariosCantidad;
     private String descripcion;
@@ -24,6 +26,33 @@ public class SubCategory {
     private String titulo;
     private String titulo2;
     private String titulo3;
+
+    private int likes;
+    private int comments;
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
+    }
+
+    public int getComments() {
+        return comments;
+    }
+
+    public void setComments(int comments) {
+        this.comments = comments;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getActivo() {
         return activo;

@@ -9,6 +9,8 @@ import com.puertomorelosapp.puertomorelosapp.Fragments.Map.Fragment_Map;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Map.Map_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Secundary_Main.SecundaryMain_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Secundary_Main.SecundaryMain_Presenter;
+import com.puertomorelosapp.puertomorelosapp.Fragments.Thrid_Main.Third_Main_Fragment;
+import com.puertomorelosapp.puertomorelosapp.Fragments.Thrid_Main.Third_Main_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Login.Login_Activity;
 import com.puertomorelosapp.puertomorelosapp.Login.Login_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
@@ -74,5 +76,11 @@ public interface AppComponent {
     void inject(SecundaryMain_Fragment fragment);
 
     void inject(SecundaryMain_Presenter target);
+
+    //ThirdCategory
+
+    void inject(Third_Main_Fragment fragment);
+
+    void inject(Third_Main_Presenter target);
 
 }

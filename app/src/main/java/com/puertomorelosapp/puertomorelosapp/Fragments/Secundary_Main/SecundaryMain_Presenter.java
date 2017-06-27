@@ -22,6 +22,8 @@ import java.util.List;
 public class SecundaryMain_Presenter implements ISecundaryMain_Presenter {
 
     private ISecundaryMain_view view;
+    private int total = 0;
+
 
     public SecundaryMain_Presenter(Context context) {
         ((PuertoMorelosApplication) context).getAppComponent().inject(this);
@@ -29,17 +31,39 @@ public class SecundaryMain_Presenter implements ISecundaryMain_Presenter {
 
 
     @Override
-    public void getSubCategories(Categorie categorie) {
+    public void getSubCategories(final Categorie categorie) {
         this.view.showLoading();
 
-        final List<SubCategory> listSubCategories = new ArrayList<>();
 
-        FirebaseDatabase.getInstance().getReference().child(Utils.PLACES_URL + "/" + categorie.getName()).addListenerForSingleValueEvent(new ValueEventListener() {
+        String url_reference;
+
+        switch (categorie.getName()) {
+            case "Hoteles":
+                url_reference = Utils.PLACES_URL + "/Servicios/" + categorie.getName();
+                break;
+            case "Restaurantes":
+            case "Comida rapida":
+                url_reference = Utils.PLACES_URL + "/Comercios/" + categorie.getName();
+                break;
+            default:
+                url_reference = Utils.PLACES_URL + "/" + categorie.getName();
+                break;
+        }
+
+        FirebaseDatabase.getInstance().getReference().child(url_reference).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
+                List<SubCategory> listSubCategories = new ArrayList<>();
+
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Log.d("VALUE", snapshot.child("descripcion").getValue().toString());
+
+
+
+                    Log.d("VALUE", snapshot.getChildren().toString());
+                    total = (int) snapshot.getChildrenCount();
                     SubCategory subCategory = new SubCategory();
+                    subCategory.setId(snapshot.getKey());
                     subCategory.setActivo(snapshot.child("activo").getValue().toString());
                     subCategory.setComentariosCantidad(Integer.parseInt(snapshot.child("comentariosCantidad").getValue().toString()));
                     subCategory.setDescripcion(snapshot.child("descripcion").getValue().toString());
@@ -58,12 +82,11 @@ public class SecundaryMain_Presenter implements ISecundaryMain_Presenter {
                     subCategory.setTitulo(snapshot.child("titulo").getValue().toString());
                     subCategory.setTitulo2(snapshot.child("titulo2").getValue().toString());
                     subCategory.setTitulo3(snapshot.child("titulo3").getValue().toString());
+                    getCommnets(categorie.getName(), subCategory.getId(), subCategory, listSubCategories);
 
-                    listSubCategories.add(subCategory);
                 }
 
-                view.showSubCategories(listSubCategories);
-                view.hideLoading();
+
             }
 
             @Override
@@ -74,6 +97,46 @@ public class SecundaryMain_Presenter implements ISecundaryMain_Presenter {
         });
 
 
+    }
+
+    private void getCommnets(final String category, final String id, final SubCategory subCategory, final List<SubCategory> subCategories) {
+        FirebaseDatabase.getInstance().getReference().child(Utils.COMMENTS_URL + category + "/" + id).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.d("COMMENTS", String.valueOf(dataSnapshot.getChildrenCount()));
+                subCategory.setComments((int) dataSnapshot.getChildrenCount());
+                getLikes(category, id, subCategory, subCategories);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    private void getLikes(String category, String id, final SubCategory subCategory, final List<SubCategory> subCategories) {
+        FirebaseDatabase.getInstance().getReference().child(Utils.LIKES_URL + category + "/" + id).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                Log.d("LIKES", String.valueOf(dataSnapshot.getChildrenCount()));
+
+                subCategory.setLikes((int) dataSnapshot.getChildrenCount());
+
+                subCategories.add(subCategory);
+
+                view.showSubCategories(subCategories);
+                view.hideLoading();
+            }
+
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override

@@ -30,6 +30,7 @@ public class Categories_Adapter extends RecyclerView.Adapter<Categories_Adapter.
         // each data item is just a string in this case
         public TextView tvCategoryName;
         public ImageView ivImageCategory;
+        public ImageView ivCateItem;
         public RelativeLayout rlContainer;
 
         public ViewHolder(View v) {
@@ -37,6 +38,7 @@ public class Categories_Adapter extends RecyclerView.Adapter<Categories_Adapter.
             tvCategoryName = (TextView) v.findViewById(R.id.tvCategoryName);
             ivImageCategory = (ImageView) v.findViewById(R.id.ivImageCategoryBack);
             rlContainer = (RelativeLayout) v.findViewById(R.id.rlCategoryContainer);
+            ivCateItem = (ImageView) v.findViewById(R.id.ivCateItem);
         }
     }
 
@@ -63,7 +65,25 @@ public class Categories_Adapter extends RecyclerView.Adapter<Categories_Adapter.
     public void onBindViewHolder(ViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        holder.tvCategoryName.setText(categorieList.get(position).getName());
+
+        holder.tvCategoryName.setText(categorieList.get(position).getName().toUpperCase());
+
+        switch (categorieList.get(position).getName()) {
+            case "Historia":
+                holder.ivCateItem.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_account_balance_white_48dp));
+                break;
+            case "Restaurantes":
+                holder.ivCateItem.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_restaurant_white_48dp));
+                break;
+            case "Hoteles":
+                holder.ivCateItem.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_hotel_white_48dp));
+                break;
+            case "Atractivos turisticos":
+                break;
+            default:
+                holder.ivCateItem.setImageDrawable(context.getResources().getDrawable(android.R.drawable.ic_dialog_info));
+                break;
+        }
 
         Glide.with(context).load(categorieList.get(position).getImage()).centerCrop().into(holder.ivImageCategory);
         holder.rlContainer.setOnClickListener(new View.OnClickListener() {

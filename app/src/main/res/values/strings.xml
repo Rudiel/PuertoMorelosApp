@@ -41,6 +41,8 @@
     <string name="facebook_app_id">1541939882548188</string>
     <string name="fb_login_protocol_scheme">fb1541939882548188</string>
 
+    <!--Descubre-->
+    <string name="descubre_title">Descubre</string>
 
 </resources>
 

@@ -2,8 +2,12 @@ package com.puertomorelosapp.puertomorelosapp.Recover;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
@@ -100,6 +104,8 @@ public class Recover_Activity extends AppCompatActivity implements IRecover_View
                 finish();
             }
         });
+
+        setDrawableHint(android.R.color.darker_gray);
     }
 
     private void recoveryAccount() {
@@ -161,5 +167,15 @@ public class Recover_Activity extends AppCompatActivity implements IRecover_View
         if (etRecoveryMail.getText().toString().trim().equals(""))
             return getString(R.string.email_empty);
         else return "";
+    }
+
+    private void setDrawableHint(int color) {
+        Drawable hintEmail = this.getResources().getDrawable(R.drawable.ic_email_black_24dp);
+        hintEmail.setColorFilter(ContextCompat.getColor(Recover_Activity.this, color),
+                PorterDuff.Mode.SRC_IN);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            etRecoveryMail.setCompoundDrawablesRelativeWithIntrinsicBounds(hintEmail, null, null, null);
+        }
     }
 }

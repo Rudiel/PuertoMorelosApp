@@ -1,5 +1,6 @@
 package com.puertomorelosapp.puertomorelosapp.Fragments.Secundary_Main;
 
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -68,6 +69,11 @@ public class SecundaryMain_Fragment extends Fragment implements ISecundaryMain_v
         rvSubcategories.setLayoutManager(mLayoutManager);
 
         presenter.getSubCategories((((Main_Activity) getActivity()).category));
+
+        ((Main_Activity) getActivity()).setToolbarTitle(((Main_Activity) getActivity()).category.getName());
+        ((Main_Activity) getActivity()).ivMap.setVisibility(View.GONE);
+
+        pbSubcategories.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.MULTIPLY);
 
 
     }

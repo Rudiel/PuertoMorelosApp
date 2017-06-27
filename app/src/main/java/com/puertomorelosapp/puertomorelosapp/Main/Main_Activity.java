@@ -1,6 +1,7 @@
 package com.puertomorelosapp.puertomorelosapp.Main;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -94,9 +95,11 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
 
         categorieList = new ArrayList<>();
 
-        setToolbarTitle(getString(R.string.menu_main));
 
         setFragment(new Categories_Fragment(), false);
+
+        pbMain.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.MULTIPLY);
+
 
     }
 
