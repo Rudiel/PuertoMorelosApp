@@ -21,6 +21,9 @@ public class Utils {
 
     public static final String LIKES_URL = "PuertoMorelos/SocialAPP/Loves/";
 
+    //https://puerto-morelos-app.firebaseio.com/PuertoMorelos/imagenesURL/Header/Comercios
+
+
 
     public static Typeface getbukharisLetter(Context context) {
         return Typeface.createFromAsset(context.getAssets(), "fonts/bukhariscript.ttf");
