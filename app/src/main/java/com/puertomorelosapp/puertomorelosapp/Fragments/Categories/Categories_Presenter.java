@@ -1,6 +1,7 @@
 package com.puertomorelosapp.puertomorelosapp.Fragments.Categories;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,7 +25,7 @@ public class Categories_Presenter implements ICategories_Presenter {
 
     private ICategories_View view;
 
-    String image =null;
+    String image = null;
 
 
     public Categories_Presenter(Context context) {
@@ -53,6 +54,8 @@ public class Categories_Presenter implements ICategories_Presenter {
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             final Categorie categorie = new Categorie();
                             categorie.setName(snapshot.getValue().toString());
+
+                            Log.d("SIZE", String.valueOf(dataSnapshot.getChildrenCount()));
 
                             if (snapshot.getValue().toString().equals("Hoteles")) {
                                 reference.child(Utils.CATE_URL_BACK + "/Servicios/" + snapshot.getValue().toString() + "/Background")
@@ -132,7 +135,7 @@ public class Categories_Presenter implements ICategories_Presenter {
 
     }
 
-    public  String getImage(final DatabaseReference reference, String url) {
+    public String getImage(final DatabaseReference reference, String url) {
         reference.child(url)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override

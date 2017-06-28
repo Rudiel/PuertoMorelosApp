@@ -43,7 +43,10 @@ public class Categories_Fragment extends Fragment implements ICategories_View, I
     ProgressBar pbCategories;
 
     private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
+    private LinearLayoutManager mLayoutManager;
+
+    public static int index = -1;
+    public static int top = -1;
 
     @Nullable
     @Override
@@ -72,15 +75,17 @@ public class Categories_Fragment extends Fragment implements ICategories_View, I
 
         rvCategories.setLayoutManager(mLayoutManager);
 
-        if (((Main_Activity) getActivity()).categorieList.size() == 0)
-            presenter.getCategories(getActivity());
-        else
-            showCategories(((Main_Activity) getActivity()).categorieList);
 
         ((Main_Activity) getActivity()).setToolbarTitle(getActivity().getString(R.string.descubre_title));
 
         pbCategories.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.MULTIPLY);
 
+        ((Main_Activity) getActivity()).showMenu();
+
+        if (((Main_Activity) getActivity()).categorieList.size() == 0)
+            presenter.getCategories(getActivity());
+        else
+            showCategories(((Main_Activity) getActivity()).categorieList);
 
     }
 
@@ -96,6 +101,9 @@ public class Categories_Fragment extends Fragment implements ICategories_View, I
 
     @Override
     public void showCategories(List<Categorie> categories) {
+
+        ((Main_Activity) getActivity()).categorieList = categories;
+
         mAdapter = new Categories_Adapter(categories, getActivity(), this);
 
         rvCategories.setAdapter(mAdapter);
@@ -118,6 +126,35 @@ public class Categories_Fragment extends Fragment implements ICategories_View, I
         } else {
             ((Main_Activity) getActivity()).setFragment(new SecundaryMain_Fragment(), true);
         }
+
+
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        //read current recyclerview position
+        index = mLayoutManager.findFirstVisibleItemPosition();
+        View v = rvCategories.getChildAt(0);
+        top = (v == null) ? 0 : (v.getTop() - rvCategories.getPaddingTop());
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (index != -1) {
+            mLayoutManager.scrollToPositionWithOffset(index, top);
+        }
+
+        /*try {
+            rvCategories.setAdapter(mAdapter);
+            ((Main_Activity) getActivity()).setToolbarTitle(getActivity().getString(R.string.descubre_title));
+            pbCategories.setVisibility(View.GONE);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
 
 
     }

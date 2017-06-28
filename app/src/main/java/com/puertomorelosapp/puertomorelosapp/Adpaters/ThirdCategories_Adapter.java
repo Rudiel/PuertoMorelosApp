@@ -9,7 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.puertomorelosapp.puertomorelosapp.Models.ThirdCategory;
+import com.puertomorelosapp.puertomorelosapp.Fragments.Thrid_Main.IOnclikThirdListener;
+import com.puertomorelosapp.puertomorelosapp.Models.Categorie;
 import com.puertomorelosapp.puertomorelosapp.R;
 
 import java.util.List;
@@ -20,8 +21,9 @@ import java.util.List;
 
 public class ThirdCategories_Adapter extends RecyclerView.Adapter<ThirdCategories_Adapter.ViewHolder> {
 
-    private List<ThirdCategory> thirdcategoryList;
+    private List<Categorie> thirdcategoryList;
     private Context context;
+    private IOnclikThirdListener listener;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
@@ -37,9 +39,10 @@ public class ThirdCategories_Adapter extends RecyclerView.Adapter<ThirdCategorie
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public ThirdCategories_Adapter(List<ThirdCategory> thirdCategories, Context context) {
+    public ThirdCategories_Adapter(List<Categorie> thirdCategories, Context context, IOnclikThirdListener listener) {
         this.thirdcategoryList = thirdCategories;
         this.context = context;
+        this.listener = listener;
     }
 
     // Create new views (invoked by the layout manager)
@@ -55,11 +58,18 @@ public class ThirdCategories_Adapter extends RecyclerView.Adapter<ThirdCategorie
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(ThirdCategories_Adapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(ThirdCategories_Adapter.ViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         holder.tvThirdCategory.setText(String.valueOf(thirdcategoryList.get(position).getName()));
         Glide.with(context).load(thirdcategoryList.get(position).getImage()).centerCrop().into(holder.ivThirdCategory);
+        holder.ivThirdCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onClickThirdListener(thirdcategoryList.get(position));
+            }
+        });
+
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -67,4 +77,6 @@ public class ThirdCategories_Adapter extends RecyclerView.Adapter<ThirdCategorie
     public int getItemCount() {
         return thirdcategoryList.size();
     }
+
+
 }

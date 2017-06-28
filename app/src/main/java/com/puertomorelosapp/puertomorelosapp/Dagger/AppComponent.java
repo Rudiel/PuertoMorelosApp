@@ -77,7 +77,7 @@ public interface AppComponent {
 
     void inject(SecundaryMain_Presenter target);
 
-    //ThirdCategory
+    //Third Category
 
     void inject(Third_Main_Fragment fragment);
 

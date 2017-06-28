@@ -64,6 +64,8 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
 
     public Categorie category;
 
+    ActionBarDrawerToggle actionBarDrawerToggle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -140,7 +142,7 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
             }
         });
 
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(
+        actionBarDrawerToggle = new ActionBarDrawerToggle(
                 this,
                 drawerLayout,
                 toolbar,
@@ -188,6 +190,19 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
 
     public void setToolbarTitle(String title) {
         titleToolbar.setText(title);
+    }
+
+    public void hideMenu() {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setHomeButtonEnabled(false);
+        titleToolbar.setPadding(0, 0, 0, 0);
+    }
+
+    public void showMenu() {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        titleToolbar.setPadding(0, 0, 60, 0);
+        actionBarDrawerToggle.syncState();
     }
 
 

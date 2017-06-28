@@ -37,18 +37,23 @@ public class SecundaryMain_Presenter implements ISecundaryMain_Presenter {
 
         String url_reference;
 
-        switch (categorie.getName()) {
-            case "Hoteles":
-                url_reference = Utils.PLACES_URL + "/Servicios/" + categorie.getName();
-                break;
-            case "Restaurantes":
-            case "Comida rapida":
-                url_reference = Utils.PLACES_URL + "/Comercios/" + categorie.getName();
-                break;
-            default:
-                url_reference = Utils.PLACES_URL + "/" + categorie.getName();
-                break;
+        if (categorie.getCategoria() != null) {
+            url_reference = Utils.PLACES_URL + "/" + categorie.getCategoria() + "/" + categorie.getName();
+        } else {
+            switch (categorie.getName()) {
+                case "Hoteles":
+                    url_reference = Utils.PLACES_URL + "/Servicios/" + categorie.getName();
+                    break;
+                case "Restaurantes":
+                case "Comida rapida":
+                    url_reference = Utils.PLACES_URL + "/Comercios/" + categorie.getName();
+                    break;
+                default:
+                    url_reference = Utils.PLACES_URL + "/" + categorie.getName();
+                    break;
+            }
         }
+
 
         FirebaseDatabase.getInstance().getReference().child(url_reference).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -57,7 +62,6 @@ public class SecundaryMain_Presenter implements ISecundaryMain_Presenter {
                 List<SubCategory> listSubCategories = new ArrayList<>();
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-
 
 
                     Log.d("VALUE", snapshot.getChildren().toString());

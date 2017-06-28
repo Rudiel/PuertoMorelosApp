@@ -1,6 +1,6 @@
 package com.puertomorelosapp.puertomorelosapp.Fragments.Thrid_Main;
 
-import com.puertomorelosapp.puertomorelosapp.Models.ThirdCategory;
+import com.puertomorelosapp.puertomorelosapp.Models.Categorie;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface IThird_View {
 
-    void showThridCategories(List<ThirdCategory> thirdCategoryList);
+    void showThridCategories(List<Categorie> categories);
 
     void showLoading();
 

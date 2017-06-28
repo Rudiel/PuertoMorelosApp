@@ -11,10 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
-import com.puertomorelosapp.puertomorelosapp.Adpaters.Categories_Adapter;
 import com.puertomorelosapp.puertomorelosapp.Adpaters.ThirdCategories_Adapter;
+import com.puertomorelosapp.puertomorelosapp.Fragments.Secundary_Main.SecundaryMain_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
-import com.puertomorelosapp.puertomorelosapp.Models.ThirdCategory;
+import com.puertomorelosapp.puertomorelosapp.Models.Categorie;
 import com.puertomorelosapp.puertomorelosapp.R;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
 
@@ -29,7 +29,7 @@ import butterknife.ButterKnife;
  * Created by rudielavilaperaza on 6/27/17.
  */
 
-public class Third_Main_Fragment extends Fragment implements IThird_View {
+public class Third_Main_Fragment extends Fragment implements IThird_View, IOnclikThirdListener {
 
     @Inject
     IThird_Main_Presenter presenter;
@@ -74,15 +74,21 @@ public class Third_Main_Fragment extends Fragment implements IThird_View {
         //else
         //  showCategories(((Main_Activity) getActivity()).categorieList);
 
-        ((Main_Activity) getActivity()).setToolbarTitle((((Main_Activity) getActivity()).category.getName()));
+        if (((Main_Activity) getActivity()).category.getCategoria() != null)
+            ((Main_Activity) getActivity()).setToolbarTitle((((Main_Activity) getActivity()).category.getCategoria()));
+        else
+            ((Main_Activity) getActivity()).setToolbarTitle((((Main_Activity) getActivity()).category.getName()));
+
 
         pbThirdCategories.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.MULTIPLY);
+
+        ((Main_Activity) getActivity()).ivMap.setVisibility(View.GONE);
 
     }
 
     @Override
-    public void showThridCategories(List<ThirdCategory> thirdCategories) {
-        mAdapter = new ThirdCategories_Adapter(thirdCategories, getActivity());
+    public void showThridCategories(List<Categorie> thirdCategories) {
+        mAdapter = new ThirdCategories_Adapter(thirdCategories, getActivity(), this);
 
         rvThirdCategories.setAdapter(mAdapter);
 
@@ -97,5 +103,27 @@ public class Third_Main_Fragment extends Fragment implements IThird_View {
     @Override
     public void hideLoading() {
         pbThirdCategories.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onClickThirdListener(Categorie category) {
+        ((Main_Activity) getActivity()).category = category;
+        ((Main_Activity) getActivity()).setFragment(new SecundaryMain_Fragment(), true);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        try {
+            rvThirdCategories.setAdapter(mAdapter);
+            if (((Main_Activity) getActivity()).category.getCategoria() != null)
+                ((Main_Activity) getActivity()).setToolbarTitle((((Main_Activity) getActivity()).category.getCategoria()));
+            else
+                ((Main_Activity) getActivity()).setToolbarTitle((((Main_Activity) getActivity()).category.getName()));
+            pbThirdCategories.setVisibility(View.GONE);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }

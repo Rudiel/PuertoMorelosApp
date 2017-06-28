@@ -8,7 +8,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.puertomorelosapp.puertomorelosapp.Models.Categorie;
-import com.puertomorelosapp.puertomorelosapp.Models.ThirdCategory;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
 import com.puertomorelosapp.puertomorelosapp.Utils.Utils;
 
@@ -38,7 +37,7 @@ public class Third_Main_Presenter implements IThird_Main_Presenter {
 
         view.showLoading();
 
-        final List<ThirdCategory> thirdCategoryList = new ArrayList<>();
+        final List<Categorie> thirdCategoryList = new ArrayList<>();
 
         FirebaseDatabase.getInstance().getReference().child(Utils.PLACES_URL + "/" + categorie.getName()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -46,10 +45,11 @@ public class Third_Main_Presenter implements IThird_Main_Presenter {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Log.d("THIRT", snapshot.getKey());
 
-                    final ThirdCategory thirdCategory = new ThirdCategory();
+                    final Categorie thirdCategory = new Categorie();
                     thirdCategory.setName(snapshot.getKey());
+                    thirdCategory.setCategoria(categorie.getName());
 
-                    FirebaseDatabase.getInstance().getReference().child(Utils.CATE_URL_BACK+"/"+categorie.getName()+"/"+snapshot.getKey()+"/Background").addListenerForSingleValueEvent(new ValueEventListener() {
+                    FirebaseDatabase.getInstance().getReference().child(Utils.CATE_URL_BACK + "/" + categorie.getName() + "/" + snapshot.getKey() + "/Background").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot data) {
 
@@ -68,7 +68,6 @@ public class Third_Main_Presenter implements IThird_Main_Presenter {
 
                         }
                     });
-
 
 
                 }

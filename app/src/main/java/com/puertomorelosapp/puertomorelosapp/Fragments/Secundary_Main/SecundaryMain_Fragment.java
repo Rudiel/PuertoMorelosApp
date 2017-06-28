@@ -68,12 +68,14 @@ public class SecundaryMain_Fragment extends Fragment implements ISecundaryMain_v
 
         rvSubcategories.setLayoutManager(mLayoutManager);
 
-        presenter.getSubCategories((((Main_Activity) getActivity()).category));
-
         ((Main_Activity) getActivity()).setToolbarTitle(((Main_Activity) getActivity()).category.getName());
         ((Main_Activity) getActivity()).ivMap.setVisibility(View.GONE);
 
         pbSubcategories.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.MULTIPLY);
+
+        ((Main_Activity) getActivity()).hideMenu();
+
+        presenter.getSubCategories((((Main_Activity) getActivity()).category));
 
 
     }
@@ -95,5 +97,21 @@ public class SecundaryMain_Fragment extends Fragment implements ISecundaryMain_v
         rvSubcategories.setAdapter(mAdapter);
 
         mAdapter.notifyDataSetChanged();
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        try {
+            rvSubcategories.setAdapter(mAdapter);
+            ((Main_Activity) getActivity()).setToolbarTitle(((Main_Activity) getActivity()).category.getName());
+            pbSubcategories.setVisibility(View.GONE);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
     }
 }
