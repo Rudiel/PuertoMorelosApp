@@ -13,7 +13,9 @@ import android.widget.ProgressBar;
 
 import com.puertomorelosapp.puertomorelosapp.Adpaters.Categories_Adapter;
 import com.puertomorelosapp.puertomorelosapp.Adpaters.SubCategories_Adapter;
+import com.puertomorelosapp.puertomorelosapp.Fragments.Details.Detail_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
+import com.puertomorelosapp.puertomorelosapp.Models.Categorie;
 import com.puertomorelosapp.puertomorelosapp.Models.SubCategory;
 import com.puertomorelosapp.puertomorelosapp.R;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
@@ -29,7 +31,7 @@ import butterknife.ButterKnife;
  * Created by rudielavilaperaza on 6/24/17.
  */
 
-public class SecundaryMain_Fragment extends Fragment implements ISecundaryMain_view {
+public class SecundaryMain_Fragment extends Fragment implements ISecundaryMain_view, ISecundaryOnclick {
 
     @Inject
     ISecundaryMain_Presenter presenter;
@@ -62,6 +64,8 @@ public class SecundaryMain_Fragment extends Fragment implements ISecundaryMain_v
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        ((Main_Activity) getActivity()).toolbar.setVisibility(View.VISIBLE);
+
         rvSubcategories.setHasFixedSize(true);
 
         mLayoutManager = new LinearLayoutManager(getActivity());
@@ -92,7 +96,7 @@ public class SecundaryMain_Fragment extends Fragment implements ISecundaryMain_v
 
     @Override
     public void showSubCategories(List<SubCategory> subCategories) {
-        mAdapter = new SubCategories_Adapter(subCategories, getActivity());
+        mAdapter = new SubCategories_Adapter(subCategories, getActivity(), this);
 
         rvSubcategories.setAdapter(mAdapter);
 
@@ -113,5 +117,11 @@ public class SecundaryMain_Fragment extends Fragment implements ISecundaryMain_v
         }
 
 
+    }
+
+    @Override
+    public void onClickCategory(SubCategory category) {
+        ((Main_Activity) getActivity()).setFragment(new Detail_Fragment(), true);
+        ((Main_Activity) getActivity()).subCategory = category;
     }
 }

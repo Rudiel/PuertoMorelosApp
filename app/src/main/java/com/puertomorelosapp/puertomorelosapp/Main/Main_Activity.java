@@ -25,6 +25,7 @@ import com.puertomorelosapp.puertomorelosapp.Fragments.Conditions_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Map.Fragment_Map;
 import com.puertomorelosapp.puertomorelosapp.Login.Login_Activity;
 import com.puertomorelosapp.puertomorelosapp.Models.Categorie;
+import com.puertomorelosapp.puertomorelosapp.Models.SubCategory;
 import com.puertomorelosapp.puertomorelosapp.R;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
 import com.puertomorelosapp.puertomorelosapp.Utils.Utils;
@@ -63,6 +64,7 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
     ProgressBar pbMain;
 
     public Categorie category;
+    public SubCategory subCategory;
 
     ActionBarDrawerToggle actionBarDrawerToggle;
 
@@ -102,6 +104,7 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
 
         pbMain.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.MULTIPLY);
 
+        showMenu();
 
     }
 
@@ -201,7 +204,7 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
     public void showMenu() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-        titleToolbar.setPadding(0, 0, 60, 0);
+        titleToolbar.setPadding(0, 0, (int) getResources().getDimension(R.dimen.margin_titile), 0);
         actionBarDrawerToggle.syncState();
     }
 

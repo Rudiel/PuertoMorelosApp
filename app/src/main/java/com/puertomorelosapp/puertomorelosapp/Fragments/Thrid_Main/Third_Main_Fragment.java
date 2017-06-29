@@ -62,6 +62,7 @@ public class Third_Main_Fragment extends Fragment implements IThird_View, IOncli
         super.onActivityCreated(savedInstanceState);
 
         //presenter.getThirdCategories(((Main_Activity) getActivity()).category);
+        ((Main_Activity) getActivity()).toolbar.setVisibility(View.VISIBLE);
 
         rvThirdCategories.setHasFixedSize(true);
 

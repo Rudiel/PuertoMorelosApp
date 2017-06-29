@@ -1,5 +1,6 @@
 package com.puertomorelosapp.puertomorelosapp.Fragments.Secundary_Main;
 
+import com.puertomorelosapp.puertomorelosapp.Models.Categorie;
 import com.puertomorelosapp.puertomorelosapp.Models.SubCategory;
 
 import java.util.List;
@@ -15,5 +16,6 @@ public interface ISecundaryMain_view {
     void showLoading();
 
     void showSubCategories(List<SubCategory> subCategories);
+
 
 }

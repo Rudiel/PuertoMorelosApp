@@ -67,6 +67,8 @@ public class Categories_Fragment extends Fragment implements ICategories_View, I
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        ((Main_Activity) getActivity()).toolbar.setVisibility(View.VISIBLE);
+
         ((Main_Activity) getActivity()).ivMap.setVisibility(View.VISIBLE);
 
         rvCategories.setHasFixedSize(true);

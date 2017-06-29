@@ -44,5 +44,12 @@
     <!--Descubre-->
     <string name="descubre_title">Descubre</string>
 
+    <!--Details-->
+    <string name="detail_like">Me gusta</string>
+    <string name="detail_comment">Comentarios</string>
+    <string name="detail_photos">Fotos</string>
+    <string name="detail_ubicacion">Ubicación</string>
+    <string name="detail_description">Descripción</string>
+
 </resources>
 

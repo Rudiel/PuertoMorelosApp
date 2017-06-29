@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.puertomorelosapp.puertomorelosapp.Fragments.Secundary_Main.ISecundaryOnclick;
 import com.puertomorelosapp.puertomorelosapp.Models.Categorie;
 import com.puertomorelosapp.puertomorelosapp.Models.SubCategory;
 import com.puertomorelosapp.puertomorelosapp.R;
@@ -23,6 +24,7 @@ public class SubCategories_Adapter extends RecyclerView.Adapter<SubCategories_Ad
 
     private List<SubCategory> subcategoryList;
     private Context context;
+    private ISecundaryOnclick listener;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
@@ -41,9 +43,10 @@ public class SubCategories_Adapter extends RecyclerView.Adapter<SubCategories_Ad
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public SubCategories_Adapter(List<SubCategory> subCategories, Context context) {
+    public SubCategories_Adapter(List<SubCategory> subCategories, Context context, ISecundaryOnclick listener) {
         this.subcategoryList = subCategories;
         this.context = context;
+        this.listener = listener;
     }
 
     // Create new views (invoked by the layout manager)
@@ -59,13 +62,20 @@ public class SubCategories_Adapter extends RecyclerView.Adapter<SubCategories_Ad
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(SubCategories_Adapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(SubCategories_Adapter.ViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         holder.tvComments.setText(String.valueOf(subcategoryList.get(position).getComments()));
         holder.tvLikes.setText(String.valueOf(subcategoryList.get(position).getLikes()));
         holder.tvSubcategoryName.setText(subcategoryList.get(position).getTitulo());
         Glide.with(context).load(subcategoryList.get(position).getImageBackgroundContent()).centerCrop().into(holder.ivSubcategory);
+
+        holder.ivSubcategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onClickCategory(subcategoryList.get(position));
+            }
+        });
 
     }
 
