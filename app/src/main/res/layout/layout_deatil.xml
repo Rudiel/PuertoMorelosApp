@@ -36,10 +36,46 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:textAppearance="?android:textAppearanceLarge"
                     android:singleLine="true"
+                    android:textAppearance="?android:textAppearanceLarge"
                     android:textColor="@color/colorAccent"
                     android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvDetailHorario"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:drawableLeft="@drawable/com_facebook_button_icon"
+                    android:drawablePadding="10dp"
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textColor="@color/colorAccent"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/tvDetailFechaDia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@id/tvDetailHorario"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textColor="@color/colorAccent"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/tvDetailAcces"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="10dp"
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textColor="@color/colorAccent"
+                    android:visibility="gone" />
 
 
             </RelativeLayout>

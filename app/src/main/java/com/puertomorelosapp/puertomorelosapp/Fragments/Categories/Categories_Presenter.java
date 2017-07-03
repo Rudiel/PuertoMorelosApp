@@ -55,8 +55,6 @@ public class Categories_Presenter implements ICategories_Presenter {
                             final Categorie categorie = new Categorie();
                             categorie.setName(snapshot.getValue().toString());
 
-                            Log.d("SIZE", String.valueOf(dataSnapshot.getChildrenCount()));
-
                             if (snapshot.getValue().toString().equals("Hoteles")) {
                                 reference.child(Utils.CATE_URL_BACK + "/Servicios/" + snapshot.getValue().toString() + "/Background")
                                         .addListenerForSingleValueEvent(new ValueEventListener() {

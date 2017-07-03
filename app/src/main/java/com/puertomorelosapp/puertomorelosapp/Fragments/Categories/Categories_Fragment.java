@@ -89,6 +89,8 @@ public class Categories_Fragment extends Fragment implements ICategories_View, I
         else
             showCategories(((Main_Activity) getActivity()).categorieList);
 
+        ((Main_Activity) getActivity()).subCategoryList.clear();
+
     }
 
     @Override
@@ -123,10 +125,10 @@ public class Categories_Fragment extends Fragment implements ICategories_View, I
         ((Main_Activity) getActivity()).category = categoria;
 
         if (categoria.getName().equals("Comercios") || categoria.getName().equals("Servicios")) {
-            ((Main_Activity) getActivity()).setFragment(new Third_Main_Fragment(), true);
+            ((Main_Activity) getActivity()).setFragment(new Third_Main_Fragment(), true, null);
 
         } else {
-            ((Main_Activity) getActivity()).setFragment(new SecundaryMain_Fragment(), true);
+            ((Main_Activity) getActivity()).setFragment(new SecundaryMain_Fragment(), true, null);
         }
 
 

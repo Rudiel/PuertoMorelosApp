@@ -39,7 +39,6 @@ public class Main_Presenter implements IMain_Presenter {
 
     @Override
     public void logout(FirebaseAuth auth) {
-        auth.signOut();
 
         view.logoutSesion();
     }

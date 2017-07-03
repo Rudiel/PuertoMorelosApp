@@ -78,7 +78,23 @@ public class Categories_Adapter extends RecyclerView.Adapter<Categories_Adapter.
             case "Hoteles":
                 holder.ivCateItem.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_hotel_white_48dp));
                 break;
-            case "Atractivos turisticos":
+            case "Atractivos Turisticos":
+                holder.ivCateItem.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_local_see_white_48dp));
+                break;
+            case "Comida rapida":
+                holder.ivCateItem.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_local_pizza_white_48dp));
+                break;
+            case "Servicios":
+                holder.ivCateItem.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_business_center_white_48dp));
+                break;
+            case "Eventos":
+                holder.ivCateItem.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_event_white_48dp));
+                break;
+            case "Lugares de interes":
+                holder.ivCateItem.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_place_white_48dp));
+                break;
+            case "Comercios":
+                holder.ivCateItem.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_store_white_48dp));
                 break;
             default:
                 holder.ivCateItem.setImageDrawable(context.getResources().getDrawable(android.R.drawable.ic_dialog_info));

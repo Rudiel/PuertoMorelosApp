@@ -21,6 +21,9 @@
     <string name="menu_about">Acerca De</string>
     <string name="menu_conditions">Términos y Condiciones</string>
     <string name="menu_logout">Cerrar Sesión</string>
+    <string name="menu_close_session_accept">Aceptar</string>
+    <string name="menu_close_session_cancel">Cancel</string>
+    <string name="menu_close_session_message">¿Estás seguro que deseas cerrar la sesión?</string>
 
     <!--About Us -->
     <string name="aboutus_face">Facebook</string>
@@ -50,6 +53,19 @@
     <string name="detail_photos">Fotos</string>
     <string name="detail_ubicacion">Ubicación</string>
     <string name="detail_description">Descripción</string>
+
+
+    <!--Categorias-->
+    <string name="historia">Historia</string>
+    <string name="restaurantes">Restaurantes</string>
+    <string name="hoteles">Hoteles</string>
+    <string name="atractivos_turisticos">Atractivos Turisticos</string>
+    <string name="comida_rapida">Comida rapida</string>
+    <string name="servicios">Servicios</string>
+    <string name="eventos">Eventos</string>
+    <string name="lugares_de_interes">Lugares de interes</string>
+    <string name="comercios">Comercios</string>
+    <string name="transition_subcategory">transicionsubcategoria</string>
 
 </resources>
 

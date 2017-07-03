@@ -1,5 +1,7 @@
 package com.puertomorelosapp.puertomorelosapp.Models;
 
+import android.support.annotation.Nullable;
+
 /**
  * Created by rudielavilaperaza on 6/24/17.
  */
@@ -8,12 +10,15 @@ public class SubCategory {
 
     private String id;
 
-    private String activo;
+    private int activo;
     private int comentariosCantidad;
     private String descripcion;
     private String descripcion2;
     private String descripcion3;
     private String direccion;
+    private String fechadias;
+    private String horafin;
+    private String horainicio;
     private String imageBackgroundContent;
     private String imageHeader;
     private String latitud;
@@ -26,9 +31,43 @@ public class SubCategory {
     private String titulo;
     private String titulo2;
     private String titulo3;
+    private String acceso;
+
 
     private int likes;
     private int comments;
+
+    public String getFechadias() {
+        return fechadias;
+    }
+
+    public String getAcceso() {
+        return acceso;
+    }
+
+    public void setAcceso(String acceso) {
+        this.acceso = acceso;
+    }
+
+    public void setFechadias(String fechadias) {
+        this.fechadias = fechadias;
+    }
+
+    public String getHorafin() {
+        return horafin;
+    }
+
+    public void setHorafin(String horafin) {
+        this.horafin = horafin;
+    }
+
+    public String getHorainicio() {
+        return horainicio;
+    }
+
+    public void setHorainicio(String horainicio) {
+        this.horainicio = horainicio;
+    }
 
     public int getLikes() {
         return likes;
@@ -54,11 +93,11 @@ public class SubCategory {
         this.id = id;
     }
 
-    public String getActivo() {
+    public int getActivo() {
         return activo;
     }
 
-    public void setActivo(String activo) {
+    public void setActivo(int activo) {
         this.activo = activo;
     }
 

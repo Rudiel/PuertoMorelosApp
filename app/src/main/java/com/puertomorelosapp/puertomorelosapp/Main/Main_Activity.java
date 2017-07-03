@@ -1,10 +1,13 @@
 package com.puertomorelosapp.puertomorelosapp.Main;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +21,8 @@ import android.widget.TextView;
 
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
+import com.puertomorelosapp.puertomorelosapp.Creators.ConfirmDialog_Creator;
+import com.puertomorelosapp.puertomorelosapp.Creators.IConfirmDialog_Creator;
 import com.puertomorelosapp.puertomorelosapp.Fragments.AboutUs.AboutUs_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Activity_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Categories.Categories_Fragment;
@@ -59,6 +64,8 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
     public ImageView ivMap;
 
     public List<Categorie> categorieList;
+    public List<SubCategory> subCategoryList;
+    public List<Categorie> thirdCategoryList;
 
     @Bind(R.id.pbMain)
     ProgressBar pbMain;
@@ -88,7 +95,7 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
         ivMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setFragment(new Fragment_Map(), false);
+                setFragment(new Fragment_Map(), false, null);
                 setToolbarTitle(getString(R.string.app_name));
             }
         });
@@ -98,9 +105,11 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
         titleToolbar.setTypeface(Utils.getbukharisLetter(this));
 
         categorieList = new ArrayList<>();
+        thirdCategoryList = new ArrayList<>();
+        subCategoryList= new ArrayList<>();
 
 
-        setFragment(new Categories_Fragment(), false);
+        setFragment(new Categories_Fragment(), false, null);
 
         pbMain.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.MULTIPLY);
 
@@ -117,22 +126,22 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.menu_about:
-                        setFragment(new AboutUs_Fragment(), false);
+                        setFragment(new AboutUs_Fragment(), false, null);
                         drawerLayout.closeDrawers();
                         setToolbarTitle(getString(R.string.menu_about));
                         break;
                     case R.id.menu_activity:
-                        setFragment(new Activity_Fragment(), false);
+                        setFragment(new Activity_Fragment(), false, null);
                         drawerLayout.closeDrawers();
                         setToolbarTitle(getString(R.string.menu_myactivity));
                         break;
                     case R.id.menu_conditions:
-                        setFragment(new Conditions_Fragment(), false);
+                        setFragment(new Conditions_Fragment(), false, null);
                         drawerLayout.closeDrawers();
                         setToolbarTitle(getString(R.string.menu_conditions));
                         break;
                     case R.id.menu_main:
-                        setFragment(new Categories_Fragment(), false);
+                        setFragment(new Categories_Fragment(), false, null);
                         drawerLayout.closeDrawers();
                         setToolbarTitle(getString(R.string.menu_main));
                         break;
@@ -160,18 +169,37 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
         actionBarDrawerToggle.syncState();
     }
 
-    public void setFragment(Fragment fragment, boolean isBackStack) {
-        if (isBackStack)
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.flContainer, fragment)
-                    .addToBackStack(null)
-                    .commit();
-        else
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.flContainer, fragment)
-                    .commit();
+    public void setFragment(Fragment fragment, boolean isBackStack, @Nullable View image) {
+        if (isBackStack) {
+            if (image != null) {
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.flContainer, fragment)
+                        .addSharedElement(image, ViewCompat.getTransitionName(image))
+                        .addToBackStack(null)
+                        .commit();
+            } else {
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.flContainer, fragment)
+                        .addToBackStack(null)
+                        .commit();
+            }
+
+        } else {
+            if (image != null) {
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.flContainer, fragment)
+                        .addSharedElement(image, ViewCompat.getTransitionName(image))
+                        .commit();
+            } else {
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.flContainer, fragment)
+                        .commit();
+            }
+        }
     }
 
     @Override
@@ -186,9 +214,29 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
 
     @Override
     public void logoutSesion() {
-        LoginManager.getInstance().logOut();
-        startActivity(new Intent(Main_Activity.this, Login_Activity.class));
-        finish();
+
+        drawerLayout.closeDrawers();
+
+        new ConfirmDialog_Creator().showConfirmDialog(this,
+                getString(R.string.menu_logout),
+                getString(R.string.menu_close_session_message),
+                new IConfirmDialog_Creator() {
+                    @Override
+                    public void onAccept(AlertDialog dialog) {
+                        auth.signOut();
+                        dialog.dismiss();
+                        LoginManager.getInstance().logOut();
+                        startActivity(new Intent(Main_Activity.this, Login_Activity.class));
+                        finish();
+                    }
+
+                    @Override
+                    public void onCancel(AlertDialog dialog) {
+                        dialog.dismiss();
+                    }
+                });
+
+
     }
 
     public void setToolbarTitle(String title) {
@@ -196,12 +244,19 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
     }
 
     public void hideMenu() {
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setHomeButtonEnabled(false);
+
+        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+
         titleToolbar.setPadding(0, 0, 0, 0);
     }
 
     public void showMenu() {
+
+        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNDEFINED);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         titleToolbar.setPadding(0, 0, (int) getResources().getDimension(R.dimen.margin_titile), 0);

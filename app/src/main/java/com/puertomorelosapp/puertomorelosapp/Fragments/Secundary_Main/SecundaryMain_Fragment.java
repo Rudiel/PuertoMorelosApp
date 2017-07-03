@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.puertomorelosapp.puertomorelosapp.Adpaters.Categories_Adapter;
@@ -20,6 +21,7 @@ import com.puertomorelosapp.puertomorelosapp.Models.SubCategory;
 import com.puertomorelosapp.puertomorelosapp.R;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -79,7 +81,10 @@ public class SecundaryMain_Fragment extends Fragment implements ISecundaryMain_v
 
         ((Main_Activity) getActivity()).hideMenu();
 
-        presenter.getSubCategories((((Main_Activity) getActivity()).category));
+        if (((Main_Activity) getActivity()).subCategoryList.size() > 0) {
+            this.showSubCategories(((Main_Activity) getActivity()).subCategoryList);
+        } else
+            presenter.getSubCategories((((Main_Activity) getActivity()).category));
 
 
     }
@@ -96,7 +101,21 @@ public class SecundaryMain_Fragment extends Fragment implements ISecundaryMain_v
 
     @Override
     public void showSubCategories(List<SubCategory> subCategories) {
-        mAdapter = new SubCategories_Adapter(subCategories, getActivity(), this);
+
+        ((Main_Activity) getActivity()).subCategoryList = subCategories;
+
+        List<SubCategory> list = new ArrayList<>();
+
+        for (SubCategory sub : subCategories) {
+            if (sub.getActivo() != 0) {
+                list.add(sub);
+            }
+        }
+
+
+        hideLoading();
+
+        mAdapter = new SubCategories_Adapter(list, getActivity(), this);
 
         rvSubcategories.setAdapter(mAdapter);
 
@@ -108,9 +127,10 @@ public class SecundaryMain_Fragment extends Fragment implements ISecundaryMain_v
     public void onResume() {
         super.onResume();
         try {
-            rvSubcategories.setAdapter(mAdapter);
+
+            //rvSubcategories.setAdapter(mAdapter);
             ((Main_Activity) getActivity()).setToolbarTitle(((Main_Activity) getActivity()).category.getName());
-            pbSubcategories.setVisibility(View.GONE);
+            //pbSubcategories.setVisibility(View.GONE);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -120,8 +140,8 @@ public class SecundaryMain_Fragment extends Fragment implements ISecundaryMain_v
     }
 
     @Override
-    public void onClickCategory(SubCategory category) {
-        ((Main_Activity) getActivity()).setFragment(new Detail_Fragment(), true);
+    public void onClickCategory(SubCategory category, ImageView image) {
+        ((Main_Activity) getActivity()).setFragment(new Detail_Fragment(), true, image);
         ((Main_Activity) getActivity()).subCategory = category;
     }
 }

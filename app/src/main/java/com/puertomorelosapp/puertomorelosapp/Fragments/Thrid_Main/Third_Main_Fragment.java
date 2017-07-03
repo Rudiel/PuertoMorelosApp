@@ -70,10 +70,7 @@ public class Third_Main_Fragment extends Fragment implements IThird_View, IOncli
 
         rvThirdCategories.setLayoutManager(mLayoutManager);
 
-        //if (((Main_Activity) getActivity()).categorieList.size() == 0)
         presenter.getThirdCategories(((Main_Activity) getActivity()).category);
-        //else
-        //  showCategories(((Main_Activity) getActivity()).categorieList);
 
         if (((Main_Activity) getActivity()).category.getCategoria() != null)
             ((Main_Activity) getActivity()).setToolbarTitle((((Main_Activity) getActivity()).category.getCategoria()));
@@ -89,6 +86,9 @@ public class Third_Main_Fragment extends Fragment implements IThird_View, IOncli
 
     @Override
     public void showThridCategories(List<Categorie> thirdCategories) {
+
+        ((Main_Activity) getActivity()).thirdCategoryList = thirdCategories;
+
         mAdapter = new ThirdCategories_Adapter(thirdCategories, getActivity(), this);
 
         rvThirdCategories.setAdapter(mAdapter);
@@ -108,8 +108,9 @@ public class Third_Main_Fragment extends Fragment implements IThird_View, IOncli
 
     @Override
     public void onClickThirdListener(Categorie category) {
+        ((Main_Activity)getActivity()).subCategoryList.clear();
         ((Main_Activity) getActivity()).category = category;
-        ((Main_Activity) getActivity()).setFragment(new SecundaryMain_Fragment(), true);
+        ((Main_Activity) getActivity()).setFragment(new SecundaryMain_Fragment(), true,null);
     }
 
     @Override

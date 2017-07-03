@@ -1,5 +1,8 @@
 package com.puertomorelosapp.puertomorelosapp.Fragments.Secundary_Main;
 
+import android.view.View;
+import android.widget.ImageView;
+
 import com.puertomorelosapp.puertomorelosapp.Models.Categorie;
 import com.puertomorelosapp.puertomorelosapp.Models.SubCategory;
 
@@ -9,5 +12,5 @@ import com.puertomorelosapp.puertomorelosapp.Models.SubCategory;
 
 public interface ISecundaryOnclick {
 
-    void onClickCategory(SubCategory category);
+    void onClickCategory(SubCategory category, ImageView image);
 }

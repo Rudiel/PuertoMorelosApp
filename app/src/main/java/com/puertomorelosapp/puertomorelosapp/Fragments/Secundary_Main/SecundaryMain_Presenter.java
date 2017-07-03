@@ -68,12 +68,24 @@ public class SecundaryMain_Presenter implements ISecundaryMain_Presenter {
                     total = (int) snapshot.getChildrenCount();
                     SubCategory subCategory = new SubCategory();
                     subCategory.setId(snapshot.getKey());
-                    subCategory.setActivo(snapshot.child("activo").getValue().toString());
+                    subCategory.setActivo(Integer.parseInt(snapshot.child("activo").getValue().toString()));
                     subCategory.setComentariosCantidad(Integer.parseInt(snapshot.child("comentariosCantidad").getValue().toString()));
                     subCategory.setDescripcion(snapshot.child("descripcion").getValue().toString());
                     subCategory.setDescripcion2(snapshot.child("descripcion2").getValue().toString());
                     subCategory.setDescripcion3(snapshot.child("descripcion3").getValue().toString());
                     subCategory.setDireccion(snapshot.child("direccion").getValue().toString());
+
+                    try {
+                        subCategory.setFechadias(snapshot.child("fechadias").getValue().toString());
+                        subCategory.setHorafin(snapshot.child("horafin").getValue().toString());
+                        subCategory.setHorainicio(snapshot.child("horainicio").getValue().toString());
+                        subCategory.setAcceso(snapshot.child("acceso").getValue().toString());
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+
                     subCategory.setImageBackgroundContent(snapshot.child("imageBackgroundContent").getValue().toString());
                     subCategory.setImageHeader(snapshot.child("imageHeader").getValue().toString());
                     subCategory.setLatitud(snapshot.child("latitud").getValue().toString());
@@ -132,7 +144,6 @@ public class SecundaryMain_Presenter implements ISecundaryMain_Presenter {
                 subCategories.add(subCategory);
 
                 view.showSubCategories(subCategories);
-                view.hideLoading();
             }
 
 
