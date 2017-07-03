@@ -8,11 +8,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.puertomorelosapp.puertomorelosapp.Models.Categorie;
+import com.puertomorelosapp.puertomorelosapp.Models.Servicio;
 import com.puertomorelosapp.puertomorelosapp.Models.SubCategory;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
 import com.puertomorelosapp.puertomorelosapp.Utils.Utils;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -66,6 +68,7 @@ public class SecundaryMain_Presenter implements ISecundaryMain_Presenter {
 
                     Log.d("VALUE", snapshot.getChildren().toString());
                     total = (int) snapshot.getChildrenCount();
+
                     SubCategory subCategory = new SubCategory();
                     subCategory.setId(snapshot.getKey());
                     subCategory.setActivo(Integer.parseInt(snapshot.child("activo").getValue().toString()));
@@ -74,18 +77,6 @@ public class SecundaryMain_Presenter implements ISecundaryMain_Presenter {
                     subCategory.setDescripcion2(snapshot.child("descripcion2").getValue().toString());
                     subCategory.setDescripcion3(snapshot.child("descripcion3").getValue().toString());
                     subCategory.setDireccion(snapshot.child("direccion").getValue().toString());
-
-                    try {
-                        subCategory.setFechadias(snapshot.child("fechadias").getValue().toString());
-                        subCategory.setHorafin(snapshot.child("horafin").getValue().toString());
-                        subCategory.setHorainicio(snapshot.child("horainicio").getValue().toString());
-                        subCategory.setAcceso(snapshot.child("acceso").getValue().toString());
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-
                     subCategory.setImageBackgroundContent(snapshot.child("imageBackgroundContent").getValue().toString());
                     subCategory.setImageHeader(snapshot.child("imageHeader").getValue().toString());
                     subCategory.setLatitud(snapshot.child("latitud").getValue().toString());
@@ -98,6 +89,53 @@ public class SecundaryMain_Presenter implements ISecundaryMain_Presenter {
                     subCategory.setTitulo(snapshot.child("titulo").getValue().toString());
                     subCategory.setTitulo2(snapshot.child("titulo2").getValue().toString());
                     subCategory.setTitulo3(snapshot.child("titulo3").getValue().toString());
+
+                    try {
+                        subCategory.setFechadias(snapshot.child("fechadias").getValue().toString());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    try {
+                        subCategory.setHorafin(snapshot.child("horafin").getValue().toString());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    try {
+                        subCategory.setHorainicio(snapshot.child("horainicio").getValue().toString());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    try {
+                        subCategory.setAcceso(snapshot.child("acceso").getValue().toString());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    try {
+                        Log.d("Servicio", snapshot.child("Servicios").getValue().toString());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    if (snapshot.child("Servicios").getValue() != null) {
+                        List<Servicio> servicios = new ArrayList<>();
+
+                        for (DataSnapshot serv: snapshot.child("Servicios").getChildren()){
+                            Servicio servicio= new Servicio();
+                            servicio.setName(serv.getKey());
+                            servicio.setStatus(Boolean.valueOf(serv.getValue().toString()));
+
+                            servicios.add(servicio);
+                        }
+
+                        subCategory.setServicios(servicios);
+
+                    }
+
+
                     getCommnets(categorie.getName(), subCategory.getId(), subCategory, listSubCategories);
 
                 }

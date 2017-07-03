@@ -2,6 +2,8 @@ package com.puertomorelosapp.puertomorelosapp.Models;
 
 import android.support.annotation.Nullable;
 
+import java.util.List;
+
 /**
  * Created by rudielavilaperaza on 6/24/17.
  */
@@ -36,6 +38,16 @@ public class SubCategory {
 
     private int likes;
     private int comments;
+
+    private List<Servicio> servicios;
+
+    public List<Servicio> getServicios() {
+        return servicios;
+    }
+
+    public void setServicios(List<Servicio> servicios) {
+        this.servicios = servicios;
+    }
 
     public String getFechadias() {
         return fechadias;

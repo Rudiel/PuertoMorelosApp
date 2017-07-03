@@ -53,6 +53,7 @@
     <string name="detail_photos">Fotos</string>
     <string name="detail_ubicacion">Ubicación</string>
     <string name="detail_description">Descripción</string>
+    <string name="detail_service_title">Services</string>
 
 
     <!--Categorias-->

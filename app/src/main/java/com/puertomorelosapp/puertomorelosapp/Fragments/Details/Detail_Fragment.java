@@ -1,22 +1,35 @@
 package com.puertomorelosapp.puertomorelosapp.Fragments.Details;
 
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.Toolbar;
 import android.transition.TransitionInflater;
+import android.view.Gravity;
 import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.puertomorelosapp.puertomorelosapp.Creators.ServicesDialog;
+import com.puertomorelosapp.puertomorelosapp.Login.Login_Activity;
 import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
+import com.puertomorelosapp.puertomorelosapp.Models.Servicio;
 import com.puertomorelosapp.puertomorelosapp.Models.SubCategory;
 import com.puertomorelosapp.puertomorelosapp.R;
+import com.puertomorelosapp.puertomorelosapp.Utils.Utils;
 
 import javax.inject.Inject;
 
@@ -31,8 +44,23 @@ public class Detail_Fragment extends Fragment {
 
     private static View view;
 
+    private SubCategory subCategory;
+
+    //Collapsin toolbar
+
+    @Bind(R.id.appBar)
+    AppBarLayout appBarLayout;
+
+    @Bind(R.id.tbDetail)
+    Toolbar tbDetail;
+
+    @Bind(R.id.collapsinToolbar)
+    CollapsingToolbarLayout collapsingToolbarLayout;
+
     @Inject
     IDetail_Presenter presenter;
+
+    //Views
 
     @Bind(R.id.ivDetail)
     ImageView ivDetail;
@@ -79,8 +107,11 @@ public class Detail_Fragment extends Fragment {
     @Bind(R.id.tvDetailAcces)
     TextView tvAcceso;
 
+    @Bind(R.id.llDetailServices)
+    LinearLayout llDetailServices;
 
-    private SubCategory subCategory;
+    @Bind(R.id.viewServices)
+    View viewServices;
 
 
     @Nullable
@@ -120,9 +151,9 @@ public class Detail_Fragment extends Fragment {
 
         subCategory = ((Main_Activity) getActivity()).subCategory;
 
+        appBarLayout.setExpanded(true);
+
         //Seteamos los datos
-        /*if (subCategory.getImageBackgroundContent() != null)
-            Glide.with(getActivity()).load(subCategory.getImageBackgroundContent()).into(ivDetail);*/
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             ivDetail.setTransitionName(subCategory.getNombre());
         }
@@ -193,6 +224,97 @@ public class Detail_Fragment extends Fragment {
 
         }
 
+        llDetailServices.removeAllViews();
+
+        if (subCategory.getServicios() != null) {
+            showServices();
+            llDetailServices.setVisibility(View.VISIBLE);
+            viewServices.setVisibility(View.VISIBLE);
+        } else {
+            llDetailServices.setVisibility(View.GONE);
+            viewServices.setVisibility(View.GONE);
+        }
+
+        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            boolean isShow = false;
+            int scrollRange = -1;
+
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                if (scrollRange == -1) {
+                    scrollRange = appBarLayout.getTotalScrollRange();
+                }
+                if (scrollRange + verticalOffset == 0) {
+                    if (getActivity() != null) {
+                        collapsingToolbarLayout.setTitle(subCategory.getNombre());
+                        collapsingToolbarLayout.setCollapsedTitleTextColor(getResources().getColor(R.color.colorAccent));
+                        collapsingToolbarLayout.setCollapsedTitleGravity(Gravity.CENTER);
+                        collapsingToolbarLayout.setCollapsedTitleTypeface(Utils.getbukharisLetter(getActivity()));
+                    }
+
+                    isShow = true;
+                } else if (isShow) {
+                    collapsingToolbarLayout.setTitle(" ");//carefull there should a space between double quote otherwise it wont work
+                    isShow = false;
+                }
+            }
+        });
+
+    }
+
+    private void showServices() {
+
+        //Click al view e inflar la vista en un dialogo
+
+        for (int i = 0; i < subCategory.getServicios().size(); i++) {
+
+                ImageView imageView = new ImageView(getContext());
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                imageView.setLayoutParams(params);
+
+                switch (subCategory.getServicios().get(i).getName()) {
+                    case "Estacionamiento":
+                        imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_local_parking_black_48dp));
+                        break;
+                    case "Multiples idiomas":
+                        imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_public_black_48dp));
+                        break;
+                    case "Pago con tarjeta":
+                        imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_payment_black_48dp));
+                        break;
+                    case "Servicio a domicilio":
+                        imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_local_shipping_black_48dp));
+                        break;
+                    case "Wifi":
+                        imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_wifi_black_48dp));
+                        break;
+                    case "Aire acondicionado":
+                        imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_ac_unit_black_48dp));
+                        break;
+                    case "Recepción":
+                        imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_room_service_black_48dp));
+                        break;
+
+                }
+
+                Drawable image = imageView.getDrawable();
+                image.setColorFilter(ContextCompat.getColor(getActivity(), android.R.color.darker_gray), PorterDuff.Mode.SRC_IN);
+                imageView.setImageDrawable(image);
+
+                subCategory.getServicios().get(i).setDrawable(image);
+
+            if (i < 3) {
+                llDetailServices.addView(imageView);
+            }
+
+        }
+
+        llDetailServices.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new ServicesDialog().showServices(getActivity(), subCategory.getServicios());
+            }
+        });
 
     }
 }
