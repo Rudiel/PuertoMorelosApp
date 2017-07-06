@@ -8,9 +8,11 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.transition.TransitionInflater;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.InflateException;
 import android.view.LayoutInflater;
@@ -18,15 +20,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.puertomorelosapp.puertomorelosapp.Creators.ServicesDialog;
-import com.puertomorelosapp.puertomorelosapp.Login.Login_Activity;
 import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
-import com.puertomorelosapp.puertomorelosapp.Models.Servicio;
 import com.puertomorelosapp.puertomorelosapp.Models.SubCategory;
 import com.puertomorelosapp.puertomorelosapp.R;
 import com.puertomorelosapp.puertomorelosapp.Utils.Utils;
@@ -35,6 +41,7 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+
 
 /**
  * Created by rudielavilaperaza on 6/29/17.
@@ -113,6 +120,9 @@ public class Detail_Fragment extends Fragment {
     @Bind(R.id.viewServices)
     View viewServices;
 
+    private GoogleMap map;
+
+    SupportMapFragment fragment;
 
     @Nullable
     @Override
@@ -221,8 +231,10 @@ public class Detail_Fragment extends Fragment {
             tvTitle3.setVisibility(View.GONE);
 
         if (subCategory.getAcceso() != null) {
-
-        }
+            tvAcceso.setVisibility(View.VISIBLE);
+            tvAcceso.setText(subCategory.getAcceso());
+        } else
+            tvAcceso.setVisibility(View.GONE);
 
         llDetailServices.removeAllViews();
 
@@ -260,6 +272,8 @@ public class Detail_Fragment extends Fragment {
             }
         });
 
+        initMap();
+
     }
 
     private void showServices() {
@@ -268,40 +282,40 @@ public class Detail_Fragment extends Fragment {
 
         for (int i = 0; i < subCategory.getServicios().size(); i++) {
 
-                ImageView imageView = new ImageView(getContext());
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                imageView.setLayoutParams(params);
+            ImageView imageView = new ImageView(getContext());
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            imageView.setLayoutParams(params);
 
-                switch (subCategory.getServicios().get(i).getName()) {
-                    case "Estacionamiento":
-                        imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_local_parking_black_48dp));
-                        break;
-                    case "Multiples idiomas":
-                        imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_public_black_48dp));
-                        break;
-                    case "Pago con tarjeta":
-                        imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_payment_black_48dp));
-                        break;
-                    case "Servicio a domicilio":
-                        imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_local_shipping_black_48dp));
-                        break;
-                    case "Wifi":
-                        imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_wifi_black_48dp));
-                        break;
-                    case "Aire acondicionado":
-                        imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_ac_unit_black_48dp));
-                        break;
-                    case "Recepción":
-                        imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_room_service_black_48dp));
-                        break;
+            switch (subCategory.getServicios().get(i).getName()) {
+                case "Estacionamiento":
+                    imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_local_parking_black_48dp));
+                    break;
+                case "Multiples idiomas":
+                    imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_public_black_48dp));
+                    break;
+                case "Pago con tarjeta":
+                    imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_payment_black_48dp));
+                    break;
+                case "Servicio a domicilio":
+                    imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_local_shipping_black_48dp));
+                    break;
+                case "Wifi":
+                    imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_wifi_black_48dp));
+                    break;
+                case "Aire acondicionado":
+                    imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_ac_unit_black_48dp));
+                    break;
+                case "Recepción":
+                    imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_room_service_black_48dp));
+                    break;
 
-                }
+            }
 
-                Drawable image = imageView.getDrawable();
-                image.setColorFilter(ContextCompat.getColor(getActivity(), android.R.color.darker_gray), PorterDuff.Mode.SRC_IN);
-                imageView.setImageDrawable(image);
+            Drawable image = imageView.getDrawable();
+            image.setColorFilter(ContextCompat.getColor(getActivity(), android.R.color.darker_gray), PorterDuff.Mode.SRC_IN);
+            imageView.setImageDrawable(image);
 
-                subCategory.getServicios().get(i).setDrawable(image);
+            subCategory.getServicios().get(i).setDrawable(image);
 
             if (i < 3) {
                 llDetailServices.addView(imageView);
@@ -317,4 +331,68 @@ public class Detail_Fragment extends Fragment {
         });
 
     }
+
+    private void initMap() {
+        FragmentManager fm = getChildFragmentManager();
+        fragment = (SupportMapFragment) fm.findFragmentById(R.id.fgMapDetail);
+        if (fragment == null) {
+            fragment = SupportMapFragment.newInstance();
+            fm.beginTransaction().replace(R.id.fgMapDetail, fragment).commit();
+        }
+
+        fragment.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(GoogleMap googleMap) {
+                try {
+                    map = googleMap;
+                    MarkerOptions marker = new MarkerOptions();
+                    LatLng position = new LatLng(Double.parseDouble(subCategory.getLatitud()), Double.parseDouble(subCategory.getLongitud()));
+                    marker.position(position);
+
+                    Log.d("CATEGORIA", ((Main_Activity) getActivity()).category.getName());
+                    Log.d("SUCATEGORIA", ((Main_Activity) getActivity()).subCategory.getTitulo());
+
+                    switch (((Main_Activity) getActivity()).category.getName()) {
+                        case "Restaurantes":
+                            marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_restaurant));
+                            break;
+                        case "Historia":
+                            marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_history));
+                            break;
+                        case "Eventos":
+                            marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_events));
+                            break;
+                        case "Comercios":
+                            marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_comercio));
+                            break;
+                        case "Servicios":
+                            marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_services));
+                            break;
+                        case "Comida rapida":
+                            marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_fastfood));
+                            break;
+                        case "Atractivos Turisticos":
+                            marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_atractivos));
+                            break;
+                        case "Lugares de interes":
+                            marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_interestingplace));
+                            break;
+                        case "Hoteles":
+                            marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_hotel));
+                            break;
+                    }
+
+                    map.addMarker(marker);
+
+                    map.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 18));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        });
+    }
+
+
 }
