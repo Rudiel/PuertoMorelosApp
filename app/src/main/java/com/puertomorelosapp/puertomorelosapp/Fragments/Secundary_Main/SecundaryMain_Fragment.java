@@ -22,6 +22,8 @@ import com.puertomorelosapp.puertomorelosapp.R;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -84,7 +86,7 @@ public class SecundaryMain_Fragment extends Fragment implements ISecundaryMain_v
         if (((Main_Activity) getActivity()).subCategoryList.size() > 0) {
             this.showSubCategories(((Main_Activity) getActivity()).subCategoryList);
         } else
-            presenter.getSubCategories((((Main_Activity) getActivity()).category));
+            presenter.getSubCategories((((Main_Activity) getActivity()).category),((Main_Activity)getActivity()).mainCategory);
 
 
     }
@@ -115,10 +117,22 @@ public class SecundaryMain_Fragment extends Fragment implements ISecundaryMain_v
 
         hideLoading();
 
+        Collections.sort(list, new Comparator<SubCategory>() {
+            @Override
+            public int compare(SubCategory o1, SubCategory o2) {
+                return o1.getPrioridad() - o2.getPrioridad();
+            }
+        });
+
         mAdapter = new SubCategories_Adapter(list, getActivity(), this);
 
         rvSubcategories.setAdapter(mAdapter);
 
+        mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void updateAdapter() {
         mAdapter.notifyDataSetChanged();
     }
 

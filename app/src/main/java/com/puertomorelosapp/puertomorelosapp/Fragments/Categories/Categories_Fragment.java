@@ -122,6 +122,8 @@ public class Categories_Fragment extends Fragment implements ICategories_View, I
 
         Log.d("CATE_SELECTED", categoria.getName());
 
+        ((Main_Activity) getActivity()).mainCategory = categoria.getName();
+
         ((Main_Activity) getActivity()).category = categoria;
 
         if (categoria.getName().equals("Comercios") || categoria.getName().equals("Servicios")) {

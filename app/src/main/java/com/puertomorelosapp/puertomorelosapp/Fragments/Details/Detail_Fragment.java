@@ -1,5 +1,6 @@
 package com.puertomorelosapp.puertomorelosapp.Fragments.Details;
 
+import android.content.res.Resources;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -21,7 +22,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -30,11 +30,14 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.puertomorelosapp.puertomorelosapp.Creators.ServicesDialog;
+import com.puertomorelosapp.puertomorelosapp.Fragments.Details.Comments.Comments_Detail_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
 import com.puertomorelosapp.puertomorelosapp.Models.SubCategory;
 import com.puertomorelosapp.puertomorelosapp.R;
+import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
 import com.puertomorelosapp.puertomorelosapp.Utils.Utils;
 
 import javax.inject.Inject;
@@ -47,7 +50,7 @@ import butterknife.ButterKnife;
  * Created by rudielavilaperaza on 6/29/17.
  */
 
-public class Detail_Fragment extends Fragment {
+public class Detail_Fragment extends Fragment implements IDetail_View {
 
     private static View view;
 
@@ -120,6 +123,9 @@ public class Detail_Fragment extends Fragment {
     @Bind(R.id.viewServices)
     View viewServices;
 
+    @Bind(R.id.ivDetailComments)
+    ImageView ivDetailComments;
+
     private GoogleMap map;
 
     SupportMapFragment fragment;
@@ -138,7 +144,13 @@ public class Detail_Fragment extends Fragment {
         /* map is already there, just return view as it is */
         }
 
+        ((PuertoMorelosApplication) getActivity().getApplication()).getAppComponent().inject(this);
+
+
         ButterKnife.bind(this, view);
+
+        presenter.setView(Detail_Fragment.this);
+
         return view;
     }
 
@@ -168,8 +180,20 @@ public class Detail_Fragment extends Fragment {
             ivDetail.setTransitionName(subCategory.getNombre());
         }
 
+        /*presenter.getNumberComments(
+                ((Main_Activity) getActivity()).mainCategory,
+                ((Main_Activity) getActivity()).category.getName(),
+                ((Main_Activity) getActivity()).subCategory.getId()
+
+        );
+
+        presenter.getNumberLikes(((Main_Activity) getActivity()).mainCategory,
+                ((Main_Activity) getActivity()).category.getName(),
+                ((Main_Activity) getActivity()).subCategory.getId());*/
+
         if (subCategory.getImageBackgroundContent() != null)
             Glide.with(getActivity()).load(subCategory.getImageBackgroundContent()).into(ivDetail);
+
 
         tvLikes.setText(String.valueOf(subCategory.getLikes()));
 
@@ -274,6 +298,13 @@ public class Detail_Fragment extends Fragment {
 
         initMap();
 
+        ivDetailComments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((Main_Activity) getActivity()).setFragment(new Comments_Detail_Fragment(), true, null);
+            }
+        });
+
     }
 
     private void showServices() {
@@ -345,14 +376,24 @@ public class Detail_Fragment extends Fragment {
             public void onMapReady(GoogleMap googleMap) {
                 try {
                     map = googleMap;
+
+                    try {
+                        map.setMapStyle(MapStyleOptions.loadRawResourceStyle(getActivity(), R.raw.style_json));
+
+                    } catch (Resources.NotFoundException e) {
+
+                    }
+
                     MarkerOptions marker = new MarkerOptions();
                     LatLng position = new LatLng(Double.parseDouble(subCategory.getLatitud()), Double.parseDouble(subCategory.getLongitud()));
                     marker.position(position);
 
                     Log.d("CATEGORIA", ((Main_Activity) getActivity()).category.getName());
                     Log.d("SUCATEGORIA", ((Main_Activity) getActivity()).subCategory.getTitulo());
+                    Log.d("MAIN_CATE", ((Main_Activity) getActivity()).mainCategory);
 
-                    switch (((Main_Activity) getActivity()).category.getName()) {
+
+                    switch (((Main_Activity) getActivity()).mainCategory) {
                         case "Restaurantes":
                             marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_restaurant));
                             break;
@@ -395,4 +436,25 @@ public class Detail_Fragment extends Fragment {
     }
 
 
+    @Override
+    public void setComments(int comments) {
+        tvComments.setText(String.valueOf(comments));
+
+    }
+
+    @Override
+    public void setLikes(int likes) {
+        tvLikes.setText(String.valueOf(likes));
+
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
 }

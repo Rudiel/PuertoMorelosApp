@@ -73,6 +73,9 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
     public Categorie category;
     public SubCategory subCategory;
 
+
+    public String mainCategory = "";
+
     ActionBarDrawerToggle actionBarDrawerToggle;
 
     @Override
@@ -106,7 +109,7 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
 
         categorieList = new ArrayList<>();
         thirdCategoryList = new ArrayList<>();
-        subCategoryList= new ArrayList<>();
+        subCategoryList = new ArrayList<>();
 
 
         setFragment(new Categories_Fragment(), false, null);

@@ -40,13 +40,16 @@ public class Login_Presenter implements ILogin_Presenter {
     }
 
     @Override
-    public void loginWithPassandUser(FirebaseAuth auth, User user) {
+    public void loginWithPassandUser(final FirebaseAuth auth, final User user) {
         view.showLoading();
 
         auth.signInWithEmailAndPassword(user.getEmail(), user.getPassword()).addOnCompleteListener((Activity) user.getContext(), new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
+
+
+
                     view.showMainActivity();
                 } else {
                     view.showErrorMessage(task.getException().getMessage());
@@ -66,26 +69,32 @@ public class Login_Presenter implements ILogin_Presenter {
     @Override
     public void loginWithFacebook(AccessToken token, final FirebaseAuth auth, Context context) {
 
-            view.showLoading();
-            Log.d("FACE", "handleFacebookAccessToken:" + token);
+        view.showLoading();
+        Log.d("FACE", "handleFacebookAccessToken:" + token);
 
-            AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
-            auth.signInWithCredential(credential)
-                    .addOnCompleteListener((Activity) context, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                FirebaseUser user = auth.getCurrentUser();
-                                view.showMainActivity();
-                            } else {
-                                Log.w("FACE", "signInWithCredential:failure", task.getException());
-                                view.showErrorMessage(task.getException().getMessage());
-                            }
+        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+        auth.signInWithCredential(credential)
+                .addOnCompleteListener((Activity) context, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            FirebaseUser user = auth.getCurrentUser();
 
-                            view.hideLoading();
-
+                            saveUser();
+                            //view.showMainActivity();
+                        } else {
+                            Log.w("FACE", "signInWithCredential:failure", task.getException());
+                            view.showErrorMessage(task.getException().getMessage());
                         }
-                    });
 
+                        view.hideLoading();
+
+                    }
+                });
+
+    }
+
+    private void saveUser() {
+        view.showMainActivity();
     }
 }

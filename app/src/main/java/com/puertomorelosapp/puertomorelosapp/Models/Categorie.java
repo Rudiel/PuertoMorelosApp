@@ -12,6 +12,17 @@ public class Categorie {
 
     private String categoria;
 
+    private String id;
+
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getCategoria() {
         return categoria;
     }

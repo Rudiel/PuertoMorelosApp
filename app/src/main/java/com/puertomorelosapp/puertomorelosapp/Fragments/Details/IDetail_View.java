@@ -6,5 +6,12 @@ package com.puertomorelosapp.puertomorelosapp.Fragments.Details;
 
 public interface IDetail_View {
 
+    void setComments(int comments);
+
+    void setLikes(int likes);
+
+    void showLoading();
+
+    void hideLoading();
 
 }

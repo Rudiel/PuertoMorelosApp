@@ -17,5 +17,7 @@ public interface ISecundaryMain_view {
 
     void showSubCategories(List<SubCategory> subCategories);
 
+    void updateAdapter();
+
 
 }

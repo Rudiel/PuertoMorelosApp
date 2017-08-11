@@ -6,7 +6,10 @@ package com.puertomorelosapp.puertomorelosapp.Fragments.Details;
 
 public interface IDetail_Presenter {
 
+    void setView(IDetail_View view);
 
+    void getNumberComments(String CategoriaPrincipal, String Categoria, String subCategoria);
 
+    void getNumberLikes(String CategoriaPrincipal, String Categoria, String subCategoria);
 
 }
