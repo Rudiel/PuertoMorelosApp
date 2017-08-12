@@ -21,6 +21,10 @@ public class Utils {
 
     public static final String LIKES_URL = "PuertoMorelos/SocialAPP/Loves/";
 
+    public static final String COMMENTS_SOCIAL_URL="SocialUSER/comments";
+
+    public static final String USERS_URL="users";
+
     //https://puerto-morelos-app.firebaseio.com/PuertoMorelos/imagenesURL/Header/Comercios
 
 

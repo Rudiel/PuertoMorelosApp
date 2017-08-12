@@ -15,12 +15,47 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:gravity="center"
-        android:text="Comments" />
+        android:text="Comments"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textColor="@color/colorAccent" />
+
+
+    <RelativeLayout
+        android:id="@+id/rlNewComment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_alignParentBottom="true">
+
+
+        <ImageView
+            android:id="@+id/ivNewCommentProfile"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/avatar_deafult" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Write a comment"
+            android:textColorHint="@color/colorAccent"
+            android:layout_toRightOf="@id/ivNewCommentProfile" />
+
+    </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvCommentsDetail"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_above="@id/rlNewComment"
         android:layout_below="@id/tvDetailCommentsTitle" />
+
+    <ProgressBar
+        android:id="@+id/pbComments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+
 
 </RelativeLayout>

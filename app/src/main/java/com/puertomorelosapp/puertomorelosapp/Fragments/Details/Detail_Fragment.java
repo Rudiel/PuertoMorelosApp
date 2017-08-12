@@ -205,6 +205,10 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
 
         tvTitle.setText(subCategory.getTitulo());
 
+        tvComments.setText(String.valueOf(subCategory.getComments()));
+
+        tvLikes.setText(String.valueOf(subCategory.getLikes()));
+
         if (subCategory.getFechadias() != null) {
             tvFechaDia.setVisibility(View.VISIBLE);
             tvFechaDia.setText(subCategory.getFechadias());
@@ -433,19 +437,6 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
 
             }
         });
-    }
-
-
-    @Override
-    public void setComments(int comments) {
-        tvComments.setText(String.valueOf(comments));
-
-    }
-
-    @Override
-    public void setLikes(int likes) {
-        tvLikes.setText(String.valueOf(likes));
-
     }
 
     @Override
