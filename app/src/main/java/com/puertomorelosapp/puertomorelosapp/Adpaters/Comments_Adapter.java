@@ -19,6 +19,9 @@ import com.puertomorelosapp.puertomorelosapp.Models.Categorie;
 import com.puertomorelosapp.puertomorelosapp.Models.Response.Comments;
 import com.puertomorelosapp.puertomorelosapp.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -64,9 +67,17 @@ public class Comments_Adapter extends RecyclerView.Adapter<Comments_Adapter.View
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
+
+        SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat output = new SimpleDateFormat("dd MMM HH:mm");
+        try {
+            Date oneWayTripDate = input.parse(commentsList.get(position).getFecha());                 // parse input
+            holder.tvCommentDate.setText(output.format(oneWayTripDate));    // format output
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         holder.tvCommentText.setText(commentsList.get(position).getText());
         holder.tvCommentName.setText(commentsList.get(position).getSenderDisplayName());
-        holder.tvCommentDate.setText(commentsList.get(position).getFecha());
 
         if (commentsList.get(position).getImageURL().equals("SomeimageURL") || commentsList.get(position).getImageURL().equals("")) {
             holder.ivProfile.setImageDrawable(context.getResources().getDrawable(R.drawable.avatar_deafult));
