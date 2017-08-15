@@ -74,6 +74,13 @@ public class SecundaryMain_Presenter implements ISecundaryMain_Presenter {
 
                     addSubcategoryElements(snapshot,subCategory);
 
+                    if(categorie.getName().equals("Comida rapida") || categorie.getName().equals("Restaurantes")){
+                        categorie.setCategoria("Comercios");
+                    }
+                    else if(categorie.getName().equals("Hoteles")){
+                        categorie.setCategoria("Servicios");
+                    }
+
                     getNumberComments(categorie, snapshot.getKey(), subCategory);
 
                     getNumberLikes(categorie,snapshot.getKey(),subCategory);
@@ -106,6 +113,7 @@ public class SecundaryMain_Presenter implements ISecundaryMain_Presenter {
         final DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
         String Url;
+
 
         if (categorie.getCategoria() == null) {
             Url = Utils.COMMENTS_URL + categorie.getName() + "/" + subcategoria;

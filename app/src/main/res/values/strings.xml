@@ -68,5 +68,9 @@
     <string name="comercios">Comercios</string>
     <string name="transition_subcategory">transicionsubcategoria</string>
 
+    <!--Photos-->
+    <string name="photos_gallery_title">Galeria</string>
+    <string name="photos_gallery_selfies">Selfies</string>
+
 </resources>
 

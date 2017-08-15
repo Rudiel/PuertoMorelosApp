@@ -59,7 +59,7 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
 
     private TextView titleToolbar;
 
-    private FirebaseAuth auth;
+    public FirebaseAuth auth;
 
     public ImageView ivMap;
 

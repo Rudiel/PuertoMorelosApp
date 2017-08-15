@@ -9,6 +9,8 @@ import com.puertomorelosapp.puertomorelosapp.Fragments.Details.Comments.Comments
 import com.puertomorelosapp.puertomorelosapp.Fragments.Details.Comments.Comments_Detail_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Details.Detail_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Details.Detail_Fragment_Presenter;
+import com.puertomorelosapp.puertomorelosapp.Fragments.Details.Photos.Photos_Detail_Fragment;
+import com.puertomorelosapp.puertomorelosapp.Fragments.Details.Photos.Photos_Detail_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Map.Fragment_Map;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Map.Map_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Secundary_Main.SecundaryMain_Fragment;
@@ -98,5 +100,11 @@ public interface AppComponent {
     void inject(Comments_Detail_Presenter target);
 
     void inject(Comments_Detail_Fragment fragment);
+
+    //Photos
+
+    void inject(Photos_Detail_Fragment fragment);
+
+    void inject(Photos_Detail_Presenter target);
 
 }

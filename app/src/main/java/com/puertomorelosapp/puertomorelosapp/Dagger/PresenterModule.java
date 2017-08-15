@@ -10,6 +10,8 @@ import com.puertomorelosapp.puertomorelosapp.Fragments.Details.Comments.Comments
 import com.puertomorelosapp.puertomorelosapp.Fragments.Details.Comments.IComments_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Details.Detail_Fragment_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Details.IDetail_Presenter;
+import com.puertomorelosapp.puertomorelosapp.Fragments.Details.Photos.IPhotos_Presenter;
+import com.puertomorelosapp.puertomorelosapp.Fragments.Details.Photos.Photos_Detail_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Map.IMap_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Map.Map_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Secundary_Main.ISecundaryMain_Presenter;
@@ -100,6 +102,12 @@ public class PresenterModule {
     @Singleton
     IComments_Presenter provideCommentsPresenter(Context context) {
         return new Comments_Detail_Presenter(context);
+    }
+
+    @Provides
+    @Singleton
+    IPhotos_Presenter providePhotosPresenter(Context context) {
+        return new Photos_Detail_Presenter(context);
     }
 
 

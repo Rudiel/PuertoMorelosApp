@@ -3,6 +3,7 @@ package com.puertomorelosapp.puertomorelosapp.Fragments.Details;
 import android.content.res.Resources;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -34,6 +35,7 @@ import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.puertomorelosapp.puertomorelosapp.Creators.ServicesDialog;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Details.Comments.Comments_Detail_Fragment;
+import com.puertomorelosapp.puertomorelosapp.Fragments.Details.Photos.Photos_Detail_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
 import com.puertomorelosapp.puertomorelosapp.Models.SubCategory;
 import com.puertomorelosapp.puertomorelosapp.R;
@@ -125,6 +127,9 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
 
     @Bind(R.id.ivDetailComments)
     ImageView ivDetailComments;
+
+    @Bind(R.id.ivDetailGalery)
+    ImageView ivDetailGalery;
 
     private GoogleMap map;
 
@@ -305,7 +310,15 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
         ivDetailComments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((Main_Activity) getActivity()).setFragment(new Comments_Detail_Fragment(), true, null);
+                if (subCategory.getComments() > 0)
+                    ((Main_Activity) getActivity()).setFragment(new Comments_Detail_Fragment(), true, null);
+            }
+        });
+
+        ivDetailGalery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((Main_Activity) getActivity()).setFragment(new Photos_Detail_Fragment(), true, null);
             }
         });
 
@@ -343,6 +356,9 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
                 case "Recepción":
                     imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_room_service_black_48dp));
                     break;
+
+                default:
+                    imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_info_outline_black_48dp));
 
             }
 

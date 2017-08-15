@@ -6,6 +6,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.puertomorelosapp.puertomorelosapp.Models.Request.NewComment;
 import com.puertomorelosapp.puertomorelosapp.Models.Response.Comments;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
 import com.puertomorelosapp.puertomorelosapp.Utils.Utils;
@@ -65,6 +66,11 @@ public class Comments_Detail_Presenter implements IComments_Presenter {
     public void setView(IComments_View view) {
 
         this.view = view;
+
+    }
+
+    @Override
+    public void setNewComment(NewComment comment) {
 
     }
 }
