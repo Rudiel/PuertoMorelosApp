@@ -10,12 +10,13 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="gone">
 
 
         <TextView
             android:id="@+id/tvPhotosGalleryTitle"
             android:layout_width="match_parent"
+            android:textAppearance="?android:textAppearanceMedium"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:elevation="4dp"
@@ -41,6 +42,7 @@
 
         <TextView
             android:id="@+id/tvPhotosSelfiesTitle"
+            android:textAppearance="?android:textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"

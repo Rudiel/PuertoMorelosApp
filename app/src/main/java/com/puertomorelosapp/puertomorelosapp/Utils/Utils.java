@@ -21,12 +21,15 @@ public class Utils {
 
     public static final String LIKES_URL = "PuertoMorelos/SocialAPP/Loves/";
 
-    public static final String COMMENTS_SOCIAL_URL="SocialUSER/comments";
+    public static final String COMMENTS_SOCIAL_URL = "SocialUSER/comments";
 
-    public static final String USERS_URL="users";
+    public static final String SELFIES_URL = "PuertoMorelos/SocialAPP/PhotoAlbum/PhotoSelfies/";
+
+    public static final String GALLERY_URL = "PuertoMorelos/SocialAPP/PhotoAlbum/officialPhotos/";
+
+    public static final String USERS_URL = "users";
 
     //https://puerto-morelos-app.firebaseio.com/PuertoMorelos/imagenesURL/Header/Comercios
-
 
 
     public static Typeface getbukharisLetter(Context context) {
