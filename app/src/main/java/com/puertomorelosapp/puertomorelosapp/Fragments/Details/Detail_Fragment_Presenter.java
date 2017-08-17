@@ -10,10 +10,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Categories.ICategories_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Models.Categorie;
+import com.puertomorelosapp.puertomorelosapp.Models.Request.Gallery;
+import com.puertomorelosapp.puertomorelosapp.Models.SubCategory;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
 import com.puertomorelosapp.puertomorelosapp.Utils.Utils;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by rudielavilaperaza on 6/29/17.
@@ -22,8 +26,9 @@ import java.net.URL;
 public class Detail_Fragment_Presenter implements IDetail_Presenter {
 
     private IDetail_View view;
-    private int likesChilds = 0;
-    private int commentsChilds = 0;
+
+    private SubCategory subCategory;
+    private Categorie categorie;
 
 
     public Detail_Fragment_Presenter(Context context) {
@@ -36,6 +41,68 @@ public class Detail_Fragment_Presenter implements IDetail_Presenter {
         this.view = view;
     }
 
+    @Override
+    public void getPhotosNumber(SubCategory subCategory, Categorie categorie) {
+
+        view.showLoading();
+
+        this.categorie = categorie;
+
+        this.subCategory = subCategory;
+
+        String Url;
+
+        if (categorie.getCategoria() == null) {
+            Url = Utils.GALLERY_URL + categorie.getName() + "/" + subCategory.getId();
+        } else {
+            Url = Utils.GALLERY_URL + categorie.getCategoria() + "/" + categorie.getName() + "/" + subCategory.getId();
+        }
+
+        //Obtenemos las selfies
+        FirebaseDatabase.getInstance().getReference(Url).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                getSelfiesNumber((int) dataSnapshot.getChildrenCount());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+        });
+
+
+    }
+
+    private void getSelfiesNumber(final int gallerynumber) {
+        String Url;
+
+        if (categorie.getCategoria() == null) {
+            Url = Utils.SELFIES_URL + categorie.getName() + "/" + subCategory.getId();
+        } else {
+            Url = Utils.SELFIES_URL + categorie.getCategoria() + "/" + categorie.getName() + "/" + subCategory.getId();
+        }
+
+        //Obtenemos las selfies
+        FirebaseDatabase.getInstance().getReference(Url).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                view.hideLoading();
+                view.setPhotosNumber(gallerynumber + (int) dataSnapshot.getChildrenCount());
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+        });
+
+    }
 
 
 }

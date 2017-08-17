@@ -8,8 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Details.Photos.IGalleryClickListener;
 import com.puertomorelosapp.puertomorelosapp.Models.Request.Gallery;
 import com.puertomorelosapp.puertomorelosapp.R;
@@ -29,11 +33,13 @@ public class Gallery_Adapter extends RecyclerView.Adapter<Gallery_Adapter.ViewHo
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView ivGallery;
+        private ProgressBar pbLoadingGallery;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
             ivGallery = (ImageView) itemView.findViewById(R.id.ivGallery);
+            pbLoadingGallery = (ProgressBar) itemView.findViewById(R.id.pbGalleryLoading);
         }
     }
 
@@ -52,7 +58,7 @@ public class Gallery_Adapter extends RecyclerView.Adapter<Gallery_Adapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(Gallery_Adapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(final Gallery_Adapter.ViewHolder holder, final int position) {
 
         DisplayMetrics displaymetrics = new DisplayMetrics();
         WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
@@ -68,7 +74,20 @@ public class Gallery_Adapter extends RecyclerView.Adapter<Gallery_Adapter.ViewHo
             e.printStackTrace();
         }
 
-        Glide.with(context).load(galleryList.get(position).getOriginal()).into(holder.ivGallery);
+        holder.pbLoadingGallery.setVisibility(View.VISIBLE);
+
+        Glide.with(context).load(galleryList.get(position).getOriginal()).centerCrop().listener(new RequestListener<String, GlideDrawable>() {
+            @Override
+            public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                return false;
+            }
+
+            @Override
+            public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                holder.pbLoadingGallery.setVisibility(View.GONE);
+                return false;
+            }
+        }).into(holder.ivGallery);
 
         holder.ivGallery.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +95,7 @@ public class Gallery_Adapter extends RecyclerView.Adapter<Gallery_Adapter.ViewHo
                 listener.onGalleryClick(position);
             }
         });
+
     }
 
     @Override

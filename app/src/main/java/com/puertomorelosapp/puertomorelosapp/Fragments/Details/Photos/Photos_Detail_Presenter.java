@@ -33,7 +33,7 @@ public class Photos_Detail_Presenter implements IPhotos_Presenter {
     @Override
     public void getSelfies(Categorie categorie, SubCategory subCategory) {
 
-        view.showLoading();
+        view.showLoadingSelfie();
         String Url = "";
         final List<Selfie> selfieList = new ArrayList<>();
 
@@ -56,8 +56,7 @@ public class Photos_Detail_Presenter implements IPhotos_Presenter {
                     selfieList.add(selfie);
 
                 }
-
-
+                view.hideLoadingSelfie();
                 view.showPhotos(selfieList);
             }
 
@@ -73,7 +72,7 @@ public class Photos_Detail_Presenter implements IPhotos_Presenter {
     @Override
     public void getGallery(Categorie categorie, SubCategory subCategory) {
 
-        view.showLoading();
+        view.showLoadingGallery();
         String Url = "";
         final List<Gallery> galleryList = new ArrayList<>();
 
@@ -97,7 +96,7 @@ public class Photos_Detail_Presenter implements IPhotos_Presenter {
 
                 }
 
-
+                view.hideLoadingGallery();
                 view.showGallery(galleryList);
             }
 

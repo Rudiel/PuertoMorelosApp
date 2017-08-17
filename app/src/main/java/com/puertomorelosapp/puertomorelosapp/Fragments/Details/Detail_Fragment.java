@@ -131,6 +131,9 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
     @Bind(R.id.ivDetailGalery)
     ImageView ivDetailGalery;
 
+    @Bind(R.id.tvDetailGallery)
+    TextView tvtvDetailGallery;
+
     private GoogleMap map;
 
     SupportMapFragment fragment;
@@ -168,6 +171,7 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             setSharedElementReturnTransition(TransitionInflater.from(getContext()).inflateTransition(android.R.transition.move));
+
     }
 
     @Override
@@ -322,6 +326,8 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
             }
         });
 
+        presenter.getPhotosNumber(this.subCategory, ((Main_Activity) getActivity()).category);
+
     }
 
     private void showServices() {
@@ -463,5 +469,10 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
     @Override
     public void hideLoading() {
 
+    }
+
+    @Override
+    public void setPhotosNumber(int photosNumber) {
+        tvtvDetailGallery.setText(String.valueOf(photosNumber));
     }
 }

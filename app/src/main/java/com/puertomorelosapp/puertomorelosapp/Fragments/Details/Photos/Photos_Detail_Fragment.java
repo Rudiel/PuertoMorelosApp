@@ -103,22 +103,25 @@ public class Photos_Detail_Fragment extends Fragment implements IPhotos_View, IG
         presenter.getSelfies(activity.category, activity.subCategory);
     }
 
+
     @Override
-    public void showLoading() {
-
-        pbGallery.setVisibility(View.VISIBLE);
-
+    public void showLoadingSelfie() {
         pbSelfies.setVisibility(View.VISIBLE);
-
     }
 
     @Override
-    public void hideLoading() {
-
-        pbGallery.setVisibility(View.GONE);
-
+    public void hideLoadingSelfie() {
         pbSelfies.setVisibility(View.GONE);
+    }
 
+    @Override
+    public void showLoadingGallery() {
+        pbGallery.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideLoadingGallery() {
+        pbGallery.setVisibility(View.GONE);
     }
 
     @Override

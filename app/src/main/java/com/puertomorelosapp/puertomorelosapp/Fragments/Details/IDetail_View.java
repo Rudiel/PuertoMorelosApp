@@ -10,4 +10,6 @@ public interface IDetail_View {
 
     void hideLoading();
 
+    void setPhotosNumber(int photosNumber);
+
 }

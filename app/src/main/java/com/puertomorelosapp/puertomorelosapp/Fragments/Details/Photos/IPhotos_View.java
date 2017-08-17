@@ -11,9 +11,13 @@ import java.util.List;
 
 public interface IPhotos_View {
 
-    void showLoading();
+    void showLoadingSelfie();
 
-    void hideLoading();
+    void hideLoadingSelfie();
+
+    void showLoadingGallery();
+
+    void hideLoadingGallery();
 
     void showGallery(List<Gallery> galleryList);
 
