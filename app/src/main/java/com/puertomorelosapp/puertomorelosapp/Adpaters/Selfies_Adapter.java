@@ -2,7 +2,6 @@ package com.puertomorelosapp.puertomorelosapp.Adpaters;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.media.Image;
 import android.net.Uri;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
@@ -19,6 +18,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.google.firebase.auth.FirebaseAuth;
+import com.puertomorelosapp.puertomorelosapp.Fragments.Details.Photos.ISelfieClickListener;
 import com.puertomorelosapp.puertomorelosapp.Models.Request.Selfie;
 import com.puertomorelosapp.puertomorelosapp.R;
 
@@ -32,6 +32,7 @@ public class Selfies_Adapter extends RecyclerView.Adapter<Selfies_Adapter.ViewHo
 
     private List<Selfie> selfieList;
     private Context context;
+    private ISelfieClickListener listener;
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -57,9 +58,10 @@ public class Selfies_Adapter extends RecyclerView.Adapter<Selfies_Adapter.ViewHo
         }
     }
 
-    public Selfies_Adapter(List<Selfie> selfieList, Context context) {
+    public Selfies_Adapter(List<Selfie> selfieList, Context context, ISelfieClickListener listener) {
         this.selfieList = selfieList;
         this.context = context;
+        this.listener = listener;
     }
 
     @Override
@@ -72,7 +74,7 @@ public class Selfies_Adapter extends RecyclerView.Adapter<Selfies_Adapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(final Selfies_Adapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final Selfies_Adapter.ViewHolder holder, final int position) {
 
         DisplayMetrics displaymetrics = new DisplayMetrics();
         WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
@@ -114,6 +116,13 @@ public class Selfies_Adapter extends RecyclerView.Adapter<Selfies_Adapter.ViewHo
 
 
         Glide.with(context).load(selfieList.get(position).getSelfieOriginal()).centerCrop().into(holder.ivSelfie);
+
+        holder.cvSelfie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onSlefieClick(position);
+            }
+        });
 
     }
 

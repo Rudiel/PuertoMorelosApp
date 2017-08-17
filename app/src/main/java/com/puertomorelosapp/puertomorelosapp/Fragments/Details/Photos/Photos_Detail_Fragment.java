@@ -8,11 +8,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.puertomorelosapp.puertomorelosapp.Adpaters.Gallery_Adapter;
 import com.puertomorelosapp.puertomorelosapp.Adpaters.Selfies_Adapter;
+import com.puertomorelosapp.puertomorelosapp.Creators.Gallery_Dialog_Creator;
 import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
 import com.puertomorelosapp.puertomorelosapp.Models.Request.Gallery;
 import com.puertomorelosapp.puertomorelosapp.Models.Request.Selfie;
@@ -20,6 +22,7 @@ import com.puertomorelosapp.puertomorelosapp.R;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
 import com.puertomorelosapp.puertomorelosapp.Utils.Utils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -31,7 +34,7 @@ import butterknife.ButterKnife;
  * Created by rudielavilaperaza on 8/15/17.
  */
 
-public class Photos_Detail_Fragment extends Fragment implements IPhotos_View {
+public class Photos_Detail_Fragment extends Fragment implements IPhotos_View, IGalleryClickListener, ISelfieClickListener {
 
     @Bind(R.id.rvSelfies)
     RecyclerView rvSelfies;
@@ -46,10 +49,16 @@ public class Photos_Detail_Fragment extends Fragment implements IPhotos_View {
     TextView tvPhotosSelfiesTitle;
 
     @Bind(R.id.llPhotosGallery)
-    LinearLayout llPhotosGallery;
+    RelativeLayout llPhotosGallery;
 
     @Bind(R.id.llPhotosSelfies)
-    LinearLayout llPhotosSelfies;
+    RelativeLayout llPhotosSelfies;
+
+    @Bind(R.id.pbGallery)
+    ProgressBar pbGallery;
+
+    @Bind(R.id.pbSelfies)
+    ProgressBar pbSelfies;
 
     @Inject
     IPhotos_Presenter presenter;
@@ -57,6 +66,10 @@ public class Photos_Detail_Fragment extends Fragment implements IPhotos_View {
     private Main_Activity activity;
 
     int numberOfColumns = 3;
+
+    private List<Gallery> galleryList;
+
+    private List<Selfie> selfieList;
 
     @Nullable
     @Override
@@ -81,6 +94,9 @@ public class Photos_Detail_Fragment extends Fragment implements IPhotos_View {
         tvPhotosGalleryTitle.setTypeface(Utils.getbukharisLetter(getActivity()));
         tvPhotosSelfiesTitle.setTypeface(Utils.getbukharisLetter(getActivity()));
 
+        galleryList = new ArrayList<>();
+
+        selfieList = new ArrayList<>();
 
         presenter.getGallery(activity.category, activity.subCategory);
 
@@ -90,10 +106,18 @@ public class Photos_Detail_Fragment extends Fragment implements IPhotos_View {
     @Override
     public void showLoading() {
 
+        pbGallery.setVisibility(View.VISIBLE);
+
+        pbSelfies.setVisibility(View.VISIBLE);
+
     }
 
     @Override
     public void hideLoading() {
+
+        pbGallery.setVisibility(View.GONE);
+
+        pbSelfies.setVisibility(View.GONE);
 
     }
 
@@ -103,16 +127,30 @@ public class Photos_Detail_Fragment extends Fragment implements IPhotos_View {
         if (galleryList.size() > 0)
             llPhotosGallery.setVisibility(View.VISIBLE);
 
+        this.galleryList = galleryList;
+
         rvGallery.setLayoutManager(new GridLayoutManager(getActivity(), numberOfColumns));
-        rvGallery.setAdapter(new Gallery_Adapter(galleryList, getActivity()));
+        rvGallery.setAdapter(new Gallery_Adapter(galleryList, getActivity(), Photos_Detail_Fragment.this));
     }
 
     @Override
     public void showPhotos(List<Selfie> selfieList) {
 
-        rvSelfies.setLayoutManager(new GridLayoutManager(getActivity(), numberOfColumns));
-        rvSelfies.setAdapter(new Selfies_Adapter(selfieList, getActivity()));
+        this.selfieList = selfieList;
 
+        rvSelfies.setLayoutManager(new GridLayoutManager(getActivity(), numberOfColumns));
+        rvSelfies.setAdapter(new Selfies_Adapter(selfieList, getActivity(), Photos_Detail_Fragment.this));
+
+
+    }
+
+    @Override
+    public void onGalleryClick(int position) {
+        new Gallery_Dialog_Creator().showGallery(getActivity(), this.galleryList, position);
+    }
+
+    @Override
+    public void onSlefieClick(int position) {
 
     }
 }

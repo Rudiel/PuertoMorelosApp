@@ -48,6 +48,10 @@ dependencies {
     //Facebook
     compile 'com.facebook.android:facebook-android-sdk:4.20.0'
 
+    //zoom image
+    compile 'com.jsibbold:zoomage:1.1.0'
+
+
 }
 
 apply plugin: 'com.google.gms.google-services'

@@ -10,6 +10,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.puertomorelosapp.puertomorelosapp.Fragments.Details.Photos.IGalleryClickListener;
 import com.puertomorelosapp.puertomorelosapp.Models.Request.Gallery;
 import com.puertomorelosapp.puertomorelosapp.R;
 
@@ -23,6 +24,7 @@ public class Gallery_Adapter extends RecyclerView.Adapter<Gallery_Adapter.ViewHo
 
     private List<Gallery> galleryList;
     private Context context;
+    private IGalleryClickListener listener;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -35,9 +37,10 @@ public class Gallery_Adapter extends RecyclerView.Adapter<Gallery_Adapter.ViewHo
         }
     }
 
-    public Gallery_Adapter(List<Gallery> galleryList, Context context) {
+    public Gallery_Adapter(List<Gallery> galleryList, Context context, IGalleryClickListener listener) {
         this.galleryList = galleryList;
         this.context = context;
+        this.listener = listener;
 
     }
 
@@ -49,7 +52,7 @@ public class Gallery_Adapter extends RecyclerView.Adapter<Gallery_Adapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(Gallery_Adapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(Gallery_Adapter.ViewHolder holder, final int position) {
 
         DisplayMetrics displaymetrics = new DisplayMetrics();
         WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
@@ -65,7 +68,14 @@ public class Gallery_Adapter extends RecyclerView.Adapter<Gallery_Adapter.ViewHo
             e.printStackTrace();
         }
 
-        Glide.with(context).load(galleryList.get(position).getOriginal()).centerCrop().into(holder.ivGallery);
+        Glide.with(context).load(galleryList.get(position).getOriginal()).into(holder.ivGallery);
+
+        holder.ivGallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onGalleryClick(position);
+            }
+        });
     }
 
     @Override

@@ -4,35 +4,43 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/llPhotosGallery"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="visible">
 
 
         <TextView
             android:id="@+id/tvPhotosGalleryTitle"
             android:layout_width="match_parent"
-            android:textAppearance="?android:textAppearanceMedium"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:elevation="4dp"
             android:gravity="center"
             android:minHeight="?attr/actionBarSize"
             android:text="@string/photos_gallery_title"
+            android:textAppearance="?android:textAppearanceMedium"
             android:textColor="@color/colorAccent" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvGallery"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_below="@id/tvPhotosGalleryTitle" />
 
-    </LinearLayout>
+        <ProgressBar
+            android:id="@+id/pbGallery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone" />
 
-    <LinearLayout
+    </RelativeLayout>
+
+    <RelativeLayout
         android:id="@+id/llPhotosSelfies"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -42,7 +50,6 @@
 
         <TextView
             android:id="@+id/tvPhotosSelfiesTitle"
-            android:textAppearance="?android:textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
@@ -50,14 +57,23 @@
             android:gravity="center"
             android:minHeight="?attr/actionBarSize"
             android:text="@string/photos_gallery_selfies"
+            android:textAppearance="?android:textAppearanceMedium"
             android:textColor="@color/colorAccent" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvSelfies"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_below="@id/tvPhotosSelfiesTitle" />
 
-    </LinearLayout>
+        <ProgressBar
+            android:id="@+id/pbSelfies"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone" />
+
+    </RelativeLayout>
 
 
 </LinearLayout>
