@@ -51,6 +51,8 @@ dependencies {
     //zoom image
     compile 'com.jsibbold:zoomage:1.1.0'
 
+    //FAB
+    compile 'com.github.clans:fab:1.6.4'
 
 }
 

@@ -29,6 +29,8 @@ public class Utils {
 
     public static final String USERS_URL = "users";
 
+    public static final String PHOTOS_URL="gs://puertomapp.appspot.com/";
+
     //https://puerto-morelos-app.firebaseio.com/PuertoMorelos/imagenesURL/Header/Comercios
 
 

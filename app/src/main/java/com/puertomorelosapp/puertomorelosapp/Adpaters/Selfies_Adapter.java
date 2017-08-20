@@ -22,6 +22,9 @@ import com.puertomorelosapp.puertomorelosapp.Fragments.Details.Photos.ISelfieCli
 import com.puertomorelosapp.puertomorelosapp.Models.Request.Selfie;
 import com.puertomorelosapp.puertomorelosapp.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -83,7 +86,7 @@ public class Selfies_Adapter extends RecyclerView.Adapter<Selfies_Adapter.ViewHo
         ViewGroup.LayoutParams params = holder.cvSelfie.getLayoutParams();
 
         try {
-            params.height = displaymetrics.heightPixels / 3;
+            params.height = displaymetrics.heightPixels / 2;
             params.width = displaymetrics.widthPixels / 2;
             holder.cvSelfie.setLayoutParams(params);
         } catch (Exception e) {
@@ -92,7 +95,14 @@ public class Selfies_Adapter extends RecyclerView.Adapter<Selfies_Adapter.ViewHo
 
         holder.tvSelfieCommet.setText(selfieList.get(position).getComentario());
 
-        holder.tvSelfieDate.setText(selfieList.get(position).getFecha());
+        SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat output = new SimpleDateFormat("dd MMM HH:mm");
+        try {
+            Date oneWayTripDate = input.parse(selfieList.get(position).getFecha());                 // parse input
+            holder.tvSelfieDate.setText(output.format(oneWayTripDate));    // format output
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         //Se tendra que buscar el nombre del usuario por id
         //holder.tvSelfieUserName.setText(selfieList.get(position).get);
