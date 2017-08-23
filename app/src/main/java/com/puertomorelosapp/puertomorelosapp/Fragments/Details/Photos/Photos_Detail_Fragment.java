@@ -196,6 +196,7 @@ public class Photos_Detail_Fragment extends Fragment implements IPhotos_View, IG
 
     }
 
+
     @Override
     public void onGalleryClick(int position) {
         new Gallery_Dialog_Creator().showGallery(getActivity(), this.galleryList, position);
@@ -312,4 +313,6 @@ public class Photos_Detail_Fragment extends Fragment implements IPhotos_View, IG
             }
         });
     }
+
+
 }

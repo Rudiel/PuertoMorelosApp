@@ -86,7 +86,7 @@ public class Selfies_Adapter extends RecyclerView.Adapter<Selfies_Adapter.ViewHo
         ViewGroup.LayoutParams params = holder.cvSelfie.getLayoutParams();
 
         try {
-            params.height = displaymetrics.heightPixels / 2;
+            params.height = displaymetrics.heightPixels / 3 + 40;
             params.width = displaymetrics.widthPixels / 2;
             holder.cvSelfie.setLayoutParams(params);
         } catch (Exception e) {
@@ -107,13 +107,11 @@ public class Selfies_Adapter extends RecyclerView.Adapter<Selfies_Adapter.ViewHo
         //Se tendra que buscar el nombre del usuario por id
         //holder.tvSelfieUserName.setText(selfieList.get(position).get);
 
-        Uri pic = FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl();
-
-        if (pic == null) {
+        if (selfieList.get(position).getPhotographer().getImageURL().equals("SomeimageURL")) {
             holder.ivSelfieProfile.setImageDrawable(context.getResources().getDrawable(R.drawable.avatar_deafult));
         } else {
 
-            Glide.with(context).load(String.valueOf(pic)).asBitmap().centerCrop().into(new BitmapImageViewTarget(holder.ivSelfieProfile) {
+            Glide.with(context).load(String.valueOf(selfieList.get(position).getPhotographer().getImageURL())).asBitmap().centerCrop().into(new BitmapImageViewTarget(holder.ivSelfieProfile) {
                 @Override
                 protected void setResource(Bitmap resource) {
                     RoundedBitmapDrawable circularBitmapDrawable =
@@ -123,6 +121,8 @@ public class Selfies_Adapter extends RecyclerView.Adapter<Selfies_Adapter.ViewHo
                 }
             });
         }
+
+        holder.tvSelfieUserName.setText(selfieList.get(position).getPhotographer().getUsername());
 
 
         Glide.with(context).load(selfieList.get(position).getSelfieOriginal()).centerCrop().into(holder.ivSelfie);

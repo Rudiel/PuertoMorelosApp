@@ -87,16 +87,17 @@
 
     <com.github.clans.fab.FloatingActionMenu
         android:layout_width="wrap_content"
+        fab:menu_colorNormal="@color/fab_yellow"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
-        android:layout_marginBottom="8dp"
-        fab:fab_colorNormal="@color/colorPrimary"
-        fab:fab_colorPressed="@color/colorPrimaryDark"
-        fab:fab_colorRipple="@color/colorPrimary">
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="5dp"
+       >
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/fabGallery"
             android:layout_width="wrap_content"
+            fab:fab_colorNormal="@color/fab_yellow"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_image_white_18dp"
             fab:fab_size="mini" />
@@ -104,6 +105,7 @@
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/fabCamera"
             android:layout_width="wrap_content"
+            fab:fab_colorNormal="@color/fab_yellow"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_photo_camera_white_18dp"
             fab:fab_size="mini" />

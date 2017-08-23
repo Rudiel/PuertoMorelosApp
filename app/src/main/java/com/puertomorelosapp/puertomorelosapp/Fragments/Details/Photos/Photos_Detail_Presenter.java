@@ -9,6 +9,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.puertomorelosapp.puertomorelosapp.Models.Categorie;
 import com.puertomorelosapp.puertomorelosapp.Models.Request.Gallery;
 import com.puertomorelosapp.puertomorelosapp.Models.Request.Selfie;
+import com.puertomorelosapp.puertomorelosapp.Models.Response.Photographer;
 import com.puertomorelosapp.puertomorelosapp.Models.SubCategory;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
 import com.puertomorelosapp.puertomorelosapp.Utils.Utils;
@@ -46,18 +47,39 @@ public class Photos_Detail_Presenter implements IPhotos_Presenter {
         //Obtenemos las selfies
         FirebaseDatabase.getInstance().getReference(Url).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(final DataSnapshot dataSnapshot) {
 
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
 
                     Selfie selfie = new Selfie();
                     selfie = data.getValue(Selfie.class);
 
-                    selfieList.add(selfie);
+                    final Selfie finalSelfie = selfie;
+                    FirebaseDatabase.getInstance().getReference(Utils.USERS_URL + "/" + selfie.getIdphotographer()).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot1) {
+
+                            Photographer photographer =
+                                    dataSnapshot1.getValue(Photographer.class);
+
+                            finalSelfie.setPhotographer(photographer);
+
+                            selfieList.add(finalSelfie);
+
+                            if (selfieList.size() == dataSnapshot.getChildrenCount()) {
+                                view.hideLoadingSelfie();
+                                view.showPhotos(selfieList);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
 
                 }
-                view.hideLoadingSelfie();
-                view.showPhotos(selfieList);
+
             }
 
             @Override
@@ -107,6 +129,28 @@ public class Photos_Detail_Presenter implements IPhotos_Presenter {
 
         });
 
+    }
+
+    private void getPhotographer(final Selfie selfie, final List<Selfie> selfieList) {
+        FirebaseDatabase.getInstance().getReference(Utils.USERS_URL + "/" + selfie.getIdphotographer()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                Photographer photographer =
+                        dataSnapshot.getValue(Photographer.class);
+
+                selfie.setPhotographer(photographer);
+
+                selfieList.add(selfie);
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override

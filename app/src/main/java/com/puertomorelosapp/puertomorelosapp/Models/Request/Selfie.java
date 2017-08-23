@@ -1,5 +1,7 @@
 package com.puertomorelosapp.puertomorelosapp.Models.Request;
 
+import com.puertomorelosapp.puertomorelosapp.Models.Response.Photographer;
+
 /**
  * Created by rudielavilaperaza on 8/16/17.
  */
@@ -21,6 +23,8 @@ public class Selfie {
     private String subcategoria;
     private Double timeStamp;
     private Double width;
+
+    private Photographer photographer;
 
 
     public String getId() {
@@ -141,5 +145,13 @@ public class Selfie {
 
     public void setWidth(Double width) {
         this.width = width;
+    }
+
+    public Photographer getPhotographer() {
+        return photographer;
+    }
+
+    public void setPhotographer(Photographer photographer) {
+        this.photographer = photographer;
     }
 }
