@@ -30,9 +30,6 @@ public class Login_Presenter implements ILogin_Presenter {
 
     private ILogin_View view;
 
-    private Boolean exist = false;
-
-
     public Login_Presenter(Context context) {
         ((PuertoMorelosApplication) context).getAppComponent().inject(this);
     }
@@ -55,13 +52,11 @@ public class Login_Presenter implements ILogin_Presenter {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-
-                    //saveUser(newUser);
-                    checkExist(user.getEmail(), auth);
+                    getUserCredentials(task.getResult().getUser());
                 } else {
+                    view.hideLoading();
                     view.showErrorMessage(task.getException().getMessage());
                 }
-                view.hideLoading();
 
             }
         });
@@ -85,9 +80,9 @@ public class Login_Presenter implements ILogin_Presenter {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            task.getResult().getUser().getUid();
                             FirebaseUser user = auth.getCurrentUser();
-                            checkExist(user.getEmail(), auth);
-                            //saveUser(newUser);
+                            //getUserCredentials(user.getEmail());
                         } else {
                             Log.w("FACE", "signInWithCredential:failure", task.getException());
                             view.showErrorMessage(task.getException().getMessage());
@@ -100,46 +95,16 @@ public class Login_Presenter implements ILogin_Presenter {
 
     }
 
-    private void saveUser(NewUser newUser) {
+    private void getUserCredentials(FirebaseUser user) {
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-
-        database.getReference().child("users").push().setValue(newUser);
-
-
-        view.showMainActivity();
-    }
-
-    private void checkExist(final String email, final FirebaseAuth auth) {
-
-        exist = false;
-
-        FirebaseDatabase.getInstance().getReference().child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("users/" + user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                com.puertomorelosapp.puertomorelosapp.Models.Response.User user = dataSnapshot.getValue(com.puertomorelosapp.puertomorelosapp.Models.Response.User.class);
 
-                    FirebaseDatabase.getInstance().getReference().child("users" + "/" + data.getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot data) {
-
-                            if (data.child("email").getValue().equals(email)) {
-                                exist = true;
-                                return;
-                            }
-
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
-
-                }
-
-
+                view.hideLoading();
+                view.saveUserData(user);
             }
 
             @Override
@@ -151,17 +116,4 @@ public class Login_Presenter implements ILogin_Presenter {
 
     }
 
-    private void createUser(FirebaseAuth auth) {
-        if (!exist) {
-            NewUser newUser = new NewUser();
-            newUser.setEmail(auth.getCurrentUser().getEmail());
-            newUser.setProvider(auth.getCurrentUser().getUid());
-            newUser.setUsername(auth.getCurrentUser().getDisplayName());
-            newUser.setImageURL(String.valueOf(auth.getCurrentUser().getPhotoUrl()));
-
-            saveUser(newUser);
-        } else {
-            view.showMainActivity();
-        }
-    }
 }

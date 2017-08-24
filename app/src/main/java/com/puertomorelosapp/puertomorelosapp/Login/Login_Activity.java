@@ -207,6 +207,16 @@ public class Login_Activity extends AppCompatActivity implements ILogin_View, Fa
         startActivity(new Intent(Login_Activity.this, Recover_Activity.class));
     }
 
+    @Override
+    public void saveUserData(com.puertomorelosapp.puertomorelosapp.Models.Response.User user) {
+        Utils.saveUserEmail(this, user.getEmail());
+        Utils.saveProvider(this, user.getProvider());
+        Utils.saveUserImage(this, user.getImageURL());
+        Utils.saveUserName(this, user.getUsername());
+
+        this.showMainActivity();
+    }
+
     private void startLogin() {
         if (!etPassword.getText().toString().isEmpty() && !etUserEmail.getText().toString().isEmpty()) {
             User user = new User();

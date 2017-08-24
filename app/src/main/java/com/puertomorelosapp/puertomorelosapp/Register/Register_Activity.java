@@ -26,6 +26,7 @@ import com.puertomorelosapp.puertomorelosapp.Creators.IDialog_Creator;
 import com.puertomorelosapp.puertomorelosapp.Login.Login_Activity;
 import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
 import com.puertomorelosapp.puertomorelosapp.Models.Register;
+import com.puertomorelosapp.puertomorelosapp.Models.Response.User;
 import com.puertomorelosapp.puertomorelosapp.R;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
 import com.puertomorelosapp.puertomorelosapp.Utils.Utils;
@@ -111,7 +112,13 @@ public class Register_Activity extends AppCompatActivity implements IRegister_Vi
     }
 
     @Override
-    public void registerDone() {
+    public void registerDone(User user) {
+
+        Utils.saveUserName(this, user.getUsername());
+        Utils.saveProvider(this, user.getProvider());
+        Utils.saveUserEmail(this, user.getEmail());
+        Utils.saveUserImage(this, user.getImageURL());
+
         startActivity(new Intent(Register_Activity.this, Main_Activity.class));
         finish();
     }

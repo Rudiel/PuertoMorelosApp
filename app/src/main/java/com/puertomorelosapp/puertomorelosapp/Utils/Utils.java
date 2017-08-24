@@ -1,7 +1,9 @@
 package com.puertomorelosapp.puertomorelosapp.Utils;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.preference.PreferenceManager;
 
 /**
  * Created by rudielavilaperaza on 6/8/17.
@@ -29,7 +31,7 @@ public class Utils {
 
     public static final String USERS_URL = "users";
 
-    public static final String PHOTOS_URL="gs://puertomapp.appspot.com/";
+    public static final String PHOTOS_URL = "gs://puertomapp.appspot.com/";
 
     //https://puerto-morelos-app.firebaseio.com/PuertoMorelos/imagenesURL/Header/Comercios
 
@@ -38,15 +40,61 @@ public class Utils {
         return Typeface.createFromAsset(context.getAssets(), "fonts/bukhariscript.ttf");
     }
 
-    public static final String HISTORIA_BACKGROUND = "PuertoMorelos/imagenesURL/Header/Historia";
-    public static final String EVENTOS_BACKGROUND = "";
-    public static final String LUGARES_BACKGROUND = "";
-    public static final String ATRACTIVOS_BACKGROUND = "";
-    public static final String HOTELES_BACKGROUND = "";
-    public static final String RESTAURANTES_BACKGROUND = "";
-    public static final String COMIDA_BACKGROUND = "";
-    public static final String COMERCIOS_BACKGROUND = "";
-    public static final String SERVICIOS_BACKGROUND = "";
+    public static void saveUserEmail(Context context, String email
+    ) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("USER_EMAIL", email);
+        editor.apply();
+    }
+
+    public static String getUserEmail(Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return preferences.getString("USER_EMAIL", "");
+    }
+
+    public static void saveUserImage(Context context, String image) {
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("USER_IMAGE", image);
+        editor.apply();
+    }
+
+    public static String getUserImage(Context context) {
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return preferences.getString("USER_IMAGE", "");
+    }
+
+    public static void saveProvider(Context context, String provider) {
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("USER_PROVIDER", provider);
+        editor.apply();
+    }
+
+    public static String getProvider(Context context) {
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return preferences.getString("USER_PROVIDER", "");
+    }
+
+    public static void saveUserName(Context context, String username) {
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("USER_NAME", username);
+        editor.apply();
+    }
+
+    public static String getUserName(Context context) {
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return preferences.getString("USER_NAME", "");
+
+    }
 
 
 }
