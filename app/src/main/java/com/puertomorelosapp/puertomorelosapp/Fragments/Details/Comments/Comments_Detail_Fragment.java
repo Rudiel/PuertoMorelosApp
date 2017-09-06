@@ -119,7 +119,7 @@ public class Comments_Detail_Fragment extends Fragment implements IComments_View
             }
         });
 
-        commentsReference.child("PuertoMorelos/SocialAPP/Comments").addValueEventListener(new ValueEventListener() {
+        commentsReference.child(Utils.COMMENTS_SOCIAL_URL).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -157,9 +157,9 @@ public class Comments_Detail_Fragment extends Fragment implements IComments_View
             @Override
             public int compare(Comments o1, Comments o2) {
                 if (o1.getTimeStamp() > o2.getTimeStamp())
-                    return 1;
-                else
                     return 0;
+                else
+                    return 1;
             }
         });
 

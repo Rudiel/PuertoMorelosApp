@@ -9,10 +9,11 @@
 
     <com.jsibbold.zoomage.ZoomageView
         android:id="@+id/ivGalleryImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
         android:clickable="false"
+        app:zoomage_translatable="false"
         android:src="@drawable/avatar_deafult"
         app:zoomage_animateOnReset="false" />
 

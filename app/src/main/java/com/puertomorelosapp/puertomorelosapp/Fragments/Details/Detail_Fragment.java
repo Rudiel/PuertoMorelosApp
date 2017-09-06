@@ -329,7 +329,7 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
         ivDetailComments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (subCategory.getComments() > 0)
+                //if (subCategory.getComments() > 0)
                     ((Main_Activity) getActivity()).setFragment(new Comments_Detail_Fragment(), true, null);
             }
         });
