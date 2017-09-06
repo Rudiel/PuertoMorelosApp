@@ -52,7 +52,6 @@
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@id/ivNewPhotoProfilePicture"
             android:gravity="center"
-            android:text="ksndjkmn"
             android:textColor="@android:color/black" />
 
         <TextView
@@ -63,6 +62,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:text="90"
+            android:inputType="number"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold" />
 

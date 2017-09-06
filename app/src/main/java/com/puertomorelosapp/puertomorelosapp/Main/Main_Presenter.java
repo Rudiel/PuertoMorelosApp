@@ -10,6 +10,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.puertomorelosapp.puertomorelosapp.Models.Categorie;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
@@ -42,5 +43,32 @@ public class Main_Presenter implements IMain_Presenter {
 
         view.logoutSesion();
     }
+
+    @Override
+    public void getMenuComments(String id) {
+
+        FirebaseDatabase.getInstance().getReference().child(Utils.COMMENTS_COUNT + id + "/" + "UniversalComments").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                Log.d("MENU_COMMENTS", "" + (int) dataSnapshot.getChildrenCount());
+                view.setComments((int) dataSnapshot.getChildrenCount());
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+    }
+
+    @Override
+    public void getMenuLikes(String id) {
+
+    }
+
 
 }

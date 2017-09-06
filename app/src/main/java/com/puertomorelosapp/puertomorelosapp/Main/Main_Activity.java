@@ -2,7 +2,9 @@ package com.puertomorelosapp.puertomorelosapp.Main;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -21,6 +23,7 @@ import android.widget.TextView;
 
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 import com.puertomorelosapp.puertomorelosapp.Creators.ConfirmDialog_Creator;
 import com.puertomorelosapp.puertomorelosapp.Creators.IConfirmDialog_Creator;
 import com.puertomorelosapp.puertomorelosapp.Fragments.AboutUs.AboutUs_Fragment;
@@ -78,6 +81,11 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
 
     ActionBarDrawerToggle actionBarDrawerToggle;
 
+    private TextView tvMenuComments;
+
+    private TextView tvMenuLikes;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,6 +125,12 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
         pbMain.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.MULTIPLY);
 
         showMenu();
+
+        tvMenuComments = (TextView) navigationView.getHeaderView(0).findViewById(R.id.tvMenuComments);
+
+        presenter.getMenuComments(Utils.getProvider(this));
+
+        presenter.getMenuLikes(Utils.getProvider(this));
 
     }
 
@@ -226,10 +240,20 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
                 new IConfirmDialog_Creator() {
                     @Override
                     public void onAccept(AlertDialog dialog) {
+
                         auth.signOut();
+
                         dialog.dismiss();
+
+                        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(Main_Activity.this);
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.clear();
+                        editor.apply();
+
                         LoginManager.getInstance().logOut();
+
                         startActivity(new Intent(Main_Activity.this, Login_Activity.class));
+
                         finish();
                     }
 
@@ -240,6 +264,11 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
                 });
 
 
+    }
+
+    @Override
+    public void setComments(int comments) {
+        tvMenuComments.setText(String.valueOf(comments));
     }
 
     public void setToolbarTitle(String title) {

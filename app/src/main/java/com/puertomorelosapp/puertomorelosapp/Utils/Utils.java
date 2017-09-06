@@ -33,6 +33,10 @@ public class Utils {
 
     public static final String PHOTOS_URL = "gs://puertomapp.appspot.com/";
 
+    public static final String COMMENTS_COUNT = "usersCountSocial/";
+
+    public static final String LIKE_SOCIAL_USER_URL = "SocialUSER/loves";
+
     //https://puerto-morelos-app.firebaseio.com/PuertoMorelos/imagenesURL/Header/Comercios
 
 

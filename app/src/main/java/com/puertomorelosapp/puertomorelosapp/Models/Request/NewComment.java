@@ -7,13 +7,39 @@ package com.puertomorelosapp.puertomorelosapp.Models.Request;
 public class NewComment {
 
     private int activo;
+    private String categoria;
     private String fecha;
     private String imageURL;
+    private String itemKey;
     private String nombreEntidad;
     private String senderDisplayName;
-    private String senderID;
+    private String senderId;
     private String text;
-    private String timeStamp;
+    private Double timeStamp;
+
+    public String getItemKey() {
+        return itemKey;
+    }
+
+    public void setItemKey(String itemKey) {
+        this.itemKey = itemKey;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    public String getSenderId() {
+        return senderId;
+    }
+
+    public void setSenderId(String senderId) {
+        this.senderId = senderId;
+    }
 
     public int getActivo() {
         return activo;
@@ -55,14 +81,6 @@ public class NewComment {
         this.senderDisplayName = senderDisplayName;
     }
 
-    public String getSenderID() {
-        return senderID;
-    }
-
-    public void setSenderID(String senderID) {
-        this.senderID = senderID;
-    }
-
     public String getText() {
         return text;
     }
@@ -71,11 +89,11 @@ public class NewComment {
         this.text = text;
     }
 
-    public String getTimeStamp() {
+    public Double getTimeStamp() {
         return timeStamp;
     }
 
-    public void setTimeStamp(String timeStamp) {
+    public void setTimeStamp(Double timeStamp) {
         this.timeStamp = timeStamp;
     }
 }

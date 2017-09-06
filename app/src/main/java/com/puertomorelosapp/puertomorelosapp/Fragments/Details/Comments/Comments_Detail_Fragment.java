@@ -17,17 +17,26 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.puertomorelosapp.puertomorelosapp.Adpaters.Comments_Adapter;
 import com.puertomorelosapp.puertomorelosapp.Creators.ConfirmDialog_Creator;
 import com.puertomorelosapp.puertomorelosapp.Creators.IConfirmComment_Creator;
 import com.puertomorelosapp.puertomorelosapp.Creators.IConfirmDialog_Creator;
 import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
 import com.puertomorelosapp.puertomorelosapp.Models.Request.NewComment;
+import com.puertomorelosapp.puertomorelosapp.Models.Request.RoutesComments;
 import com.puertomorelosapp.puertomorelosapp.Models.Response.Comments;
 import com.puertomorelosapp.puertomorelosapp.R;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
 import com.puertomorelosapp.puertomorelosapp.Utils.Utils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -65,6 +74,8 @@ public class Comments_Detail_Fragment extends Fragment implements IComments_View
 
     Main_Activity activity;
 
+    private DatabaseReference commentsReference;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -85,7 +96,9 @@ public class Comments_Detail_Fragment extends Fragment implements IComments_View
 
         activity = ((Main_Activity) getActivity());
 
-        Glide.with(getActivity()).load(R.drawable.background_comments).centerCrop().into(ivCommentsDetailBackground);
+        commentsReference= FirebaseDatabase.getInstance().getReference();
+
+        Glide.with(getActivity()).load(R.drawable.background_comments).centerCrop().dontTransform().into(ivCommentsDetailBackground);
 
         tvDetailCommentsTitle.setTypeface(Utils.getbukharisLetter(getActivity()));
 
@@ -95,7 +108,11 @@ public class Comments_Detail_Fragment extends Fragment implements IComments_View
 
         rvCommentsDetail.setLayoutManager(mLayoutManager);
 
-        presenter.getComments(((Main_Activity) getActivity()).subCategory.getId());
+        presenter.setDatabaseReference(commentsReference);
+
+        //presenter.getComments(((Main_Activity) getActivity()).subCategory.getId());
+
+        getComments(activity.subCategory.getId());
 
         btWriteComment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,6 +120,8 @@ public class Comments_Detail_Fragment extends Fragment implements IComments_View
                 showWriteComment();
             }
         });
+
+
 
     }
 
@@ -126,6 +145,13 @@ public class Comments_Detail_Fragment extends Fragment implements IComments_View
         rvCommentsDetail.setAdapter(mAdapter);
     }
 
+    @Override
+    public void onCommentSucces() {
+
+        //presenter.getComments(((Main_Activity) getActivity()).subCategory.getId());
+
+    }
+
     private void showWriteComment() {
         new ConfirmDialog_Creator().showWriteComment(getActivity(),
                 "New Comment", null, new IConfirmComment_Creator() {
@@ -136,14 +162,72 @@ public class Comments_Detail_Fragment extends Fragment implements IComments_View
 
                     @Override
                     public void onAccept(Dialog dialog, NewComment comment) {
+
+                        dialog.dismiss();
+
                         comment.setActivo(1);
+
+                        SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+                        comment.setFecha(input.format(new Date()));
+                        comment.setImageURL(Utils.getUserImage(getActivity()));
                         comment.setNombreEntidad(activity.subCategory.getNombre());
-                        comment.setSenderDisplayName(activity.auth.getCurrentUser().getDisplayName());
-                        comment.setImageURL(String.valueOf(activity.auth.getCurrentUser().getPhotoUrl()));
-                        comment.setSenderID(activity.auth.getCurrentUser().getUid());
-                        comment.setTimeStamp(String.valueOf(System.currentTimeMillis()));
-                        comment.setFecha(String.valueOf(new Date()));
+                        comment.setSenderDisplayName(Utils.getUserName(getActivity()));
+                        comment.setSenderId(Utils.getProvider(getActivity()));
+                        comment.setText(comment.getText());
+                        comment.setTimeStamp((double) System.currentTimeMillis());
+                        comment.setItemKey(activity.subCategory.getId());
+
+                        String url = "";
+
+                        if (activity.category.getCategoria() == null) {
+                            comment.setCategoria(activity.mainCategory);
+                            url = Utils.COMMENTS_URL + activity.category.getName() + "/" + activity.subCategory.getId();
+                        } else {
+                            comment.setCategoria(activity.category.getCategoria());
+                            url = Utils.COMMENTS_URL + activity.category.getCategoria() + "/" + activity.category.getName() + "/" + activity.subCategory.getId();
+                        }
+
+                        RoutesComments routesComments = new RoutesComments();
+                        routesComments.setUrl1(url);
+                        routesComments.setUrl2(Utils.COMMENTS_SOCIAL_URL + "/" + Utils.getProvider(getActivity()));
+                        routesComments.setUrl3(Utils.COMMENTS_COUNT + Utils.getProvider(getActivity()) + "/" + "UniversalComments");
+
+                        presenter.setNewComment(comment, routesComments);
                     }
                 });
     }
+
+    private void getComments(final String id){
+        showLoading();
+
+        final List<Comments> commentsList = new ArrayList<>();
+
+        commentsReference.child(Utils.COMMENTS_SOCIAL_URL).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+
+                    for (DataSnapshot d : data.getChildren()) {
+
+                        Comments comment = d.getValue(Comments.class);
+
+                        if (comment.getItemKey().equals(id))
+                            commentsList.add(comment);
+
+                    }
+
+
+                }
+                setComments(commentsList);
+                hideLoading();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
 }

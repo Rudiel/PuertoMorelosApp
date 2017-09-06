@@ -1,23 +1,17 @@
 package com.puertomorelosapp.puertomorelosapp.Fragments.Details;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.puertomorelosapp.puertomorelosapp.Fragments.Categories.ICategories_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Models.Categorie;
-import com.puertomorelosapp.puertomorelosapp.Models.Request.Gallery;
+import com.puertomorelosapp.puertomorelosapp.Models.Request.Like;
 import com.puertomorelosapp.puertomorelosapp.Models.SubCategory;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
 import com.puertomorelosapp.puertomorelosapp.Utils.Utils;
 
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by rudielavilaperaza on 6/29/17.
@@ -72,6 +66,14 @@ public class Detail_Fragment_Presenter implements IDetail_Presenter {
             }
 
         });
+
+
+    }
+
+    @Override
+    public void saveLike(Like like) {
+
+
 
 
     }

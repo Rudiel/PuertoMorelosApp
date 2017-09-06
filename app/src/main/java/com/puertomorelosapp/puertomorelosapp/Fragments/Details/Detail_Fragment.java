@@ -2,6 +2,7 @@ package com.puertomorelosapp.puertomorelosapp.Fragments.Details;
 
 import android.content.res.Resources;
 import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.os.Build;
@@ -33,14 +34,19 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.ServerValue;
 import com.puertomorelosapp.puertomorelosapp.Creators.ServicesDialog;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Details.Comments.Comments_Detail_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Details.Photos.Photos_Detail_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
+import com.puertomorelosapp.puertomorelosapp.Models.Request.Like;
 import com.puertomorelosapp.puertomorelosapp.Models.SubCategory;
 import com.puertomorelosapp.puertomorelosapp.R;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
 import com.puertomorelosapp.puertomorelosapp.Utils.Utils;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.inject.Inject;
 
@@ -133,6 +139,15 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
 
     @Bind(R.id.tvDetailGallery)
     TextView tvtvDetailGallery;
+
+    @Bind(R.id.tvDetailDescriptionTitle)
+    TextView tvDetailDescriptionTitle;
+
+    @Bind(R.id.tvDetailUbicationTitle)
+    TextView tvDetailUbicationTitle;
+
+    @Bind(R.id.ivDetailLikes)
+    ImageView ivDetailLikes;
 
     private GoogleMap map;
 
@@ -326,6 +341,14 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
             }
         });
 
+        ivDetailLikes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveLike();
+            }
+        });
+
+
         presenter.getPhotosNumber(this.subCategory, ((Main_Activity) getActivity()).category);
 
     }
@@ -386,6 +409,9 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
                 new ServicesDialog().showServices(getActivity(), subCategory.getServicios());
             }
         });
+
+        setTextViewDrawableColor(tvDetailDescriptionTitle);
+        setTextViewDrawableColor(tvDetailUbicationTitle);
 
     }
 
@@ -475,4 +501,33 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
     public void setPhotosNumber(int photosNumber) {
         tvtvDetailGallery.setText(String.valueOf(photosNumber));
     }
+
+    private void setTextViewDrawableColor(TextView textView) {
+        for (Drawable drawable : textView.getCompoundDrawables()) {
+            if (drawable != null) {
+                drawable.setColorFilter(new PorterDuffColorFilter(getActivity().getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN));
+            }
+        }
+    }
+
+    private void saveLike() {
+
+        Like like= new Like();
+
+        SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        like.setFecha(input.format(new Date()));
+
+        Long tsLong = System.currentTimeMillis()/1000;
+        like.setTimeStamp(Double.valueOf(tsLong));
+
+        like.setIdioma("Español");
+        like.setLugar("PuertoMorelos");
+        like.setNombreEntidad(subCategory.getNombre());
+        like.setCategoria(((Main_Activity)getActivity()).category.getName());
+        
+
+        presenter.saveLike(like);
+    }
+
+
 }

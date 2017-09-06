@@ -65,6 +65,8 @@ public class Comments_Adapter extends RecyclerView.Adapter<Comments_Adapter.View
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
 
+        //"2017-05-28 11:57:32"
+
         SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         SimpleDateFormat output = new SimpleDateFormat("dd MMM HH:mm");
         try {

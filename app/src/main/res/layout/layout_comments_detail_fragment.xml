@@ -2,13 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="false"
-    android:orientation="vertical">
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true">
 
     <ImageView
         android:id="@+id/ivCommentsDetailBackground"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
 
     <TextView
         android:id="@+id/tvDetailCommentsTitle"
@@ -38,12 +39,12 @@
         <Button
             android:id="@+id/btWriteComment"
             android:layout_width="match_parent"
-            android:gravity="left|center_vertical"
-            android:paddingLeft="10dp"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/ivNewCommentProfile"
             android:background="@null"
+            android:gravity="left|center_vertical"
             android:hint="Write a comment"
+            android:paddingLeft="10dp"
             android:textColorHint="@color/colorAccent" />
 
     </RelativeLayout>

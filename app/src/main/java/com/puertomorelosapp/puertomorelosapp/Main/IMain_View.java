@@ -15,4 +15,6 @@ public interface IMain_View {
     void hideLoading();
 
     void logoutSesion();
+
+    void setComments(int comments);
 }

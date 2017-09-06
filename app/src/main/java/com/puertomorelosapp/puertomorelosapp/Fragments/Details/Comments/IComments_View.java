@@ -15,4 +15,7 @@ public interface IComments_View {
     void hideLoading();
 
     void setComments(List<Comments> commentList);
+
+    void onCommentSucces();
+
 }

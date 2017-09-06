@@ -12,4 +12,8 @@ public interface IMain_Presenter {
 
     void logout(FirebaseAuth auth);
 
+    void getMenuComments(String id);
+
+    void getMenuLikes(String id);
+
 }

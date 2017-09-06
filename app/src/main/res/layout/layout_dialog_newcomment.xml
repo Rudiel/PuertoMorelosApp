@@ -4,10 +4,47 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/etWriteComment"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxLines="3" />
+        android:background="@color/colorPrimary">
+
+        <Button
+            android:id="@+id/btAccept"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@null"
+            android:text="Accept"
+            android:textAllCaps="false"
+            android:textColor="@color/colorAccent" />
+
+        <Button
+            android:id="@+id/btCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:background="@null"
+            android:text="Cancel"
+            android:textAllCaps="false"
+            android:textColor="@color/colorAccent" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
+
+        <EditText
+            android:id="@+id/etWriteComment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:maxLength="150"
+            android:hint="Escribe un comentario"
+            android:maxLines="3"
+            android:padding="5dp" />
+    </RelativeLayout>
+
 
 </LinearLayout>

@@ -1,4 +1,4 @@
-package com.puertomorelosapp.puertomorelosapp.Fragments.Activities;
+package com.puertomorelosapp.puertomorelosapp.Fragments.Activities.Comments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,12 +13,11 @@ import com.puertomorelosapp.puertomorelosapp.R;
  * Created by rudielavilaperaza on 6/13/17.
  */
 
-public class Megusta_Fragment extends Fragment {
-
+public class Comentarios_Fragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.layout_activities_like, container, false);
+        return inflater.inflate(R.layout.layout_activities_comments, container, false);
     }
 
     @Override

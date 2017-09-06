@@ -133,7 +133,9 @@ public class SecundaryMain_Fragment extends Fragment implements ISecundaryMain_v
 
     @Override
     public void updateAdapter() {
-        mAdapter.notifyDataSetChanged();
+
+        //mAdapter.notifyDataSetChanged();
+
     }
 
 
