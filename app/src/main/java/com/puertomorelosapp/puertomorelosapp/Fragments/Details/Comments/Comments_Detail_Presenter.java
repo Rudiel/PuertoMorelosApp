@@ -44,7 +44,6 @@ public class Comments_Detail_Presenter implements IComments_Presenter {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                Log.d("CHANGED","VALUE WAS CHANGED");
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
 
                     for (DataSnapshot d : data.getChildren()) {
@@ -93,8 +92,6 @@ public class Comments_Detail_Presenter implements IComments_Presenter {
        commentsReference.child(routesComments.getUrl3()).push().setValue("true");
 
         //una vez que lo guarde refrescamos la lista
-        view.onCommentSucces();
-
 
     }
 

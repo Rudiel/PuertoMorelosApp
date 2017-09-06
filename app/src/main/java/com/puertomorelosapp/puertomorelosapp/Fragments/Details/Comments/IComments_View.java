@@ -16,6 +16,4 @@ public interface IComments_View {
 
     void setComments(List<Comments> commentList);
 
-    void onCommentSucces();
-
 }

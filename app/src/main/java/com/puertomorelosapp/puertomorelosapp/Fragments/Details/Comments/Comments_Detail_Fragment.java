@@ -37,6 +37,8 @@ import com.puertomorelosapp.puertomorelosapp.Utils.Utils;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -96,7 +98,7 @@ public class Comments_Detail_Fragment extends Fragment implements IComments_View
 
         activity = ((Main_Activity) getActivity());
 
-        commentsReference= FirebaseDatabase.getInstance().getReference();
+        commentsReference = FirebaseDatabase.getInstance().getReference();
 
         Glide.with(getActivity()).load(R.drawable.background_comments).centerCrop().dontTransform().into(ivCommentsDetailBackground);
 
@@ -110,10 +112,6 @@ public class Comments_Detail_Fragment extends Fragment implements IComments_View
 
         presenter.setDatabaseReference(commentsReference);
 
-        //presenter.getComments(((Main_Activity) getActivity()).subCategory.getId());
-
-        getComments(activity.subCategory.getId());
-
         btWriteComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,6 +119,21 @@ public class Comments_Detail_Fragment extends Fragment implements IComments_View
             }
         });
 
+        commentsReference.child("PuertoMorelos/SocialAPP/Comments").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                Log.d("CHANGED", "VALUE WAS CHANGED");
+
+                presenter.getComments(activity.subCategory.getId());
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
 
     }
@@ -140,17 +153,22 @@ public class Comments_Detail_Fragment extends Fragment implements IComments_View
     public void setComments(List<Comments> commentList) {
         Log.d("Comments", "" + commentList.size());
 
+        Collections.sort(commentList, new Comparator<Comments>() {
+            @Override
+            public int compare(Comments o1, Comments o2) {
+                if (o1.getTimeStamp() > o2.getTimeStamp())
+                    return 1;
+                else
+                    return 0;
+            }
+        });
+
         mAdapter = new Comments_Adapter(commentList, getActivity());
 
         rvCommentsDetail.setAdapter(mAdapter);
-    }
-
-    @Override
-    public void onCommentSucces() {
-
-        //presenter.getComments(((Main_Activity) getActivity()).subCategory.getId());
 
     }
+
 
     private void showWriteComment() {
         new ConfirmDialog_Creator().showWriteComment(getActivity(),
@@ -198,36 +216,5 @@ public class Comments_Detail_Fragment extends Fragment implements IComments_View
                 });
     }
 
-    private void getComments(final String id){
-        showLoading();
-
-        final List<Comments> commentsList = new ArrayList<>();
-
-        commentsReference.child(Utils.COMMENTS_SOCIAL_URL).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot data : dataSnapshot.getChildren()) {
-
-                    for (DataSnapshot d : data.getChildren()) {
-
-                        Comments comment = d.getValue(Comments.class);
-
-                        if (comment.getItemKey().equals(id))
-                            commentsList.add(comment);
-
-                    }
-
-
-                }
-                setComments(commentsList);
-                hideLoading();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }
 
 }
