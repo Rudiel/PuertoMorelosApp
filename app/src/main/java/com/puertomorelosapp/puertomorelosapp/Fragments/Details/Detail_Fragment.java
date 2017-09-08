@@ -524,7 +524,8 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
         like.setLugar("PuertoMorelos");
         like.setNombreEntidad(subCategory.getNombre());
         like.setCategoria(((Main_Activity)getActivity()).category.getName());
-        
+
+        like.setItemKey(Utils.getProvider(getActivity()));
 
         presenter.saveLike(like);
     }

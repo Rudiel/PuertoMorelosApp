@@ -153,15 +153,5 @@ public class Categories_Fragment extends Fragment implements ICategories_View, I
             mLayoutManager.scrollToPositionWithOffset(index, top);
         }
 
-        /*try {
-            rvCategories.setAdapter(mAdapter);
-            ((Main_Activity) getActivity()).setToolbarTitle(getActivity().getString(R.string.descubre_title));
-            pbCategories.setVisibility(View.GONE);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
-
-
     }
 }

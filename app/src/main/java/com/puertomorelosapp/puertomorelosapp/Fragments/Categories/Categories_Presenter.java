@@ -47,108 +47,62 @@ public class Categories_Presenter implements ICategories_Presenter {
 
         final DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
-        reference.child(Utils.CATE_URL)
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(final DataSnapshot dataSnapshot) {
-                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                            final Categorie categorie = new Categorie();
-                            categorie.setName(snapshot.getValue().toString());
+        reference.child(Utils.CATE_URL).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(final DataSnapshot dataSnapshot) {
 
-                            if (snapshot.getValue().toString().equals("Hoteles")) {
-                                reference.child(Utils.CATE_URL_BACK + "/Servicios/" + snapshot.getValue().toString() + "/Background")
-                                        .addListenerForSingleValueEvent(new ValueEventListener() {
-                                            @Override
-                                            public void onDataChange(DataSnapshot data) {
-                                                categorie.setImage(data.getValue().toString());
-                                                if (categorieList.size() == dataSnapshot.getChildrenCount()) {
-                                                    view.hideLoading();
-                                                    view.showCategories(categorieList);
-                                                }
-                                            }
+                for (final DataSnapshot data : dataSnapshot.getChildren()) {
 
-                                            @Override
-                                            public void onCancelled(DatabaseError databaseError) {
+                    final Categorie categoria = new Categorie();
+                    categoria.setName(data.getValue().toString());
 
-                                            }
-                                        });
-                                /*categorie.setImage(getImage(reference,Utils.CATE_URL_BACK
-                                        + "/Servicios/" +
-                                        snapshot.getValue().toString() +
-                                        "/Background"));
-                                if (categorieList.size() == dataSnapshot.getChildrenCount()) {
-                                    view.hideLoading();
-                                    view.showCategories(categorieList);
-                                }*/
+                    String URL;
 
-                            } else if (snapshot.getValue().toString().equals("Restaurantes") ||
-                                    snapshot.getValue().toString().equals("Comida rapida")) {
-
-                                reference.child(Utils.CATE_URL_BACK + "/Comercios/" + snapshot.getValue().toString() + "/Background")
-                                        .addListenerForSingleValueEvent(new ValueEventListener() {
-                                            @Override
-                                            public void onDataChange(DataSnapshot data) {
-                                                categorie.setImage(data.getValue().toString());
-                                                if (categorieList.size() == dataSnapshot.getChildrenCount()) {
-                                                    view.hideLoading();
-                                                    view.showCategories(categorieList);
-                                                }
-                                            }
-
-                                            @Override
-                                            public void onCancelled(DatabaseError databaseError) {
-
-                                            }
-                                        });
-                            } else {
-                                reference.child(Utils.CATE_URL_BACK + "/" + snapshot.getValue().toString() + "/Background")
-                                        .addListenerForSingleValueEvent(new ValueEventListener() {
-                                            @Override
-                                            public void onDataChange(DataSnapshot data) {
-                                                categorie.setImage(data.getValue().toString());
-                                                if (categorieList.size() == dataSnapshot.getChildrenCount()) {
-                                                    view.hideLoading();
-                                                    view.showCategories(categorieList);
-                                                }
-                                            }
-
-                                            @Override
-                                            public void onCancelled(DatabaseError databaseError) {
-
-                                            }
-                                        });
-                            }
-
-
-                            categorieList.add(categorie);
-                        }
-
-
+                    switch (categoria.getName()) {
+                        case "Hoteles":
+                            URL = Utils.CATE_URL_BACK + "/Servicios/" + categoria.getName() + "/Background";
+                            break;
+                        case "Restaurantes":
+                        case "Comida rapida":
+                            URL = Utils.CATE_URL_BACK + "/Comercios/" + categoria.getName() + "/Background";
+                            break;
+                        default:
+                            URL = Utils.CATE_URL_BACK + "/" + categoria.getName() + "/Background";
+                            break;
                     }
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                    }
-                });
+                    reference.child(URL)
+                            .addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot1) {
 
-    }
+                                    categoria.setImage(dataSnapshot1.getValue().toString());
 
-    public String getImage(final DatabaseReference reference, String url) {
-        reference.child(url)
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot data) {
-                        image = data.getValue().toString();
-                    }
+                                    categorieList.add(categoria);
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        image = null;
-                    }
-                });
+                                    if (dataSnapshot.getChildrenCount() == categorieList.size()) {
+                                        view.hideLoading();
+                                        view.showCategories(categorieList);
+                                    }
 
+                                }
 
-        return image;
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
 
     }
 
