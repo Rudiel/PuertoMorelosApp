@@ -16,4 +16,6 @@ public interface ICategories_Presenter {
 
     void getCategories(Context context);
 
+    void getMainAd(Context context);
+
 }

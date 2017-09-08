@@ -2,6 +2,7 @@ package com.puertomorelosapp.puertomorelosapp.Fragments.Categories;
 
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,8 +11,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import com.bumptech.glide.Glide;
 import com.puertomorelosapp.puertomorelosapp.Adpaters.Categories_Adapter;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Secundary_Main.SecundaryMain_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Thrid_Main.Third_Main_Fragment;
@@ -42,8 +45,12 @@ public class Categories_Fragment extends Fragment implements ICategories_View, I
     @Bind(R.id.pbCategories)
     ProgressBar pbCategories;
 
+    @Bind(R.id.ivAd)
+    ImageView ivAd;
+
     private RecyclerView.Adapter mAdapter;
     private LinearLayoutManager mLayoutManager;
+
 
     public static int index = -1;
     public static int top = -1;
@@ -84,12 +91,16 @@ public class Categories_Fragment extends Fragment implements ICategories_View, I
 
         ((Main_Activity) getActivity()).showMenu();
 
-        if (((Main_Activity) getActivity()).categorieList.size() == 0)
+
+        if (((Main_Activity) getActivity()).categorieList.size() == 0){
+            presenter.getMainAd(getActivity());
             presenter.getCategories(getActivity());
+        }
         else
             showCategories(((Main_Activity) getActivity()).categorieList);
 
         ((Main_Activity) getActivity()).subCategoryList.clear();
+
 
     }
 
@@ -113,6 +124,26 @@ public class Categories_Fragment extends Fragment implements ICategories_View, I
         rvCategories.setAdapter(mAdapter);
 
         mAdapter.notifyDataSetChanged();
+
+    }
+
+    @Override
+    public void showAd(String url) {
+
+        ivAd.setVisibility(View.VISIBLE);
+
+        ((Main_Activity)getActivity()).toolbar.setVisibility(View.GONE);
+
+        Glide.with(getActivity()).load(url).centerCrop().into(ivAd);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ((Main_Activity)getActivity()).toolbar.setVisibility(View.VISIBLE);
+
+                ivAd.setVisibility(View.GONE);
+            }
+        }, 3000);
 
     }
 

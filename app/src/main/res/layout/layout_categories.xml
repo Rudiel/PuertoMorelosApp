@@ -17,4 +17,10 @@
         android:progressTint="@color/colorPrimaryDark"
         android:visibility="gone" />
 
+    <ImageView
+        android:id="@+id/ivAd"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
 </RelativeLayout>

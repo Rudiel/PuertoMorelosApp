@@ -16,4 +16,6 @@ public interface ICategories_View {
 
     void showCategories(List<Categorie> categories);
 
+    void showAd(String url);
+
 }

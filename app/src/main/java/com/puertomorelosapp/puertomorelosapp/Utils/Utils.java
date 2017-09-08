@@ -37,6 +37,8 @@ public class Utils {
 
     public static final String LIKE_SOCIAL_USER_URL = "SocialUSER/loves";
 
+    public static final String WELCOME_AD = "PuertoMorelos/imagenesURL/Publicidad/WelcomeBackground/imageURL";
+
     //https://puerto-morelos-app.firebaseio.com/PuertoMorelos/imagenesURL/Header/Comercios
 
 
