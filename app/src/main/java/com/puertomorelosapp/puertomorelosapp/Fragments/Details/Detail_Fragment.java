@@ -40,13 +40,16 @@ import com.puertomorelosapp.puertomorelosapp.Fragments.Details.Comments.Comments
 import com.puertomorelosapp.puertomorelosapp.Fragments.Details.Photos.Photos_Detail_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
 import com.puertomorelosapp.puertomorelosapp.Models.Request.Like;
+import com.puertomorelosapp.puertomorelosapp.Models.Servicio;
 import com.puertomorelosapp.puertomorelosapp.Models.SubCategory;
 import com.puertomorelosapp.puertomorelosapp.R;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
 import com.puertomorelosapp.puertomorelosapp.Utils.Utils;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -330,7 +333,7 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
             @Override
             public void onClick(View v) {
                 //if (subCategory.getComments() > 0)
-                    ((Main_Activity) getActivity()).setFragment(new Comments_Detail_Fragment(), true, null);
+                ((Main_Activity) getActivity()).setFragment(new Comments_Detail_Fragment(), true, null);
             }
         });
 
@@ -357,47 +360,57 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
 
         //Click al view e inflar la vista en un dialogo
 
-        for (int i = 0; i < subCategory.getServicios().size(); i++) {
+        final List<Servicio> servicioList= new ArrayList<>();
+
+        int i=0;
+
+        for(String key: subCategory.getServicios().keySet()){
+
+            i+=1;
 
             ImageView imageView = new ImageView(getContext());
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             imageView.setLayoutParams(params);
 
-            switch (subCategory.getServicios().get(i).getName()) {
-                case "Estacionamiento":
-                    imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_local_parking_black_48dp));
-                    break;
-                case "Multiples idiomas":
-                    imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_public_black_48dp));
-                    break;
-                case "Pago con tarjeta":
-                    imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_payment_black_48dp));
-                    break;
-                case "Servicio a domicilio":
-                    imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_local_shipping_black_48dp));
-                    break;
-                case "Wifi":
-                    imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_wifi_black_48dp));
-                    break;
-                case "Aire acondicionado":
-                    imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_ac_unit_black_48dp));
-                    break;
-                case "Recepción":
-                    imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_room_service_black_48dp));
-                    break;
+            Servicio servicio= new Servicio();
 
-                default:
-                    imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_info_outline_black_48dp));
+            if (key.equals("Estacionamiento")) {
+                imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_local_parking_black_48dp));
+
+            } else if (key.equals("Multiples idiomas")) {
+                imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_public_black_48dp));
+
+            } else if (key.equals("Pago con tarjeta")) {
+                imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_payment_black_48dp));
+            }else if(key.equals("Wifi")){
+                imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_wifi_black_48dp));
+            }
+            else if(key.equals("Aire acondicionado")){
+                imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_ac_unit_black_48dp));
 
             }
+            else if(key.equals("Recepción")){
+                imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_room_service_black_48dp));
+
+            }
+            else if(key.equals("Servicio a domicilio")){
+                imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_local_shipping_black_48dp));
+            }
+            else {
+                imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_info_outline_black_48dp));
+            }
+
+            servicio.setName(key);
 
             Drawable image = imageView.getDrawable();
             image.setColorFilter(ContextCompat.getColor(getActivity(), android.R.color.darker_gray), PorterDuff.Mode.SRC_IN);
             imageView.setImageDrawable(image);
 
-            subCategory.getServicios().get(i).setDrawable(image);
+            servicio.setDrawable(image);
 
-            if (i < 3) {
+            servicioList.add(servicio);
+
+            if (i <4) {
                 llDetailServices.addView(imageView);
             }
 
@@ -406,7 +419,7 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
         llDetailServices.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new ServicesDialog().showServices(getActivity(), subCategory.getServicios());
+                 new ServicesDialog().showServices(getActivity(), servicioList);
             }
         });
 
@@ -512,18 +525,18 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
 
     private void saveLike() {
 
-        Like like= new Like();
+        Like like = new Like();
 
         SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         like.setFecha(input.format(new Date()));
 
-        Long tsLong = System.currentTimeMillis()/1000;
+        Long tsLong = System.currentTimeMillis() / 1000;
         like.setTimeStamp(Double.valueOf(tsLong));
 
         like.setIdioma("Español");
         like.setLugar("PuertoMorelos");
         like.setNombreEntidad(subCategory.getNombre());
-        like.setCategoria(((Main_Activity)getActivity()).category.getName());
+        like.setCategoria(((Main_Activity) getActivity()).category.getName());
 
         like.setItemKey(Utils.getProvider(getActivity()));
 

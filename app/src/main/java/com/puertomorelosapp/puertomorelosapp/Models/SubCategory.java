@@ -1,7 +1,9 @@
 package com.puertomorelosapp.puertomorelosapp.Models;
 
+import android.app.Service;
 import android.support.annotation.Nullable;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -39,14 +41,14 @@ public class SubCategory {
     private int likes;
     private int comments;
 
-    private List<Servicio> servicios;
+    private HashMap<String,Boolean> Servicios;
 
-    public List<Servicio> getServicios() {
-        return servicios;
+    public HashMap<String, Boolean> getServicios() {
+        return Servicios;
     }
 
-    public void setServicios(List<Servicio> servicios) {
-        this.servicios = servicios;
+    public void setServicios(HashMap<String, Boolean> servicios) {
+        Servicios = servicios;
     }
 
     public String getFechadias() {

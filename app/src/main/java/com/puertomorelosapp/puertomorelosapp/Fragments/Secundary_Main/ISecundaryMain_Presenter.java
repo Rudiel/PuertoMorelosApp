@@ -12,4 +12,8 @@ public interface ISecundaryMain_Presenter {
 
     void setView(ISecundaryMain_view view);
 
+    void getNumberLikes();
+
+    void getNumberComments();
+
 }
