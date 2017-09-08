@@ -114,7 +114,6 @@ public class SecundaryMain_Fragment extends Fragment implements ISecundaryMain_v
             }
         }
 
-
         hideLoading();
 
         Collections.sort(list, new Comparator<SubCategory>() {

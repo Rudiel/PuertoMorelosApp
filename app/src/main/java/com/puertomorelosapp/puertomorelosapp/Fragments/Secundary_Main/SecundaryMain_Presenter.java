@@ -58,7 +58,7 @@ public class SecundaryMain_Presenter implements ISecundaryMain_Presenter {
         }
 
 
-        FirebaseDatabase.getInstance().getReference().child(url_reference).addListenerForSingleValueEvent(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child(url_reference).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -126,7 +126,7 @@ public class SecundaryMain_Presenter implements ISecundaryMain_Presenter {
 
 
         reference.child(Url)
-                .addListenerForSingleValueEvent(new ValueEventListener() {
+                .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(final DataSnapshot dataSnapshot) {
 
@@ -161,7 +161,7 @@ public class SecundaryMain_Presenter implements ISecundaryMain_Presenter {
         Log.d("LIKES_URL", Url);
 
         reference.child(Url)
-                .addListenerForSingleValueEvent(new ValueEventListener() {
+                .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(final DataSnapshot dataSnapshot) {
 
