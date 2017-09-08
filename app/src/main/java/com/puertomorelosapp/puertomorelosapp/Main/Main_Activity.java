@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
+import android.media.Image;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -21,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
@@ -60,6 +63,9 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
     @Inject
     IMain_Presenter presenter;
 
+    @Bind(R.id.ivAd)
+    ImageView ivAd;
+
     private TextView titleToolbar;
 
     public FirebaseAuth auth;
@@ -98,6 +104,8 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
         presenter.setView(this);
 
         ButterKnife.bind(this);
+
+        presenter.getAd();
 
         setmenuActions();
 
@@ -270,6 +278,26 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
     public void setComments(int comments) {
         tvMenuComments.setText(String.valueOf(comments));
     }
+
+    @Override
+    public void showAd(String URL) {
+
+        toolbar.setVisibility(View.GONE);
+
+        ivAd.setVisibility(View.VISIBLE);
+
+
+        Glide.with(this).load(URL).centerCrop().into(ivAd);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                toolbar.setVisibility(View.VISIBLE);
+                ivAd.setVisibility(View.GONE);
+            }
+        }, 3000);
+    }
+
 
     public void setToolbarTitle(String title) {
         titleToolbar.setText(title);

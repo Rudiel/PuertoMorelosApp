@@ -106,24 +106,6 @@ public class Categories_Presenter implements ICategories_Presenter {
 
     }
 
-    @Override
-    public void getMainAd(Context context) {
-
-        final DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-
-        reference.child(Utils.WELCOME_AD).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                view.showAd(dataSnapshot.getValue().toString());
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-    }
 
 
 }

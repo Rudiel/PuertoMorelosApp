@@ -93,7 +93,6 @@ public class Categories_Fragment extends Fragment implements ICategories_View, I
 
 
         if (((Main_Activity) getActivity()).categorieList.size() == 0){
-            presenter.getMainAd(getActivity());
             presenter.getCategories(getActivity());
         }
         else
@@ -124,26 +123,6 @@ public class Categories_Fragment extends Fragment implements ICategories_View, I
         rvCategories.setAdapter(mAdapter);
 
         mAdapter.notifyDataSetChanged();
-
-    }
-
-    @Override
-    public void showAd(String url) {
-
-        ivAd.setVisibility(View.VISIBLE);
-
-        ((Main_Activity)getActivity()).toolbar.setVisibility(View.GONE);
-
-        Glide.with(getActivity()).load(url).centerCrop().into(ivAd);
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                ((Main_Activity)getActivity()).toolbar.setVisibility(View.VISIBLE);
-
-                ivAd.setVisibility(View.GONE);
-            }
-        }, 3000);
 
     }
 

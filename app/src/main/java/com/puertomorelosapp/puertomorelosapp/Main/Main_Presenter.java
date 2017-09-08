@@ -70,5 +70,23 @@ public class Main_Presenter implements IMain_Presenter {
 
     }
 
+    @Override
+    public void getAd() {
+        final DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+
+        reference.child(Utils.WELCOME_AD).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                view.showAd(dataSnapshot.getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
 
 }

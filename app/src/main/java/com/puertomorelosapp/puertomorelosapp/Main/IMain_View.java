@@ -17,4 +17,6 @@ public interface IMain_View {
     void logoutSesion();
 
     void setComments(int comments);
+
+    void showAd(String URL);
 }

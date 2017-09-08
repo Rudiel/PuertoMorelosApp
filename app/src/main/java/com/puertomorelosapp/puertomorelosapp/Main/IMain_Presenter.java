@@ -16,4 +16,6 @@ public interface IMain_Presenter {
 
     void getMenuLikes(String id);
 
+    void getAd();
+
 }
