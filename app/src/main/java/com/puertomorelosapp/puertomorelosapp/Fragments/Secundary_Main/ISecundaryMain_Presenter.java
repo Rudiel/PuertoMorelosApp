@@ -8,12 +8,12 @@ import com.puertomorelosapp.puertomorelosapp.Models.Categorie;
 
 public interface ISecundaryMain_Presenter {
 
-    void getSubCategories(Categorie category, String mainCategory);
+    void getSubCategories(Categorie category);
 
     void setView(ISecundaryMain_view view);
 
-    void getNumberLikes();
+    void getNumberLikes(Categorie category);
 
-    void getNumberComments();
+    void getNumberComments(Categorie category);
 
 }

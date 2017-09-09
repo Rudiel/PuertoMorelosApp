@@ -34,7 +34,7 @@ public class SecundaryMain_Presenter implements ISecundaryMain_Presenter {
 
 
     @Override
-    public void getSubCategories(final Categorie categorie, String main) {
+    public void getSubCategories(final Categorie categorie) {
         this.view.showLoading();
 
         final List<SubCategory> subCategories = new ArrayList<>();
@@ -63,7 +63,7 @@ public class SecundaryMain_Presenter implements ISecundaryMain_Presenter {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 total = (int) dataSnapshot.getChildrenCount();
-                
+
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 
                     Log.d("VALUE", dataSnapshot.getChildren().toString());
@@ -72,7 +72,7 @@ public class SecundaryMain_Presenter implements ISecundaryMain_Presenter {
 
                     subCategory.setId(snapshot.getKey());
 
-                    subCategories.add(subCategory);
+                    listSubCategories.add(subCategory);
 
                     //addSubcategoryElements(snapshot,subCategory);
 
@@ -82,14 +82,11 @@ public class SecundaryMain_Presenter implements ISecundaryMain_Presenter {
                         categorie.setCategoria("Servicios");
                     }
 
-                    // getNumberComments(categorie, snapshot.getKey(), subCategory);
+                    getNumberComments(categorie, snapshot.getKey(), subCategory);
 
-                    // getNumberLikes(categorie,snapshot.getKey(),subCategory);
+                    getNumberLikes(categorie,snapshot.getKey(),subCategory);
                 }
 
-                view.showSubCategories(subCategories);
-
-                view.hideLoading();
 
             }
 
@@ -109,12 +106,25 @@ public class SecundaryMain_Presenter implements ISecundaryMain_Presenter {
     }
 
     @Override
-    public void getNumberLikes() {
+    public void getNumberLikes(final Categorie categorie) {
+
+
+       /* FirebaseDatabase.getInstance().getReference().child("").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });*/
 
     }
 
     @Override
-    public void getNumberComments() {
+    public void getNumberComments(Categorie categorie) {
 
     }
 
@@ -178,7 +188,10 @@ public class SecundaryMain_Presenter implements ISecundaryMain_Presenter {
                                 subCategory.setLikes((int) dataSnapshot.getChildrenCount());
                             }
                         }
-                        view.updateAdapter();
+
+                        view.showSubCategories(listSubCategories);
+
+                        view.hideLoading();
 
                     }
 

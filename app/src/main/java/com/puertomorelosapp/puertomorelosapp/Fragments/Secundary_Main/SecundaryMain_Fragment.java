@@ -86,7 +86,7 @@ public class SecundaryMain_Fragment extends Fragment implements ISecundaryMain_v
         if (((Main_Activity) getActivity()).subCategoryList.size() > 0) {
             this.showSubCategories(((Main_Activity) getActivity()).subCategoryList);
         } else
-            presenter.getSubCategories((((Main_Activity) getActivity()).category),((Main_Activity)getActivity()).mainCategory);
+            presenter.getSubCategories((((Main_Activity) getActivity()).category));
 
 
     }
