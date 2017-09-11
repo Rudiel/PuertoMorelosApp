@@ -68,6 +68,18 @@ public class Main_Presenter implements IMain_Presenter {
     @Override
     public void getMenuLikes(String id) {
 
+        FirebaseDatabase.getInstance().getReference().child(Utils.COMMENTS_COUNT + id + "/UniversalLoves").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                view.setLikes((int) dataSnapshot.getChildrenCount());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
     @Override

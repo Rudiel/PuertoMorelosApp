@@ -188,6 +188,10 @@ public class Photos_Detail_Fragment extends Fragment implements IPhotos_View, IG
     @Override
     public void showPhotos(List<Selfie> selfieList) {
 
+        if (selfieList.size() == 0) {
+            return;
+        }
+
         this.selfieList = selfieList;
 
         rvSelfies.setLayoutManager(new GridLayoutManager(getActivity(), numberOfColumns));
@@ -204,7 +208,7 @@ public class Photos_Detail_Fragment extends Fragment implements IPhotos_View, IG
 
     @Override
     public void onSlefieClick(int position) {
-
+        new Gallery_Dialog_Creator().showSelfies(getActivity(), this.selfieList, position);
     }
 
     private void cameraIntent() {
@@ -243,7 +247,7 @@ public class Photos_Detail_Fragment extends Fragment implements IPhotos_View, IG
             }
         }
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.PNG, 90, stream);
+        bm.compress(Bitmap.CompressFormat.PNG, 100, stream);
 
         //loadImageIntoProfile(stream.toByteArray());
 
@@ -258,7 +262,7 @@ public class Photos_Detail_Fragment extends Fragment implements IPhotos_View, IG
 
             Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
             ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-            thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+            thumbnail.compress(Bitmap.CompressFormat.PNG, 100, bytes);
             File destination = new File(Environment.getExternalStorageDirectory(),
                     System.currentTimeMillis() + ".jpg");
             FileOutputStream fo;

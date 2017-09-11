@@ -15,7 +15,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
+import com.bumptech.glide.request.target.Target;
 import com.puertomorelosapp.puertomorelosapp.R;
 import com.puertomorelosapp.puertomorelosapp.Utils.Utils;
 
@@ -40,7 +43,7 @@ public class PhotoDialog_Creator {
         final Button btNewPhotoCancel = (Button) dialog.findViewById(R.id.btNewPhotoCancel);
         final TextView tvNewPhotoUserName = (TextView) dialog.findViewById(R.id.tvNewPhotoUserName);
 
-        Glide.with(context).load(bytes).asBitmap().centerCrop().into(new BitmapImageViewTarget(ivNewPhoto) {
+        /*Glide.with(context).load(bytes).asBitmap().centerCrop().into(new BitmapImageViewTarget(ivNewPhoto) {
             @Override
             protected void setResource(Bitmap resource) {
                 RoundedBitmapDrawable circularBitmapDrawable =
@@ -48,7 +51,19 @@ public class PhotoDialog_Creator {
                 circularBitmapDrawable.setCircular(true);
                 ivNewPhoto.setImageDrawable(circularBitmapDrawable);
             }
-        });
+        });*/
+
+        Glide.with(context).load(bytes).listener(new RequestListener<byte[], GlideDrawable>() {
+            @Override
+            public boolean onException(Exception e, byte[] model, Target<GlideDrawable> target, boolean isFirstResource) {
+                return false;
+            }
+
+            @Override
+            public boolean onResourceReady(GlideDrawable resource, byte[] model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                return false;
+            }
+        }).centerCrop().into(ivNewPhoto);
 
         etNewPhotoComment.addTextChangedListener(new TextWatcher() {
             @Override

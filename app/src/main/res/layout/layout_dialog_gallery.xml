@@ -12,6 +12,7 @@
         android:background="@null"
         android:src="@drawable/ic_close_white_24dp" />
 
+
     <TextView
         android:id="@+id/tvGallerySeparator"
         android:layout_width="wrap_content"
@@ -43,6 +44,17 @@
         android:layout_marginRight="10dp"
         android:layout_toLeftOf="@id/tvGallerySeparator"
         android:textColor="@color/colorAccent" />
+
+    <TextView
+        android:id="@+id/tvGalleryMessage"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/tvGallerySeparator"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/colorAccent"
+        android:visibility="gone" />
 
 
     <android.support.v4.view.ViewPager

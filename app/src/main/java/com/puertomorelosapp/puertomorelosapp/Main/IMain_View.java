@@ -18,5 +18,7 @@ public interface IMain_View {
 
     void setComments(int comments);
 
+    void setLikes(int likes);
+
     void showAd(String URL);
 }

@@ -538,8 +538,6 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
 
         like.setTimeStamp(-1 * Double.parseDouble(timeStamp));
 
-        //like.setTimeStamp((double) (-1 * (System.currentTimeMillis() / 1000)));
-
         like.setIdioma("Español");
         like.setLugar("PuertoMorelos");
         like.setNombreEntidad(subCategory.getNombre());

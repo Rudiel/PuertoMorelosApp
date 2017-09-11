@@ -136,6 +136,8 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
 
         tvMenuComments = (TextView) navigationView.getHeaderView(0).findViewById(R.id.tvMenuComments);
 
+        tvMenuLikes = (TextView) navigationView.getHeaderView(0).findViewById(R.id.tvMenuLikes);
+
         presenter.getMenuComments(Utils.getProvider(this));
 
         presenter.getMenuLikes(Utils.getProvider(this));
@@ -277,6 +279,11 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
     @Override
     public void setComments(int comments) {
         tvMenuComments.setText(String.valueOf(comments));
+    }
+
+    @Override
+    public void setLikes(int likes) {
+        tvMenuLikes.setText(String.valueOf(likes));
     }
 
     @Override

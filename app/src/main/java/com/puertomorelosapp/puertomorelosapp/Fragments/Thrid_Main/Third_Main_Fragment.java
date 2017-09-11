@@ -82,6 +82,8 @@ public class Third_Main_Fragment extends Fragment implements IThird_View, IOncli
 
         ((Main_Activity) getActivity()).ivMap.setVisibility(View.GONE);
 
+        ((Main_Activity) getActivity()).hideMenu();
+
     }
 
     @Override
