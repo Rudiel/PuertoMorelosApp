@@ -1,6 +1,7 @@
 package com.puertomorelosapp.puertomorelosapp.Fragments.Details;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -79,13 +80,6 @@ public class Detail_Fragment_Presenter implements IDetail_Presenter {
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
-        //salvamos el like en tres rutas o eliminamos el like en 3 rutas
-
-        //1. puertomapp.SocialUSER.loves.KEYUSER.itemKey
-
-        //2.puertomapp.PuertoMorelos.SocialAPP.Loves.categoria.subcategoria(En caso de tener).itemKey.KeyUser
-
-        //3.puertomapp.userCountSocial.KeyUser.UniversalLoves.itemKey
 
         if (isDelete) {
             //Eliminamos el like
@@ -104,9 +98,9 @@ public class Detail_Fragment_Presenter implements IDetail_Presenter {
             reference.child(Utils.LIKE_SOCIAL_USER_URL + "/" + Utils.getProvider(context) + "/" + like.getItemKey()).setValue(like);
 
             if (like.getSubcategoria() != null)
-                reference.child(Utils.LIKES_URL + "/" + like.getCategoria() + "/" + like.getSubcategoria() + "/" + like.getItemKey() + "/" + Utils.getProvider(context)+"/love").setValue(true);
+                reference.child(Utils.LIKES_URL + "/" + like.getCategoria() + "/" + like.getSubcategoria() + "/" + like.getItemKey() + "/" + Utils.getProvider(context) + "/love").setValue(true);
             else
-                reference.child(Utils.LIKES_URL + "/" + like.getCategoria() + "/" + like.getItemKey() + "/" + Utils.getProvider(context)+"/love").setValue(true);
+                reference.child(Utils.LIKES_URL + "/" + like.getCategoria() + "/" + like.getItemKey() + "/" + Utils.getProvider(context) + "/love").setValue(true);
 
             reference.child(Utils.COMMENTS_COUNT + Utils.getProvider(context) + "/UniversalLoves/" + like.getItemKey()).setValue("true");
         }
@@ -123,6 +117,35 @@ public class Detail_Fragment_Presenter implements IDetail_Presenter {
                 } else
                     view.isLikeActive(false);
 
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    @Override
+    public void getLikes(SubCategory subCategory, Categorie categorie) {
+        final DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+
+        String Url;
+
+        if (categorie.getCategoria() == null) {
+            Url = Utils.LIKES_URL + categorie.getName() + "/" + subCategory.getId();
+
+        } else {
+            Url = Utils.LIKES_URL + categorie.getCategoria() + "/" + categorie.getName() + "/" + subCategory.getId();
+        }
+
+        Log.d("LIKES_URL", Url);
+
+        reference.child(Url).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                view.setLikesNumber((int) dataSnapshot.getChildrenCount());
             }
 
             @Override

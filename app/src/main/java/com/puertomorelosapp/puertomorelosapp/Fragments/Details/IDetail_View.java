@@ -14,4 +14,6 @@ public interface IDetail_View {
 
     void isLikeActive(boolean like);
 
+    void setLikesNumber(int likesNumber);
+
 }

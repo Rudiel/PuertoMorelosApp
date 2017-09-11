@@ -1,11 +1,9 @@
 package com.puertomorelosapp.puertomorelosapp.Fragments.Details;
 
-import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -35,7 +33,6 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.firebase.database.ServerValue;
 import com.puertomorelosapp.puertomorelosapp.Creators.ServicesDialog;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Details.Comments.Comments_Detail_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Details.Photos.Photos_Detail_Fragment;
@@ -215,9 +212,12 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
         if (subCategory.getImageBackgroundContent() != null)
             Glide.with(getActivity()).load(subCategory.getImageBackgroundContent()).into(ivDetail);
 
+        presenter.getLikes(this.subCategory, ((Main_Activity) getActivity()).category);
+
         presenter.getLikeActive(Utils.getProvider(getActivity()), subCategory.getId());
 
-        tvLikes.setText(String.valueOf(subCategory.getLikes()));
+        presenter.getPhotosNumber(this.subCategory, ((Main_Activity) getActivity()).category);
+
 
         tvComments.setText(String.valueOf(subCategory.getComments()));
 
@@ -228,8 +228,6 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
         tvTitle.setText(subCategory.getTitulo());
 
         tvComments.setText(String.valueOf(subCategory.getComments()));
-
-        tvLikes.setText(String.valueOf(subCategory.getLikes()));
 
         if (subCategory.getFechadias() != null) {
             tvFechaDia.setVisibility(View.VISIBLE);
@@ -345,8 +343,6 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
             }
         });
 
-
-        presenter.getPhotosNumber(this.subCategory, ((Main_Activity) getActivity()).category);
 
     }
 
@@ -516,6 +512,12 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
         }
     }
 
+    @Override
+    public void setLikesNumber(int likesNumber) {
+        tvLikes.setText(String.valueOf(likesNumber));
+
+    }
+
     private void setTextViewDrawableColor(TextView textView) {
         for (Drawable drawable : textView.getCompoundDrawables()) {
             if (drawable != null) {
@@ -534,7 +536,7 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
 
         String timeStamp = TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()) + "";
 
-        like.setTimeStamp(-1*Double.parseDouble(timeStamp));
+        like.setTimeStamp(-1 * Double.parseDouble(timeStamp));
 
         //like.setTimeStamp((double) (-1 * (System.currentTimeMillis() / 1000)));
 
@@ -542,12 +544,13 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
         like.setLugar("PuertoMorelos");
         like.setNombreEntidad(subCategory.getNombre());
 
-        like.setCategoria(((Main_Activity) getActivity()).mainCategory);
-
         Categorie c = ((Main_Activity) getActivity()).category;
 
-        if (c.getCategoria() != null)
-            like.setSubcategoria(c.getCategoria());
+        if (c.getCategoria() != null) {
+            like.setSubcategoria(c.getName());
+            like.setCategoria(c.getCategoria());
+        } else
+            like.setCategoria(c.getName());
 
         like.setItemKey(subCategory.getId());
 

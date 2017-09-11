@@ -18,5 +18,7 @@ public interface IDetail_Presenter {
 
     void getLikeActive(String userID, String placeID);
 
+    void getLikes(SubCategory subCategory, Categorie categorie);
+
 
 }
