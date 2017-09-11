@@ -1,5 +1,6 @@
 package com.puertomorelosapp.puertomorelosapp.Fragments.Details;
 
+import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
@@ -39,6 +40,7 @@ import com.puertomorelosapp.puertomorelosapp.Creators.ServicesDialog;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Details.Comments.Comments_Detail_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Details.Photos.Photos_Detail_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
+import com.puertomorelosapp.puertomorelosapp.Models.Categorie;
 import com.puertomorelosapp.puertomorelosapp.Models.Request.Like;
 import com.puertomorelosapp.puertomorelosapp.Models.Servicio;
 import com.puertomorelosapp.puertomorelosapp.Models.SubCategory;
@@ -50,6 +52,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
@@ -141,7 +144,7 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
     ImageView ivDetailGalery;
 
     @Bind(R.id.tvDetailGallery)
-    TextView tvtvDetailGallery;
+    TextView tvDetailGallery;
 
     @Bind(R.id.tvDetailDescriptionTitle)
     TextView tvDetailDescriptionTitle;
@@ -155,6 +158,8 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
     private GoogleMap map;
 
     SupportMapFragment fragment;
+
+    private boolean isDelete = false;
 
     @Nullable
     @Override
@@ -207,20 +212,10 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
             ivDetail.setTransitionName(subCategory.getNombre());
         }
 
-        /*presenter.getNumberComments(
-                ((Main_Activity) getActivity()).mainCategory,
-                ((Main_Activity) getActivity()).category.getName(),
-                ((Main_Activity) getActivity()).subCategory.getId()
-
-        );
-
-        presenter.getNumberLikes(((Main_Activity) getActivity()).mainCategory,
-                ((Main_Activity) getActivity()).category.getName(),
-                ((Main_Activity) getActivity()).subCategory.getId());*/
-
         if (subCategory.getImageBackgroundContent() != null)
             Glide.with(getActivity()).load(subCategory.getImageBackgroundContent()).into(ivDetail);
 
+        presenter.getLikeActive(Utils.getProvider(getActivity()), subCategory.getId());
 
         tvLikes.setText(String.valueOf(subCategory.getLikes()));
 
@@ -332,7 +327,6 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
         ivDetailComments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //if (subCategory.getComments() > 0)
                 ((Main_Activity) getActivity()).setFragment(new Comments_Detail_Fragment(), true, null);
             }
         });
@@ -360,19 +354,19 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
 
         //Click al view e inflar la vista en un dialogo
 
-        final List<Servicio> servicioList= new ArrayList<>();
+        final List<Servicio> servicioList = new ArrayList<>();
 
-        int i=0;
+        int i = 0;
 
-        for(String key: subCategory.getServicios().keySet()){
+        for (String key : subCategory.getServicios().keySet()) {
 
-            i+=1;
+            i += 1;
 
             ImageView imageView = new ImageView(getContext());
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             imageView.setLayoutParams(params);
 
-            Servicio servicio= new Servicio();
+            Servicio servicio = new Servicio();
 
             if (key.equals("Estacionamiento")) {
                 imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_local_parking_black_48dp));
@@ -382,21 +376,17 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
 
             } else if (key.equals("Pago con tarjeta")) {
                 imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_payment_black_48dp));
-            }else if(key.equals("Wifi")){
+            } else if (key.equals("Wifi")) {
                 imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_wifi_black_48dp));
-            }
-            else if(key.equals("Aire acondicionado")){
+            } else if (key.equals("Aire acondicionado")) {
                 imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_ac_unit_black_48dp));
 
-            }
-            else if(key.equals("Recepción")){
+            } else if (key.equals("Recepción")) {
                 imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_room_service_black_48dp));
 
-            }
-            else if(key.equals("Servicio a domicilio")){
+            } else if (key.equals("Servicio a domicilio")) {
                 imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_local_shipping_black_48dp));
-            }
-            else {
+            } else {
                 imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_info_outline_black_48dp));
             }
 
@@ -410,7 +400,7 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
 
             servicioList.add(servicio);
 
-            if (i <4) {
+            if (i < 4) {
                 llDetailServices.addView(imageView);
             }
 
@@ -419,7 +409,7 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
         llDetailServices.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 new ServicesDialog().showServices(getActivity(), servicioList);
+                new ServicesDialog().showServices(getActivity(), servicioList);
             }
         });
 
@@ -512,7 +502,18 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
 
     @Override
     public void setPhotosNumber(int photosNumber) {
-        tvtvDetailGallery.setText(String.valueOf(photosNumber));
+        tvDetailGallery.setText(String.valueOf(photosNumber));
+    }
+
+    @Override
+    public void isLikeActive(boolean like) {
+        if (like) {
+            ivDetailLikes.setColorFilter(ContextCompat.getColor(getActivity(), R.color.colorPrimary), android.graphics.PorterDuff.Mode.MULTIPLY);
+            isDelete = true;
+        } else {
+            ivDetailLikes.setColorFilter(ContextCompat.getColor(getActivity(), android.R.color.darker_gray), android.graphics.PorterDuff.Mode.MULTIPLY);
+            isDelete = false;
+        }
     }
 
     private void setTextViewDrawableColor(TextView textView) {
@@ -530,17 +531,27 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
         SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         like.setFecha(input.format(new Date()));
 
-        Long tsLong = System.currentTimeMillis() / 1000;
-        like.setTimeStamp(Double.valueOf(tsLong));
+
+        String timeStamp = TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()) + "";
+
+        like.setTimeStamp(-1*Double.parseDouble(timeStamp));
+
+        //like.setTimeStamp((double) (-1 * (System.currentTimeMillis() / 1000)));
 
         like.setIdioma("Español");
         like.setLugar("PuertoMorelos");
         like.setNombreEntidad(subCategory.getNombre());
-        like.setCategoria(((Main_Activity) getActivity()).category.getName());
 
-        like.setItemKey(Utils.getProvider(getActivity()));
+        like.setCategoria(((Main_Activity) getActivity()).mainCategory);
 
-        presenter.saveLike(like);
+        Categorie c = ((Main_Activity) getActivity()).category;
+
+        if (c.getCategoria() != null)
+            like.setSubcategoria(c.getCategoria());
+
+        like.setItemKey(subCategory.getId());
+
+        presenter.saveLike(like, isDelete);
     }
 
 

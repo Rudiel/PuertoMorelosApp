@@ -12,4 +12,6 @@ public interface IDetail_View {
 
     void setPhotosNumber(int photosNumber);
 
+    void isLikeActive(boolean like);
+
 }

@@ -14,7 +14,9 @@ public interface IDetail_Presenter {
 
     void getPhotosNumber(SubCategory subCategory, Categorie categorie);
 
-    void saveLike(Like like);
+    void saveLike(Like like, boolean isDelete);
+
+    void getLikeActive(String userID, String placeID);
 
 
 }
