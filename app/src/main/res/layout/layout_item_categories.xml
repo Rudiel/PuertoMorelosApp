@@ -11,9 +11,10 @@
         android:minHeight="200dp"
         android:layout_height="wrap_content" />
 
+
     <ImageView
         android:layout_width="match_parent"
-        android:src="@color/transparent"
+        android:src="@drawable/gradient_images"
         android:layout_height="match_parent" />
 
     <ImageView
