@@ -32,6 +32,11 @@
                     android:src="@drawable/avatar_deafult"
                     app:layout_collapseMode="parallax" />
 
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:src="@drawable/gradient_images"
+                    android:layout_height="match_parent" />
+
                 <TextView
                     android:id="@+id/tvDetailNombre"
                     android:layout_width="wrap_content"
