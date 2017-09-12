@@ -75,5 +75,9 @@
     <string name="newphoto_publicar">Publicar</string>
     <string name="newphoto_text_hint">¿Que ah pasado?</string>
 
+    <!--Activities-->
+
+    <string name="likes_delete">Eliminar</string>
+
 </resources>
 
