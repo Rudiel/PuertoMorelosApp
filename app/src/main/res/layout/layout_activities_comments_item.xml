@@ -8,68 +8,92 @@
     app:rightEdgeSwipeOffset="0dp">
 
     <LinearLayout
-        android:id="@+id/llEliminar"
+        android:id="@+id/llCommentsOptions"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:background="#FF5534"
         android:gravity="center">
 
         <TextView
-            android:id="@+id/trash"
+            android:id="@+id/tvEdit"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:text="@string/likes_delete"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@color/colorPrimary"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:gravity="center"
+            android:text="@string/comments_edit"
             android:textColor="@color/colorAccent" />
-    </LinearLayout>
 
+        <TextView
+            android:id="@+id/tvDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="#FF5534"
+            android:gravity="center"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="@string/comments_delete"
+            android:textColor="@color/colorAccent" />
+
+
+    </LinearLayout>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/ivLikesImage"
+            android:id="@+id/ivCommentsImage"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
             android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
             android:src="@drawable/ic_activity_restaurant" />
 
         <TextView
-            android:id="@+id/tvLikesPlace"
+            android:id="@+id/tvCommentsPlace"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="lksndlkjanfks"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:layout_toRightOf="@id/ivLikesImage"
+            android:layout_toRightOf="@id/ivCommentsImage"
             android:textAppearance="?android:textAppearanceMedium"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tvLikesCategory"
+            android:id="@+id/tvCommentsCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_below="@id/tvCommentsPlace"
+            android:layout_marginBottom="5dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_below="@id/tvLikesPlace"
-            android:layout_toRightOf="@id/ivLikesImage"
-            android:text="klsdnalskdnlksdnk"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/ivCommentsImage"
             android:textColor="@android:color/darker_gray" />
 
         <TextView
-            android:id="@+id/tvLikesDate"
+            android:id="@+id/tvCommentsComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvCommentsCategory"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/ivCommentsImage"
+            android:textColor="@android:color/darker_gray" />
+
+        <TextView
+            android:id="@+id/tvCommentsDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_below="@id/tvLikesPlace"
-            android:layout_marginRight="10dp"
+            android:layout_below="@id/tvCommentsPlace"
             android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
             android:textColor="@android:color/darker_gray" />
 
         <View

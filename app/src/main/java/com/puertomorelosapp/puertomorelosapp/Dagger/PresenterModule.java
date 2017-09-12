@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.puertomorelosapp.puertomorelosapp.Fragments.AboutUs.AboutUs_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Fragments.AboutUs.IAboutUs_Presenter;
+import com.puertomorelosapp.puertomorelosapp.Fragments.Activities.Comments.Comentarios_Presenter;
+import com.puertomorelosapp.puertomorelosapp.Fragments.Activities.Comments.IComentarios_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Activities.Likes.IMegusta_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Activities.Likes.Megusta_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Categories.Categories_Presenter;
@@ -116,6 +118,12 @@ public class PresenterModule {
     @Singleton
     IMegusta_Presenter provideMegustaPresenter(Context context) {
         return new Megusta_Presenter(context);
+    }
+
+    @Provides
+    @Singleton
+    IComentarios_Presenter provideComentariosPresenter(Context context) {
+        return new Comentarios_Presenter(context);
     }
 
 

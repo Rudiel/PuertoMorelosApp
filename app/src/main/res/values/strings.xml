@@ -77,7 +77,9 @@
 
     <!--Activities-->
 
-    <string name="likes_delete">Eliminar</string>
+    <string name="likes_delete">No me gusta</string>
+    <string name="comments_delete">Eliminar</string>
+    <string name="comments_edit">Editar</string>
 
 </resources>
 

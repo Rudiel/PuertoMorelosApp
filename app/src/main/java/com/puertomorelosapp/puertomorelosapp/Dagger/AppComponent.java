@@ -3,6 +3,8 @@ package com.puertomorelosapp.puertomorelosapp.Dagger;
 import com.google.android.gms.maps.MapFragment;
 import com.puertomorelosapp.puertomorelosapp.Fragments.AboutUs.AboutUs_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Fragments.AboutUs.AboutUs_Presenter;
+import com.puertomorelosapp.puertomorelosapp.Fragments.Activities.Comments.Comentarios_Fragment;
+import com.puertomorelosapp.puertomorelosapp.Fragments.Activities.Comments.Comentarios_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Activities.Likes.Megusta_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Activities.Likes.Megusta_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Categories.Categories_Fragment;
@@ -114,6 +116,12 @@ public interface AppComponent {
     void inject(Megusta_Fragment fragment);
 
     void inject(Megusta_Presenter target);
+
+    //Activities Comments
+
+    void inject(Comentarios_Fragment fragment);
+
+    void inject(Comentarios_Presenter target);
 
 
 }
