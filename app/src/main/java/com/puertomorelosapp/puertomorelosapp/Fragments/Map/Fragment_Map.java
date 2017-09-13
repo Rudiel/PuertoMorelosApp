@@ -1,5 +1,6 @@
 package com.puertomorelosapp.puertomorelosapp.Fragments.Map;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,9 +17,12 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.puertomorelosapp.puertomorelosapp.Adpaters.Adapter_CustomInfoWindow;
 import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
 import com.puertomorelosapp.puertomorelosapp.Models.Places;
+import com.puertomorelosapp.puertomorelosapp.Models.Response.Place;
 import com.puertomorelosapp.puertomorelosapp.R;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
 
@@ -56,7 +60,6 @@ public class Fragment_Map extends Fragment implements OnMapReadyCallback, IMap_V
 
         ((Main_Activity) getActivity()).ivMap.setVisibility(View.GONE);
 
-        presenter.getPlaces();
 
     }
 
@@ -76,69 +79,72 @@ public class Fragment_Map extends Fragment implements OnMapReadyCallback, IMap_V
     public void onMapReady(GoogleMap googleMap) {
 
         MapsInitializer.initialize(getActivity());
+
         map = googleMap;
-        setMarkers();
+
+        setStyle(map);
+
+        presenter.getPlaces();
 
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(20.852656, -86.889002), 13.0f));
 
-    }
-
-    private void setMarkers() {
-
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(new LatLng(20.854918, -86.901747));
-        markerOptions.title("Testing");
-        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_atractivos));
-        map.addMarker(markerOptions);
-
-        MarkerOptions markerOptions1 = new MarkerOptions();
-        markerOptions1.position(new LatLng(20.856883, -86.898227));
-        markerOptions1.title("Testing");
-        markerOptions1.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_comercio));
-        map.addMarker(markerOptions1);
-
-
-        MarkerOptions markerOptions2 = new MarkerOptions();
-        markerOptions2.position(new LatLng(20.859530, -86.902304));
-        markerOptions2.title("Testing");
-        markerOptions2.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_events));
-        map.addMarker(markerOptions2);
-
-        MarkerOptions markerOptions3 = new MarkerOptions();
-        markerOptions3.position(new LatLng(20.848661, -86.875182));
-        markerOptions3.title("Testing");
-        markerOptions3.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_fastfood));
-        map.addMarker(markerOptions3);
-
-        MarkerOptions markerOptions4 = new MarkerOptions();
-        markerOptions4.position(new LatLng(20.856498, -86.872413));
-        markerOptions4.title("Testing");
-        markerOptions4.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_history));
-        map.addMarker(markerOptions4);
-
-        MarkerOptions markerOptions5 = new MarkerOptions();
-        markerOptions5.position(new LatLng(20.848589, -86.900368));
-        markerOptions5.title("Testing");
-        markerOptions5.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_interestingplace));
-        map.addMarker(markerOptions5);
-
-        MarkerOptions markerOptions6 = new MarkerOptions();
-        markerOptions6.position(new LatLng(20.862105, -86.908822));
-        markerOptions6.title("Testing");
-        markerOptions6.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_hotel));
-        map.addMarker(markerOptions6);
-
-        //20.859530, -86.902304
-        //20.848661, -86.875182
-        //20.856498, -86.872413
-        //20.848589, -86.900368
-        //20.862105, -86.908822
-        //20.865759, -86.900167
+        map.setInfoWindowAdapter(new Adapter_CustomInfoWindow(getActivity()));
 
     }
 
     @Override
-    public void showPlaces(List<Places> places) {
+    public void showPlaces(List<Place> places) {
+        for (Place place : places) {
+            if (!place.getLatitud().equals("") && !place.getLongitud().equals("")) {
+                MarkerOptions markerOptions = new MarkerOptions();
+                markerOptions.position(new LatLng(Double.parseDouble(place.getLatitud()), Double.parseDouble(place.getLongitud())));
+
+                switch (place.getCategoria()) {
+                    case "Comercios":
+                        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_comercio));
+                        break;
+                    case "Eventos":
+                        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_events));
+                        break;
+                    case "Lugares de interes":
+                        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_interestingplace));
+                        break;
+                    case "Servicios":
+                        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_services));
+                        break;
+                    case "Historia":
+                        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_history));
+                        break;
+                }
+                if (place.getSubcategoria() != null) {
+                    switch (place.getSubcategoria()) {
+                        case "Hoteles":
+                            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_hotel));
+                            break;
+                        case "Comida rapida":
+                            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_fastfood));
+                            break;
+                        case "Restaurantes":
+                            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_restaurant));
+                            break;
+                    }
+                    markerOptions.title(place.getNombre() + "\n" + place.getSubcategoria());
+                } else
+                    markerOptions.title(place.getNombre());
+
+                map.addMarker(markerOptions);
+            }
+        }
+    }
+
+    private void setStyle(GoogleMap map) {
+
+        try {
+            map.setMapStyle(MapStyleOptions.loadRawResourceStyle(getActivity(), R.raw.style_json));
+
+        } catch (Resources.NotFoundException e) {
+
+        }
 
     }
 }

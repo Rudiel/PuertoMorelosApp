@@ -1,6 +1,7 @@
 package com.puertomorelosapp.puertomorelosapp.Fragments.Map;
 
 import com.puertomorelosapp.puertomorelosapp.Models.Places;
+import com.puertomorelosapp.puertomorelosapp.Models.Response.Place;
 
 import java.util.List;
 
@@ -10,5 +11,5 @@ import java.util.List;
 
 public interface IMap_View {
 
-    void showPlaces(List<Places> places);
+    void showPlaces(List<Place> places);
 }

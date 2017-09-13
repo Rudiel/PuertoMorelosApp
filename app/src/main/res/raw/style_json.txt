@@ -1,11 +1,26 @@
 [
     {
-        "featureType": "poi.business",
-        "elementType": "all",
+        "elementType": "labels",
         "stylers": [
+                    {
+                    "visibility": "off"
+                    }
+                    ]
+        },
         {
-            "visibility": "off"
+        "featureType": "administrative.land_parcel",
+        "stylers": [
+                    {
+                    "visibility": "off"
+                    }
+                    ]
+        },
+        {
+        "featureType": "administrative.neighborhood",
+        "stylers": [
+                    {
+                    "visibility": "off"
+                    }
+                    ]
         }
-        ]
-    }
 ]

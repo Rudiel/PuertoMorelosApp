@@ -8,8 +8,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.puertomorelosapp.puertomorelosapp.Models.Categorie;
+import com.puertomorelosapp.puertomorelosapp.Models.Response.Place;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
 import com.puertomorelosapp.puertomorelosapp.Utils.Utils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by rudielavilaperaza on 6/21/17.
@@ -33,31 +37,46 @@ public class Map_Presenter implements IMap_Presenter {
     @Override
     public void getPlaces() {
 
-
-        FirebaseDatabase database= FirebaseDatabase.getInstance();
-        Log.d("REF",database.getReference().child(Utils.CATE_URL).toString());
-        /*FirebaseDatabase.getInstance()
-                .getReference()
-                .child(Utils.CATE_URL_BACK+"/"+snapshot.getValue()+"/Background");*/
+        final List<Place> listplaces = new ArrayList<>();
 
         FirebaseDatabase.getInstance().getReference().child(Utils.PLACES_URL)
-                .addListenerForSingleValueEvent(new ValueEventListener() {
+                .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                            if(snapshot.hasChildren()){
-                                for(DataSnapshot snap: snapshot.getChildren()){
-                                    Log.d("snap",snap.getValue().toString());
-                                    if(snap.hasChildren()){
-                                        for(DataSnapshot s: snapshot.getChildren()){
-                                            Log.d("s",s.getValue().toString());
+
+                        for (DataSnapshot categoria : dataSnapshot.getChildren()) {
+                            if (!categoria.getKey().equals("Menu")) {
+                                Log.d("MAP_CAT", categoria.getKey().toString());
+
+                                if (!categoria.getKey().equals("Servicios") && !categoria.getKey().equals("Comercios")) {
+
+                                    for (DataSnapshot item : categoria.getChildren()) {
+                                        Place place = item.getValue(Place.class);
+                                        place.setCategoria(categoria.getKey());
+                                        listplaces.add(place);
+                                    }
+
+                                } else {
+                                    //Recorremos cada subcategoria
+
+                                    for (DataSnapshot subcategoria : categoria.getChildren()) {
+                                        for (DataSnapshot item : subcategoria.getChildren()) {
+                                            Place place = item.getValue(Place.class);
+                                            place.setSubcategoria(subcategoria.getKey());
+                                            place.setCategoria(categoria.getKey());
+
+                                            listplaces.add(place);
                                         }
                                     }
                                 }
-                            }
 
+                            }
                         }
+
+                        view.showPlaces(listplaces);
+
                     }
+
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
                     }
