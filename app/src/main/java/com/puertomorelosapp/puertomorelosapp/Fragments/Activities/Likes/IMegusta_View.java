@@ -15,4 +15,6 @@ public interface IMegusta_View {
     void showLoading();
 
     void setLikesList(List<Like> likes);
+
+    void refreshList();
 }

@@ -15,6 +15,7 @@ import com.puertomorelosapp.puertomorelosapp.Models.Request.Like;
 import com.puertomorelosapp.puertomorelosapp.R;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -33,6 +34,10 @@ public class Megusta_Fragment extends Fragment implements IMegusta_View, IDelete
 
     @Inject
     IMegusta_Presenter presenter;
+
+    private Activities_Likes_Adapter adapter;
+
+    private List<Like> likes;
 
 
     @Nullable
@@ -56,6 +61,8 @@ public class Megusta_Fragment extends Fragment implements IMegusta_View, IDelete
         rvActivitiesLikes.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvActivitiesLikes.setHasFixedSize(false);
 
+        likes = new ArrayList<>();
+
         presenter.getLikesList(getActivity());
 
     }
@@ -73,12 +80,24 @@ public class Megusta_Fragment extends Fragment implements IMegusta_View, IDelete
     @Override
     public void setLikesList(List<Like> likes) {
 
-        rvActivitiesLikes.setAdapter(new Activities_Likes_Adapter(getActivity(), likes, this));
+        this.likes = likes;
+
+        adapter = new Activities_Likes_Adapter(getActivity(), this.likes, this);
+
+        rvActivitiesLikes.setAdapter(adapter);
 
     }
 
     @Override
+    public void refreshList() {
+
+        this.likes.clear();
+
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
     public void onDeleteListener(Like like) {
-        Toast.makeText(getActivity(), "Eliminamos Like", Toast.LENGTH_SHORT).show();
+        presenter.deleteLike(like, getActivity());
     }
 }

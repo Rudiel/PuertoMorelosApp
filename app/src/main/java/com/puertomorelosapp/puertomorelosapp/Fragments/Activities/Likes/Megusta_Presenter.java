@@ -5,6 +5,7 @@ import android.content.Context;
 import com.bumptech.glide.util.Util;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.puertomorelosapp.puertomorelosapp.Models.Request.Like;
@@ -63,5 +64,22 @@ public class Megusta_Presenter implements IMegusta_Presenter {
                     }
                 });
         //view.setLikesList();
+    }
+
+    @Override
+    public void deleteLike(Like like, Context context) {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+
+        //Eliminamos el like
+        reference.child(Utils.LIKE_SOCIAL_USER_URL + "/" + Utils.getProvider(context) + "/" + like.getItemKey()).removeValue();
+
+        if (like.getSubcategoria() != null)
+            reference.child(Utils.LIKES_URL + "/" + like.getCategoria() + "/" + like.getSubcategoria() + "/" + like.getItemKey() + "/" + Utils.getProvider(context)).removeValue();
+        else
+            reference.child(Utils.LIKES_URL + "/" + like.getCategoria() + "/" + like.getItemKey() + "/" + Utils.getProvider(context)).removeValue();
+
+        reference.child(Utils.COMMENTS_COUNT + Utils.getProvider(context) + "/UniversalLoves/" + like.getItemKey()).removeValue();
+
+        view.refreshList();
     }
 }

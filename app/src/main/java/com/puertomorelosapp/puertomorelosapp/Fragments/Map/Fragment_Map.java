@@ -4,6 +4,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -128,7 +129,8 @@ public class Fragment_Map extends Fragment implements OnMapReadyCallback, IMap_V
                             markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_restaurant));
                             break;
                     }
-                    markerOptions.title(place.getNombre() + "\n" + place.getSubcategoria());
+//Html.fromHtml("<html><body><font size=5 color=red>Hello </font> World </body><html>")
+                    markerOptions.title(place.getNombre() + "\n" + Html.fromHtml("<font size=8 >"+place.getSubcategoria()+"</font>"));
                 } else
                     markerOptions.title(place.getNombre());
 

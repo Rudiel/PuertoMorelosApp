@@ -5,9 +5,11 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.puertomorelosapp.puertomorelosapp.Adpaters.Activities_Adapter;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Activities.Comments.Comentarios_Fragment;
@@ -38,6 +40,10 @@ public class Activity_Fragment extends Fragment {
 
     private List<Activity> activities;
 
+    private Toolbar toolbar;
+
+    private ImageView ivInfo;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -57,6 +63,17 @@ public class Activity_Fragment extends Fragment {
         setFragmentsDefault();
 
         ((Main_Activity) getActivity()).ivMap.setVisibility(View.GONE);
+
+        toolbar = ((Main_Activity) getActivity()).toolbar;
+
+        ivInfo = (ImageView) toolbar.findViewById(R.id.ivMap);
+
+        ivInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
 
         tlActivities.setupWithViewPager(viewPager);
