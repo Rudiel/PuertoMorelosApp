@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.puertomorelosapp.puertomorelosapp.Models.Request.NewComment;
+import com.puertomorelosapp.puertomorelosapp.Models.Response.Comments;
 import com.puertomorelosapp.puertomorelosapp.R;
 
 /**
@@ -63,7 +64,7 @@ public class ConfirmDialog_Creator {
 
     }
 
-    public void showWriteComment(@NonNull final Context context, @Nullable String title, @Nullable String message, final IConfirmComment_Creator listener) {
+    public void showWriteComment(@NonNull final Context context, @Nullable String title, @Nullable String message, final IConfirmComment_Creator listener, @Nullable final Comments comment) {
 
 
         final Dialog dialog = new Dialog(context);
@@ -79,16 +80,28 @@ public class ConfirmDialog_Creator {
 
         final EditText etComment = (EditText) dialog.findViewById(R.id.etWriteComment);
 
+        if (comment != null) {
+            etComment.setText(comment.getText());
+        }
 
-        btDialogAccept.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        if (!etComment.getText().toString().trim().equals(""))
+            btDialogAccept.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-                NewComment newComment = new NewComment();
-                newComment.setText(etComment.getText().toString());
-                listener.onAccept(dialog, newComment);
-            }
-        });
+
+                    if (comment == null) {
+                        NewComment newComment = new NewComment();
+                        newComment.setText(etComment.getText().toString());
+                        listener.onAccept(dialog, newComment);
+                    } else {
+                        //editamos el comentario
+                        listener.onEdit(dialog, comment);
+                    }
+
+
+                }
+            });
 
         btDialogCancel.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -16,6 +16,7 @@ import android.widget.ProgressBar;
 
 import com.bumptech.glide.Glide;
 import com.puertomorelosapp.puertomorelosapp.Adpaters.Categories_Adapter;
+import com.puertomorelosapp.puertomorelosapp.Fragments.Map.Fragment_Map;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Secundary_Main.SecundaryMain_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Thrid_Main.Third_Main_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
@@ -84,6 +85,14 @@ public class Categories_Fragment extends Fragment implements ICategories_View, I
 
         rvCategories.setLayoutManager(mLayoutManager);
 
+        ((Main_Activity) getActivity()).ivMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((Main_Activity) getActivity()).setFragment(new Fragment_Map(), false, null);
+                ((Main_Activity) getActivity()).setToolbarTitle(getString(R.string.app_name));
+            }
+        });
+
 
         ((Main_Activity) getActivity()).setToolbarTitle(getActivity().getString(R.string.descubre_title));
 
@@ -92,10 +101,9 @@ public class Categories_Fragment extends Fragment implements ICategories_View, I
         ((Main_Activity) getActivity()).showMenu();
 
 
-        if (((Main_Activity) getActivity()).categorieList.size() == 0){
+        if (((Main_Activity) getActivity()).categorieList.size() == 0) {
             presenter.getCategories(getActivity());
-        }
-        else
+        } else
             showCategories(((Main_Activity) getActivity()).categorieList);
 
         ((Main_Activity) getActivity()).subCategoryList.clear();

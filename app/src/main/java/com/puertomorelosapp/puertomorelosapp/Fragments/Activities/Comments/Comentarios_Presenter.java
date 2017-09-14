@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.puertomorelosapp.puertomorelosapp.Models.Response.Comments;
@@ -63,5 +64,22 @@ public class Comentarios_Presenter implements IComentarios_Presenter {
     @Override
     public void setView(IComentarios_View view) {
         this.view = view;
+    }
+
+    @Override
+    public void deleteComment(Context context, Comments comment) {
+
+        FirebaseDatabase.getInstance().getReference().child("").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
 }

@@ -111,14 +111,6 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
 
         ivMap = (ImageView) toolbar.findViewById(R.id.ivMap);
 
-        ivMap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setFragment(new Fragment_Map(), false, null);
-                setToolbarTitle(getString(R.string.app_name));
-            }
-        });
-
         titleToolbar = (TextView) toolbar.findViewById(R.id.tvTitleToolbar);
 
         titleToolbar.setTypeface(Utils.getbukharisLetter(this));

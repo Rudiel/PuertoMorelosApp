@@ -1,5 +1,6 @@
 package com.puertomorelosapp.puertomorelosapp.Fragments.Activities.Comments;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,10 +12,15 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.puertomorelosapp.puertomorelosapp.Adpaters.Activities_Comments_Adapter;
+import com.puertomorelosapp.puertomorelosapp.Creators.ConfirmDialog_Creator;
+import com.puertomorelosapp.puertomorelosapp.Creators.Dialog_Creator;
+import com.puertomorelosapp.puertomorelosapp.Creators.IConfirmComment_Creator;
+import com.puertomorelosapp.puertomorelosapp.Models.Request.NewComment;
 import com.puertomorelosapp.puertomorelosapp.Models.Response.Comments;
 import com.puertomorelosapp.puertomorelosapp.R;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -39,6 +45,8 @@ public class Comentarios_Fragment extends Fragment implements IComentarios_View,
 
     private Activities_Comments_Adapter adapter;
 
+    private List<Comments> commentsList;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -62,13 +70,17 @@ public class Comentarios_Fragment extends Fragment implements IComentarios_View,
 
         rvActivitiesComments.setHasFixedSize(false);
 
+        commentsList = new ArrayList<>();
+
         presenter.getComentarios(getActivity());
     }
 
     @Override
     public void showComentarios(List<Comments> commentsList) {
 
-        adapter = new Activities_Comments_Adapter(getActivity(), commentsList, this);
+        this.commentsList = commentsList;
+
+        adapter = new Activities_Comments_Adapter(getActivity(), this.commentsList, this);
 
         rvActivitiesComments.setAdapter(adapter);
 
@@ -85,12 +97,39 @@ public class Comentarios_Fragment extends Fragment implements IComentarios_View,
     }
 
     @Override
+    public void refreshComments() {
+
+        commentsList.clear();
+
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
     public void onEditComment(Comments comment) {
+
+        new ConfirmDialog_Creator().showWriteComment(getActivity(), null, null, new IConfirmComment_Creator() {
+            @Override
+            public void onCancel(Dialog dialog) {
+                dialog.dismiss();
+            }
+
+            @Override
+            public void onAccept(Dialog dialog, NewComment comment) {
+
+            }
+
+            @Override
+            public void onEdit(Dialog dialog, Comments comment) {
+                dialog.dismiss();
+            }
+        }, comment);
 
     }
 
     @Override
     public void onDelete(Comments comment) {
+
+        presenter.deleteComment(getActivity(), comment);
 
     }
 }

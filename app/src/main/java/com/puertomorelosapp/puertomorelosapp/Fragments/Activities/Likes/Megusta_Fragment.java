@@ -98,6 +98,7 @@ public class Megusta_Fragment extends Fragment implements IMegusta_View, IDelete
 
     @Override
     public void onDeleteListener(Like like) {
+
         presenter.deleteLike(like, getActivity());
     }
 }

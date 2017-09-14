@@ -213,7 +213,12 @@ public class Comments_Detail_Fragment extends Fragment implements IComments_View
 
                         presenter.setNewComment(comment, routesComments);
                     }
-                });
+
+                    @Override
+                    public void onEdit(Dialog dialog, Comments comment) {
+
+                    }
+                }, null);
     }
 
 

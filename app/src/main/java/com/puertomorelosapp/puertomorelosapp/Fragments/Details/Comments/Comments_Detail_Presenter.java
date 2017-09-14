@@ -50,8 +50,10 @@ public class Comments_Detail_Presenter implements IComments_Presenter {
 
                         Comments comment = d.getValue(Comments.class);
 
-                        if (comment.getItemKey().equals(id))
-                            commentsList.add(comment);
+                        if (comment.getItemKey().equals(id)) {
+                            if (comment.getActivo() == 1)
+                                commentsList.add(comment);
+                        }
 
                     }
 
@@ -89,7 +91,7 @@ public class Comments_Detail_Presenter implements IComments_Presenter {
 
         //tercera ruta
 
-       commentsReference.child(routesComments.getUrl3()).push().setValue("true");
+        commentsReference.child(routesComments.getUrl3()).push().setValue("true");
 
         //una vez que lo guarde refrescamos la lista
 
