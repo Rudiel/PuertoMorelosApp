@@ -97,7 +97,7 @@ public class Activity_Fragment extends Fragment {
     }
 
     private void setUpViewPager() {
-        Activities_Adapter adapter = new Activities_Adapter(getFragmentManager(), activities);
+        Activities_Adapter adapter = new Activities_Adapter(getChildFragmentManager(), activities);
         viewPager.setAdapter(adapter);
     }
 
