@@ -79,7 +79,13 @@ public class Activities_Likes_Adapter extends RecyclerView.Adapter<Activities_Li
         String cate;
 
         if (likeList.get(position).getSubcategoria() != null) {
-            cate = likeList.get(position).getSubcategoria();
+            if (likeList.get(position).getSubcategoria().equals("Restaurantes") ||
+                    likeList.get(position).getSubcategoria().equals("Comida rapida") ||
+                    likeList.get(position).getSubcategoria().equals("Hoteles")
+                    )
+                cate = likeList.get(position).getSubcategoria();
+            else
+                cate = likeList.get(position).getCategoria();
         } else {
             cate = likeList.get(position).getCategoria();
         }

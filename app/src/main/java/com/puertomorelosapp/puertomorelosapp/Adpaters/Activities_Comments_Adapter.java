@@ -1,10 +1,12 @@
 package com.puertomorelosapp.puertomorelosapp.Adpaters;
 
 import android.content.Context;
+import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.puertomorelosapp.puertomorelosapp.Fragments.Activities.Comments.IComments_Listener;
@@ -34,6 +36,7 @@ public class Activities_Comments_Adapter extends RecyclerView.Adapter<Activities
         private TextView tvPlace;
         private TextView tvEdit;
         private TextView tvDelete;
+        private ImageView ivCommentsImage;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -44,6 +47,7 @@ public class Activities_Comments_Adapter extends RecyclerView.Adapter<Activities
             tvPlace = (TextView) itemView.findViewById(R.id.tvCommentsPlace);
             tvEdit = (TextView) itemView.findViewById(R.id.tvEdit);
             tvDelete = (TextView) itemView.findViewById(R.id.tvDelete);
+            ivCommentsImage = (ImageView) itemView.findViewById(R.id.ivCommentsImage);
         }
     }
 
@@ -78,6 +82,52 @@ public class Activities_Comments_Adapter extends RecyclerView.Adapter<Activities
 
         } catch (ParseException e) {
             e.printStackTrace();
+        }
+
+        String cate;
+
+        if (commentsList.get(position).getSubcategoria() != null) {
+            if (commentsList.get(position).getSubcategoria().equals("Restaurantes") ||
+                    commentsList.get(position).getSubcategoria().equals("Comida rapida") ||
+                    commentsList.get(position).getSubcategoria().equals("Hoteles")
+                    )
+                cate = commentsList.get(position).getSubcategoria();
+            else
+                cate = commentsList.get(position).getCategoria();
+        } else {
+            cate = commentsList.get(position).getCategoria();
+        }
+
+        switch (cate) {
+            case "Comercios":
+                holder.ivCommentsImage.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_activity_commerce));
+                break;
+            case "Lugares de interes":
+                holder.ivCommentsImage.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_activity_interesting));
+                break;
+            case "Historia":
+                holder.ivCommentsImage.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_activity_history));
+                break;
+            case "Eventos":
+                holder.ivCommentsImage.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_activity_events));
+                break;
+            case "Servicios":
+                holder.ivCommentsImage.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_activity_service));
+                break;
+            case "Atractivos Turisticos":
+                holder.ivCommentsImage.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_activity_atractives));
+                break;
+            case "Hoteles":
+                holder.ivCommentsImage.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_activity_hotel));
+                break;
+            case "Restaurantes":
+                holder.ivCommentsImage.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_activity_restaurant));
+                break;
+            case "Comida rapida":
+                holder.ivCommentsImage.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_activity_fastfood));
+                break;
+            default:
+                break;
         }
 
         holder.tvDelete.setOnClickListener(new View.OnClickListener() {

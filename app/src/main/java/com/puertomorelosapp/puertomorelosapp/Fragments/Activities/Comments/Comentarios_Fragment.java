@@ -21,6 +21,8 @@ import com.puertomorelosapp.puertomorelosapp.R;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -79,6 +81,15 @@ public class Comentarios_Fragment extends Fragment implements IComentarios_View,
     public void showComentarios(List<Comments> commentsList) {
 
         this.commentsList = commentsList;
+
+        Collections.sort(this.commentsList, new Comparator<Comments>() {
+            @Override
+            public int compare(Comments o1, Comments o2) {
+                return o1.getFecha().compareTo(o2.getFecha());
+            }
+        });
+
+        Collections.reverse(this.commentsList);
 
         adapter = new Activities_Comments_Adapter(getActivity(), this.commentsList, this);
 

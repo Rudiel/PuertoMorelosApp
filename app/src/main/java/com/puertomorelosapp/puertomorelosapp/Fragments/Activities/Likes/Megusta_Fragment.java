@@ -16,6 +16,8 @@ import com.puertomorelosapp.puertomorelosapp.R;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -81,6 +83,15 @@ public class Megusta_Fragment extends Fragment implements IMegusta_View, IDelete
     public void setLikesList(List<Like> likes) {
 
         this.likes = likes;
+
+       Collections.sort(this.likes, new Comparator<Like>() {
+           @Override
+           public int compare(Like o1, Like o2) {
+               return (o1.getFecha().compareTo(o2.getFecha()));
+           }
+       });
+
+        Collections.reverse(this.likes);
 
         adapter = new Activities_Likes_Adapter(getActivity(), this.likes, this);
 
