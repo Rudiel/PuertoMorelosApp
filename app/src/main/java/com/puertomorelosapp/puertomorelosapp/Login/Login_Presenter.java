@@ -82,29 +82,50 @@ public class Login_Presenter implements ILogin_Presenter {
                         if (task.isSuccessful()) {
                             task.getResult().getUser().getUid();
                             FirebaseUser user = auth.getCurrentUser();
+                            getUserCredentials(user);
+                            //getUserCredentials(user);
+                            //view.saveUserData(user);
+                            //view.hideLoading();
                             //getUserCredentials(user.getEmail());
                         } else {
                             Log.w("FACE", "signInWithCredential:failure", task.getException());
+                            view.hideLoading();
                             view.showErrorMessage(task.getException().getMessage());
                         }
 
-                        view.hideLoading();
 
                     }
                 });
 
     }
 
-    private void getUserCredentials(FirebaseUser user) {
+    private void getUserCredentials(final FirebaseUser firebaseUser) {
 
-        FirebaseDatabase.getInstance().getReference().child("users/" + user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("users/" + firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 com.puertomorelosapp.puertomorelosapp.Models.Response.User user = dataSnapshot.getValue(com.puertomorelosapp.puertomorelosapp.Models.Response.User.class);
+                if (user != null) {
+                    view.hideLoading();
+                    view.saveUserData(user);
+                } else {
 
-                view.hideLoading();
-                view.saveUserData(user);
+                    com.puertomorelosapp.puertomorelosapp.Models.Response.User usuario = new com.puertomorelosapp.puertomorelosapp.Models.Response.User();
+                    usuario.setEmail(firebaseUser.getEmail());
+                    if (firebaseUser.getPhotoUrl() != null)
+                        usuario.setImageURL("SomeimageURL");
+                    else
+                        usuario.setImageURL(firebaseUser.getPhotoUrl().toString());
+
+                    usuario.setProvider(firebaseUser.getUid());
+                    usuario.setUsername(firebaseUser.getDisplayName());
+
+                    FirebaseDatabase.getInstance().getReference().child("users").child(firebaseUser.getUid()).setValue(usuario);
+                    view.hideLoading();
+                    view.saveUserData(usuario);
+                }
+
             }
 
             @Override

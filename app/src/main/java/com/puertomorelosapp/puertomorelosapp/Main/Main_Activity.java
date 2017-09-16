@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
-import android.media.Image;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
@@ -26,14 +25,12 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
 import com.puertomorelosapp.puertomorelosapp.Creators.ConfirmDialog_Creator;
 import com.puertomorelosapp.puertomorelosapp.Creators.IConfirmDialog_Creator;
 import com.puertomorelosapp.puertomorelosapp.Fragments.AboutUs.AboutUs_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Activity_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Categories.Categories_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Conditions_Fragment;
-import com.puertomorelosapp.puertomorelosapp.Fragments.Map.Fragment_Map;
 import com.puertomorelosapp.puertomorelosapp.Login.Login_Activity;
 import com.puertomorelosapp.puertomorelosapp.Models.Categorie;
 import com.puertomorelosapp.puertomorelosapp.Models.SubCategory;
@@ -91,6 +88,8 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
 
     private TextView tvMenuLikes;
 
+    private ImageView ivProfilePicture;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,6 +128,13 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
         tvMenuComments = (TextView) navigationView.getHeaderView(0).findViewById(R.id.tvMenuComments);
 
         tvMenuLikes = (TextView) navigationView.getHeaderView(0).findViewById(R.id.tvMenuLikes);
+
+        ivProfilePicture = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.ivProfilePicture);
+
+        if (auth.getCurrentUser().getPhotoUrl() != null) {
+            Glide.with(this).load(auth.getCurrentUser().getPhotoUrl()).into(ivProfilePicture);
+        } else
+            Glide.with(this).load(R.drawable.avatar_deafult).into(ivProfilePicture);
 
         presenter.getMenuComments(Utils.getProvider(this));
 
