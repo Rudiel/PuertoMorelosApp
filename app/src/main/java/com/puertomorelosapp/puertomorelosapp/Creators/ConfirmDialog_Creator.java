@@ -84,21 +84,21 @@ public class ConfirmDialog_Creator {
             etComment.setText(comment.getText());
         }
 
-        if (!etComment.getText().toString().trim().equals(""))
             btDialogAccept.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-
-                    if (comment == null) {
-                        NewComment newComment = new NewComment();
-                        newComment.setText(etComment.getText().toString());
-                        listener.onAccept(dialog, newComment);
-                    } else {
-                        //editamos el comentario
-                        listener.onEdit(dialog, comment);
+                    if (!etComment.getText().toString().trim().equals(""))
+                    {
+                        if (comment == null) {
+                            NewComment newComment = new NewComment();
+                            newComment.setText(etComment.getText().toString());
+                            listener.onAccept(dialog, newComment);
+                        } else {
+                            //editamos el comentario
+                            listener.onEdit(dialog, comment);
+                        }
                     }
-
 
                 }
             });

@@ -113,10 +113,8 @@ public class Login_Presenter implements ILogin_Presenter {
 
                     com.puertomorelosapp.puertomorelosapp.Models.Response.User usuario = new com.puertomorelosapp.puertomorelosapp.Models.Response.User();
                     usuario.setEmail(firebaseUser.getEmail());
-                    if (firebaseUser.getPhotoUrl() != null)
-                        usuario.setImageURL("SomeimageURL");
-                    else
-                        usuario.setImageURL(firebaseUser.getPhotoUrl().toString());
+                    String photoUrl =  firebaseUser.getProviderData().get(0).getPhotoUrl().toString();
+                    usuario.setImageURL(photoUrl);
 
                     usuario.setProvider(firebaseUser.getUid());
                     usuario.setUsername(firebaseUser.getDisplayName());
