@@ -1,6 +1,7 @@
 package com.puertomorelosapp.puertomorelosapp.Fragments.Details.Photos;
 
 import com.puertomorelosapp.puertomorelosapp.Models.Categorie;
+import com.puertomorelosapp.puertomorelosapp.Models.Request.Selfie;
 import com.puertomorelosapp.puertomorelosapp.Models.SubCategory;
 
 /**
@@ -14,5 +15,7 @@ public interface IPhotos_Presenter {
     void getGallery(Categorie categorie, SubCategory subCategory);
 
     void setView(IPhotos_View view);
+
+    void saveSelfie(byte[] thumb, byte[] original, Selfie selfie, String itemName);
 
 }

@@ -11,8 +11,11 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -83,15 +86,17 @@ public class Selfies_Adapter extends RecyclerView.Adapter<Selfies_Adapter.ViewHo
         WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         windowManager.getDefaultDisplay().getMetrics(displaymetrics);
 
-        ViewGroup.LayoutParams params = holder.cvSelfie.getLayoutParams();
+        LayoutParams params = holder.cvSelfie.getLayoutParams();
 
         try {
             params.height = displaymetrics.heightPixels / 3 + 40;
             params.width = displaymetrics.widthPixels / 2;
-            holder.cvSelfie.setLayoutParams(params);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        holder.cvSelfie.setLayoutParams(params);
 
         holder.tvSelfieCommet.setText(selfieList.get(position).getComentario());
 

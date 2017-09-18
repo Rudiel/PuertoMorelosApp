@@ -8,11 +8,13 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.storage.StorageManager;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -90,6 +92,7 @@ public class Photos_Detail_Fragment extends Fragment implements IPhotos_View, IG
     private Main_Activity activity;
 
     int numberOfColumns = 3;
+    int numberOfColumnsSelfie = 2;
 
     private List<Gallery> galleryList;
 
@@ -97,6 +100,8 @@ public class Photos_Detail_Fragment extends Fragment implements IPhotos_View, IG
 
     private final static int REQUEST_CAMERA = 0;
     private final static int REQUEST_GALERY = 1;
+
+    private byte bytesThumb[];
 
     @Nullable
     @Override
@@ -150,6 +155,8 @@ public class Photos_Detail_Fragment extends Fragment implements IPhotos_View, IG
                 }
             }
         });
+
+
     }
 
 
@@ -179,7 +186,12 @@ public class Photos_Detail_Fragment extends Fragment implements IPhotos_View, IG
         if (galleryList.size() > 0)
             llPhotosGallery.setVisibility(View.VISIBLE);
 
+        this.galleryList.clear();
+
         this.galleryList = galleryList;
+
+        GridLayoutManager manager = new GridLayoutManager(getActivity(), numberOfColumns);
+
 
         rvGallery.setLayoutManager(new GridLayoutManager(getActivity(), numberOfColumns));
         rvGallery.setAdapter(new Gallery_Adapter(galleryList, getActivity(), Photos_Detail_Fragment.this));
@@ -192,9 +204,12 @@ public class Photos_Detail_Fragment extends Fragment implements IPhotos_View, IG
             return;
         }
 
+        this.selfieList.clear();
+
         this.selfieList = selfieList;
 
-        rvSelfies.setLayoutManager(new GridLayoutManager(getActivity(), numberOfColumns));
+        rvSelfies.setLayoutManager(new GridLayoutManager(getActivity(), numberOfColumnsSelfie));
+
         rvSelfies.setAdapter(new Selfies_Adapter(selfieList, getActivity(), Photos_Detail_Fragment.this));
 
 
@@ -247,11 +262,18 @@ public class Photos_Detail_Fragment extends Fragment implements IPhotos_View, IG
             }
         }
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        bm.compress(Bitmap.CompressFormat.JPEG, 100, stream);
 
         //loadImageIntoProfile(stream.toByteArray());
 
+        ByteArrayOutputStream bytesT = new ByteArrayOutputStream();
+
+        bm.compress(Bitmap.CompressFormat.JPEG, 80, bytesT);
+
+        bytesThumb = bytesT.toByteArray();
+
         showNewPhotoDialog(stream.toByteArray());
+
 
     }
 
@@ -262,7 +284,7 @@ public class Photos_Detail_Fragment extends Fragment implements IPhotos_View, IG
 
             Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
             ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-            thumbnail.compress(Bitmap.CompressFormat.PNG, 100, bytes);
+            thumbnail.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
             File destination = new File(Environment.getExternalStorageDirectory(),
                     System.currentTimeMillis() + ".jpg");
             FileOutputStream fo;
@@ -277,9 +299,15 @@ public class Photos_Detail_Fragment extends Fragment implements IPhotos_View, IG
                 e.printStackTrace();
             }
 
+            ByteArrayOutputStream bytesT = new ByteArrayOutputStream();
+
+            thumbnail.compress(Bitmap.CompressFormat.JPEG, 80, bytesT);
+
+
+            bytesThumb = bytesT.toByteArray();
+
             showNewPhotoDialog(bytes.toByteArray());
 
-            //loadImageIntoProfile(bytes.toByteArray());
 
         }
     }
@@ -312,7 +340,30 @@ public class Photos_Detail_Fragment extends Fragment implements IPhotos_View, IG
             }
 
             @Override
-            public void onConfirmClick(Dialog dialog) {
+            public void onConfirmClick(Dialog dialog, byte bytes[], Selfie selfie) {
+
+                if (activity.category.getCategoria() == null) {
+                    selfie.setCategoria(activity.category.getName());
+
+                } else {
+                    selfie.setCategoria(activity.category.getCategoria());
+                    selfie.setSubcategoria(activity.category.getName());
+                }
+
+                selfie.setIdioma("Español");
+
+                selfie.setLugar("PuertoMorelos");
+
+                selfie.setItemKey(activity.subCategory.getId());
+
+                selfie.setIdphotographer(Utils.getProvider(getActivity()));
+
+                selfie.setNombreEntidad(activity.subCategory.getNombre());
+
+                selfie.setTimeStamp((double) System.currentTimeMillis());
+
+                presenter.saveSelfie(bytesThumb, bytes, selfie, activity.subCategory.getNombre());
+
                 dialog.dismiss();
             }
         });

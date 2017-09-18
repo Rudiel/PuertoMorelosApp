@@ -31,15 +31,14 @@ public class Utils {
 
     public static final String USERS_URL = "users";
 
-    public static final String PHOTOS_URL = "gs://puertomapp.appspot.com/";
-
     public static final String COMMENTS_COUNT = "usersCountSocial/";
 
     public static final String LIKE_SOCIAL_USER_URL = "SocialUSER/loves";
 
     public static final String WELCOME_AD = "PuertoMorelos/imagenesURL/Publicidad/WelcomeBackground/imageURL";
 
-    //https://puerto-morelos-app.firebaseio.com/PuertoMorelos/imagenesURL/Header/Comercios
+    public static final String SELFIES_URL_NEW = "SocialUSER/PhotoSelfies/";
+
 
 
     public static Typeface getbukharisLetter(Context context) {

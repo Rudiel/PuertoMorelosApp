@@ -19,8 +19,12 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.bumptech.glide.request.target.Target;
+import com.puertomorelosapp.puertomorelosapp.Models.Request.Selfie;
 import com.puertomorelosapp.puertomorelosapp.R;
 import com.puertomorelosapp.puertomorelosapp.Utils.Utils;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by rudielavilaperaza on 8/18/17.
@@ -29,7 +33,7 @@ import com.puertomorelosapp.puertomorelosapp.Utils.Utils;
 public class PhotoDialog_Creator {
 
 
-    public void showNewPhotoDialog(final Context context, byte[] bytes, final INewPhoto_Creator listener) {
+    public void showNewPhotoDialog(final Context context, final byte[] bytes, final INewPhoto_Creator listener) {
 
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -102,7 +106,19 @@ public class PhotoDialog_Creator {
         btNewPhotoConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onConfirmClick(dialog);
+
+                Selfie selfie = new Selfie();
+
+                if (!etNewPhotoComment.getText().toString().trim().equals(""))
+                    selfie.setComentario(etNewPhotoComment.getText().toString());
+                else
+                    selfie.setComentario("");
+
+                SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+                selfie.setFecha(input.format(new Date()));
+
+                listener.onConfirmClick(dialog, bytes, selfie);
             }
         });
 
