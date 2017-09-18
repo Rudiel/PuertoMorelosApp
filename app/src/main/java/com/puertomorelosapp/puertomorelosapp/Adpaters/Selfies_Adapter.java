@@ -90,7 +90,7 @@ public class Selfies_Adapter extends RecyclerView.Adapter<Selfies_Adapter.ViewHo
 
         try {
             params.height = displaymetrics.heightPixels / 3 + 40;
-            params.width = displaymetrics.widthPixels / 2;
+            //params.width = displaymetrics.widthPixels / 2;
 
         } catch (Exception e) {
             e.printStackTrace();
