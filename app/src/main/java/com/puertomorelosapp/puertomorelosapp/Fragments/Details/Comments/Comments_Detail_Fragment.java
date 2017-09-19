@@ -20,11 +20,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.puertomorelosapp.puertomorelosapp.Adpaters.Comments_Adapter;
 import com.puertomorelosapp.puertomorelosapp.Creators.ConfirmDialog_Creator;
 import com.puertomorelosapp.puertomorelosapp.Creators.IConfirmComment_Creator;
@@ -37,6 +32,7 @@ import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
 import com.puertomorelosapp.puertomorelosapp.Utils.Utils;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -77,9 +73,9 @@ public class Comments_Detail_Fragment extends Fragment implements IComments_View
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
-    Main_Activity activity;
+    private Main_Activity activity;
 
-    private DatabaseReference commentsReference;
+    private List<Comments> commentsList;
 
     @Nullable
     @Override
@@ -100,8 +96,6 @@ public class Comments_Detail_Fragment extends Fragment implements IComments_View
         super.onActivityCreated(savedInstanceState);
 
         activity = ((Main_Activity) getActivity());
-
-        commentsReference = FirebaseDatabase.getInstance().getReference();
 
         Glide.with(getActivity()).load(R.drawable.background_comments).centerCrop().dontTransform().into(ivCommentsDetailBackground);
 
@@ -126,8 +120,6 @@ public class Comments_Detail_Fragment extends Fragment implements IComments_View
 
         rvCommentsDetail.setLayoutManager(mLayoutManager);
 
-        presenter.setDatabaseReference(commentsReference);
-
         btWriteComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,23 +127,10 @@ public class Comments_Detail_Fragment extends Fragment implements IComments_View
             }
         });
 
-        commentsReference.child(Utils.COMMENTS_SOCIAL_URL).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+        presenter.getComments(activity.subCategory.getId());
 
-                Log.d("CHANGED", "VALUE WAS CHANGED");
-
-                presenter.getComments(activity.subCategory.getId());
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-
+        commentsList = new ArrayList<>();
+        
     }
 
 
@@ -169,17 +148,19 @@ public class Comments_Detail_Fragment extends Fragment implements IComments_View
     public void setComments(List<Comments> commentList) {
         Log.d("Comments", "" + commentList.size());
 
-        Collections.sort(commentList, new Comparator<Comments>() {
+        this.commentsList.clear();
+
+        this.commentsList = commentList;
+
+        Collections.sort(this.commentsList, new Comparator<Comments>() {
             @Override
             public int compare(Comments o1, Comments o2) {
-                if (o1.getTimeStamp() > o2.getTimeStamp())
-                    return 0;
-                else
-                    return 1;
+                return (o2.getFecha().compareTo(o1.getFecha()));
+
             }
         });
 
-        mAdapter = new Comments_Adapter(commentList, getActivity());
+        mAdapter = new Comments_Adapter(this.commentsList, getActivity());
 
         rvCommentsDetail.setAdapter(mAdapter);
 

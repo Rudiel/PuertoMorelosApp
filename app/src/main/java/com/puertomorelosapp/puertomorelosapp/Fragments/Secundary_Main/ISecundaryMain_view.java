@@ -19,5 +19,4 @@ public interface ISecundaryMain_view {
 
     void updateAdapter();
 
-
 }

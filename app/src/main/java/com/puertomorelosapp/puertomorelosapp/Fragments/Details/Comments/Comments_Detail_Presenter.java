@@ -27,8 +27,6 @@ public class Comments_Detail_Presenter implements IComments_Presenter {
 
     private IComments_View view;
 
-    private DatabaseReference commentsReference;
-
     public Comments_Detail_Presenter(Context context) {
 
         ((PuertoMorelosApplication) context).getAppComponent().inject(this);
@@ -40,7 +38,7 @@ public class Comments_Detail_Presenter implements IComments_Presenter {
 
         final List<Comments> commentsList = new ArrayList<>();
 
-        commentsReference.child(Utils.COMMENTS_SOCIAL_URL).addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child(Utils.COMMENTS_SOCIAL_URL).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -84,22 +82,18 @@ public class Comments_Detail_Presenter implements IComments_Presenter {
 
         //primera ruta
 
-        commentsReference.child(routesComments.getUrl1()).push().setValue(comment);
+        FirebaseDatabase.getInstance().getReference().child(routesComments.getUrl1()).push().setValue(comment);
         //segunda ruta
 
-        commentsReference.child(routesComments.getUrl2()).push().setValue(comment);
+        FirebaseDatabase.getInstance().getReference().child(routesComments.getUrl2()).push().setValue(comment);
 
         //tercera ruta
 
-        commentsReference.child(routesComments.getUrl3()).push().setValue("true");
+        FirebaseDatabase.getInstance().getReference().child(routesComments.getUrl3()).push().setValue("true");
 
         //una vez que lo guarde refrescamos la lista
 
     }
 
-    @Override
-    public void setDatabaseReference(DatabaseReference reference) {
-        this.commentsReference = reference;
-    }
 
 }

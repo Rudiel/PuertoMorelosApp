@@ -19,6 +19,4 @@ public interface IComments_Presenter {
 
     void setNewComment(NewComment comment, RoutesComments routesComments);
 
-    void setDatabaseReference(DatabaseReference reference);
-
 }
