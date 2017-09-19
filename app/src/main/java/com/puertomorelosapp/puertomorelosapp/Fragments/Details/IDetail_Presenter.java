@@ -20,5 +20,7 @@ public interface IDetail_Presenter {
 
     void getLikes(SubCategory subCategory, Categorie categorie);
 
+    void getCommentsNumber(SubCategory subCategory,Categorie categorie);
+
 
 }

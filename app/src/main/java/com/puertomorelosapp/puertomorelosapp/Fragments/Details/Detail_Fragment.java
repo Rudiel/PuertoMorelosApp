@@ -218,16 +218,14 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
 
         presenter.getPhotosNumber(this.subCategory, ((Main_Activity) getActivity()).category);
 
+        presenter.getCommentsNumber(this.subCategory, ((Main_Activity) getActivity()).category);
 
-        tvComments.setText(String.valueOf(subCategory.getComments()));
 
         tvDescripcion.setText(subCategory.getDescripcion());
 
         tvNombre.setText(subCategory.getNombre());
 
         tvTitle.setText(subCategory.getTitulo());
-
-        tvComments.setText(String.valueOf(subCategory.getComments()));
 
         if (subCategory.getFechadias() != null) {
             tvFechaDia.setVisibility(View.VISIBLE);
@@ -516,6 +514,11 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
     public void setLikesNumber(int likesNumber) {
         tvLikes.setText(String.valueOf(likesNumber));
 
+    }
+
+    @Override
+    public void setCommentsNumber(int commentsNumber) {
+        tvComments.setText(String.valueOf(commentsNumber));
     }
 
     private void setTextViewDrawableColor(TextView textView) {

@@ -16,4 +16,6 @@ public interface IDetail_View {
 
     void setLikesNumber(int likesNumber);
 
+    void setCommentsNumber(int commentsNumber);
+
 }

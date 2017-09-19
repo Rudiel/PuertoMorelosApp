@@ -10,9 +10,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.puertomorelosapp.puertomorelosapp.Models.Categorie;
 import com.puertomorelosapp.puertomorelosapp.Models.Request.Like;
+import com.puertomorelosapp.puertomorelosapp.Models.Response.Comments;
 import com.puertomorelosapp.puertomorelosapp.Models.SubCategory;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
 import com.puertomorelosapp.puertomorelosapp.Utils.Utils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -146,6 +150,46 @@ public class Detail_Fragment_Presenter implements IDetail_Presenter {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 view.setLikesNumber((int) dataSnapshot.getChildrenCount());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    @Override
+    public void getCommentsNumber(SubCategory subCategory, Categorie categorie) {
+
+        final DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+
+        String Url;
+        final List<Comments> commentsList = new ArrayList<>();
+
+        if (categorie.getCategoria() == null) {
+            Url = Utils.COMMENTS_URL + categorie.getName() + "/" + subCategory.getId();
+
+        } else {
+            Url = Utils.COMMENTS_URL + categorie.getCategoria() + "/" + categorie.getName() + "/" + subCategory.getId();
+        }
+
+        Log.d("COMMENTS_URL", Url);
+
+        reference.child(Url).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot comentario : dataSnapshot.getChildren()) {
+                    Comments comment = comentario.getValue(Comments.class);
+                    if (comment.getActivo() == 1) {
+                        commentsList.add(comment);
+                    }
+                }
+                view.setCommentsNumber(commentsList.size());
+
+                // view.setCommentsNumber((int) dataSnapshot.getChildrenCount());
             }
 
             @Override

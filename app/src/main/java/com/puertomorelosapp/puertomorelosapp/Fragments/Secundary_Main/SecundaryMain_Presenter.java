@@ -9,6 +9,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.puertomorelosapp.puertomorelosapp.Models.Categorie;
+import com.puertomorelosapp.puertomorelosapp.Models.Response.Comments;
 import com.puertomorelosapp.puertomorelosapp.Models.Servicio;
 import com.puertomorelosapp.puertomorelosapp.Models.SubCategory;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
@@ -84,7 +85,7 @@ public class SecundaryMain_Presenter implements ISecundaryMain_Presenter {
 
                     getNumberComments(categorie, snapshot.getKey(), subCategory);
 
-                    getNumberLikes(categorie,snapshot.getKey(),subCategory);
+                    getNumberLikes(categorie, snapshot.getKey(), subCategory);
                 }
 
 
@@ -144,6 +145,8 @@ public class SecundaryMain_Presenter implements ISecundaryMain_Presenter {
 
         Log.d("COMMENTS_URL", Url);
 
+        final List<Comments> commentsList = new ArrayList<>();
+
 
         reference.child(Url)
                 .addValueEventListener(new ValueEventListener() {
@@ -152,10 +155,17 @@ public class SecundaryMain_Presenter implements ISecundaryMain_Presenter {
 
                         for (SubCategory sub : listSubCategories) {
                             if (sub.getId().equals(subcategoria)) {
-                                subCategory.setComments((int) dataSnapshot.getChildrenCount());
+                                for (DataSnapshot comentario : dataSnapshot.getChildren()) {
+                                    Comments comment = comentario.getValue(Comments.class);
+                                    if (comment.getActivo() == 1) {
+                                        commentsList.add(comment);
+                                    }
+                                }
+                                subCategory.setComments(commentsList.size());
                             }
                         }
                     }
+
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
 
