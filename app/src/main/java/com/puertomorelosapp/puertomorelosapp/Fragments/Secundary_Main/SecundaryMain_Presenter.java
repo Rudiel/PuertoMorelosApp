@@ -145,13 +145,13 @@ public class SecundaryMain_Presenter implements ISecundaryMain_Presenter {
 
         Log.d("COMMENTS_URL", Url);
 
-        final List<Comments> commentsList = new ArrayList<>();
-
 
         reference.child(Url)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(final DataSnapshot dataSnapshot) {
+
+                        final List<Comments> commentsList = new ArrayList<>();
 
                         for (SubCategory sub : listSubCategories) {
                             if (sub.getId().equals(subcategoria)) {

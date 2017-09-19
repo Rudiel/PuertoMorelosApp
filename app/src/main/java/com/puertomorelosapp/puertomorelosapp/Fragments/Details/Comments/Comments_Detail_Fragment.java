@@ -130,7 +130,7 @@ public class Comments_Detail_Fragment extends Fragment implements IComments_View
         presenter.getComments(activity.subCategory.getId());
 
         commentsList = new ArrayList<>();
-        
+
     }
 
 
@@ -146,9 +146,10 @@ public class Comments_Detail_Fragment extends Fragment implements IComments_View
 
     @Override
     public void setComments(List<Comments> commentList) {
-        Log.d("Comments", "" + commentList.size());
 
         this.commentsList.clear();
+
+        Log.d("Comments", "" + commentList.size());
 
         this.commentsList = commentList;
 

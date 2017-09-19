@@ -166,7 +166,6 @@ public class Detail_Fragment_Presenter implements IDetail_Presenter {
         final DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
         String Url;
-        final List<Comments> commentsList = new ArrayList<>();
 
         if (categorie.getCategoria() == null) {
             Url = Utils.COMMENTS_URL + categorie.getName() + "/" + subCategory.getId();
@@ -180,6 +179,8 @@ public class Detail_Fragment_Presenter implements IDetail_Presenter {
         reference.child(Url).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
+                final List<Comments> commentsList = new ArrayList<>();
 
                 for (DataSnapshot comentario : dataSnapshot.getChildren()) {
                     Comments comment = comentario.getValue(Comments.class);

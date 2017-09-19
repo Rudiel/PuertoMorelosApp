@@ -73,6 +73,6 @@ public class Selfie_Pager_Adapter extends PagerAdapter {
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        super.destroyItem(container, position, object);
+        //super.destroyItem(container, position, object);
     }
 }

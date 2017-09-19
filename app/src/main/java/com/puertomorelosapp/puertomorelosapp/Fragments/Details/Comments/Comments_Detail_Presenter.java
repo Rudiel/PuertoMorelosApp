@@ -36,11 +36,11 @@ public class Comments_Detail_Presenter implements IComments_Presenter {
     public void getComments(final String id) {
         view.showLoading();
 
-        final List<Comments> commentsList = new ArrayList<>();
-
         FirebaseDatabase.getInstance().getReference().child(Utils.COMMENTS_SOCIAL_URL).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
+                final List<Comments> commentsList = new ArrayList<>();
 
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
 
