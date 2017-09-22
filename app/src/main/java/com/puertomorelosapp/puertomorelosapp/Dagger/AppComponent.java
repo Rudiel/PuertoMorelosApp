@@ -7,6 +7,8 @@ import com.puertomorelosapp.puertomorelosapp.Fragments.Activities.Comments.Comen
 import com.puertomorelosapp.puertomorelosapp.Fragments.Activities.Comments.Comentarios_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Activities.Likes.Megusta_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Activities.Likes.Megusta_Presenter;
+import com.puertomorelosapp.puertomorelosapp.Fragments.Activities.Selfies.Selfies_Fragment;
+import com.puertomorelosapp.puertomorelosapp.Fragments.Activities.Selfies.Selfies_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Categories.Categories_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Categories.Categories_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Details.Comments.Comments_Detail_Fragment;
@@ -122,6 +124,12 @@ public interface AppComponent {
     void inject(Comentarios_Fragment fragment);
 
     void inject(Comentarios_Presenter target);
+
+    //Activities Selfies
+
+    void inject(Selfies_Fragment fragment);
+
+    void inject(Selfies_Presenter target);
 
 
 }

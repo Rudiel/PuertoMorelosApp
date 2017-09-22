@@ -43,6 +43,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -190,9 +192,6 @@ public class Photos_Detail_Fragment extends Fragment implements IPhotos_View, IG
 
         this.galleryList = galleryList;
 
-        GridLayoutManager manager = new GridLayoutManager(getActivity(), numberOfColumns);
-
-
         rvGallery.setLayoutManager(new GridLayoutManager(getActivity(), numberOfColumns));
         rvGallery.setAdapter(new Gallery_Adapter(galleryList, getActivity(), Photos_Detail_Fragment.this));
     }
@@ -207,6 +206,13 @@ public class Photos_Detail_Fragment extends Fragment implements IPhotos_View, IG
         this.selfieList.clear();
 
         this.selfieList = selfieList;
+
+        Collections.sort(this.selfieList, new Comparator<Selfie>() {
+            @Override
+            public int compare(Selfie o1, Selfie o2) {
+                return (o2.getFecha().compareTo(o1.getFecha()));
+            }
+        });
 
         rvSelfies.setLayoutManager(new GridLayoutManager(getActivity(), numberOfColumnsSelfie));
 

@@ -8,6 +8,8 @@ import com.puertomorelosapp.puertomorelosapp.Fragments.Activities.Comments.Comen
 import com.puertomorelosapp.puertomorelosapp.Fragments.Activities.Comments.IComentarios_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Activities.Likes.IMegusta_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Activities.Likes.Megusta_Presenter;
+import com.puertomorelosapp.puertomorelosapp.Fragments.Activities.Selfies.ISelfies_Presenter;
+import com.puertomorelosapp.puertomorelosapp.Fragments.Activities.Selfies.Selfies_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Categories.Categories_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Categories.ICategories_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Details.Comments.Comments_Detail_Presenter;
@@ -124,6 +126,12 @@ public class PresenterModule {
     @Singleton
     IComentarios_Presenter provideComentariosPresenter(Context context) {
         return new Comentarios_Presenter(context);
+    }
+
+    @Provides
+    @Singleton
+    ISelfies_Presenter provideSelfiesPresenter(Context context) {
+        return new Selfies_Presenter(context);
     }
 
 

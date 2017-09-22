@@ -51,7 +51,6 @@ public class Photos_Detail_Presenter implements IPhotos_Presenter {
 
         view.showLoadingSelfie();
         String Url = "";
-        final List<Selfie> selfieList = new ArrayList<>();
 
         if (categorie.getCategoria() == null) {
             Url = Utils.SELFIES_URL + categorie.getName() + "/" + subCategory.getId();
@@ -63,6 +62,8 @@ public class Photos_Detail_Presenter implements IPhotos_Presenter {
         FirebaseDatabase.getInstance().getReference(Url).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(final DataSnapshot dataSnapshot) {
+
+                final List<Selfie> selfieList = new ArrayList<>();
 
                 if (dataSnapshot.getChildrenCount() > 0) {
 
@@ -117,7 +118,6 @@ public class Photos_Detail_Presenter implements IPhotos_Presenter {
 
         view.showLoadingGallery();
         String Url = "";
-        final List<Gallery> galleryList = new ArrayList<>();
 
         if (categorie.getCategoria() == null) {
             Url = Utils.GALLERY_URL + categorie.getName() + "/" + subCategory.getId();
@@ -129,6 +129,8 @@ public class Photos_Detail_Presenter implements IPhotos_Presenter {
         FirebaseDatabase.getInstance().getReference(Url).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
+                final List<Gallery> galleryList = new ArrayList<>();
 
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
 

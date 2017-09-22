@@ -1,7 +1,6 @@
 package com.puertomorelosapp.puertomorelosapp.Utils;
 
 import android.app.Application;
-import android.content.Context;
 
 import com.puertomorelosapp.puertomorelosapp.Dagger.AppComponent;
 import com.puertomorelosapp.puertomorelosapp.Dagger.AppModule;
