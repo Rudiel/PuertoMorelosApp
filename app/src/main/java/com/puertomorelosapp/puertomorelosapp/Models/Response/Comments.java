@@ -28,6 +28,15 @@ public class Comments {
 
     private Double timeStamp;
 
+    private String commentId;
+
+    public String getCommentId() {
+        return commentId;
+    }
+
+    public void setCommentId(String commentId) {
+        this.commentId = commentId;
+    }
 
     public int getActivo() {
         return activo;

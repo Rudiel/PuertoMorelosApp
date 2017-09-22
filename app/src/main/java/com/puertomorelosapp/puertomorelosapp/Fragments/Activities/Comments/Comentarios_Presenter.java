@@ -7,6 +7,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.puertomorelosapp.puertomorelosapp.Models.Request.NewComment;
 import com.puertomorelosapp.puertomorelosapp.Models.Response.Comments;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
 import com.puertomorelosapp.puertomorelosapp.Utils.Utils;
@@ -45,6 +46,7 @@ public class Comentarios_Presenter implements IComentarios_Presenter {
 
                         for (DataSnapshot data : dataSnapshot.getChildren()) {
                             Comments comment = data.getValue(Comments.class);
+                            comment.setCommentId(data.getKey());
                             commentsList.add(comment);
                         }
 
@@ -69,7 +71,15 @@ public class Comentarios_Presenter implements IComentarios_Presenter {
     @Override
     public void deleteComment(Context context, Comments comment) {
 
-        FirebaseDatabase.getInstance().getReference().child("").addValueEventListener(new ValueEventListener() {
+        String url="";
+
+        if(comment.getSubcategoria()!=null){
+            url= Utils.COMMENTS_URL+comment.getCategoria()+"/"+comment.getSubcategoria()+"/"+comment.getItemKey()+"/"+comment.getCommentId();
+        }else
+            url= Utils.COMMENTS_URL+comment.getCategoria()+"/"+comment.getItemKey()+"/"+comment.getCommentId();
+
+
+        FirebaseDatabase.getInstance().getReference().child(url).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -80,6 +90,11 @@ public class Comentarios_Presenter implements IComentarios_Presenter {
 
             }
         });
+
+    }
+
+    @Override
+    public void editComment(Context context, NewComment editComment) {
 
     }
 }

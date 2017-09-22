@@ -81,18 +81,14 @@ public class Comments_Detail_Presenter implements IComments_Presenter {
     public void setNewComment(NewComment comment, RoutesComments routesComments) {
 
         //primera ruta
-
-        FirebaseDatabase.getInstance().getReference().child(routesComments.getUrl1()).push().setValue(comment);
-        //segunda ruta
-
         FirebaseDatabase.getInstance().getReference().child(routesComments.getUrl2()).push().setValue(comment);
 
+        //segunda ruta
+        FirebaseDatabase.getInstance().getReference().child(routesComments.getUrl1()).push().setValue(comment);
+
         //tercera ruta
-
         FirebaseDatabase.getInstance().getReference().child(routesComments.getUrl3()).push().setValue("true");
-
-        //una vez que lo guarde refrescamos la lista
-
+        
     }
 
 

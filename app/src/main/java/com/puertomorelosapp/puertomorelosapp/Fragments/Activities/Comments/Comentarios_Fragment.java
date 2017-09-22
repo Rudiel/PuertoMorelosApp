@@ -126,7 +126,7 @@ public class Comentarios_Fragment extends Fragment implements IComentarios_View,
 
             @Override
             public void onAccept(Dialog dialog, NewComment comment) {
-
+                presenter.editComment(getActivity(),comment);
             }
 
             @Override

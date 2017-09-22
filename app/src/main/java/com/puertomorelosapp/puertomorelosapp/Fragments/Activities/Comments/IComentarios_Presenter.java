@@ -2,6 +2,7 @@ package com.puertomorelosapp.puertomorelosapp.Fragments.Activities.Comments;
 
 import android.content.Context;
 
+import com.puertomorelosapp.puertomorelosapp.Models.Request.NewComment;
 import com.puertomorelosapp.puertomorelosapp.Models.Response.Comments;
 
 /**
@@ -15,4 +16,6 @@ public interface IComentarios_Presenter {
     void setView(IComentarios_View view);
 
     void deleteComment(Context context, Comments comment);
+
+    void editComment(Context context, NewComment editComment);
 }

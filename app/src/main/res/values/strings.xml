@@ -73,7 +73,7 @@
     <string name="photos_gallery_selfies">Selfies</string>
     <string name="newphoto_cancel">Cancelar</string>
     <string name="newphoto_publicar">Publicar</string>
-    <string name="newphoto_text_hint">¿Que ah pasado?</string>
+    <string name="newphoto_text_hint">¿Que ha pasado?</string>
 
     <!--Activities-->
 
