@@ -120,9 +120,6 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
         thirdCategoryList = new ArrayList<>();
         subCategoryList = new ArrayList<>();
 
-
-        setFragment(new Categories_Fragment(), false, null);
-
         pbMain.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.MULTIPLY);
 
         showMenu();
@@ -154,6 +151,8 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
         presenter.getMenuComments(Utils.getProvider(this));
 
         presenter.getMenuLikes(Utils.getProvider(this));
+
+        setFragment(new Categories_Fragment(), false, null);
 
     }
 

@@ -25,7 +25,6 @@ import java.util.List;
 public class SecundaryMain_Presenter implements ISecundaryMain_Presenter {
 
     private ISecundaryMain_view view;
-    private int total = 0;
     private List<SubCategory> listSubCategories = new ArrayList<>();
 
 
@@ -62,8 +61,6 @@ public class SecundaryMain_Presenter implements ISecundaryMain_Presenter {
         FirebaseDatabase.getInstance().getReference().child(url_reference).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
-                total = (int) dataSnapshot.getChildrenCount();
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 

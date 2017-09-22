@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -33,17 +33,18 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp">
+        android:minHeight="150dp"
+        android:layout_height="wrap_content">
 
         <EditText
             android:id="@+id/etWriteComment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@null"
             android:maxLength="150"
             android:hint="Escribe un comentario"
-            android:maxLines="3"
-            android:padding="5dp" />
+            android:padding="5dp"
+           />
     </RelativeLayout>
 
 

@@ -34,8 +34,8 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:src="@drawable/gradient_images"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:src="@drawable/gradient_images" />
 
                 <TextView
                     android:id="@+id/tvDetailNombre"
@@ -98,6 +98,7 @@
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nsContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"

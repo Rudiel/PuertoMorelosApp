@@ -12,6 +12,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.Toolbar;
 import android.transition.TransitionInflater;
 import android.util.Log;
@@ -158,6 +159,9 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
 
     private boolean isDelete = false;
 
+    @Bind(R.id.nsContent)
+    NestedScrollView nestedScrollView;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -204,6 +208,8 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
 
         appBarLayout.setExpanded(true);
 
+        nestedScrollView.scrollTo(0, 0);
+
         //Seteamos los datos
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             ivDetail.setTransitionName(subCategory.getNombre());
@@ -239,14 +245,14 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
         } else
             tvHorario.setVisibility(View.GONE);
 
-        if (subCategory.getTelefono() != null) {
+        if (subCategory.getTelefono() != null && !subCategory.getTelefono().equals("")) {
             tvTelefono.setVisibility(View.VISIBLE);
             tvTelefono.setText(subCategory.getTelefono());
         } else {
             tvTelefono.setVisibility(View.GONE);
         }
 
-        if (subCategory.getDireccion() != null) {
+        if (subCategory.getDireccion() != null && !subCategory.getDireccion().equals("")) {
             tvDireccion.setText(subCategory.getDireccion());
             tvDireccion.setVisibility(View.VISIBLE);
         } else
