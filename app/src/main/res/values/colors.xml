@@ -6,5 +6,6 @@
     <color name="menu_top">#1b77af</color>
     <color name="menu_bottom">#29b9c8</color>
     <color name="transparent">#20000000</color>
+    <color name="trans_black">#40000000</color>
     <color name="fab_yellow">#feb92b</color>
 </resources>

@@ -30,6 +30,7 @@ import com.puertomorelosapp.puertomorelosapp.Adpaters.Selfies_Adapter;
 import com.puertomorelosapp.puertomorelosapp.Creators.Gallery_Dialog_Creator;
 import com.puertomorelosapp.puertomorelosapp.Creators.INewPhoto_Creator;
 import com.puertomorelosapp.puertomorelosapp.Creators.PhotoDialog_Creator;
+import com.puertomorelosapp.puertomorelosapp.Fragments.Activities.Selfies.IDeleteSelfie;
 import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
 import com.puertomorelosapp.puertomorelosapp.Models.Request.Gallery;
 import com.puertomorelosapp.puertomorelosapp.Models.Request.Selfie;
@@ -229,7 +230,12 @@ public class Photos_Detail_Fragment extends Fragment implements IPhotos_View, IG
 
     @Override
     public void onSlefieClick(int position) {
-        new Gallery_Dialog_Creator().showSelfies(getActivity(), this.selfieList, position);
+        new Gallery_Dialog_Creator().showSelfies(getActivity(), this.selfieList, position, false, new IDeleteSelfie() {
+            @Override
+            public void onDeleteSelfieListener(Selfie selfie) {
+                //no hacemos nada aqui
+            }
+        });
     }
 
     private void cameraIntent() {

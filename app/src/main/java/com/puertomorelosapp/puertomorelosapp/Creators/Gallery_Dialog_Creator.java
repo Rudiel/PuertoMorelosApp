@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.puertomorelosapp.puertomorelosapp.Adpaters.Gallery_Pager_Adapter;
 import com.puertomorelosapp.puertomorelosapp.Adpaters.Selfie_Pager_Adapter;
+import com.puertomorelosapp.puertomorelosapp.Fragments.Activities.Selfies.IDeleteSelfie;
 import com.puertomorelosapp.puertomorelosapp.Models.Request.Gallery;
 import com.puertomorelosapp.puertomorelosapp.Models.Request.Selfie;
 import com.puertomorelosapp.puertomorelosapp.R;
@@ -85,7 +86,7 @@ public class Gallery_Dialog_Creator {
 
     }
 
-    public void showSelfies(Context context, final List<Selfie> selfieList, int position) {
+    public void showSelfies(Context context, final List<Selfie> selfieList, final int position, boolean isActivity, final IDeleteSelfie deleteSelfie) {
         final Dialog dialogGallery = new Dialog(context);
         dialogGallery.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialogGallery.setContentView(R.layout.layout_dialog_gallery);
@@ -109,6 +110,7 @@ public class Gallery_Dialog_Creator {
         TextView tvTotal = (TextView) dialogGallery.findViewById(R.id.tvGalleryTotal);
 
         ImageButton ibClose = (ImageButton) dialogGallery.findViewById(R.id.btCloseGallery);
+        ImageButton ibDelete = (ImageButton) dialogGallery.findViewById(R.id.btDelete);
 
         final TextView tvMessage = (TextView) dialogGallery.findViewById(R.id.tvGalleryMessage);
 
@@ -119,6 +121,11 @@ public class Gallery_Dialog_Creator {
         tvMessage.setVisibility(View.VISIBLE);
 
         tvMessage.setText(selfieList.get(position).getComentario());
+
+        if (isActivity)
+            ibDelete.setVisibility(View.VISIBLE);
+        else
+            ibDelete.setVisibility(View.GONE);
 
         viewPager.setAdapter(new Selfie_Pager_Adapter(selfieList, context));
 
@@ -139,6 +146,14 @@ public class Gallery_Dialog_Creator {
             @Override
             public void onPageScrollStateChanged(int state) {
 
+            }
+        });
+
+        ibDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteSelfie.onDeleteSelfieListener(selfieList.get(position));
+                dialogGallery.dismiss();
             }
         });
 

@@ -242,18 +242,20 @@ public class Photos_Detail_Presenter implements IPhotos_Presenter {
 
     private void saveSelfie(Selfie selfie) {
 
-        FirebaseDatabase.getInstance().getReference().child(Utils.SELFIES_URL_NEW + Utils.getProvider(context)).push().setValue(selfie);
+        String key = FirebaseDatabase.getInstance().getReference().child(Utils.SELFIES_URL_NEW + Utils.getProvider(context)).push().getKey();
 
         if (selfie.getSubcategoria() == null) {
 
-            FirebaseDatabase.getInstance().getReference().child(Utils.SELFIES_URL +  "/" + selfie.getCategoria() + "/" + selfie.getItemKey()).push().setValue(selfie);
+            FirebaseDatabase.getInstance().getReference().child(Utils.SELFIES_URL + "/" + selfie.getCategoria() + "/" + selfie.getItemKey() + "/" + key).setValue(selfie);
 
         } else {
-            FirebaseDatabase.getInstance().getReference().child(Utils.SELFIES_URL + "/" + selfie.getCategoria() + "/" + selfie.getSubcategoria() + "/" + selfie.getItemKey()).push().setValue(selfie);
+            FirebaseDatabase.getInstance().getReference().child(Utils.SELFIES_URL + "/" + selfie.getCategoria() + "/" + selfie.getSubcategoria() + "/" + selfie.getItemKey() + "/" + key).setValue(selfie);
 
         }
 
-        FirebaseDatabase.getInstance().getReference().child(Utils.COMMENTS_COUNT+Utils.getProvider(context)+"/UniversalSelfies/").push().setValue("true");
+        FirebaseDatabase.getInstance().getReference().child(Utils.COMMENTS_COUNT + Utils.getProvider(context) + "/UniversalSelfies/" + key).setValue("true");
+
+        FirebaseDatabase.getInstance().getReference().child(Utils.SELFIES_URL_NEW + Utils.getProvider(context) + "/" + key).setValue(selfie);
 
         view.hideLoadingSelfie();
 
