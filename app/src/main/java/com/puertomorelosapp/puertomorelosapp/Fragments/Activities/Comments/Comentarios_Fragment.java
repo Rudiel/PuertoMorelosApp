@@ -15,6 +15,7 @@ import com.puertomorelosapp.puertomorelosapp.Adpaters.Activities_Comments_Adapte
 import com.puertomorelosapp.puertomorelosapp.Creators.ConfirmDialog_Creator;
 import com.puertomorelosapp.puertomorelosapp.Creators.Dialog_Creator;
 import com.puertomorelosapp.puertomorelosapp.Creators.IConfirmComment_Creator;
+import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
 import com.puertomorelosapp.puertomorelosapp.Models.Request.NewComment;
 import com.puertomorelosapp.puertomorelosapp.Models.Response.Comments;
 import com.puertomorelosapp.puertomorelosapp.R;
@@ -126,11 +127,12 @@ public class Comentarios_Fragment extends Fragment implements IComentarios_View,
 
             @Override
             public void onAccept(Dialog dialog, NewComment comment) {
-                presenter.editComment(getActivity(),comment);
+
             }
 
             @Override
             public void onEdit(Dialog dialog, Comments comment) {
+                presenter.editComment(getActivity(),comment);
                 dialog.dismiss();
             }
         }, comment);

@@ -49,6 +49,8 @@ public class SecundaryMain_Fragment extends Fragment implements ISecundaryMain_v
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
+    private Main_Activity activity;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -68,7 +70,9 @@ public class SecundaryMain_Fragment extends Fragment implements ISecundaryMain_v
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        ((Main_Activity) getActivity()).toolbar.setVisibility(View.VISIBLE);
+        activity=((Main_Activity)getActivity());
+
+        activity.toolbar.setVisibility(View.VISIBLE);
 
         rvSubcategories.setHasFixedSize(true);
 
@@ -76,17 +80,17 @@ public class SecundaryMain_Fragment extends Fragment implements ISecundaryMain_v
 
         rvSubcategories.setLayoutManager(mLayoutManager);
 
-        ((Main_Activity) getActivity()).setToolbarTitle(((Main_Activity) getActivity()).category.getName());
-        ((Main_Activity) getActivity()).ivMap.setVisibility(View.GONE);
+        activity.setToolbarTitle(((Main_Activity) getActivity()).category.getName());
+        activity.ivMap.setVisibility(View.GONE);
 
         pbSubcategories.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.MULTIPLY);
 
         ((Main_Activity) getActivity()).hideMenu();
 
-        if (((Main_Activity) getActivity()).subCategoryList.size() > 0) {
-            this.showSubCategories(((Main_Activity) getActivity()).subCategoryList);
+        if (activity.subCategoryList.size() > 0) {
+            this.showSubCategories(activity.subCategoryList);
         } else
-            presenter.getSubCategories((((Main_Activity) getActivity()).category));
+            presenter.getSubCategories(activity.category);
 
 
     }
@@ -104,7 +108,8 @@ public class SecundaryMain_Fragment extends Fragment implements ISecundaryMain_v
     @Override
     public void showSubCategories(List<SubCategory> subCategories) {
 
-        ((Main_Activity) getActivity()).subCategoryList = subCategories;
+        if (activity!= null)
+            activity.subCategoryList = subCategories;
 
         List<SubCategory> list = new ArrayList<>();
 

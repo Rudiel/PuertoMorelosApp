@@ -80,15 +80,17 @@ public class Comments_Detail_Presenter implements IComments_Presenter {
     @Override
     public void setNewComment(NewComment comment, RoutesComments routesComments) {
 
+        String key = FirebaseDatabase.getInstance().getReference().child(routesComments.getUrl1()).push().getKey();
+
         //primera ruta
-        FirebaseDatabase.getInstance().getReference().child(routesComments.getUrl2()).push().setValue(comment);
+        FirebaseDatabase.getInstance().getReference().child(routesComments.getUrl2() + "/" + key).setValue(comment);
 
         //segunda ruta
-        FirebaseDatabase.getInstance().getReference().child(routesComments.getUrl1()).push().setValue(comment);
+        FirebaseDatabase.getInstance().getReference().child(routesComments.getUrl1() + "/" + key).setValue(comment);
 
         //tercera ruta
-        FirebaseDatabase.getInstance().getReference().child(routesComments.getUrl3()).push().setValue("true");
-        
+        FirebaseDatabase.getInstance().getReference().child(routesComments.getUrl3() + "/" + key).setValue("true");
+
     }
 
 

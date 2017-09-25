@@ -162,6 +162,8 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
     @Bind(R.id.nsContent)
     NestedScrollView nestedScrollView;
 
+    private Main_Activity activity;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -202,9 +204,11 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        ((Main_Activity) getActivity()).toolbar.setVisibility(View.GONE);
+        activity = ((Main_Activity) getActivity());
 
-        subCategory = ((Main_Activity) getActivity()).subCategory;
+        activity.toolbar.setVisibility(View.GONE);
+
+        subCategory = activity.subCategory;
 
         appBarLayout.setExpanded(true);
 
@@ -218,13 +222,13 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
         if (subCategory.getImageBackgroundContent() != null)
             Glide.with(getActivity()).load(subCategory.getImageBackgroundContent()).into(ivDetail);
 
-        presenter.getLikes(this.subCategory, ((Main_Activity) getActivity()).category);
+        presenter.getLikes(this.subCategory, activity.category);
 
         presenter.getLikeActive(Utils.getProvider(getActivity()), subCategory.getId());
 
-        presenter.getPhotosNumber(this.subCategory, ((Main_Activity) getActivity()).category);
+        presenter.getPhotosNumber(this.subCategory, activity.category);
 
-        presenter.getCommentsNumber(this.subCategory, ((Main_Activity) getActivity()).category);
+        presenter.getCommentsNumber(this.subCategory, activity.category);
 
 
         tvDescripcion.setText(subCategory.getDescripcion());
@@ -329,14 +333,14 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
         ivDetailComments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((Main_Activity) getActivity()).setFragment(new Comments_Detail_Fragment(), true, null);
+                activity.setFragment(new Comments_Detail_Fragment(), true, null);
             }
         });
 
         ivDetailGalery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((Main_Activity) getActivity()).setFragment(new Photos_Detail_Fragment(), true, null);
+                activity.setFragment(new Photos_Detail_Fragment(), true, null);
             }
         });
 
@@ -443,12 +447,12 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
                     LatLng position = new LatLng(Double.parseDouble(subCategory.getLatitud()), Double.parseDouble(subCategory.getLongitud()));
                     marker.position(position);
 
-                    Log.d("CATEGORIA", ((Main_Activity) getActivity()).category.getName());
-                    Log.d("SUCATEGORIA", ((Main_Activity) getActivity()).subCategory.getTitulo());
-                    Log.d("MAIN_CATE", ((Main_Activity) getActivity()).mainCategory);
+                    Log.d("CATEGORIA", activity.category.getName());
+                    Log.d("SUCATEGORIA", activity.subCategory.getTitulo());
+                    Log.d("MAIN_CATE", activity.mainCategory);
 
 
-                    switch (((Main_Activity) getActivity()).mainCategory) {
+                    switch (activity.mainCategory) {
                         case "Restaurantes":
                             marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_restaurant));
                             break;
@@ -507,13 +511,18 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
 
     @Override
     public void isLikeActive(boolean like) {
-        if (like) {
-            ivDetailLikes.setColorFilter(ContextCompat.getColor(getActivity(), R.color.colorPrimary), android.graphics.PorterDuff.Mode.MULTIPLY);
-            isDelete = true;
-        } else {
-            ivDetailLikes.setColorFilter(ContextCompat.getColor(getActivity(), android.R.color.darker_gray), android.graphics.PorterDuff.Mode.MULTIPLY);
-            isDelete = false;
-        }
+        if (activity != null && ivDetailLikes != null)
+            if (like) {
+                ivDetailLikes.setColorFilter(ContextCompat.getColor(getActivity(), R.color.colorPrimary), android.graphics.PorterDuff.Mode.MULTIPLY);
+                isDelete = true;
+            } else {
+                try {
+                    ivDetailLikes.setColorFilter(ContextCompat.getColor(getActivity(), android.R.color.darker_gray), android.graphics.PorterDuff.Mode.MULTIPLY);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                isDelete = false;
+            }
     }
 
     @Override
@@ -551,7 +560,7 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
         like.setLugar("PuertoMorelos");
         like.setNombreEntidad(subCategory.getNombre());
 
-        Categorie c = ((Main_Activity) getActivity()).category;
+        Categorie c = activity.category;
 
         if (c.getCategoria() != null) {
             like.setSubcategoria(c.getName());

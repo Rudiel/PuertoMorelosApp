@@ -16,6 +16,16 @@ public class NewComment {
     private String senderId;
     private String text;
     private Double timeStamp;
+    private String commentId;
+
+
+    public String getCommentId() {
+        return commentId;
+    }
+
+    public void setCommentId(String commentId) {
+        this.commentId = commentId;
+    }
 
     public String getItemKey() {
         return itemKey;

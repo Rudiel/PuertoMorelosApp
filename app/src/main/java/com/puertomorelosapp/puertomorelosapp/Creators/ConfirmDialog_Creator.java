@@ -96,6 +96,7 @@ public class ConfirmDialog_Creator {
                             listener.onAccept(dialog, newComment);
                         } else {
                             //editamos el comentario
+                            comment.setText(etComment.getText().toString());
                             listener.onEdit(dialog, comment);
                         }
                     }
