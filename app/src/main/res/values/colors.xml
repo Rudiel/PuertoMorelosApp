@@ -8,4 +8,7 @@
     <color name="transparent">#20000000</color>
     <color name="trans_black">#40000000</color>
     <color name="fab_yellow">#feb92b</color>
+
+    <color name="primary_transparent">#8843becb</color>
+    <color name="purple_transparent">#883333cc</color>
 </resources>

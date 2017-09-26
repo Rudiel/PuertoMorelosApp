@@ -19,6 +19,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -129,6 +130,10 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
         tvMenuLikes = (TextView) navigationView.getHeaderView(0).findViewById(R.id.tvMenuLikes);
 
         final ImageView ivProfilePicture = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.ivProfilePicture);
+
+
+        if (auth.getCurrentUser().getPhotoUrl() != null)
+            Utils.saveUserImage(this, auth.getCurrentUser().getPhotoUrl().toString());
 
         if (!Utils.getUserImage(this).equals("SomeimageURL")) {
             Glide.with(this).load(Utils.getUserImage(this)).asBitmap().centerCrop().into(new BitmapImageViewTarget(ivProfilePicture) {

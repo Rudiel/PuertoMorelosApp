@@ -9,8 +9,12 @@ import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.puertomorelosapp.puertomorelosapp.Adpaters.Activities_Tutorial_Adapter;
 import com.puertomorelosapp.puertomorelosapp.Adpaters.Gallery_Pager_Adapter;
+import com.puertomorelosapp.puertomorelosapp.Models.Tutorial;
 import com.puertomorelosapp.puertomorelosapp.R;
+
+import java.util.List;
 
 /**
  * Created by rudielavilaperaza on 9/14/17.
@@ -18,31 +22,34 @@ import com.puertomorelosapp.puertomorelosapp.R;
 
 public class Tuturial_Activity_Creator {
 
-    public void showTutorial(Context context) {
+    public void showTutorial(final Context context, List<Tutorial> tutorialList) {
 
-        final Dialog dialogGallery = new Dialog(context);
-        dialogGallery.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialogGallery.setContentView(R.layout.layout_dialog_gallery);
+        final Dialog dialogTutorial = new Dialog(context);
+        dialogTutorial.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialogTutorial.setContentView(R.layout.layout_activities_tutorial);
 
-        Window window = dialogGallery.getWindow();
+        final Window window = dialogTutorial.getWindow();
 
         window.setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        window.setBackgroundDrawableResource(android.R.color.black);
+        //window.setBackgroundDrawableResource(android.R.color.black);
+        window.setBackgroundDrawable(new ColorDrawable(context.getResources().getColor(R.color.primary_transparent)));
 
-        dialogGallery.setCancelable(true);
 
-        dialogGallery.setCanceledOnTouchOutside(false);
+        dialogTutorial.setCancelable(true);
 
-        dialogGallery.getWindow().setLayout(ViewPager.LayoutParams.MATCH_PARENT,
+        dialogTutorial.setCanceledOnTouchOutside(false);
+
+        dialogTutorial.getWindow().setLayout(ViewPager.LayoutParams.MATCH_PARENT,
                 ViewPager.LayoutParams.MATCH_PARENT);
 
-        ViewPager viewPager = (ViewPager) dialogGallery.findViewById(R.id.vpGallery);
+        ViewPager viewPager = (ViewPager) dialogTutorial.findViewById(R.id.vpTutorial);
 
-        final TextView tvPosition = (TextView) dialogGallery.findViewById(R.id.tvGalleryPosition);
+        viewPager.setAdapter(new Activities_Tutorial_Adapter(context, tutorialList));
 
-        TextView tvTotal = (TextView) dialogGallery.findViewById(R.id.tvGalleryTotal);
 
-        ImageButton ibClose = (ImageButton) dialogGallery.findViewById(R.id.btCloseGallery);
+        ImageButton ibClose = (ImageButton) dialogTutorial.findViewById(R.id.ibCloseTutorial);
+
+        viewPager.setCurrentItem(0);
 
 
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -53,7 +60,14 @@ public class Tuturial_Activity_Creator {
 
             @Override
             public void onPageSelected(int position) {
-                tvPosition.setText(String.valueOf(position + 1));
+                switch (position) {
+                    case 0:
+                        window.setBackgroundDrawable(new ColorDrawable(context.getResources().getColor(R.color.primary_transparent)));
+                        break;
+                    case 1:
+                        window.setBackgroundDrawable(new ColorDrawable(context.getResources().getColor(R.color.purple_transparent)));
+                        break;
+                }
             }
 
             @Override
@@ -65,11 +79,11 @@ public class Tuturial_Activity_Creator {
         ibClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialogGallery.dismiss();
+                dialogTutorial.dismiss();
             }
         });
 
-        dialogGallery.show();
+        dialogTutorial.show();
 
     }
 }

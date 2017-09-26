@@ -12,14 +12,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.puertomorelosapp.puertomorelosapp.Adpaters.Activities_Adapter;
+import com.puertomorelosapp.puertomorelosapp.Creators.Tuturial_Activity_Creator;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Activities.Comments.Comentarios_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Activities.Likes.Megusta_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Activities.Selfies.Selfies_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
 import com.puertomorelosapp.puertomorelosapp.Models.Activity;
+import com.puertomorelosapp.puertomorelosapp.Models.Tutorial;
 import com.puertomorelosapp.puertomorelosapp.R;
 import com.puertomorelosapp.puertomorelosapp.Utils.NoSwipeableViewPager;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,6 +48,8 @@ public class Activity_Fragment extends Fragment {
 
     private ImageView ivInfo;
 
+    private List<Tutorial> tutorialList;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -63,7 +68,10 @@ public class Activity_Fragment extends Fragment {
 
         setFragmentsDefault();
 
-        ((Main_Activity) getActivity()).ivMap.setVisibility(View.GONE);
+        //((Main_Activity) getActivity()).ivMap.setVisibility(View.GONE);
+
+        tutorialList = new ArrayList<>();
+
 
         toolbar = ((Main_Activity) getActivity()).toolbar;
 
@@ -72,7 +80,7 @@ public class Activity_Fragment extends Fragment {
         ivInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                new Tuturial_Activity_Creator().showTutorial(getActivity(), tutorialList);
             }
         });
 
@@ -94,6 +102,9 @@ public class Activity_Fragment extends Fragment {
 
             }
         });*/
+
+        createTutorialList();
+
 
     }
 
@@ -124,6 +135,39 @@ public class Activity_Fragment extends Fragment {
         activities.add(selfies);
 
         setUpViewPager();
+
+    }
+
+    private void createTutorialList() {
+
+        Tutorial tutorial1 = new Tutorial();
+        tutorial1.setTitle(getString(R.string.tutorial_delete_title));
+        tutorial1.setSubtitle(getString(R.string.tutorial_delete_subtitle));
+        tutorial1.setImage(getActivity().getResources().getDrawable(R.drawable.ic_activity_fastfood));
+
+        tutorialList.add(tutorial1);
+
+        //String string = "U+1F602";
+        String string = "\uD83D\uDE23";
+
+        try {
+            // Convert from Unicode to UTF-8
+            byte[] utf8 = string.getBytes("UTF-8");
+
+            // Convert from UTF-8 to Unicode
+            string = new String(utf8, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+        }
+
+        Tutorial tutorial2 = new Tutorial();
+        tutorial2.setTitle(getString(R.string.tutorial_delete_title) + " " + string);
+        tutorial2.setSubtitle(getString(R.string.tutorial_selfie_subtitle));
+        tutorial2.setImage(getActivity().getResources().getDrawable(R.drawable.ic_activity_restaurant));
+
+        tutorialList.add(tutorial2);
+
+        //U+1F623
+
 
     }
 }
