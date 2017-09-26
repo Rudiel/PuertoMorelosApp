@@ -2,6 +2,7 @@ package com.puertomorelosapp.puertomorelosapp.Fragments.Activities.Selfies;
 
 import android.content.Context;
 
+import com.bumptech.glide.util.Util;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -34,11 +35,11 @@ public class Selfies_Presenter implements ISelfies_Presenter {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                List<Selfie> selfieList = new ArrayList<Selfie>();
+                List<Selfie> selfieList = new ArrayList<>();
 
                 for (DataSnapshot selfie : dataSnapshot.getChildren()) {
                     Selfie s = selfie.getValue(Selfie.class);
-                    //s.setId();
+                    s.setId(selfie.getKey());
                     selfieList.add(s);
                 }
 
@@ -63,6 +64,15 @@ public class Selfies_Presenter implements ISelfies_Presenter {
     @Override
     public void deleteSelfie(Selfie selfie, Context context) {
 
-        //FirebaseDatabase.getInstance().getReference().child().removeValue();
+        FirebaseDatabase.getInstance().getReference().child(Utils.SELFIES_URL_NEW + Utils.getProvider(context) + "/" + selfie.getId()).removeValue();
+
+        FirebaseDatabase.getInstance().getReference().child(Utils.COMMENTS_COUNT + Utils.getProvider(context) + "/UniversalSelfies/" + selfie.getId()).removeValue();
+
+        if (selfie.getSubcategoria() != null)
+            FirebaseDatabase.getInstance().getReference().child(Utils.SELFIES_URL + selfie.getCategoria() + "/" + selfie.getSubcategoria() + "/" + selfie.getItemKey() + "/" + selfie.getId()).removeValue();
+        else
+            FirebaseDatabase.getInstance().getReference().child(Utils.SELFIES_URL + selfie.getCategoria() + "/" + selfie.getItemKey() + "/" + selfie.getId()).removeValue();
+
+
     }
 }
