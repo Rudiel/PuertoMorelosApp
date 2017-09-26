@@ -18,6 +18,7 @@ import com.puertomorelosapp.puertomorelosapp.Fragments.Activities.Selfies.Selfie
 import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
 import com.puertomorelosapp.puertomorelosapp.Models.Activity;
 import com.puertomorelosapp.puertomorelosapp.R;
+import com.puertomorelosapp.puertomorelosapp.Utils.NoSwipeableViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,7 @@ public class Activity_Fragment extends Fragment {
     TabLayout tlActivities;
 
     @Bind(R.id.vpActivities)
-    ViewPager viewPager;
+    NoSwipeableViewPager viewPager;
 
     private List<Activity> activities;
 
@@ -78,7 +79,7 @@ public class Activity_Fragment extends Fragment {
 
         tlActivities.setupWithViewPager(viewPager);
 
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        /*viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
             }
@@ -92,7 +93,7 @@ public class Activity_Fragment extends Fragment {
             public void onPageScrollStateChanged(int state) {
 
             }
-        });
+        });*/
 
     }
 

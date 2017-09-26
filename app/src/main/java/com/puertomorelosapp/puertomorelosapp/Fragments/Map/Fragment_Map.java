@@ -1,8 +1,12 @@
 package com.puertomorelosapp.puertomorelosapp.Fragments.Map;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -91,6 +95,14 @@ public class Fragment_Map extends Fragment implements OnMapReadyCallback, IMap_V
 
         map.setInfoWindowAdapter(new Adapter_CustomInfoWindow(getActivity()));
 
+
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1001);
+        } else {
+            map.setMyLocationEnabled(true);
+        }
+
+
     }
 
     @Override
@@ -130,7 +142,7 @@ public class Fragment_Map extends Fragment implements OnMapReadyCallback, IMap_V
                             break;
                     }
 //Html.fromHtml("<html><body><font size=5 color=red>Hello </font> World </body><html>")
-                    markerOptions.title(place.getNombre() + "\n" + Html.fromHtml("<font size=8 >"+place.getSubcategoria()+"</font>"));
+                    markerOptions.title(place.getNombre() + "\n" + Html.fromHtml("<font size=8 >" + place.getSubcategoria() + "</font>"));
                 } else
                     markerOptions.title(place.getNombre());
 
@@ -148,5 +160,15 @@ public class Fragment_Map extends Fragment implements OnMapReadyCallback, IMap_V
 
         }
 
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 1001) {
+            if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                map.setMyLocationEnabled(true);
+            }
+        }
     }
 }

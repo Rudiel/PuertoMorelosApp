@@ -20,7 +20,7 @@
             app:tabTextColor="@color/colorPrimary" />
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.view.ViewPager
+    <com.puertomorelosapp.puertomorelosapp.Utils.NoSwipeableViewPager
         android:id="@+id/vpActivities"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
