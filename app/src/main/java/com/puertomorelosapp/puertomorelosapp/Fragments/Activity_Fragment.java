@@ -72,10 +72,13 @@ public class Activity_Fragment extends Fragment {
 
         tutorialList = new ArrayList<>();
 
-
         toolbar = ((Main_Activity) getActivity()).toolbar;
 
         ivInfo = (ImageView) toolbar.findViewById(R.id.ivMap);
+
+        ivInfo.setVisibility(View.VISIBLE);
+
+        ivInfo.setImageDrawable(getResources().getDrawable(R.drawable.ic_info_outline_white_36dp));
 
         ivInfo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,7 +146,7 @@ public class Activity_Fragment extends Fragment {
         Tutorial tutorial1 = new Tutorial();
         tutorial1.setTitle(getString(R.string.tutorial_delete_title));
         tutorial1.setSubtitle(getString(R.string.tutorial_delete_subtitle));
-        tutorial1.setImage(getActivity().getResources().getDrawable(R.drawable.ic_activity_fastfood));
+        tutorial1.setImage(getActivity().getResources().getDrawable(R.drawable.swipe_to_right));
 
         tutorialList.add(tutorial1);
 
@@ -160,9 +163,9 @@ public class Activity_Fragment extends Fragment {
         }
 
         Tutorial tutorial2 = new Tutorial();
-        tutorial2.setTitle(getString(R.string.tutorial_delete_title) + " " + string);
+        tutorial2.setTitle(getString(R.string.tutorial_selfie_title) + " " + string);
         tutorial2.setSubtitle(getString(R.string.tutorial_selfie_subtitle));
-        tutorial2.setImage(getActivity().getResources().getDrawable(R.drawable.ic_activity_restaurant));
+        tutorial2.setImage(getActivity().getResources().getDrawable(R.drawable.borrar_infoactividad));
 
         tutorialList.add(tutorial2);
 

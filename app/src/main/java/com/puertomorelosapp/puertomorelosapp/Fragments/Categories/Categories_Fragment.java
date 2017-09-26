@@ -79,6 +79,8 @@ public class Categories_Fragment extends Fragment implements ICategories_View, I
 
         ((Main_Activity) getActivity()).ivMap.setVisibility(View.VISIBLE);
 
+        ((Main_Activity)getActivity()).ivMap.setImageDrawable(getResources().getDrawable(R.drawable.ic_pin_drop_white_36dp));
+
         rvCategories.setHasFixedSize(true);
 
         mLayoutManager = new LinearLayoutManager(getActivity());
