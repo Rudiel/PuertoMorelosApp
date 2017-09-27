@@ -3,6 +3,7 @@ package com.puertomorelosapp.puertomorelosapp.Models;
 import android.app.Service;
 import android.support.annotation.Nullable;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  * Created by rudielavilaperaza on 6/24/17.
  */
 
-public class SubCategory {
+public class SubCategory implements Serializable {
 
     private String id;
 

@@ -34,6 +34,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.puertomorelosapp.puertomorelosapp.Creators.Dialog_Map;
 import com.puertomorelosapp.puertomorelosapp.Creators.ServicesDialog;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Details.Comments.Comments_Detail_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Details.Photos.Photos_Detail_Fragment;
@@ -488,6 +489,19 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
+                map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+                    @Override
+                    public void onMapClick(LatLng latLng) {
+                        //new Dialog_Map().showMap(getActivity());
+                        FragmentManager fm = getChildFragmentManager();
+                        Dialog_Map dialog_map = new Dialog_Map();
+                        Bundle cate = new Bundle();
+                        cate.putSerializable("Place", subCategory);
+                        dialog_map.setArguments(cate);
+                        dialog_map.show(fm, "frag_map");
+                    }
+                });
 
 
             }

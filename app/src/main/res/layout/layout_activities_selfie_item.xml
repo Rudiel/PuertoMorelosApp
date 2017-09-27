@@ -48,7 +48,6 @@
                 android:gravity="center"
                 android:maxLines="2"
                 android:singleLine="true"
-                android:text="kjdnfjklsfkjhskhfkscjhdfkhckfhksh"
                 android:textColor="@android:color/black" />
 
             <TextView
@@ -63,7 +62,6 @@
                 android:layout_toRightOf="@id/ivActivitySelfieProfile"
                 android:gravity="center"
                 android:singleLine="true"
-                android:text="sdnlsk jhdlkjshnlhds"
                 android:textColor="@android:color/black"
                 android:textStyle="bold" />
 
@@ -74,8 +72,8 @@
                 android:layout_below="@id/tvActivitySelfieCommerceName"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="5dp"
+                android:singleLine="true"
                 android:layout_toRightOf="@id/ivActivitySelfieProfile"
-                android:text="kjdsbksjhkdjaksadjhka"
                 android:textAppearance="?android:textAppearanceSmall"
                 android:textStyle="bold" />
 
