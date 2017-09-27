@@ -38,21 +38,23 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="1"
+            android:textAllCaps="false"
             android:background="@null"
             android:text="@string/dialog_cancel"
             android:textColor="@color/colorPrimary"
-            android:textStyle="bold" />
+             />
 
         <Button
             android:id="@+id/btAccept"
             android:layout_width="0dp"
+            android:textAllCaps="false"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:background="@null"
             android:text="@string/dialog_accept"
             android:textColor="@color/colorPrimary"
-            android:textStyle="bold" />
+             />
 
 
     </LinearLayout>

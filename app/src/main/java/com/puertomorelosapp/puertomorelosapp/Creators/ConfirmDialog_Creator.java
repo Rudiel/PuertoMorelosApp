@@ -25,42 +25,51 @@ import com.puertomorelosapp.puertomorelosapp.R;
 public class ConfirmDialog_Creator {
 
     public void showConfirmDialog(@NonNull final Context context, @Nullable String title, @Nullable String message, final IConfirmDialog_Creator listener) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
+        final Dialog dialog = new Dialog(context);
+
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.layout_dialog);
+
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+
+        final Button btDialogOK = (Button) dialog.findViewById(R.id.btOK);
+
+        final TextView tvDialogTitle = (TextView) dialog.findViewById(R.id.tvTitle);
+        final TextView tvDialogMessage = (TextView) dialog.findViewById(R.id.tvMessage);
+
+        final LinearLayout llButtons = (LinearLayout) dialog.findViewById(R.id.llButtons);
+
+        final Button btAccept = dialog.findViewById(R.id.btAccept);
+        final Button btCancel = dialog.findViewById(R.id.btCancel);
 
         if (title != null)
-            builder.setTitle(title);
+            tvDialogTitle.setText(title);
 
         if (message != null)
-            builder.setMessage(message);
+            tvDialogMessage.setText(message);
 
+        llButtons.setVisibility(View.VISIBLE);
 
-        final AlertDialog dialogo = builder
-                .setPositiveButton(context.getString(R.string.menu_close_session_accept), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        listener.onAccept((AlertDialog) dialog);
-                    }
-                })
+        btDialogOK.setVisibility(View.GONE);
 
-                .setNegativeButton(context.getString(R.string.menu_close_session_cancel), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        listener.onCancel((AlertDialog) dialog);
-                    }
-                }).create();
-
-        dialogo.setOnShowListener(new DialogInterface.OnShowListener() {
+        btAccept.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onShow(DialogInterface arg0) {
-                dialogo.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(context.getResources().getColor(R.color.colorPrimary));
-                dialogo.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(context.getResources().getColor(R.color.colorPrimaryDark));
+            public void onClick(View view) {
+                listener.onAccept(dialog);
+            }
+        });
 
+        btCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onCancel(dialog);
             }
         });
 
 
-        dialogo.show();
+        dialog.show();
 
     }
 
@@ -84,25 +93,24 @@ public class ConfirmDialog_Creator {
             etComment.setText(comment.getText());
         }
 
-            btDialogAccept.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+        btDialogAccept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-                    if (!etComment.getText().toString().trim().equals(""))
-                    {
-                        if (comment == null) {
-                            NewComment newComment = new NewComment();
-                            newComment.setText(etComment.getText().toString());
-                            listener.onAccept(dialog, newComment);
-                        } else {
-                            //editamos el comentario
-                            comment.setText(etComment.getText().toString());
-                            listener.onEdit(dialog, comment);
-                        }
+                if (!etComment.getText().toString().trim().equals("")) {
+                    if (comment == null) {
+                        NewComment newComment = new NewComment();
+                        newComment.setText(etComment.getText().toString());
+                        listener.onAccept(dialog, newComment);
+                    } else {
+                        //editamos el comentario
+                        comment.setText(etComment.getText().toString());
+                        listener.onEdit(dialog, comment);
                     }
-
                 }
-            });
+
+            }
+        });
 
         btDialogCancel.setOnClickListener(new View.OnClickListener() {
             @Override

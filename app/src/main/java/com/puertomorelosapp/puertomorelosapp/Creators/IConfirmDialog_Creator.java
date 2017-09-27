@@ -1,6 +1,6 @@
 package com.puertomorelosapp.puertomorelosapp.Creators;
 
-import android.app.AlertDialog;
+import android.app.Dialog;
 
 /**
  * Created by rudielavilaperaza on 6/28/17.
@@ -8,7 +8,7 @@ import android.app.AlertDialog;
 
 public interface IConfirmDialog_Creator {
 
-    void onAccept(AlertDialog dialog);
+    void onAccept(Dialog dialog);
 
-    void onCancel(AlertDialog dialog);
+    void onCancel(Dialog dialog);
 }

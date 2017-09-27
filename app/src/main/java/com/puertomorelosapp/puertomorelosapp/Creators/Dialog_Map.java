@@ -1,23 +1,23 @@
 package com.puertomorelosapp.puertomorelosapp.Creators;
 
+import android.Manifest;
 import android.app.Dialog;
-import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.view.WindowManager;
-import android.widget.EditText;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -40,7 +40,8 @@ public class Dialog_Map extends DialogFragment {
     private SubCategory subCategory;
     private static View view;
 
-    SupportMapFragment fragment;
+    private SupportMapFragment fragment;
+    private GoogleMap map;
 
 
     public Dialog_Map() {
@@ -100,10 +101,12 @@ public class Dialog_Map extends DialogFragment {
         fragment.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap googleMap) {
+
+                map = googleMap;
                 try {
 
                     try {
-                        googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(getActivity(), R.raw.style_json));
+                        map.setMapStyle(MapStyleOptions.loadRawResourceStyle(getActivity(), R.raw.style_json));
 
                     } catch (Resources.NotFoundException e) {
 
@@ -148,11 +151,16 @@ public class Dialog_Map extends DialogFragment {
                             break;
                     }
 
-                    googleMap.addMarker(marker);
+                    map.addMarker(marker);
 
-                    googleMap.setMyLocationEnabled(true);
+                    if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                        requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1001);
+                    } else {
+                        map.setMyLocationEnabled(true);
+                    }
 
-                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 16));
+
+                    map.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 16));
 
 
                 } catch (Exception e) {
@@ -161,6 +169,16 @@ public class Dialog_Map extends DialogFragment {
             }
         });
 
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 1001) {
+            if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                map.setMyLocationEnabled(true);
+            }
+        }
     }
 
 

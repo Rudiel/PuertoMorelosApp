@@ -1,6 +1,7 @@
 package com.puertomorelosapp.puertomorelosapp.Main;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -269,7 +270,7 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
                 getString(R.string.menu_close_session_message),
                 new IConfirmDialog_Creator() {
                     @Override
-                    public void onAccept(AlertDialog dialog) {
+                    public void onAccept(Dialog dialog) {
 
                         auth.signOut();
 
@@ -288,7 +289,7 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
                     }
 
                     @Override
-                    public void onCancel(AlertDialog dialog) {
+                    public void onCancel(Dialog dialog) {
                         dialog.dismiss();
                     }
                 });
