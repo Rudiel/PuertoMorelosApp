@@ -1,6 +1,7 @@
 package com.puertomorelosapp.puertomorelosapp.Login;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -13,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -29,6 +31,7 @@ import com.facebook.login.widget.LoginButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.puertomorelosapp.puertomorelosapp.Creators.Dialog_Creator;
 import com.puertomorelosapp.puertomorelosapp.Creators.IDialog_Creator;
+import com.puertomorelosapp.puertomorelosapp.Creators.Loading_Creator;
 import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
 import com.puertomorelosapp.puertomorelosapp.Models.User;
 import com.puertomorelosapp.puertomorelosapp.R;
@@ -60,8 +63,6 @@ public class Login_Activity extends AppCompatActivity implements ILogin_View, Fa
     @Bind(R.id.btLoginFacebook)
     Button btLoginFace;
 
-    @Bind(R.id.pbLogin)
-    ProgressBar pbLogin;
 
     @Bind(R.id.tvForget)
     TextView tvForget;
@@ -77,8 +78,9 @@ public class Login_Activity extends AppCompatActivity implements ILogin_View, Fa
 
     private FirebaseAuth auth;
 
-
     private CallbackManager callbackManager;
+
+    private Dialog loading;
 
 
     @Override
@@ -118,6 +120,11 @@ public class Login_Activity extends AppCompatActivity implements ILogin_View, Fa
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (v != null) {
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                }
                 startLogin();
             }
         });
@@ -144,17 +151,19 @@ public class Login_Activity extends AppCompatActivity implements ILogin_View, Fa
 
         setDrawableHint(android.R.color.darker_gray);
 
+        loading = new Loading_Creator().showLoadingLogin(this, "Iniciando sesion");
+
 
     }
 
     @Override
     public void showLoading() {
-        pbLogin.setVisibility(View.VISIBLE);
+        loading.show();
     }
 
     @Override
     public void hideLoading() {
-        pbLogin.setVisibility(View.GONE);
+        loading.dismiss();
     }
 
     @Override

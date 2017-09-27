@@ -352,6 +352,9 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
             }
         });
 
+        setTextViewDrawableColor(tvDetailDescriptionTitle);
+        setTextViewDrawableColor(tvDetailUbicationTitle);
+
 
     }
 
@@ -418,8 +421,6 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
             }
         });
 
-        setTextViewDrawableColor(tvDetailDescriptionTitle);
-        setTextViewDrawableColor(tvDetailUbicationTitle);
 
     }
 
