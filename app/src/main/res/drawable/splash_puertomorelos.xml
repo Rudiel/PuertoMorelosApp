@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--<item
+        android:drawable="@drawable/launch_residences"
+        android:gravity="center"
+        />-->
+
+  <item android:gravity="fill|center" >
+        <bitmap
+            android:gravity="fill|center"
+            android:src="@drawable/launch"
+            android:tileMode="disabled"
+            android:tintMode="screen"
+            />
+    </item>
+
+
+</layer-list>

@@ -98,6 +98,8 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setTheme(R.style.AppTheme);
         setContentView(R.layout.activity_main);
 
         auth = FirebaseAuth.getInstance();
