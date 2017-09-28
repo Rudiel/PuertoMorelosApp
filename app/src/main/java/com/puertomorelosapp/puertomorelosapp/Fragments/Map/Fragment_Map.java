@@ -142,9 +142,10 @@ public class Fragment_Map extends Fragment implements OnMapReadyCallback, IMap_V
                             break;
                     }
 //Html.fromHtml("<html><body><font size=5 color=red>Hello </font> World </body><html>")
-                    markerOptions.title(place.getNombre() + "\n" + Html.fromHtml("<font size=8 >" + place.getSubcategoria() + "</font>"));
+                    markerOptions.snippet(place.getSubcategoria());
                 } else
-                    markerOptions.title(place.getNombre());
+                    markerOptions.snippet(place.getCategoria());
+                markerOptions.title(place.getNombre());
 
                 map.addMarker(markerOptions);
             }

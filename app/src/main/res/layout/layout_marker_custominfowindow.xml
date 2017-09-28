@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:padding="10dp"
     android:background="@drawable/bubble_approach_white"
     android:orientation="vertical">
 
@@ -10,8 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:padding="10dp"
         android:textColor="@color/colorPrimaryDark"
         android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvMarkerSubtitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/colorPrimary" />
 
 </LinearLayout>

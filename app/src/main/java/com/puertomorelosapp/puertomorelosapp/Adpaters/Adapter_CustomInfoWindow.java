@@ -33,9 +33,14 @@ public class Adapter_CustomInfoWindow implements GoogleMap.InfoWindowAdapter {
 
         TextView tvTitle = (TextView) v.findViewById(R.id.tvMarkerTitle);
 
+        TextView tvSubtitle = v.findViewById(R.id.tvMarkerSubtitle);
+
         //tvTitle.setTypeface(Utils.getMisoFont(context));
 
         tvTitle.setText(marker.getTitle());
+
+        tvSubtitle.setText(marker.getSnippet());
+
 
         return v;
         //return LayoutInflater.from(context).inflate(R.layout.layout_marker_custominfowindow,null ,false);
