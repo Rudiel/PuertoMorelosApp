@@ -1,5 +1,6 @@
 package com.puertomorelosapp.puertomorelosapp.Fragments.AboutUs;
 
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -39,6 +40,9 @@ public class AboutUs_Fragment extends Fragment implements IAboutUs_View {
 
     @Bind(R.id.btAboutTwi)
     Button btTwit;
+
+    @Bind(R.id.tvAboutUsVersion)
+    TextView tvAboutUsVersion;
 
 
     @Nullable
@@ -90,6 +94,12 @@ public class AboutUs_Fragment extends Fragment implements IAboutUs_View {
                 presenter.onTwitterClick();
             }
         });
+
+        try {
+            tvAboutUsVersion.setText("Versión" + " " + getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0).versionName);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
