@@ -151,7 +151,7 @@ public class Login_Activity extends AppCompatActivity implements ILogin_View, Fa
 
         setDrawableHint(android.R.color.darker_gray);
 
-        loading = new Loading_Creator().showLoadingLogin(this, "Iniciando sesion");
+        loading = new Loading_Creator().showLoadingLogin(this, getString(R.string.login_loading));
 
 
     }

@@ -23,4 +23,8 @@ public interface IPhotos_View {
 
     void showPhotos(List<Selfie> selfieList);
 
+    void showUploadingSelfie();
+
+    void hidelUploadingSelfie();
+
 }

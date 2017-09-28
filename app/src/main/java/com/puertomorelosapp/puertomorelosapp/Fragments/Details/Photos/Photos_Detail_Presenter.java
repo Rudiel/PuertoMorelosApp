@@ -184,7 +184,7 @@ public class Photos_Detail_Presenter implements IPhotos_Presenter {
     @Override
     public void saveSelfie(final byte[] bytesThumb, byte[] bytes, final Selfie selfie, final String itemName) {
 
-        view.showLoadingSelfie();
+        view.showUploadingSelfie();
 
         StorageReference storage = FirebaseStorage.getInstance().getReference("/PuertoMorelos/selfies/" + itemName + "/" + "(" + selfie.getTimeStamp() + ").jpg");
 
@@ -257,7 +257,7 @@ public class Photos_Detail_Presenter implements IPhotos_Presenter {
 
         FirebaseDatabase.getInstance().getReference().child(Utils.SELFIES_URL_NEW + Utils.getProvider(context) + "/" + key).setValue(selfie);
 
-        view.hideLoadingSelfie();
+        view.hidelUploadingSelfie();
 
 
     }

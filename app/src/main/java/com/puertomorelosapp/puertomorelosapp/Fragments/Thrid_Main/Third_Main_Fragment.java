@@ -9,8 +9,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import com.bumptech.glide.Glide;
 import com.puertomorelosapp.puertomorelosapp.Adpaters.ThirdCategories_Adapter;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Secundary_Main.SecundaryMain_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
@@ -42,6 +44,9 @@ public class Third_Main_Fragment extends Fragment implements IThird_View, IOncli
 
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+
+    @Bind(R.id.ivThirdCategoryBackground)
+    ImageView ivThirdCategoryBackground;
 
     @Nullable
     @Override
@@ -83,6 +88,8 @@ public class Third_Main_Fragment extends Fragment implements IThird_View, IOncli
         ((Main_Activity) getActivity()).ivMap.setVisibility(View.GONE);
 
         ((Main_Activity) getActivity()).hideMenu();
+
+        Glide.with(getActivity()).load(R.drawable.historia_fondo).into(ivThirdCategoryBackground);
 
     }
 

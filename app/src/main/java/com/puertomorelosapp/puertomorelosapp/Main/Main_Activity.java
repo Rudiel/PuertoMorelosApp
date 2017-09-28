@@ -157,11 +157,6 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
 
         tvUserName.setText(Utils.getUserName(this));
 
-        presenter.getMenuComments(Utils.getProvider(this));
-
-        presenter.getMenuLikes(Utils.getProvider(this));
-
-        setFragment(new Categories_Fragment(), false, null);
 
     }
 
@@ -310,22 +305,43 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
     @Override
     public void showAd(String URL) {
 
-        toolbar.setVisibility(View.GONE);
+        if (!URL.equals("")) {
+            toolbar.setVisibility(View.GONE);
 
-        ivAd.setVisibility(View.VISIBLE);
+            ivAd.setVisibility(View.VISIBLE);
 
-        ivAd.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            ivAd.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+
+            Glide.with(this).load(URL).centerCrop().into(ivAd);
+
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+
+                    toolbar.setVisibility(View.VISIBLE);
+                    ivAd.setVisibility(View.GONE);
+
+                    presenter.getMenuComments(Utils.getProvider(Main_Activity.this));
+
+                    presenter.getMenuLikes(Utils.getProvider(Main_Activity.this));
+
+                    setFragment(new Categories_Fragment(), false, null);
+
+                }
+            }, 3000);
+        } else {
+
+            toolbar.setVisibility(View.VISIBLE);
+            ivAd.setVisibility(View.GONE);
+
+            presenter.getMenuComments(Utils.getProvider(Main_Activity.this));
+
+            presenter.getMenuLikes(Utils.getProvider(Main_Activity.this));
+
+            setFragment(new Categories_Fragment(), false, null);
+        }
 
 
-        Glide.with(this).load(URL).centerCrop().into(ivAd);
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                toolbar.setVisibility(View.VISIBLE);
-                ivAd.setVisibility(View.GONE);
-            }
-        }, 3000);
     }
 
 

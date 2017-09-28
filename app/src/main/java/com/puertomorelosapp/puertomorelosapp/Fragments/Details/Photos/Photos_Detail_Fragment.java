@@ -29,6 +29,7 @@ import com.puertomorelosapp.puertomorelosapp.Adpaters.Gallery_Adapter;
 import com.puertomorelosapp.puertomorelosapp.Adpaters.Selfies_Adapter;
 import com.puertomorelosapp.puertomorelosapp.Creators.Gallery_Dialog_Creator;
 import com.puertomorelosapp.puertomorelosapp.Creators.INewPhoto_Creator;
+import com.puertomorelosapp.puertomorelosapp.Creators.Loading_Creator;
 import com.puertomorelosapp.puertomorelosapp.Creators.PhotoDialog_Creator;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Activities.Selfies.IDeleteSelfie;
 import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
@@ -106,6 +107,8 @@ public class Photos_Detail_Fragment extends Fragment implements IPhotos_View, IG
 
     private byte bytesThumb[];
 
+    private Dialog loading;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -158,6 +161,8 @@ public class Photos_Detail_Fragment extends Fragment implements IPhotos_View, IG
                 }
             }
         });
+
+        loading = new Loading_Creator().showLoadingLogin(getActivity(), getString(R.string.newselfie_loading));
 
 
     }
@@ -220,6 +225,16 @@ public class Photos_Detail_Fragment extends Fragment implements IPhotos_View, IG
         rvSelfies.setAdapter(new Selfies_Adapter(selfieList, getActivity(), Photos_Detail_Fragment.this));
 
 
+    }
+
+    @Override
+    public void showUploadingSelfie() {
+        loading.show();
+    }
+
+    @Override
+    public void hidelUploadingSelfie() {
+        loading.dismiss();
     }
 
 

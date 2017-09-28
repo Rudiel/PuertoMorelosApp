@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import com.bumptech.glide.Glide;
 import com.puertomorelosapp.puertomorelosapp.Adpaters.Categories_Adapter;
 import com.puertomorelosapp.puertomorelosapp.Adpaters.SubCategories_Adapter;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Details.Detail_Fragment;
@@ -51,6 +52,9 @@ public class SecundaryMain_Fragment extends Fragment implements ISecundaryMain_v
 
     private Main_Activity activity;
 
+    @Bind(R.id.ivSecundaryCategoryBackground)
+    ImageView ivSecundaryCategoryBackground;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -70,7 +74,7 @@ public class SecundaryMain_Fragment extends Fragment implements ISecundaryMain_v
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        activity=((Main_Activity)getActivity());
+        activity = ((Main_Activity) getActivity());
 
         activity.toolbar.setVisibility(View.VISIBLE);
 
@@ -92,6 +96,8 @@ public class SecundaryMain_Fragment extends Fragment implements ISecundaryMain_v
         } else
             presenter.getSubCategories(activity.category);
 
+        Glide.with(getActivity()).load(R.drawable.historia_fondo).into(ivSecundaryCategoryBackground);
+
 
     }
 
@@ -108,7 +114,7 @@ public class SecundaryMain_Fragment extends Fragment implements ISecundaryMain_v
     @Override
     public void showSubCategories(List<SubCategory> subCategories) {
 
-        if (activity!= null)
+        if (activity != null)
             activity.subCategoryList = subCategories;
 
         List<SubCategory> list = new ArrayList<>();

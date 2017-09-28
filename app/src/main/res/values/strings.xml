@@ -7,6 +7,7 @@
     <string name="login_login_button">Entrar</string>
     <string name="login_email_edittext">E-mail</string>
     <string name="login_pass_edittext">Password</string>
+    <string name="login_loading">Iniciando Sesión...</string>
 
     <!--Registro-->
     <string name="registro_mensaje">¿Ya estás registrado?</string>
@@ -74,6 +75,7 @@
     <string name="newphoto_cancel">Cancelar</string>
     <string name="newphoto_publicar">Publicar</string>
     <string name="newphoto_text_hint">¿Que ha pasado?</string>
+    <string name="newselfie_loading">Subiendo Selfie...</string>
 
     <!--Activities-->
 
