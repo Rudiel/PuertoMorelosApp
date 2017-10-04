@@ -3,9 +3,14 @@ package com.puertomorelosapp.puertomorelosapp.Fragments.Details.Photos;
 import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.ClipData;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.storage.StorageManager;
@@ -14,6 +19,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.FileProvider;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -44,9 +50,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -108,6 +116,8 @@ public class Photos_Detail_Fragment extends Fragment implements IPhotos_View, IG
     private byte bytesThumb[];
 
     private Dialog loading;
+
+    String mCurrentPhotoPath;
 
     @Nullable
     @Override
@@ -254,8 +264,48 @@ public class Photos_Detail_Fragment extends Fragment implements IPhotos_View, IG
     }
 
     private void cameraIntent() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent, REQUEST_CAMERA);
+       /* Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, REQUEST_CAMERA);*/
+
+        Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        if (takePicture.resolveActivity(getActivity().getPackageManager()) != null) {
+
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            if (photoFile != null) {
+                Uri u = FileProvider.getUriForFile(getActivity(), "com.example.android.fileprovider", photoFile);
+
+                takePicture.putExtra(MediaStore.EXTRA_OUTPUT, u);
+                if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP) {
+                    takePicture.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                }
+                else if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.JELLY_BEAN) {
+                    ClipData clip=
+                            ClipData.newUri(getActivity().getContentResolver(), "A photo", u);
+
+                    takePicture.setClipData(clip);
+                    takePicture.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                }
+                else {
+                    List<ResolveInfo> resInfoList=
+                            getActivity().getPackageManager()
+                                    .queryIntentActivities(takePicture, PackageManager.MATCH_DEFAULT_ONLY);
+
+                    for (ResolveInfo resolveInfo : resInfoList) {
+                        String packageName = resolveInfo.activityInfo.packageName;
+                        getActivity().grantUriPermission(packageName, u,
+                                Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                    }
+                }
+                startActivityForResult(takePicture, REQUEST_CAMERA);
+            }
+        }
     }
 
     private void galleryIntent() {
@@ -274,7 +324,7 @@ public class Photos_Detail_Fragment extends Fragment implements IPhotos_View, IG
                 onSelectFromGalleryResult(data);
             }
             if (requestCode == REQUEST_CAMERA) {
-                onCaptureImageResult(data);
+                onCaptureImageResult();
             }
         }
     }
@@ -305,8 +355,10 @@ public class Photos_Detail_Fragment extends Fragment implements IPhotos_View, IG
     }
 
 
-    private void onCaptureImageResult(Intent data) {
-        if (data != null) {
+    private void onCaptureImageResult() {
+        /*if (data != null) {
+
+
 
 
             Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
@@ -331,12 +383,30 @@ public class Photos_Detail_Fragment extends Fragment implements IPhotos_View, IG
             thumbnail.compress(Bitmap.CompressFormat.JPEG, 80, bytesT);
 
 
+            Bitmap bitmap= BitmapFactory.decodeFile(destination.getAbsolutePath());
+
+            ByteArrayOutputStream b = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, b);
+
             bytesThumb = bytesT.toByteArray();
 
-            showNewPhotoDialog(bytes.toByteArray());
+            showNewPhotoDialog(b.toByteArray());
 
 
-        }
+        }*/
+
+        Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath);
+
+        ByteArrayOutputStream b = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, b);
+
+        ByteArrayOutputStream bytesT = new ByteArrayOutputStream();
+
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 80, bytesT);
+
+        bytesThumb = bytesT.toByteArray();
+
+        showNewPhotoDialog(b.toByteArray());
     }
 
     @Override
@@ -394,6 +464,19 @@ public class Photos_Detail_Fragment extends Fragment implements IPhotos_View, IG
                 dialog.dismiss();
             }
         });
+    }
+
+    private File createImageFile() throws IOException {
+
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "PM_" + timeStamp + "_";
+        File storageDire = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File i = File.createTempFile(imageFileName,
+                ".jpg",
+                storageDire);
+
+        mCurrentPhotoPath = i.getAbsolutePath();
+        return i;
     }
 
 
