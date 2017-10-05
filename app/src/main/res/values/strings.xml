@@ -90,5 +90,11 @@
     <string name="tutorial_selfie_title_emoticon">¿Esa selfie ya no te gusta tanto?😞</string>
     <string name="tutorial_selfie_subtitle">Búscala en el album, seleccionala y presiona la papeleria.</string>
 
+    <!--Comments-->
+
+    <string name="comments_title">Comentarios</string>
+    <string name="comments_writecomment">Escribe un comentario</string>
+
+
 </resources>
 

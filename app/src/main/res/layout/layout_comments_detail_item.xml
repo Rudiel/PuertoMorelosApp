@@ -24,7 +24,7 @@
             android:textColor="@color/colorAccent"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
-            android:text="jsabkjb" />
+           />
 
         <TextView
             android:id="@+id/tvCommentsDetailUser"
@@ -36,7 +36,7 @@
             android:textAppearance="?android:textAppearanceMedium"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="10dp"
-            android:text="jhbsdjakj" />
+             />
 
         <TextView
             android:id="@+id/tvCommentsDetailText"
@@ -47,7 +47,7 @@
             android:textAppearance="?android:textAppearanceMedium"
             android:layout_below="@id/tvCommentsDetailUser"
             android:layout_marginLeft="10dp"
-            android:text="adjhbkjh" />
+             />
 
         <View
             android:layout_width="match_parent"

@@ -19,7 +19,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/ivTutorialImage"
         android:layout_margin="20dp"
-        android:text="Titulo"
         android:textStyle="bold"
         android:textColor="@color/colorAccent"
         android:textSize="36sp" />
@@ -30,7 +29,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tvTutorialTitle"
         android:layout_margin="10dp"
-        android:text="subtitulo"
         android:textAppearance="?android:textAppearanceMedium"
         android:textColor="@color/colorAccent" />
 

@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:background="@null"
-            android:text="Accept"
+            android:text="@string/menu_close_session_accept"
             android:textAllCaps="false"
             android:textColor="@color/colorAccent" />
 
@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:background="@null"
-            android:text="Cancel"
+            android:text="@string/menu_close_session_cancel"
             android:textAllCaps="false"
             android:textColor="@color/colorAccent" />
 
@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:background="@null"
             android:maxLength="150"
-            android:hint="Escribe un comentario"
+            android:hint="@string/comments_writecomment"
             android:padding="5dp"
            />
     </RelativeLayout>
