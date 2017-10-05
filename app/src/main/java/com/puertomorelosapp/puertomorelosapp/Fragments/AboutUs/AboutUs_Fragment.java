@@ -70,28 +70,28 @@ public class AboutUs_Fragment extends Fragment implements IAboutUs_View {
         btInsta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.onInstagramClick();
+                presenter.onInstagramClick(getActivity());
             }
         });
 
         btContact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.onContactClick();
+                presenter.onContactClick(getActivity());
             }
         });
 
         btFace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.onFacebookClick();
+                presenter.onFacebookClick(getActivity());
             }
         });
 
         btTwit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.onTwitterClick();
+                presenter.onTwitterClick(getActivity());
             }
         });
 

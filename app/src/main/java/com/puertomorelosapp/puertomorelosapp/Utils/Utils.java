@@ -41,6 +41,13 @@ public class Utils {
 
     public static final String ADS_URL = "PuertoMorelos/imagenesURL/Publicidad/";
 
+    public static final String SOCIAL_FACEBOOK = "https://www.facebook.com/puertomorelosapp/";
+    public static String FACEBOOK_PAGE_ID = "puertomorelosapp";
+
+    public static final String SOCIAL_EMAIL = "info@puertomorelosapp.com";
+    public static final String SOCIAL_TWITTER = "https://twitter.com/PMorelosApp";
+    public static final String SOCIAL_INSTAGRAM = "https://www.instagram.com/puertomorelosapp/";
+
 
     public static Typeface getbukharisLetter(Context context) {
         return Typeface.createFromAsset(context.getAssets(), "fonts/bukhariscript.ttf");
