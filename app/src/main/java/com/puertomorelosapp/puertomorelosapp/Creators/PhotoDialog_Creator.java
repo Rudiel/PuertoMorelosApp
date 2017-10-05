@@ -47,15 +47,6 @@ public class PhotoDialog_Creator {
         final Button btNewPhotoCancel = (Button) dialog.findViewById(R.id.btNewPhotoCancel);
         final TextView tvNewPhotoUserName = (TextView) dialog.findViewById(R.id.tvNewPhotoUserName);
 
-        /*Glide.with(context).load(bytes).asBitmap().centerCrop().into(new BitmapImageViewTarget(ivNewPhoto) {
-            @Override
-            protected void setResource(Bitmap resource) {
-                RoundedBitmapDrawable circularBitmapDrawable =
-                        RoundedBitmapDrawableFactory.create(context.getResources(), resource);
-                circularBitmapDrawable.setCircular(true);
-                ivNewPhoto.setImageDrawable(circularBitmapDrawable);
-            }
-        });*/
 
         Glide.with(context).load(bytes).listener(new RequestListener<byte[], GlideDrawable>() {
             @Override

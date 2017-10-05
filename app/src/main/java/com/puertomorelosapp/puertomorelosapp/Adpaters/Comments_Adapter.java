@@ -70,7 +70,7 @@ public class Comments_Adapter extends RecyclerView.Adapter<Comments_Adapter.View
         SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         SimpleDateFormat output = new SimpleDateFormat("dd MMM HH:mm");
         try {
-            Date oneWayTripDate = input.parse(commentsList.get(position).getFecha());                 // parse input
+            Date oneWayTripDate = input.parse(commentsList.get(position).getFecha()); // parse input
             holder.tvCommentDate.setText(output.format(oneWayTripDate));    // format output
         } catch (ParseException e) {
             e.printStackTrace();

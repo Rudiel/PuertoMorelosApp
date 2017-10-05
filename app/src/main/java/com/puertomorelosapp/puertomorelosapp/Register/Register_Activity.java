@@ -8,7 +8,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
@@ -17,13 +16,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.puertomorelosapp.puertomorelosapp.Creators.Dialog_Creator;
 import com.puertomorelosapp.puertomorelosapp.Creators.IDialog_Creator;
-import com.puertomorelosapp.puertomorelosapp.Login.Login_Activity;
 import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
 import com.puertomorelosapp.puertomorelosapp.Models.Register;
 import com.puertomorelosapp.puertomorelosapp.Models.Response.User;
@@ -130,15 +127,6 @@ public class Register_Activity extends AppCompatActivity implements IRegister_Vi
                 getString(R.string.title_register),
                 message,
                 new IDialog_Creator() {
-                    @Override
-                    public void didConfirm(Dialog dialog) {
-
-                    }
-
-                    @Override
-                    public void didCancel(Dialog dialog) {
-
-                    }
 
                     @Override
                     public void didOK(Dialog dialog) {

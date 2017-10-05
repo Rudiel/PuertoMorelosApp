@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -18,7 +17,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -184,15 +182,6 @@ public class Login_Activity extends AppCompatActivity implements ILogin_View, Fa
                 getString(R.string.title_register),
                 message,
                 new IDialog_Creator() {
-                    @Override
-                    public void didConfirm(Dialog dialog) {
-
-                    }
-
-                    @Override
-                    public void didCancel(Dialog dialog) {
-
-                    }
 
                     @Override
                     public void didOK(Dialog dialog) {

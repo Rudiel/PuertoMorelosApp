@@ -139,15 +139,6 @@ public class Recover_Activity extends AppCompatActivity implements IRecover_View
                 getString(R.string.title_register),
                 message,
                 new IDialog_Creator() {
-                    @Override
-                    public void didConfirm(Dialog dialog) {
-
-                    }
-
-                    @Override
-                    public void didCancel(Dialog dialog) {
-
-                    }
 
                     @Override
                     public void didOK(Dialog dialog) {

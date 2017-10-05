@@ -1,9 +1,6 @@
 package com.puertomorelosapp.puertomorelosapp.Fragments.Details.Comments;
 
 
-import android.support.v7.widget.RecyclerView;
-
-import com.google.firebase.database.DatabaseReference;
 import com.puertomorelosapp.puertomorelosapp.Models.Request.NewComment;
 import com.puertomorelosapp.puertomorelosapp.Models.Request.RoutesComments;
 

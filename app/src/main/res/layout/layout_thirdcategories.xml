@@ -5,11 +5,17 @@
     android:orientation="vertical">
 
     <ImageView
-        android:id="@+id/ivThirdCategoryBackground"
         android:layout_width="match_parent"
-        android:scaleType="fitXY"
         android:layout_height="match_parent"
-   />
+        android:scaleType="fitEnd"
+        android:src="@drawable/secundary_background" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:scaleType="fitStart"
+        android:src="@drawable/top_background" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvThirdCategories"

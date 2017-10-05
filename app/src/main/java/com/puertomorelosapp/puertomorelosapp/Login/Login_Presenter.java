@@ -17,10 +17,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.puertomorelosapp.puertomorelosapp.Models.Request.NewUser;
 import com.puertomorelosapp.puertomorelosapp.Models.User;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
-import com.puertomorelosapp.puertomorelosapp.Utils.Utils;
 
 /**
  * Created by rudielavilaperaza on 6/8/17.

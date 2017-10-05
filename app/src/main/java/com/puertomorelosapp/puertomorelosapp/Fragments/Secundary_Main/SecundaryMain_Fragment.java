@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
@@ -52,9 +51,6 @@ public class SecundaryMain_Fragment extends Fragment implements ISecundaryMain_v
     private RecyclerView.LayoutManager mLayoutManager;
 
     private Main_Activity activity;
-
-    @Bind(R.id.ivSecundaryCategoryBackground)
-    ImageView ivSecundaryCategoryBackground;
 
     @Bind(R.id.ivAdSubcategory)
     ImageView ivAdSubcategory;
@@ -101,8 +97,6 @@ public class SecundaryMain_Fragment extends Fragment implements ISecundaryMain_v
             this.showSubCategories(activity.subCategoryList);
         } else
             presenter.getSubCategories(activity.category);
-
-        Glide.with(getActivity()).load(R.drawable.historia_fondo).into(ivSecundaryCategoryBackground);
 
 
     }

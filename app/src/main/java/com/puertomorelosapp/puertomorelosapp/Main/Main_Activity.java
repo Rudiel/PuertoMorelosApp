@@ -1,6 +1,5 @@
 package com.puertomorelosapp.puertomorelosapp.Main;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;

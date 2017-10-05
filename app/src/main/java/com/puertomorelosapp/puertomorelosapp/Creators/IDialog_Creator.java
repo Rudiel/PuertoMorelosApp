@@ -9,9 +9,5 @@ import android.support.v7.app.AlertDialog;
 
 public interface IDialog_Creator {
 
-    void didConfirm(Dialog dialog);
-
-    void didCancel(Dialog dialog);
-
     void didOK(Dialog dialog);
 }

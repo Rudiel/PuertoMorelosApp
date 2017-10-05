@@ -2,7 +2,6 @@ package com.puertomorelosapp.puertomorelosapp.Adpaters;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.CardView;
@@ -14,13 +13,10 @@ import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
-import com.google.firebase.auth.FirebaseAuth;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Details.Photos.ISelfieClickListener;
 import com.puertomorelosapp.puertomorelosapp.Models.Request.Selfie;
 import com.puertomorelosapp.puertomorelosapp.R;
@@ -109,8 +105,6 @@ public class Selfies_Adapter extends RecyclerView.Adapter<Selfies_Adapter.ViewHo
             e.printStackTrace();
         }
 
-        //Se tendra que buscar el nombre del usuario por id
-        //holder.tvSelfieUserName.setText(selfieList.get(position).get);
 
         if (selfieList.get(position).getPhotographer().getImageURL().equals("SomeimageURL")) {
             holder.ivSelfieProfile.setImageDrawable(context.getResources().getDrawable(R.drawable.avatar_deafult));

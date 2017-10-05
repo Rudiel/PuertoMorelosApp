@@ -1,6 +1,5 @@
 package com.puertomorelosapp.puertomorelosapp.Dagger;
 
-import com.google.android.gms.maps.MapFragment;
 import com.puertomorelosapp.puertomorelosapp.Fragments.AboutUs.AboutUs_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Fragments.AboutUs.AboutUs_Presenter;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Activities.Comments.Comentarios_Fragment;

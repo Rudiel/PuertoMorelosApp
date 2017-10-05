@@ -26,35 +26,21 @@ public class Adapter_CustomInfoWindow implements GoogleMap.InfoWindowAdapter {
     @Override
     public View getInfoWindow(Marker marker) {
 
-        //TODO: Cambiar el texto mostrado e informacion si es necesaria
-
-
         View v = LayoutInflater.from(context).inflate(R.layout.layout_marker_custominfowindow, null, false);
 
         TextView tvTitle = (TextView) v.findViewById(R.id.tvMarkerTitle);
 
         TextView tvSubtitle = v.findViewById(R.id.tvMarkerSubtitle);
 
-        //tvTitle.setTypeface(Utils.getMisoFont(context));
-
         tvTitle.setText(marker.getTitle());
 
         tvSubtitle.setText(marker.getSnippet());
 
-
         return v;
-        //return LayoutInflater.from(context).inflate(R.layout.layout_marker_custominfowindow,null ,false);
     }
 
     @Override
     public View getInfoContents(Marker marker) {
-
-
-        // View v = LayoutInflater.from(context).inflate(R.layout.layout_marker_custominfowindow, null, false);
-
-        //TextView tvTitle = (TextView) view.findViewById(R.id.tvMarkerTitle);
-
-        //tvTitle.setText(marker.getTitle());
 
         return null;
     }

@@ -2,7 +2,6 @@ package com.puertomorelosapp.puertomorelosapp.Fragments.Activities.Selfies;
 
 import android.content.Context;
 
-import com.bumptech.glide.util.Util;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;

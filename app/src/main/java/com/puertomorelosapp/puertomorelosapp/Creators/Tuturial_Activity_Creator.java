@@ -7,10 +7,8 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 import com.puertomorelosapp.puertomorelosapp.Adpaters.Activities_Tutorial_Adapter;
-import com.puertomorelosapp.puertomorelosapp.Adpaters.Gallery_Pager_Adapter;
 import com.puertomorelosapp.puertomorelosapp.Models.Tutorial;
 import com.puertomorelosapp.puertomorelosapp.R;
 

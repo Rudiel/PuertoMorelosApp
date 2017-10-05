@@ -13,9 +13,7 @@ import android.widget.ProgressBar;
 
 import com.puertomorelosapp.puertomorelosapp.Adpaters.Activities_Comments_Adapter;
 import com.puertomorelosapp.puertomorelosapp.Creators.ConfirmDialog_Creator;
-import com.puertomorelosapp.puertomorelosapp.Creators.Dialog_Creator;
 import com.puertomorelosapp.puertomorelosapp.Creators.IConfirmComment_Creator;
-import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
 import com.puertomorelosapp.puertomorelosapp.Models.Request.NewComment;
 import com.puertomorelosapp.puertomorelosapp.Models.Response.Comments;
 import com.puertomorelosapp.puertomorelosapp.R;
@@ -108,13 +106,6 @@ public class Comentarios_Fragment extends Fragment implements IComentarios_View,
         pbActivitiesComments.setVisibility(View.GONE);
     }
 
-    @Override
-    public void refreshComments() {
-
-        commentsList.clear();
-
-        adapter.notifyDataSetChanged();
-    }
 
     @Override
     public void onEditComment(Comments comment) {

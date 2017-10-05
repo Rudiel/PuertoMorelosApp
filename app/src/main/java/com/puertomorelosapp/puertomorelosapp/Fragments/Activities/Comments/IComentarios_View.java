@@ -17,5 +17,4 @@ public interface IComentarios_View {
 
     void hideLoading();
 
-    void refreshComments();
 }

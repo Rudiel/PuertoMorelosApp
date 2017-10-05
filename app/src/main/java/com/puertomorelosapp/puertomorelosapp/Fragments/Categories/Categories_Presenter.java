@@ -1,14 +1,12 @@
 package com.puertomorelosapp.puertomorelosapp.Fragments.Categories;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
 import com.puertomorelosapp.puertomorelosapp.Models.Categorie;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
 import com.puertomorelosapp.puertomorelosapp.Utils.Utils;
@@ -24,8 +22,6 @@ import java.util.List;
 public class Categories_Presenter implements ICategories_Presenter {
 
     private ICategories_View view;
-
-    String image = null;
 
 
     public Categories_Presenter(Context context) {

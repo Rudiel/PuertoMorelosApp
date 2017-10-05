@@ -13,14 +13,12 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.storage.StorageManager;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -47,8 +45,6 @@ import com.puertomorelosapp.puertomorelosapp.Utils.Utils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -356,44 +352,6 @@ public class Photos_Detail_Fragment extends Fragment implements IPhotos_View, IG
 
 
     private void onCaptureImageResult() {
-        /*if (data != null) {
-
-
-
-
-            Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
-            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-            thumbnail.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-            File destination = new File(Environment.getExternalStorageDirectory(),
-                    System.currentTimeMillis() + ".jpg");
-            FileOutputStream fo;
-            try {
-                destination.createNewFile();
-                fo = new FileOutputStream(destination);
-                fo.write(bytes.toByteArray());
-                fo.close();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            ByteArrayOutputStream bytesT = new ByteArrayOutputStream();
-
-            thumbnail.compress(Bitmap.CompressFormat.JPEG, 80, bytesT);
-
-
-            Bitmap bitmap= BitmapFactory.decodeFile(destination.getAbsolutePath());
-
-            ByteArrayOutputStream b = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, b);
-
-            bytesThumb = bytesT.toByteArray();
-
-            showNewPhotoDialog(b.toByteArray());
-
-
-        }*/
 
         Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath);
 
