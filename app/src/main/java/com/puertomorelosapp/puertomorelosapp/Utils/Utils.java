@@ -39,6 +39,7 @@ public class Utils {
 
     public static final String SELFIES_URL_NEW = "SocialUSER/PhotoSelfies/";
 
+    public static final String ADS_URL = "PuertoMorelos/imagenesURL/Publicidad/";
 
 
     public static Typeface getbukharisLetter(Context context) {

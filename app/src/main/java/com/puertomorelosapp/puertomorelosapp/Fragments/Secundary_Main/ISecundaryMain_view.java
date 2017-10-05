@@ -19,4 +19,6 @@ public interface ISecundaryMain_view {
 
     void updateAdapter();
 
+    void showAd(String url);
+
 }

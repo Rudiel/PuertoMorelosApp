@@ -16,4 +16,6 @@ public interface ISecundaryMain_Presenter {
 
     void getNumberComments(Categorie category);
 
+    void getAd(Categorie category);
+
 }

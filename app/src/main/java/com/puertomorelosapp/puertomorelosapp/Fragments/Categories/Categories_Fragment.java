@@ -52,6 +52,8 @@ public class Categories_Fragment extends Fragment implements ICategories_View, I
     private RecyclerView.Adapter mAdapter;
     private LinearLayoutManager mLayoutManager;
 
+    private Main_Activity activity;
+
 
     public static int index = -1;
     public static int top = -1;
@@ -75,40 +77,42 @@ public class Categories_Fragment extends Fragment implements ICategories_View, I
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        ((Main_Activity) getActivity()).toolbar.setVisibility(View.VISIBLE);
+        activity = ((Main_Activity) getActivity());
 
-        ((Main_Activity) getActivity()).ivMap.setVisibility(View.VISIBLE);
+        activity.toolbar.setVisibility(View.VISIBLE);
 
-        ((Main_Activity)getActivity()).ivMap.setImageDrawable(getResources().getDrawable(R.drawable.ic_pin_drop_white_36dp));
-
-        rvCategories.setHasFixedSize(true);
 
         mLayoutManager = new LinearLayoutManager(getActivity());
 
         rvCategories.setLayoutManager(mLayoutManager);
 
-        ((Main_Activity) getActivity()).ivMap.setOnClickListener(new View.OnClickListener() {
+        activity.ivMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((Main_Activity) getActivity()).setFragment(new Fragment_Map(), false, null);
-                ((Main_Activity) getActivity()).setToolbarTitle(getString(R.string.app_name));
+                activity.setFragment(new Fragment_Map(), false, null);
+                activity.setToolbarTitle(getString(R.string.app_name));
             }
         });
 
 
-        ((Main_Activity) getActivity()).setToolbarTitle(getActivity().getString(R.string.descubre_title));
+        activity.setToolbarTitle(getActivity().getString(R.string.descubre_title));
 
         pbCategories.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.MULTIPLY);
 
-        ((Main_Activity) getActivity()).showMenu();
+        activity.showMenu();
 
+        activity.ivMap.setVisibility(View.VISIBLE);
 
-        if (((Main_Activity) getActivity()).categorieList.size() == 0) {
+        activity.ivMap.setImageDrawable(getResources().getDrawable(R.drawable.ic_pin_drop_white_36dp));
+
+        if (activity.categorieList.size() == 0) {
             presenter.getCategories(getActivity());
         } else
-            showCategories(((Main_Activity) getActivity()).categorieList);
+            showCategories(activity.categorieList);
 
-        ((Main_Activity) getActivity()).subCategoryList.clear();
+        activity.subCategoryList.clear();
+
+        rvCategories.setHasFixedSize(true);
 
 
     }
@@ -126,7 +130,7 @@ public class Categories_Fragment extends Fragment implements ICategories_View, I
     @Override
     public void showCategories(List<Categorie> categories) {
 
-        ((Main_Activity) getActivity()).categorieList = categories;
+        activity.categorieList = categories;
 
         mAdapter = new Categories_Adapter(categories, getActivity(), this);
 
@@ -142,15 +146,15 @@ public class Categories_Fragment extends Fragment implements ICategories_View, I
 
         Log.d("CATE_SELECTED", categoria.getName());
 
-        ((Main_Activity) getActivity()).mainCategory = categoria.getName();
+        activity.mainCategory = categoria.getName();
 
-        ((Main_Activity) getActivity()).category = categoria;
+        activity.category = categoria;
 
         if (categoria.getName().equals("Comercios") || categoria.getName().equals("Servicios")) {
-            ((Main_Activity) getActivity()).setFragment(new Third_Main_Fragment(), true, null);
+            activity.setFragment(new Third_Main_Fragment(), true, null);
 
         } else {
-            ((Main_Activity) getActivity()).setFragment(new SecundaryMain_Fragment(), true, null);
+            activity.setFragment(new SecundaryMain_Fragment(), true, null);
         }
 
 

@@ -126,6 +126,37 @@ public class SecundaryMain_Presenter implements ISecundaryMain_Presenter {
 
     }
 
+    @Override
+    public void getAd(Categorie category) {
+
+        String url = "";
+
+        if (category.getCategoria() != null)
+            url = Utils.ADS_URL + category.getCategoria() + "/" + category.getName();
+        else
+            url = Utils.ADS_URL + category.getName();
+
+
+        FirebaseDatabase.getInstance().getReference().child(url+"/imageURL").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getValue() != null) {
+
+                    Log.d("URL_ADS", dataSnapshot.getValue().toString());
+
+                    view.showAd(dataSnapshot.getValue().toString());
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
     public void getNumberComments(final Categorie categorie, final String subcategoria, final SubCategory subCategory) {
 
 

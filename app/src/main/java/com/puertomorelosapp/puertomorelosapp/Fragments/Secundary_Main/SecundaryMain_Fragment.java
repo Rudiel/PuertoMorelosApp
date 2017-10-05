@@ -2,6 +2,7 @@ package com.puertomorelosapp.puertomorelosapp.Fragments.Secundary_Main;
 
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,14 +11,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
-import com.puertomorelosapp.puertomorelosapp.Adpaters.Categories_Adapter;
 import com.puertomorelosapp.puertomorelosapp.Adpaters.SubCategories_Adapter;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Details.Detail_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
-import com.puertomorelosapp.puertomorelosapp.Models.Categorie;
 import com.puertomorelosapp.puertomorelosapp.Models.SubCategory;
 import com.puertomorelosapp.puertomorelosapp.R;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
@@ -55,6 +56,9 @@ public class SecundaryMain_Fragment extends Fragment implements ISecundaryMain_v
     @Bind(R.id.ivSecundaryCategoryBackground)
     ImageView ivSecundaryCategoryBackground;
 
+    @Bind(R.id.ivAdSubcategory)
+    ImageView ivAdSubcategory;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -75,6 +79,8 @@ public class SecundaryMain_Fragment extends Fragment implements ISecundaryMain_v
         super.onActivityCreated(savedInstanceState);
 
         activity = ((Main_Activity) getActivity());
+
+        presenter.getAd(activity.category);
 
         activity.toolbar.setVisibility(View.VISIBLE);
 
@@ -146,6 +152,28 @@ public class SecundaryMain_Fragment extends Fragment implements ISecundaryMain_v
 
         //mAdapter.notifyDataSetChanged();
 
+    }
+
+    @Override
+    public void showAd(String url) {
+
+        activity.toolbar.setVisibility(View.GONE);
+
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+
+        ivAdSubcategory.setLayoutParams(params);
+
+        ivAdSubcategory.setVisibility(View.VISIBLE);
+
+        Glide.with(getActivity()).load(url).centerCrop().into(ivAdSubcategory);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                activity.toolbar.setVisibility(View.VISIBLE);
+                ivAdSubcategory.setVisibility(View.GONE);
+            }
+        }, 3000);
     }
 
 
