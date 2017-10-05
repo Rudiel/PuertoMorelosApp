@@ -201,6 +201,7 @@ public class Comments_Detail_Fragment extends Fragment implements IComments_View
                             url = Utils.COMMENTS_URL + activity.category.getName() + "/" + activity.subCategory.getId();
                         } else {
                             comment.setCategoria(activity.category.getCategoria());
+                            comment.setSubcategoria(activity.category.getName());
                             url = Utils.COMMENTS_URL + activity.category.getCategoria() + "/" + activity.category.getName() + "/" + activity.subCategory.getId();
                         }
 

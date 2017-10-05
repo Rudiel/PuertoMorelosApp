@@ -17,7 +17,16 @@ public class NewComment {
     private String text;
     private Double timeStamp;
     private String commentId;
+    private String subcategoria;
 
+
+    public String getSubcategoria() {
+        return subcategoria;
+    }
+
+    public void setSubcategoria(String subcategoria) {
+        this.subcategoria = subcategoria;
+    }
 
     public String getCommentId() {
         return commentId;
