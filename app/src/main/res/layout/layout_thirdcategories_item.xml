@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="200dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/primary_transparent"
     android:orientation="vertical">
 
@@ -22,6 +23,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
+        app:autoSizeTextType="uniform"
         android:singleLine="true"
         android:textAppearance="?android:textAppearanceLarge"
         android:textColor="@color/colorAccent"

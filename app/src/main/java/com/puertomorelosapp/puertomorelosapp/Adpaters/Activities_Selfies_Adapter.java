@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -97,11 +98,30 @@ public class Activities_Selfies_Adapter extends RecyclerView.Adapter<Activities_
 
         Glide.with(context).load(selfieList.get(position).getSelfieOriginal()).centerCrop().into(holder.ivSelfie);
 
-        SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        /*SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         SimpleDateFormat output = new SimpleDateFormat("dd MMM HH:mm");
         try {
             Date oneWayTripDate = input.parse(selfieList.get(position).getFecha());// parse input
             holder.tvDate.setText(output.format(oneWayTripDate));    // format output
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }*/
+        SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat output = new SimpleDateFormat("dd MMM HH:mm");
+
+        SimpleDateFormat out24 = new SimpleDateFormat("HH:mm");
+
+        int time24 = 24 * 60 * 60 * 1000;
+        int time48 = time24 * 2;
+
+        try {
+            Date oneWayTripDate = input.parse(selfieList.get(position).getFecha());// parse input
+            if ((System.currentTimeMillis() - oneWayTripDate.getTime()) < time24) {
+                holder.tvDate.setText(context.getString(R.string.comments_today)  + out24.format(oneWayTripDate));
+            } else if ((System.currentTimeMillis() - oneWayTripDate.getTime()) < time48)
+                holder.tvDate.setText(context.getString(R.string.comments_yesterday)  + out24.format(oneWayTripDate));
+            else
+                holder.tvDate.setText(output.format(oneWayTripDate));    // format output
         } catch (ParseException e) {
             e.printStackTrace();
         }

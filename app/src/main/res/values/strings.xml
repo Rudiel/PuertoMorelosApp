@@ -94,7 +94,8 @@
 
     <string name="comments_title">Comentarios</string>
     <string name="comments_writecomment">Escribe un comentario</string>
-
+    <string name="comments_today">Hoy </string>
+    <string name="comments_yesterday">Ayer </string>
 
 </resources>
 

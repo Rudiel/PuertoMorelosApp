@@ -2,6 +2,7 @@ package com.puertomorelosapp.puertomorelosapp.Adpaters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,12 +67,32 @@ public class Activities_Likes_Adapter extends RecyclerView.Adapter<Activities_Li
         holder.tvLikesPlace.setText(likeList.get(position).getNombreEntidad());
         holder.tvLikesCategory.setText(likeList.get(position).getCategoria());
 
-        SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        /*SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         SimpleDateFormat output = new SimpleDateFormat("dd MMM HH:mm");
         try {
             Date oneWayTripDate = input.parse(likeList.get(position).getFecha());
             holder.tvDate.setText(output.format(oneWayTripDate));
 
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }*/
+        SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat output = new SimpleDateFormat("dd MMM HH:mm");
+
+        SimpleDateFormat out24 = new SimpleDateFormat("HH:mm");
+
+        int time24 = 24 * 60 * 60 * 1000;
+        int time48 = time24 * 2;
+
+
+        try {
+            Date oneWayTripDate = input.parse(likeList.get(position).getFecha());// parse input
+            if ((System.currentTimeMillis() - oneWayTripDate.getTime()) < time24) {
+                holder.tvDate.setText(context.getString(R.string.comments_today) + out24.format(oneWayTripDate));
+            } else if ((System.currentTimeMillis() - oneWayTripDate.getTime()) < time48)
+                holder.tvDate.setText(context.getString(R.string.comments_yesterday)  + out24.format(oneWayTripDate));
+            else
+                holder.tvDate.setText(output.format(oneWayTripDate));    // format output
         } catch (ParseException e) {
             e.printStackTrace();
         }

@@ -9,7 +9,7 @@
         android:id="@+id/llSocial"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="11dp"
+        android:layout_marginTop="10dp"
         android:gravity="center"
         android:orientation="horizontal"
         android:layout_alignParentTop="true"
@@ -188,7 +188,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/llMap"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
         android:orientation="vertical">
 
         <TextView
@@ -209,7 +208,6 @@
             android:id="@+id/tvDetailTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
             android:layout_marginTop="20dp"
             android:singleLine="true"
             android:textAppearance="?android:textAppearanceMedium"
@@ -217,12 +215,14 @@
 
         <TextView
             android:id="@+id/tvDetailDescription"
+            android:layout_marginTop="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/tvDetailTitle2"
             android:layout_width="wrap_content"
+            android:visibility="gone"
             android:layout_height="match_parent"
             android:textAppearance="?android:textAppearanceMedium"
             android:textColor="@android:color/black" />

@@ -7,6 +7,7 @@ import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -98,9 +99,22 @@ public class Selfies_Adapter extends RecyclerView.Adapter<Selfies_Adapter.ViewHo
 
         SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         SimpleDateFormat output = new SimpleDateFormat("dd MMM HH:mm");
+
+        SimpleDateFormat out24 = new SimpleDateFormat("HH:mm");
+
+        int time24 = 24 * 60 * 60 * 1000;
+        int time48 = time24 * 2;
+
+        Log.d("TIMEPIC",selfieList.get(position).getFecha());
+
         try {
-            Date oneWayTripDate = input.parse(selfieList.get(position).getFecha());                 // parse input
-            holder.tvSelfieDate.setText(output.format(oneWayTripDate));    // format output
+            Date oneWayTripDate = input.parse(selfieList.get(position).getFecha());// parse input
+            if ((System.currentTimeMillis() - oneWayTripDate.getTime()) < time24) {
+                holder.tvSelfieDate.setText(context.getString(R.string.comments_today)  + out24.format(oneWayTripDate));
+            } else if ((System.currentTimeMillis() - oneWayTripDate.getTime()) < time48)
+                holder.tvSelfieDate.setText(context.getString(R.string.comments_yesterday)  + out24.format(oneWayTripDate));
+            else
+                holder.tvSelfieDate.setText(output.format(oneWayTripDate));    // format output
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -121,8 +135,13 @@ public class Selfies_Adapter extends RecyclerView.Adapter<Selfies_Adapter.ViewHo
             });
         }
 
-        holder.tvSelfieUserName.setText(selfieList.get(position).getPhotographer().getUsername());
+        String name = selfieList.get(position).getPhotographer().getUsername();
 
+        if (name.contains(" ")) {
+            name = name.substring(0, name.indexOf(" "));
+            holder.tvSelfieUserName.setText(name);
+        } else
+            holder.tvSelfieUserName.setText(selfieList.get(position).getPhotographer().getUsername());
 
         Glide.with(context).load(selfieList.get(position).getSelfieThumb()).centerCrop().into(holder.ivSelfie);
 

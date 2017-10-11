@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,14 +70,44 @@ public class Comments_Adapter extends RecyclerView.Adapter<Comments_Adapter.View
 
         SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         SimpleDateFormat output = new SimpleDateFormat("dd MMM HH:mm");
+
+        SimpleDateFormat out24 = new SimpleDateFormat("HH:mm");
+
+        int time24 = 24 * 60 * 60 * 1000;
+        int time48 = time24 * 2;
+
+
+        try {
+            Date oneWayTripDate = input.parse(commentsList.get(position).getFecha());// parse input
+            if ((System.currentTimeMillis() - oneWayTripDate.getTime()) < time24) {
+                holder.tvCommentDate.setText(context.getString(R.string.comments_today) + out24.format(oneWayTripDate));
+            } else if ((System.currentTimeMillis() - oneWayTripDate.getTime()) < time48)
+                holder.tvCommentDate.setText(context.getString(R.string.comments_yesterday) + out24.format(oneWayTripDate));
+            else
+                holder.tvCommentDate.setText(output.format(oneWayTripDate));    // format output
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+        /*SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat output = new SimpleDateFormat("dd MMM HH:mm");
         try {
             Date oneWayTripDate = input.parse(commentsList.get(position).getFecha()); // parse input
             holder.tvCommentDate.setText(output.format(oneWayTripDate));    // format output
         } catch (ParseException e) {
             e.printStackTrace();
-        }
+        }*/
+
         holder.tvCommentText.setText(commentsList.get(position).getText());
-        holder.tvCommentName.setText(commentsList.get(position).getSenderDisplayName());
+
+        String name = commentsList.get(position).getSenderDisplayName();
+
+        if (name.contains(" ")) {
+            name = name.substring(0, name.indexOf(" "));
+            holder.tvCommentName.setText(name);
+        } else
+            holder.tvCommentName.setText(commentsList.get(position).getSenderDisplayName());
 
         if (commentsList.get(position).getImageURL().equals("SomeimageURL") || commentsList.get(position).getImageURL().equals("")) {
             holder.ivProfile.setImageDrawable(context.getResources().getDrawable(R.drawable.avatar_deafult));

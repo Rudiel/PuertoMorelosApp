@@ -3,21 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rlSubCategoryContainer"
     android:layout_width="match_parent"
-    android:background="@color/primary_transparent"
-    android:layout_height="200dp">
+    android:layout_height="200dp"
+    android:background="@color/primary_transparent">
 
     <ImageView
         android:id="@+id/ivSubcategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="200dp"
-        android:scaleType="centerCrop"
-      />
+        android:scaleType="centerCrop" />
 
     <ImageView
         android:layout_width="match_parent"
-        android:src="@drawable/gradient_images"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:src="@drawable/gradient_images" />
 
 
     <ImageView
@@ -71,17 +70,17 @@
     <TextView
         android:id="@+id/tvSubcategoryName"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
-        android:gravity="left"
-        android:singleLine="true"
-        android:layout_alignParentLeft="true"
+        android:layout_marginRight="10dp"
         android:layout_toLeftOf="@id/tvCountLikes"
-        android:textAppearance="?android:textAppearanceLarge"
+        android:gravity="left|bottom"
         android:textColor="@color/colorAccent"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:autoSizeTextType="uniform" />
 
 
 </RelativeLayout>
