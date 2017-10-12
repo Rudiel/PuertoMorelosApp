@@ -84,14 +84,6 @@ public class Categories_Fragment extends Fragment implements ICategories_View, I
 
         rvCategories.setLayoutManager(mLayoutManager);
 
-        activity.ivMap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                activity.setFragment(new Fragment_Map(), false, null);
-                activity.setToolbarTitle(getString(R.string.app_name));
-            }
-        });
-
 
         activity.setToolbarTitle(getActivity().getString(R.string.descubre_title));
 
@@ -102,6 +94,14 @@ public class Categories_Fragment extends Fragment implements ICategories_View, I
         activity.ivMap.setVisibility(View.VISIBLE);
 
         activity.ivMap.setImageDrawable(getResources().getDrawable(R.drawable.ic_pin_drop_white_36dp));
+
+        activity.ivMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.setFragment(new Fragment_Map(), false, null);
+                activity.setToolbarTitle(getString(R.string.app_name));
+            }
+        });
 
         if (activity.categorieList.size() == 0) {
             presenter.getCategories(getActivity());

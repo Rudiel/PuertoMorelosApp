@@ -263,25 +263,25 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
         } else
             tvDireccion.setVisibility(View.GONE);
 
-        if (subCategory.getDescripcion2() != null) {
+        if (subCategory.getDescripcion2() != null && !subCategory.getDescripcion2().equals("")) {
             tvDescripcion2.setVisibility(View.VISIBLE);
             tvDescripcion2.setText(subCategory.getDescripcion2());
         } else
             tvDescripcion2.setVisibility(View.GONE);
 
-        if (subCategory.getTitulo2() != null) {
+        if (subCategory.getTitulo2() != null && !subCategory.getTitulo2().equals("")) {
             tvTitle2.setVisibility(View.VISIBLE);
             tvTitle2.setText(subCategory.getTitulo2());
         } else
             tvTitle2.setVisibility(View.GONE);
 
-        if (subCategory.getDescripcion3() != null) {
+        if (subCategory.getDescripcion3() != null && !subCategory.getDescripcion3().equals("")) {
             tvDescripcion3.setVisibility(View.VISIBLE);
             tvDescripcion3.setText(subCategory.getDescripcion3());
         } else
             tvDescripcion3.setVisibility(View.GONE);
 
-        if (subCategory.getTitulo3() != null) {
+        if (subCategory.getTitulo3() != null && !subCategory.getTitulo3().equals("")) {
             tvTitle3.setVisibility(View.VISIBLE);
             tvTitle3.setText(subCategory.getTitulo3());
         } else
