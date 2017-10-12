@@ -588,5 +588,13 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
         presenter.saveLike(like, isDelete);
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
 
+        tvDetailGallery.setText("0");
+        tvLikes.setText("0");
+        tvComments.setText("0");
+
+    }
 }
