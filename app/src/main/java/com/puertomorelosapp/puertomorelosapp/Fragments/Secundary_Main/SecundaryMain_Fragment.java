@@ -76,8 +76,6 @@ public class SecundaryMain_Fragment extends Fragment implements ISecundaryMain_v
 
         activity = ((Main_Activity) getActivity());
 
-        presenter.getAd(activity.category);
-
         activity.toolbar.setVisibility(View.VISIBLE);
 
         rvSubcategories.setHasFixedSize(true);
@@ -95,8 +93,12 @@ public class SecundaryMain_Fragment extends Fragment implements ISecundaryMain_v
 
         if (activity.subCategoryList.size() > 0) {
             this.showSubCategories(activity.subCategoryList);
-        } else
+        } else {
+
+            presenter.getAd(activity.category);
+
             presenter.getSubCategories(activity.category);
+        }
 
 
     }
