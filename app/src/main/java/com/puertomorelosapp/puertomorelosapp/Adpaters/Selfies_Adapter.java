@@ -20,10 +20,13 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Details.Photos.ISelfieClickListener;
 import com.puertomorelosapp.puertomorelosapp.Models.Request.Selfie;
+import com.puertomorelosapp.puertomorelosapp.Models.Response.User;
 import com.puertomorelosapp.puertomorelosapp.R;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -98,24 +101,10 @@ public class Selfies_Adapter extends RecyclerView.Adapter<Selfies_Adapter.ViewHo
         holder.tvSelfieCommet.setText(selfieList.get(position).getComentario());
 
         SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        SimpleDateFormat output = new SimpleDateFormat("dd MMM HH:mm");
-
-        SimpleDateFormat out24 = new SimpleDateFormat("HH:mm");
-
-        int time24 = 24 * 60 * 60 * 1000;
-        int time48 = time24 * 2;
-
-        Log.d("TIMEPIC",selfieList.get(position).getFecha());
 
         try {
-            Date oneWayTripDate = input.parse(selfieList.get(position).getFecha());// parse input
-            if ((System.currentTimeMillis() - oneWayTripDate.getTime()) < time24) {
-                holder.tvSelfieDate.setText(context.getString(R.string.comments_today)  + out24.format(oneWayTripDate));
-            } else if ((System.currentTimeMillis() - oneWayTripDate.getTime()) < time48)
-                holder.tvSelfieDate.setText(context.getString(R.string.comments_yesterday)  + out24.format(oneWayTripDate));
-            else
-                holder.tvSelfieDate.setText(output.format(oneWayTripDate));    // format output
-        } catch (ParseException e) {
+            holder.tvSelfieDate.setText(getFormattedDate(input.parse(selfieList.get(position).getFecha())));
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -157,6 +146,28 @@ public class Selfies_Adapter extends RecyclerView.Adapter<Selfies_Adapter.ViewHo
     @Override
     public int getItemCount() {
         return selfieList.size();
+    }
+
+    private String getFormattedDate(Date datePic) {
+
+        Calendar picTime = Calendar.getInstance();
+        picTime.setTimeInMillis(datePic.getTime());
+
+        Calendar currentTime = Calendar.getInstance();
+
+
+        SimpleDateFormat output = new SimpleDateFormat("dd MMM HH:mm");
+
+        SimpleDateFormat out24 = new SimpleDateFormat("HH:mm");
+
+        if (currentTime.get(Calendar.DATE) == picTime.get(Calendar.DATE)) {
+            return context.getString(R.string.comments_today) + " " + out24.format(datePic);
+        } else if (currentTime.get(Calendar.DATE) - picTime.get(Calendar.DATE) == 1) {
+            return context.getString(R.string.comments_yesterday) + " " + out24.format(datePic);
+        } else {
+            return output.format(datePic);
+        }
+
     }
 
 

@@ -15,6 +15,7 @@ import com.puertomorelosapp.puertomorelosapp.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -74,36 +75,14 @@ public class Activities_Comments_Adapter extends RecyclerView.Adapter<Activities
         holder.tvComment.setText(commentsList.get(position).getText());
 
 
-       /* SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        SimpleDateFormat output = new SimpleDateFormat("dd MMM HH:mm");
-        try {
-            Date oneWayTripDate = input.parse(commentsList.get(position).getFecha());
-            holder.tvDate.setText(output.format(oneWayTripDate));
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }*/
-
         SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        SimpleDateFormat output = new SimpleDateFormat("dd MMM HH:mm");
-
-        SimpleDateFormat out24 = new SimpleDateFormat("HH:mm");
-
-        int time24 = 24 * 60 * 60 * 1000;
-        int time48 = time24 * 2;
-
 
         try {
-            Date oneWayTripDate = input.parse(commentsList.get(position).getFecha());// parse input
-            if ((System.currentTimeMillis() - oneWayTripDate.getTime()) < time24) {
-                holder.tvDate.setText(context.getString(R.string.comments_today) + out24.format(oneWayTripDate));
-            } else if ((System.currentTimeMillis() - oneWayTripDate.getTime()) < time48)
-                holder.tvDate.setText(context.getString(R.string.comments_yesterday)+ out24.format(oneWayTripDate));
-            else
-                holder.tvDate.setText(output.format(oneWayTripDate));    // format output
-        } catch (ParseException e) {
+            holder.tvDate.setText(getFormattedDate(input.parse(commentsList.get(position).getFecha())));
+        } catch (Exception e) {
             e.printStackTrace();
         }
+
 
         String cate;
 
@@ -174,4 +153,25 @@ public class Activities_Comments_Adapter extends RecyclerView.Adapter<Activities
     }
 
 
+    private String getFormattedDate(Date datePic) {
+
+        Calendar picTime = Calendar.getInstance();
+        picTime.setTimeInMillis(datePic.getTime());
+
+        Calendar currentTime = Calendar.getInstance();
+
+
+        SimpleDateFormat output = new SimpleDateFormat("dd MMM HH:mm");
+
+        SimpleDateFormat out24 = new SimpleDateFormat("HH:mm");
+
+        if (currentTime.get(Calendar.DATE) == picTime.get(Calendar.DATE)) {
+            return context.getString(R.string.comments_today) + " " + out24.format(datePic);
+        } else if (currentTime.get(Calendar.DATE) - picTime.get(Calendar.DATE) == 1) {
+            return context.getString(R.string.comments_yesterday) + " " + out24.format(datePic);
+        } else {
+            return output.format(datePic);
+        }
+
+    }
 }
