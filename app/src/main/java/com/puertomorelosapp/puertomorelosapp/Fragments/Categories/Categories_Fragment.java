@@ -4,6 +4,7 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -94,6 +95,10 @@ public class Categories_Fragment extends Fragment implements ICategories_View, I
         activity.ivMap.setVisibility(View.VISIBLE);
 
         activity.ivMap.setImageDrawable(getResources().getDrawable(R.drawable.ic_pin_drop_white_36dp));
+
+        activity.ivMap.setColorFilter(ContextCompat.getColor(getActivity(), R.color.colorAccent), android.graphics.PorterDuff.Mode.MULTIPLY);
+
+
 
         activity.ivMap.setOnClickListener(new View.OnClickListener() {
             @Override

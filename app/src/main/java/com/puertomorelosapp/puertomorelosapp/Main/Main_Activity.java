@@ -112,6 +112,8 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
 
         presenter.getAd();
 
+        setSupportActionBar(toolbar);
+
         setmenuActions();
 
         ivMap = (ImageView) toolbar.findViewById(R.id.ivMap);
@@ -161,7 +163,6 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
 
 
     private void setmenuActions() {
-        setSupportActionBar(toolbar);
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
