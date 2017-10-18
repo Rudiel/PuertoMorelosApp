@@ -55,6 +55,7 @@
     <string name="detail_ubicacion">Ubicación</string>
     <string name="detail_description">Descripción</string>
     <string name="detail_service_title">Servicios</string>
+    <string name="detail_phone_hint">Tel:</string>
 
 
     <!--Categorias-->

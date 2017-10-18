@@ -80,7 +80,7 @@ public class ConfirmDialog_Creator {
         dialog.setContentView(R.layout.layout_dialog_newcomment);
 
         dialog.setCancelable(false);
-        dialog.setCanceledOnTouchOutside(false);
+        dialog.setCanceledOnTouchOutside(true);
 
         final Button btDialogAccept = (Button) dialog.findViewById(R.id.btAccept);
         final Button btDialogCancel = (Button) dialog.findViewById(R.id.btCancel);

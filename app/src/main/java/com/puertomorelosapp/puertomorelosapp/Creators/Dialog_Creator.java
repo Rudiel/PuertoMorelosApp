@@ -26,7 +26,7 @@ public class Dialog_Creator {
         dialog.setContentView(R.layout.layout_dialog);
 
         dialog.setCancelable(false);
-        dialog.setCanceledOnTouchOutside(false);
+        dialog.setCanceledOnTouchOutside(true);
 
         final Button btDialogOK = (Button) dialog.findViewById(R.id.btOK);
 

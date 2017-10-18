@@ -39,11 +39,13 @@
 
                 <TextView
                     android:id="@+id/tvDetailNombre"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
                     android:layout_centerInParent="true"
-                    android:singleLine="true"
-                    android:textAppearance="?android:textAppearanceLarge"
+                    android:gravity="center"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    app:autoSizeTextType="uniform"
                     android:textColor="@color/colorAccent"
                     android:textStyle="bold" />
 

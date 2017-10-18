@@ -36,7 +36,7 @@ import com.puertomorelosapp.puertomorelosapp.Creators.IConfirmDialog_Creator;
 import com.puertomorelosapp.puertomorelosapp.Fragments.AboutUs.AboutUs_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Activity_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Categories.Categories_Fragment;
-import com.puertomorelosapp.puertomorelosapp.Fragments.Conditions_Fragment;
+import com.puertomorelosapp.puertomorelosapp.Fragments.TermsandConditions.Conditions_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Login.Login_Activity;
 import com.puertomorelosapp.puertomorelosapp.Models.Categorie;
 import com.puertomorelosapp.puertomorelosapp.Models.SubCategory;
@@ -156,7 +156,14 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
 
         TextView tvUserName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.tvMenuUserName);
 
-        tvUserName.setText(Utils.getUserName(this));
+
+        String name = Utils.getUserName(this);
+
+        if (name.contains(" ")) {
+            name = name.substring(0, name.indexOf(" "));
+            tvUserName.setText(name);
+        } else
+            tvUserName.setText(Utils.getUserName(this));
 
 
     }

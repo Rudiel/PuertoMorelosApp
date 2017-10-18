@@ -25,6 +25,7 @@ import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
 import com.puertomorelosapp.puertomorelosapp.Models.Register;
 import com.puertomorelosapp.puertomorelosapp.Models.Response.User;
 import com.puertomorelosapp.puertomorelosapp.R;
+import com.puertomorelosapp.puertomorelosapp.TermsAndConditions.Conditions_Activity;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
 import com.puertomorelosapp.puertomorelosapp.Utils.Utils;
 
@@ -53,6 +54,9 @@ public class Register_Activity extends AppCompatActivity implements IRegister_Vi
 
     @Bind(R.id.pbRegister)
     ProgressBar pbregister;
+
+    @Bind(R.id.tvTermsandConditions)
+    TextView tvTermsandConditions;
 
     private FirebaseAuth auth;
 
@@ -94,6 +98,13 @@ public class Register_Activity extends AppCompatActivity implements IRegister_Vi
         });
 
         setDrawableHint(android.R.color.darker_gray);
+
+        tvTermsandConditions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Register_Activity.this, Conditions_Activity.class));
+            }
+        });
 
 
     }

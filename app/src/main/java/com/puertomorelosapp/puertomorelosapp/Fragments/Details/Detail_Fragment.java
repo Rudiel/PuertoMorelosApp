@@ -252,7 +252,7 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
 
         if (subCategory.getTelefono() != null && !subCategory.getTelefono().equals("")) {
             tvTelefono.setVisibility(View.VISIBLE);
-            tvTelefono.setText(subCategory.getTelefono());
+            tvTelefono.setText(getString(R.string.detail_phone_hint) + " " + subCategory.getTelefono());
         } else {
             tvTelefono.setVisibility(View.GONE);
         }

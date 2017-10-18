@@ -30,7 +30,6 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:26.0.0'
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
     testCompile 'junit:junit:4.12'
 
     //Google Maps
@@ -64,6 +63,8 @@ dependencies {
     //compile 'com.daimajia.swipelayout:library:1.2.0@aar'
     compile 'com.github.daimajia:AndroidSwipeLayout:f66ac6942b'
 
+    //PDF Reader
+    compile 'com.github.barteksc:android-pdf-viewer:2.7.0'
 
 }
 

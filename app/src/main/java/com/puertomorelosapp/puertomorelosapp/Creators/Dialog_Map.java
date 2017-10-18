@@ -75,7 +75,7 @@ public class Dialog_Map extends DialogFragment {
 
         d.setCancelable(true);
 
-        d.setCanceledOnTouchOutside(false);
+        d.setCanceledOnTouchOutside(true);
 
         d.getWindow().setLayout(ViewPager.LayoutParams.MATCH_PARENT,
                 ViewPager.LayoutParams.MATCH_PARENT);

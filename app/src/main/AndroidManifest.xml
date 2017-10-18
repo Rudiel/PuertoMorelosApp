@@ -66,6 +66,9 @@
             android:name=".Recover.Recover_Activity"
             android:screenOrientation="portrait" />
 
+        <activity android:name=".TermsAndConditions.Conditions_Activity"
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
