@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
+import com.puertomorelosapp.puertomorelosapp.Fragments.Details.Comments.IProfileListener;
 import com.puertomorelosapp.puertomorelosapp.Models.Response.Comments;
 import com.puertomorelosapp.puertomorelosapp.R;
 
@@ -31,6 +32,7 @@ public class Comments_Adapter extends RecyclerView.Adapter<Comments_Adapter.View
 
     private List<Comments> commentsList;
     private Context context;
+    private IProfileListener listener;
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -51,9 +53,10 @@ public class Comments_Adapter extends RecyclerView.Adapter<Comments_Adapter.View
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public Comments_Adapter(List<Comments> commentsList, Context context) {
+    public Comments_Adapter(List<Comments> commentsList, Context context, IProfileListener listener) {
         this.context = context;
         this.commentsList = commentsList;
+        this.listener = listener;
 
     }
 
@@ -65,7 +68,7 @@ public class Comments_Adapter extends RecyclerView.Adapter<Comments_Adapter.View
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
 
         SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -100,6 +103,13 @@ public class Comments_Adapter extends RecyclerView.Adapter<Comments_Adapter.View
                 }
             });
         }
+
+        holder.ivProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onProfileClickListener(commentsList.get(position));
+            }
+        });
     }
 
     @Override

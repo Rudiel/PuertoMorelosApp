@@ -1,6 +1,7 @@
 package com.puertomorelosapp.puertomorelosapp.Fragments.Details.Comments;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -9,6 +10,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.puertomorelosapp.puertomorelosapp.Models.Request.NewComment;
 import com.puertomorelosapp.puertomorelosapp.Models.Request.RoutesComments;
 import com.puertomorelosapp.puertomorelosapp.Models.Response.Comments;
+import com.puertomorelosapp.puertomorelosapp.Models.Response.ProfileInfo;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
 import com.puertomorelosapp.puertomorelosapp.Utils.Utils;
 
@@ -89,5 +91,42 @@ public class Comments_Detail_Presenter implements IComments_Presenter {
 
     }
 
+    @Override
+    public void getProfileInfo(Comments comment) {
+        final ProfileInfo info = new ProfileInfo();
+        info.setName(comment.getSenderDisplayName());
+        info.setImage(comment.getImageURL());
+
+        FirebaseDatabase.getInstance().getReference().child(Utils.COMMENTS_COUNT + comment.getSenderId()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    if (snapshot.getKey().equals("UniversalComments")) {
+
+                        info.setComments((int)snapshot.getChildrenCount());
+
+                    }else if(snapshot.getKey().equals("UniversalLoves")){
+
+                        info.setLikes((int)snapshot.getChildrenCount());
+
+                    }
+                    else if(snapshot.getKey().equals("UniversalSelfies")){
+
+                        info.setSelfies((int)snapshot.getChildrenCount());
+
+                    }
+                }
+                view.showProfileInfo(info);
+            }
+
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+    }
 
 }

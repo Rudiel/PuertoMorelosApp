@@ -1,6 +1,7 @@
 package com.puertomorelosapp.puertomorelosapp.Fragments.Details.Comments;
 
 import com.puertomorelosapp.puertomorelosapp.Models.Response.Comments;
+import com.puertomorelosapp.puertomorelosapp.Models.Response.ProfileInfo;
 
 import java.util.List;
 
@@ -15,5 +16,7 @@ public interface IComments_View {
     void hideLoading();
 
     void setComments(List<Comments> commentList);
+
+    void showProfileInfo(ProfileInfo profile);
 
 }

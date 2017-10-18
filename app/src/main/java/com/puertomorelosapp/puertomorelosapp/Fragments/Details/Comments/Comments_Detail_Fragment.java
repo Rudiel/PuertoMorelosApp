@@ -23,10 +23,12 @@ import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.puertomorelosapp.puertomorelosapp.Adpaters.Comments_Adapter;
 import com.puertomorelosapp.puertomorelosapp.Creators.ConfirmDialog_Creator;
 import com.puertomorelosapp.puertomorelosapp.Creators.IConfirmComment_Creator;
+import com.puertomorelosapp.puertomorelosapp.Creators.ProfileDetails_Creator;
 import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
 import com.puertomorelosapp.puertomorelosapp.Models.Request.NewComment;
 import com.puertomorelosapp.puertomorelosapp.Models.Request.RoutesComments;
 import com.puertomorelosapp.puertomorelosapp.Models.Response.Comments;
+import com.puertomorelosapp.puertomorelosapp.Models.Response.ProfileInfo;
 import com.puertomorelosapp.puertomorelosapp.R;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
 import com.puertomorelosapp.puertomorelosapp.Utils.Utils;
@@ -47,7 +49,7 @@ import butterknife.ButterKnife;
  * Created by rudielavilaperaza on 7/7/17.
  */
 
-public class Comments_Detail_Fragment extends Fragment implements IComments_View {
+public class Comments_Detail_Fragment extends Fragment implements IComments_View, IProfileListener {
 
     @Bind(R.id.ivCommentsDetailBackground)
     ImageView ivCommentsDetailBackground;
@@ -161,10 +163,15 @@ public class Comments_Detail_Fragment extends Fragment implements IComments_View
             }
         });
 
-        mAdapter = new Comments_Adapter(this.commentsList, getActivity());
+        mAdapter = new Comments_Adapter(this.commentsList, getActivity(),this);
 
         rvCommentsDetail.setAdapter(mAdapter);
 
+    }
+
+    @Override
+    public void showProfileInfo(ProfileInfo profile) {
+            new ProfileDetails_Creator().showDetails(getActivity(), profile);
     }
 
 
@@ -221,4 +228,9 @@ public class Comments_Detail_Fragment extends Fragment implements IComments_View
     }
 
 
+    @Override
+    public void onProfileClickListener(Comments comment) {
+
+        presenter.getProfileInfo(comment);
+    }
 }
