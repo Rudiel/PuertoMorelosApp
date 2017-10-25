@@ -18,4 +18,8 @@ public interface IDetail_View {
 
     void setCommentsNumber(int commentsNumber);
 
+    void setCommentedbyUser(boolean isAlreadyCommented);
+
+    void setPhotobyUser(boolean isAlreadyPhoted);
+
 }

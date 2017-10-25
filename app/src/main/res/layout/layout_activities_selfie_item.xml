@@ -19,7 +19,7 @@
             android:id="@+id/ivActivitySelfie"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2"
+            android:layout_weight="1.5"
             android:src="@drawable/avatar_deafult" />
 
         <RelativeLayout
@@ -36,46 +36,50 @@
                 android:layout_marginLeft="5dp"
                 android:src="@drawable/avatar_deafult" />
 
-
-            <TextView
-                android:id="@+id/tvActivitySelfieCommerceName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="2dp"
                 android:layout_toRightOf="@id/ivActivitySelfieProfile"
                 android:gravity="center"
-                android:maxLines="2"
-                android:singleLine="true"
-                android:textColor="@android:color/black" />
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvActivitySelfieCategory"
-                android:layout_width="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_height="wrap_content"
-                android:layout_above="@id/tvActivitySelfieCommerceName"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp"
-                android:layout_toRightOf="@id/ivActivitySelfieProfile"
-                android:gravity="center"
-                android:singleLine="true"
-                android:textColor="@android:color/black"
-                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/tvActivitySelfieCategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    app:autoSizeMinTextSize="10sp"
+                    app:autoSizeTextType="uniform" />
 
-            <TextView
-                android:id="@+id/tvActivitySelfieDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tvActivitySelfieCommerceName"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="5dp"
-                android:singleLine="true"
-                android:layout_toRightOf="@id/ivActivitySelfieProfile"
-                android:textAppearance="?android:textAppearanceSmall"
-                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/tvActivitySelfieCommerceName"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="@android:color/black"
+                    app:autoSizeMinTextSize="10sp"
+                    app:autoSizeTextType="uniform" />
+
+
+                <TextView
+                    android:id="@+id/tvActivitySelfieDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight=".7"
+                    android:gravity="center"
+                    android:textAppearance="?android:textAppearanceSmall"
+                    android:textStyle="bold"
+                    app:autoSizeMinTextSize="10sp"
+                    app:autoSizeTextType="uniform" />
+
+
+            </LinearLayout>
+
 
         </RelativeLayout>
 

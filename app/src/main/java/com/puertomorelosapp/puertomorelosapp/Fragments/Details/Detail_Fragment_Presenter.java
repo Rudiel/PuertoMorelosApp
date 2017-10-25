@@ -3,6 +3,7 @@ package com.puertomorelosapp.puertomorelosapp.Fragments.Details;
 import android.content.Context;
 import android.util.Log;
 
+import com.bumptech.glide.util.Util;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -199,6 +200,40 @@ public class Detail_Fragment_Presenter implements IDetail_Presenter {
             }
         });
 
+    }
+
+    @Override
+    public void isCommentedbyUser(Context context, String placeId) {
+
+        Log.d("UserId", Utils.getProvider(context));
+
+        FirebaseDatabase.getInstance().getReference().child(Utils.COMMENTS_SOCIAL_URL + "/" + Utils.getProvider(context) + "/" + placeId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                view.setCommentedbyUser(dataSnapshot.hasChildren());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    @Override
+    public void isPhotobyUser(Context context, String placeId) {
+        FirebaseDatabase.getInstance().getReference().child(Utils.SELFIES_URL_NEW + Utils.getProvider(context) + "/" + placeId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                view.setPhotobyUser(dataSnapshot.hasChildren());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void getSelfiesNumber(final int gallerynumber) {

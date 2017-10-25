@@ -1,5 +1,7 @@
 package com.puertomorelosapp.puertomorelosapp.Fragments.Details;
 
+import android.content.Context;
+
 import com.puertomorelosapp.puertomorelosapp.Models.Categorie;
 import com.puertomorelosapp.puertomorelosapp.Models.Request.Like;
 import com.puertomorelosapp.puertomorelosapp.Models.SubCategory;
@@ -20,7 +22,11 @@ public interface IDetail_Presenter {
 
     void getLikes(SubCategory subCategory, Categorie categorie);
 
-    void getCommentsNumber(SubCategory subCategory,Categorie categorie);
+    void getCommentsNumber(SubCategory subCategory, Categorie categorie);
+
+    void isCommentedbyUser(Context context, String placeId);
+
+    void isPhotobyUser(Context context, String placeId);
 
 
 }

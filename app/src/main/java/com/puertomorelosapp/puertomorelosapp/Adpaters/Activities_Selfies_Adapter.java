@@ -81,7 +81,7 @@ public class Activities_Selfies_Adapter extends RecyclerView.Adapter<Activities_
         ViewGroup.LayoutParams params = holder.cvActivitySelfie.getLayoutParams();
 
         try {
-            params.height = displaymetrics.heightPixels / 3 + 40;
+            params.height = displaymetrics.heightPixels / 3 + 60;
             //params.width = displaymetrics.widthPixels / 2;
 
         } catch (Exception e) {

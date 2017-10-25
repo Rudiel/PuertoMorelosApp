@@ -12,6 +12,7 @@
     <style name="NavigationViewTheme">
         <item name="android:listDivider">@color/colorAccent</item>
         <item name="android:layout_marginRight">5dp</item>
+        <item name="android:textSize">@dimen/menu_text_size</item>
         <item name="android:textColorSecondary">@color/colorAccent</item>
     </style>
 
@@ -23,6 +24,14 @@
 
     <style name="Splash_Theme" parent="AppTheme">
         <item name="android:windowBackground">@drawable/splash_puertomorelos</item>
+    </style>
+
+
+    <style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabTextAppearance">@style/MyCustomTabTextAppearance</item>
+    </style>
+    <style name="MyCustomTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">@dimen/menu_text_size</item>
     </style>
 
 

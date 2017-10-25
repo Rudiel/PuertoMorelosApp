@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -129,12 +130,9 @@ public class SecundaryMain_Fragment extends Fragment implements ISecundaryMain_v
 
         hideLoading();
 
-        Collections.sort(list, new Comparator<SubCategory>() {
-            @Override
-            public int compare(SubCategory o1, SubCategory o2) {
-                return o1.getPrioridad() - o2.getPrioridad();
-            }
-        });
+        if (activity.category.getName() != null) {
+            Collections.reverse(list);
+        }
 
         mAdapter = new SubCategories_Adapter(list, getActivity(), this);
 

@@ -231,6 +231,9 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
 
         presenter.getCommentsNumber(this.subCategory, activity.category);
 
+        //presenter.isCommentedbyUser(getActivity(), this.subCategory.getId());
+
+        //presenter.isPhotobyUser(getActivity(), this.subCategory.getId());
 
         tvDescripcion.setText(subCategory.getDescripcion());
 
@@ -549,6 +552,24 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
     @Override
     public void setCommentsNumber(int commentsNumber) {
         tvComments.setText(String.valueOf(commentsNumber));
+    }
+
+    @Override
+    public void setCommentedbyUser(boolean isAlreadyCommented) {
+        if (isAlreadyCommented)
+            ivDetailComments.setColorFilter(new PorterDuffColorFilter(getActivity().getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN));
+        else
+            ivDetailComments.setColorFilter(new PorterDuffColorFilter(getActivity().getResources().getColor(android.R.color.darker_gray), PorterDuff.Mode.SRC_IN));
+
+    }
+
+    @Override
+    public void setPhotobyUser(boolean isAlreadyPhoted) {
+        if (isAlreadyPhoted)
+            ivDetailGalery.setColorFilter(new PorterDuffColorFilter(getActivity().getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN));
+        else
+            ivDetailGalery.setColorFilter(new PorterDuffColorFilter(getActivity().getResources().getColor(android.R.color.darker_gray), PorterDuff.Mode.SRC_IN));
+
     }
 
     private void setTextViewDrawableColor(TextView textView) {
