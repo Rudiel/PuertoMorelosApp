@@ -132,7 +132,7 @@ public class Selfies_Adapter extends RecyclerView.Adapter<Selfies_Adapter.ViewHo
         } else
             holder.tvSelfieUserName.setText(selfieList.get(position).getPhotographer().getUsername());
 
-        Glide.with(context).load(selfieList.get(position).getSelfieThumb()).centerCrop().into(holder.ivSelfie);
+        Glide.with(context).load(selfieList.get(position).getSelfieOriginal()).centerCrop().into(holder.ivSelfie);
 
         holder.cvSelfie.setOnClickListener(new View.OnClickListener() {
             @Override

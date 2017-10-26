@@ -392,7 +392,7 @@ public class Photos_Detail_Fragment extends Fragment implements IPhotos_View, IG
 
         ByteArrayOutputStream bytesT = new ByteArrayOutputStream();
 
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 80, bytesT);
+        rotatedBitmap.compress(Bitmap.CompressFormat.JPEG, 80, bytesT);
 
         bytesThumb = bytesT.toByteArray();
 
