@@ -231,9 +231,9 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
 
         presenter.getCommentsNumber(this.subCategory, activity.category);
 
-        //presenter.isCommentedbyUser(getActivity(), this.subCategory.getId());
+        presenter.isCommentedbyUser(getActivity(), activity.category, this.subCategory.getId());
 
-        //presenter.isPhotobyUser(getActivity(), this.subCategory.getId());
+        presenter.isPhotobyUser(getActivity(), activity.category, this.subCategory.getId());
 
         tvDescripcion.setText(subCategory.getDescripcion());
 
@@ -556,6 +556,9 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
 
     @Override
     public void setCommentedbyUser(boolean isAlreadyCommented) {
+
+        Log.d("isAlreadyCommented", "" + isAlreadyCommented);
+
         if (isAlreadyCommented)
             ivDetailComments.setColorFilter(new PorterDuffColorFilter(getActivity().getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN));
         else
@@ -565,6 +568,9 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
 
     @Override
     public void setPhotobyUser(boolean isAlreadyPhoted) {
+
+        Log.d("isAlreadyPhoted", "" + isAlreadyPhoted);
+
         if (isAlreadyPhoted)
             ivDetailGalery.setColorFilter(new PorterDuffColorFilter(getActivity().getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN));
         else

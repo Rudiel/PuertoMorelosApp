@@ -29,7 +29,7 @@
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/background_circular"
                 android:src="@drawable/ic_favorite_white_48dp"
-                android:tint="@color/colorPrimary" />
+                android:tint="@android:color/darker_gray"/>
 
             <TextView
                 android:id="@+id/tvDetailLikesText"
@@ -63,7 +63,7 @@
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/background_circular"
                 android:src="@drawable/ic_chat_bubble_white_48dp"
-                android:tint="@color/colorPrimary" />
+                android:tint="@android:color/darker_gray" />
 
             <TextView
                 android:id="@+id/tvDetailCommentsText"
@@ -99,7 +99,7 @@
                 android:layout_marginRight="10dp"
                 android:background="@drawable/background_circular"
                 android:src="@drawable/ic_image_white_48dp"
-                android:tint="@color/colorPrimary" />
+                android:tint="@android:color/darker_gray" />
 
             <TextView
                 android:id="@+id/tvDetailGaleryText"

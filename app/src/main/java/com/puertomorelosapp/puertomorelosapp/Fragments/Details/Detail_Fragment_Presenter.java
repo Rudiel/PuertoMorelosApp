@@ -11,6 +11,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.puertomorelosapp.puertomorelosapp.Models.Categorie;
 import com.puertomorelosapp.puertomorelosapp.Models.Request.Like;
+import com.puertomorelosapp.puertomorelosapp.Models.Request.Selfie;
 import com.puertomorelosapp.puertomorelosapp.Models.Response.Comments;
 import com.puertomorelosapp.puertomorelosapp.Models.SubCategory;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
@@ -203,14 +204,33 @@ public class Detail_Fragment_Presenter implements IDetail_Presenter {
     }
 
     @Override
-    public void isCommentedbyUser(Context context, String placeId) {
+    public void isCommentedbyUser(final Context context, Categorie category, String placeId) {
 
-        Log.d("UserId", Utils.getProvider(context));
+        String url;
 
-        FirebaseDatabase.getInstance().getReference().child(Utils.COMMENTS_SOCIAL_URL + "/" + Utils.getProvider(context) + "/" + placeId).addValueEventListener(new ValueEventListener() {
+        if (category.getCategoria() != null) {
+            url = Utils.COMMENTS_URL + "/" + category.getCategoria() + "/" + category.getName() + "/" + placeId;
+        } else {
+            url = Utils.COMMENTS_URL + "/" + category.getName() + "/" + placeId;
+        }
+
+        FirebaseDatabase.getInstance().getReference().child(url).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                view.setCommentedbyUser(dataSnapshot.hasChildren());
+
+                if (dataSnapshot.getChildrenCount() > 0) {
+
+                    for (DataSnapshot comment : dataSnapshot.getChildren()) {
+                        Comments c = comment.getValue(Comments.class);
+                        if (c.getActivo() == 1 && c.getSenderId().equals(Utils.getProvider(context))) {
+                            view.setCommentedbyUser(true);
+                            break;
+                        }
+                        view.setCommentedbyUser(false);
+                    }
+
+                } else
+                    view.setCommentedbyUser(false);
             }
 
             @Override
@@ -222,11 +242,32 @@ public class Detail_Fragment_Presenter implements IDetail_Presenter {
     }
 
     @Override
-    public void isPhotobyUser(Context context, String placeId) {
-        FirebaseDatabase.getInstance().getReference().child(Utils.SELFIES_URL_NEW + Utils.getProvider(context) + "/" + placeId).addValueEventListener(new ValueEventListener() {
+    public void isPhotobyUser(final Context context, Categorie category, String placeId) {
+
+        String url;
+
+        if (category.getCategoria() != null) {
+            url = Utils.SELFIES_URL + "/" + category.getCategoria() + "/" + category.getName() + "/" + placeId;
+        } else {
+            url = Utils.SELFIES_URL + "/" + category.getName() + "/" + placeId;
+        }
+
+        FirebaseDatabase.getInstance().getReference().child(url).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                view.setPhotobyUser(dataSnapshot.hasChildren());
+                if (dataSnapshot.getChildrenCount() > 0) {
+                    for (DataSnapshot selfie : dataSnapshot.getChildren()) {
+                        Selfie s = selfie.getValue(Selfie.class);
+
+                        if (s.getIdphotographer().equals(Utils.getProvider(context))) {
+                            view.setPhotobyUser(true);
+                            break;
+                        }
+                        view.setPhotobyUser(false);
+                    }
+                } else {
+                    view.setPhotobyUser(false);
+                }
             }
 
             @Override
@@ -234,6 +275,7 @@ public class Detail_Fragment_Presenter implements IDetail_Presenter {
 
             }
         });
+
     }
 
     private void getSelfiesNumber(final int gallerynumber) {

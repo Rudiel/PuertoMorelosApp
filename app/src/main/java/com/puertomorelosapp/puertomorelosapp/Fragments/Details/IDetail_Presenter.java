@@ -24,9 +24,9 @@ public interface IDetail_Presenter {
 
     void getCommentsNumber(SubCategory subCategory, Categorie categorie);
 
-    void isCommentedbyUser(Context context, String placeId);
+    void isCommentedbyUser(Context context, Categorie category, String placeId);
 
-    void isPhotobyUser(Context context, String placeId);
+    void isPhotobyUser(Context context, Categorie category, String placeId);
 
 
 }
