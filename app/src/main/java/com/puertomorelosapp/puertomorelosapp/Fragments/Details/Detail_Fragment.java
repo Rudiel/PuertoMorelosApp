@@ -397,6 +397,12 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
 
             } else if (key.equals("Servicio a domicilio")) {
                 imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_local_shipping_black_48dp));
+            } else if (key.equals("Reservas")) {
+                imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_assignment_black_48dp));
+            } else if (key.equals("Acceso a playa")) {
+                imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_beach_access_black_48dp));
+            } else if (key.equals("Alberca")) {
+                imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_pool_black_48dp));
             } else {
                 imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_info_outline_black_48dp));
             }
@@ -557,8 +563,6 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
     @Override
     public void setCommentedbyUser(boolean isAlreadyCommented) {
 
-        Log.d("isAlreadyCommented", "" + isAlreadyCommented);
-
         if (isAlreadyCommented)
             ivDetailComments.setColorFilter(new PorterDuffColorFilter(getActivity().getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN));
         else
@@ -568,8 +572,6 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
 
     @Override
     public void setPhotobyUser(boolean isAlreadyPhoted) {
-
-        Log.d("isAlreadyPhoted", "" + isAlreadyPhoted);
 
         if (isAlreadyPhoted)
             ivDetailGalery.setColorFilter(new PorterDuffColorFilter(getActivity().getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN));
