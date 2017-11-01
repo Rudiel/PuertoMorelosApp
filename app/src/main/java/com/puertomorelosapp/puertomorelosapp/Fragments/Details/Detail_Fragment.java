@@ -559,21 +559,25 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
     @Override
     public void setCommentedbyUser(boolean isAlreadyCommented) {
 
-        if (isAlreadyCommented)
-            ivDetailComments.setColorFilter(new PorterDuffColorFilter(getActivity().getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN));
-        else
-            ivDetailComments.setColorFilter(new PorterDuffColorFilter(getActivity().getResources().getColor(android.R.color.darker_gray), PorterDuff.Mode.SRC_IN));
+        if (activity != null) {
 
+            if (isAlreadyCommented)
+                ivDetailComments.setColorFilter(new PorterDuffColorFilter(activity.getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN));
+            else
+                ivDetailComments.setColorFilter(new PorterDuffColorFilter(activity.getResources().getColor(android.R.color.darker_gray), PorterDuff.Mode.SRC_IN));
+        }
     }
 
     @Override
     public void setPhotobyUser(boolean isAlreadyPhoted) {
 
-        if (isAlreadyPhoted)
-            ivDetailGalery.setColorFilter(new PorterDuffColorFilter(getActivity().getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN));
-        else
-            ivDetailGalery.setColorFilter(new PorterDuffColorFilter(getActivity().getResources().getColor(android.R.color.darker_gray), PorterDuff.Mode.SRC_IN));
+        if (activity != null) {
 
+            if (isAlreadyPhoted)
+                ivDetailGalery.setColorFilter(new PorterDuffColorFilter(activity.getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN));
+            else
+                ivDetailGalery.setColorFilter(new PorterDuffColorFilter(activity.getResources().getColor(android.R.color.darker_gray), PorterDuff.Mode.SRC_IN));
+        }
     }
 
     private void setTextViewDrawableColor(TextView textView) {
