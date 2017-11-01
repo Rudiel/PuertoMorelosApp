@@ -146,8 +146,6 @@ public class Detail_Fragment_Presenter implements IDetail_Presenter {
             Url = Utils.LIKES_URL + categorie.getCategoria() + "/" + categorie.getName() + "/" + subCategory.getId();
         }
 
-        Log.d("LIKES_URL", Url);
-
         reference.child(Url).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -175,8 +173,6 @@ public class Detail_Fragment_Presenter implements IDetail_Presenter {
         } else {
             Url = Utils.COMMENTS_URL + categorie.getCategoria() + "/" + categorie.getName() + "/" + subCategory.getId();
         }
-
-        Log.d("COMMENTS_URL", Url);
 
         reference.child(Url).addValueEventListener(new ValueEventListener() {
             @Override

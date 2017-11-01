@@ -381,20 +381,16 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
 
             if (key.equals("Estacionamiento")) {
                 imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_local_parking_black_48dp));
-
             } else if (key.equals("Multiples idiomas")) {
                 imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_public_black_48dp));
-
             } else if (key.equals("Pago con tarjeta")) {
                 imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_payment_black_48dp));
             } else if (key.equals("Wifi")) {
                 imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_wifi_black_48dp));
             } else if (key.equals("Aire acondicionado")) {
                 imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_ac_unit_black_48dp));
-
             } else if (key.equals("Recepción")) {
                 imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_room_service_black_48dp));
-
             } else if (key.equals("Servicio a domicilio")) {
                 imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_local_shipping_black_48dp));
             } else if (key.equals("Reservas")) {
