@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cvSelfie"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginBottom="5dp"
     android:layout_marginLeft="5dp"
     android:layout_marginRight="5dp"
@@ -11,23 +11,9 @@
     app:cardCornerRadius="5dp"
     app:cardElevation="4dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <ImageView
-            android:id="@+id/ivSelfie"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:src="@drawable/avatar_deafult" />
-
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1.5">
-
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/ivSelfieProfile"
@@ -37,23 +23,23 @@
                 android:layout_marginBottom="10dp"
                 android:src="@drawable/avatar_deafult" />
 
+
             <TextView
-                android:id="@+id/tvSelfieComment"
+                android:id="@+id/tvSelfieDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_above="@id/ivSelfieProfile"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="5dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="5dp"
                 android:layout_marginRight="5dp"
-                android:maxLines="2"
-                app:autoSizeTextType="uniform" />
+                android:gravity="right"
+                android:textAppearance="?android:textAppearanceSmall" />
 
             <TextView
                 android:id="@+id/tvSelfieNameUser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignTop="@id/ivSelfieProfile"
+                android:layout_above="@id/tvSelfieDate"
                 android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@id/ivSelfieProfile"
                 android:gravity="center"
@@ -62,20 +48,21 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tvSelfieDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginBottom="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_toRightOf="@id/ivSelfieProfile"
-                android:gravity="right"
-                android:textAppearance="?android:textAppearanceSmall" />
+                android:id="@+id/tvSelfieComment"
+                android:layout_width="match_parent"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMinTextSize="4sp"
+                android:layout_height="40dp"
+                android:layout_above="@id/ivSelfieProfile" />
+
+            <ImageView
+                android:id="@+id/ivSelfie"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@id/tvSelfieComment"
+                android:src="@drawable/avatar_deafult" />
+
 
         </RelativeLayout>
-
-    </LinearLayout>
-
 
 </android.support.v7.widget.CardView>

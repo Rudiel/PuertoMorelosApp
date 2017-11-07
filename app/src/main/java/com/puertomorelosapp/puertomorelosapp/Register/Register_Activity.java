@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -98,6 +99,11 @@ public class Register_Activity extends AppCompatActivity implements IRegister_Vi
         });
 
         setDrawableHint(android.R.color.darker_gray);
+
+        String conditions = getString(R.string.registro_terminos) + " " + "<font color=" + getResources().getColor(R.color.fab_yellow) + ">" + getResources().getString(R.string.registro_terminos_link)
+                + "</font>" + " " + getResources().getString(R.string.registro_terminos_app);
+
+        tvTermsandConditions.setText(Html.fromHtml(conditions));
 
         tvTermsandConditions.setOnClickListener(new View.OnClickListener() {
             @Override

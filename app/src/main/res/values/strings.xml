@@ -11,7 +11,9 @@
 
     <!--Registro-->
     <string name="registro_mensaje">¿Ya estás registrado?</string>
-    <string name="registro_terminos">Al registrarte estas aceptando nuestros términos y condiciones</string>
+    <string name="registro_terminos">Al registrarte estas aceptando nuestros</string>
+    <string name="registro_terminos_link">términos y condiciones</string>
+    <string name="registro_terminos_app">de esta aplicación.</string>
     <string name="registro_hint_username">Username</string>
     <string name="registro_hint_email">E-mail</string>
     <string name="registro_hint_passwprd">Password</string>
