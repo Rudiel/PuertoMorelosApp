@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.puertomorelosapp.puertomorelosapp.Adpaters.Activities_Comments_Adapter;
 import com.puertomorelosapp.puertomorelosapp.Creators.ConfirmDialog_Creator;
 import com.puertomorelosapp.puertomorelosapp.Creators.IConfirmComment_Creator;
@@ -73,7 +74,8 @@ public class Comentarios_Fragment extends Fragment implements IComentarios_View,
 
         commentsList = new ArrayList<>();
 
-        presenter.getComentarios(getActivity());
+        if (!FirebaseAuth.getInstance().getCurrentUser().isAnonymous())
+            presenter.getComentarios(getActivity());
     }
 
     @Override
@@ -123,7 +125,7 @@ public class Comentarios_Fragment extends Fragment implements IComentarios_View,
 
             @Override
             public void onEdit(Dialog dialog, Comments comment) {
-                presenter.editComment(getActivity(),comment);
+                presenter.editComment(getActivity(), comment);
                 dialog.dismiss();
             }
         }, comment);

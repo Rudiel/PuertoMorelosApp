@@ -8,6 +8,7 @@
     <string name="login_email_edittext">E-mail</string>
     <string name="login_pass_edittext">Password</string>
     <string name="login_loading">Iniciando Sesión...</string>
+    <string name="login_anonymous">Inicio de Sesión modo anónimo</string>
 
     <!--Registro-->
     <string name="registro_mensaje">¿Ya estás registrado?</string>
@@ -99,6 +100,11 @@
     <string name="comments_writecomment">Escribe un comentario</string>
     <string name="comments_today">Hoy </string>
     <string name="comments_yesterday">Ayer </string>
+
+    <!--Tabs-->
+    <string name="tab_likes">Me gusta</string>
+    <string name="tab_comments">Comentarios</string>
+    <string name="tab_selfies">Selfies</string>
 
 </resources>
 

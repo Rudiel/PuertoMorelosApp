@@ -120,18 +120,18 @@ public class Activity_Fragment extends Fragment {
 
         Activity megusta = new Activity();
         megusta.setFragment(new Megusta_Fragment());
-        megusta.setTitle("Me Gusta");
+        megusta.setTitle(getString(R.string.tab_likes));
 
         activities.add(megusta);
 
         Activity comentarios = new Activity();
         comentarios.setFragment(new Comentarios_Fragment());
-        comentarios.setTitle("Comentarios");
+        comentarios.setTitle(getString(R.string.tab_comments));
 
         activities.add(comentarios);
 
         Activity selfies = new Activity();
-        selfies.setTitle("Selfies");
+        selfies.setTitle(getString(R.string.tab_selfies));
         selfies.setFragment(new Selfies_Fragment());
 
         activities.add(selfies);

@@ -22,4 +22,6 @@ public interface ILogin_View {
 
     void saveUserData(User user);
 
+    void showMainActivityAnonymous(User user);
+
 }

@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.puertomorelosapp.puertomorelosapp.Adpaters.Activities_Likes_Adapter;
 import com.puertomorelosapp.puertomorelosapp.Models.Request.Like;
 import com.puertomorelosapp.puertomorelosapp.R;
@@ -64,7 +65,8 @@ public class Megusta_Fragment extends Fragment implements IMegusta_View, IDelete
 
         likes = new ArrayList<>();
 
-        presenter.getLikesList(getActivity());
+        if (!FirebaseAuth.getInstance().getCurrentUser().isAnonymous())
+            presenter.getLikesList(getActivity());
 
     }
 
@@ -83,12 +85,12 @@ public class Megusta_Fragment extends Fragment implements IMegusta_View, IDelete
 
         this.likes = likes;
 
-       Collections.sort(this.likes, new Comparator<Like>() {
-           @Override
-           public int compare(Like o1, Like o2) {
-               return (o1.getFecha().compareTo(o2.getFecha()));
-           }
-       });
+        Collections.sort(this.likes, new Comparator<Like>() {
+            @Override
+            public int compare(Like o1, Like o2) {
+                return (o1.getFecha().compareTo(o2.getFecha()));
+            }
+        });
 
         Collections.reverse(this.likes);
 

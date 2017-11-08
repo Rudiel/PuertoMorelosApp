@@ -97,6 +97,34 @@ public class Login_Presenter implements ILogin_Presenter {
 
     }
 
+    @Override
+    public void loginAnonymous(final FirebaseAuth auth, Activity context) {
+
+        view.showLoading();
+
+        auth.signInAnonymously().addOnCompleteListener(context, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+
+                view.hideLoading();
+
+                if (task.isSuccessful()) {
+
+                    com.puertomorelosapp.puertomorelosapp.Models.Response.User usuario= new com.puertomorelosapp.puertomorelosapp.Models.Response.User();
+                    usuario.setImageURL("SomeimageURL");
+                    usuario.setProvider("");
+                    usuario.setEmail("");
+                    usuario.setUsername("PuertoMorelosApp");
+                    view.showMainActivityAnonymous(usuario);
+                } else {
+                    view.showErrorMessage(task.getException().getMessage());
+                }
+
+            }
+        });
+
+    }
+
     private void getUserCredentials(final FirebaseUser firebaseUser) {
 
         FirebaseDatabase.getInstance().getReference().child("users/" + firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -111,7 +139,7 @@ public class Login_Presenter implements ILogin_Presenter {
 
                     com.puertomorelosapp.puertomorelosapp.Models.Response.User usuario = new com.puertomorelosapp.puertomorelosapp.Models.Response.User();
                     usuario.setEmail(firebaseUser.getEmail());
-                    String photoUrl =  firebaseUser.getProviderData().get(0).getPhotoUrl().toString();
+                    String photoUrl = firebaseUser.getProviderData().get(0).getPhotoUrl().toString();
                     usuario.setImageURL(photoUrl);
 
                     usuario.setProvider(firebaseUser.getUid());

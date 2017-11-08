@@ -137,7 +137,7 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
         final ImageView ivProfilePicture = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.ivProfilePicture);
 
 
-        if (auth.getCurrentUser().getPhotoUrl() != null)
+        if (auth.getCurrentUser().getPhotoUrl() != null && !auth.getCurrentUser().isAnonymous())
             Utils.saveUserImage(this, auth.getCurrentUser().getPhotoUrl().toString());
 
         if (!Utils.getUserImage(this).equals("SomeimageURL")) {

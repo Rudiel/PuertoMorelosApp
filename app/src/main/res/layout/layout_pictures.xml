@@ -12,8 +12,8 @@
 
         <ImageView
             android:layout_width="wrap_content"
-            android:scaleType="fitEnd"
             android:layout_height="wrap_content"
+            android:scaleType="fitEnd"
             android:src="@drawable/photo_background" />
 
     </RelativeLayout>
@@ -100,6 +100,7 @@
     </ScrollView>
 
     <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/fabNew"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"

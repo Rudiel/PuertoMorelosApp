@@ -34,6 +34,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.puertomorelosapp.puertomorelosapp.Creators.Dialog_Map;
 import com.puertomorelosapp.puertomorelosapp.Creators.ServicesDialog;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Details.Comments.Comments_Detail_Fragment;
@@ -334,26 +335,27 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
 
         initMap();
 
-        ivDetailComments.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                activity.setFragment(new Comments_Detail_Fragment(), true, null);
-            }
-        });
+            ivDetailComments.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    activity.setFragment(new Comments_Detail_Fragment(), true, null);
+                }
+            });
 
-        ivDetailGalery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                activity.setFragment(new Photos_Detail_Fragment(), true, null);
-            }
-        });
+            ivDetailGalery.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    activity.setFragment(new Photos_Detail_Fragment(), true, null);
+                }
+            });
 
-        ivDetailLikes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveLike();
-            }
-        });
+        if (!FirebaseAuth.getInstance().getCurrentUser().isAnonymous())
+            ivDetailLikes.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    saveLike();
+                }
+            });
 
         setTextViewDrawableColor(tvDetailDescriptionTitle);
         setTextViewDrawableColor(tvDetailUbicationTitle);

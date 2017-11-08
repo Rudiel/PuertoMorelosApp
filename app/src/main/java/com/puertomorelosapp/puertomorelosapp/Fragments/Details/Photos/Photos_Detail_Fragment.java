@@ -31,6 +31,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
+import com.google.firebase.auth.FirebaseAuth;
 import com.puertomorelosapp.puertomorelosapp.Adpaters.Gallery_Adapter;
 import com.puertomorelosapp.puertomorelosapp.Adpaters.Selfies_Adapter;
 import com.puertomorelosapp.puertomorelosapp.Creators.Gallery_Dialog_Creator;
@@ -96,6 +98,9 @@ public class Photos_Detail_Fragment extends Fragment implements IPhotos_View, IG
     @Bind(R.id.fabCamera)
     FloatingActionButton fabCamera;
 
+    @Bind(R.id.fabNew)
+    FloatingActionMenu fabNew;
+
     @Inject
     IPhotos_Presenter presenter;
 
@@ -147,6 +152,9 @@ public class Photos_Detail_Fragment extends Fragment implements IPhotos_View, IG
         presenter.getGallery(activity.category, activity.subCategory);
 
         presenter.getSelfies(activity.category, activity.subCategory);
+
+        if (FirebaseAuth.getInstance().getCurrentUser().isAnonymous())
+            fabNew.setVisibility(View.GONE);
 
         fabCamera.setOnClickListener(new View.OnClickListener() {
             @Override

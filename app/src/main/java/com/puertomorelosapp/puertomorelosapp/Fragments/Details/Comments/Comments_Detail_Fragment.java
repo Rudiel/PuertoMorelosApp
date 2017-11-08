@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
+import com.google.firebase.auth.FirebaseAuth;
 import com.puertomorelosapp.puertomorelosapp.Adpaters.Comments_Adapter;
 import com.puertomorelosapp.puertomorelosapp.Creators.ConfirmDialog_Creator;
 import com.puertomorelosapp.puertomorelosapp.Creators.IConfirmComment_Creator;
@@ -122,12 +123,13 @@ public class Comments_Detail_Fragment extends Fragment implements IComments_View
 
         rvCommentsDetail.setLayoutManager(mLayoutManager);
 
-        btWriteComment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showWriteComment();
-            }
-        });
+        if (!FirebaseAuth.getInstance().getCurrentUser().isAnonymous())
+            btWriteComment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showWriteComment();
+                }
+            });
 
         presenter.getComments(activity.subCategory.getId());
 
@@ -163,7 +165,7 @@ public class Comments_Detail_Fragment extends Fragment implements IComments_View
             }
         });
 
-        mAdapter = new Comments_Adapter(this.commentsList, getActivity(),this);
+        mAdapter = new Comments_Adapter(this.commentsList, getActivity(), this);
 
         rvCommentsDetail.setAdapter(mAdapter);
 
@@ -171,7 +173,7 @@ public class Comments_Detail_Fragment extends Fragment implements IComments_View
 
     @Override
     public void showProfileInfo(ProfileInfo profile) {
-            new ProfileDetails_Creator().showDetails(getActivity(), profile);
+        new ProfileDetails_Creator().showDetails(getActivity(), profile);
     }
 
 

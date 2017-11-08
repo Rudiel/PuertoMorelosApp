@@ -74,6 +74,9 @@ public class Login_Activity extends AppCompatActivity implements ILogin_View, Fa
     @Bind(R.id.blFacebook)
     LoginButton lbFacebook;
 
+    @Bind(R.id.tvLoginAnnonymus)
+    TextView tvLoginAnnonymus;
+
     private FirebaseAuth auth;
 
     private CallbackManager callbackManager;
@@ -151,6 +154,13 @@ public class Login_Activity extends AppCompatActivity implements ILogin_View, Fa
 
         loading = new Loading_Creator().showLoadingLogin(this, getString(R.string.login_loading));
 
+        tvLoginAnnonymus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.loginAnonymous(auth, Login_Activity.this);
+            }
+        });
+
 
     }
 
@@ -204,6 +214,11 @@ public class Login_Activity extends AppCompatActivity implements ILogin_View, Fa
         Utils.saveUserName(this, user.getUsername());
 
         this.showMainActivity();
+    }
+
+    @Override
+    public void showMainActivityAnonymous(com.puertomorelosapp.puertomorelosapp.Models.Response.User user) {
+        saveUserData(user);
     }
 
     private void startLogin() {

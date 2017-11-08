@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.puertomorelosapp.puertomorelosapp.Adpaters.Activities_Selfies_Adapter;
 import com.puertomorelosapp.puertomorelosapp.Creators.Gallery_Dialog_Creator;
 import com.puertomorelosapp.puertomorelosapp.Models.Request.Selfie;
@@ -68,7 +69,8 @@ public class Selfies_Fragment extends Fragment implements ISelfies_View, ISelfie
         rvActivitiesSelfies.setHasFixedSize(true);
         rvActivitiesSelfies.setLayoutManager(new GridLayoutManager(getActivity(), 2));
 
-        presenter.getSelfies(getActivity());
+        if (!FirebaseAuth.getInstance().getCurrentUser().isAnonymous())
+            presenter.getSelfies(getActivity());
 
     }
 
