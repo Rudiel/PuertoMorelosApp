@@ -145,7 +145,7 @@ public class Activity_Fragment extends Fragment {
         Tutorial tutorial1 = new Tutorial();
         tutorial1.setTitle(getString(R.string.tutorial_delete_title));
         tutorial1.setSubtitle(getString(R.string.tutorial_delete_subtitle));
-        tutorial1.setImage(getActivity().getResources().getDrawable(R.drawable.swipe_to_right));
+        tutorial1.setImage(getActivity().getResources().getDrawable(R.drawable.ic_gesture_swipe_left_white_48dp));
 
         tutorialList.add(tutorial1);
 
@@ -164,7 +164,7 @@ public class Activity_Fragment extends Fragment {
         Tutorial tutorial2 = new Tutorial();
         tutorial2.setTitle(getString(R.string.tutorial_selfie_title) + " " + string);
         tutorial2.setSubtitle(getString(R.string.tutorial_selfie_subtitle));
-        tutorial2.setImage(getActivity().getResources().getDrawable(R.drawable.borrar_infoactividad));
+        tutorial2.setImage(getActivity().getResources().getDrawable(R.drawable.ic_delete_white_48dp));
 
         tutorialList.add(tutorial2);
 
