@@ -23,7 +23,7 @@
     <string name="menu_main">Menu Principal</string>
     <string name="menu_myactivity">Mi Actividad</string>
     <string name="menu_about">Acerca De</string>
-    <string name="menu_conditions">Términos y Condiciones</string>
+    <string name="menu_conditions">Términos</string>
     <string name="menu_logout">Cerrar Sesión</string>
     <string name="menu_close_session_accept">Aceptar</string>
     <string name="menu_close_session_cancel">Cancel</string>

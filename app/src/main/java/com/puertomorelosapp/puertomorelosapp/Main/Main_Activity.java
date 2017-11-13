@@ -1,5 +1,6 @@
 package com.puertomorelosapp.puertomorelosapp.Main;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -31,6 +32,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
+import com.puertomorelosapp.puertomorelosapp.Adpaters.Activities_Selfies_Adapter;
 import com.puertomorelosapp.puertomorelosapp.Creators.ConfirmDialog_Creator;
 import com.puertomorelosapp.puertomorelosapp.Creators.IConfirmDialog_Creator;
 import com.puertomorelosapp.puertomorelosapp.Fragments.AboutUs.AboutUs_Fragment;
@@ -94,10 +96,14 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
 
     private TextView tvMenuLikes;
 
+    public static Activity act;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        act = this;
 
         setTheme(R.style.AppTheme);
         setContentView(R.layout.activity_main);

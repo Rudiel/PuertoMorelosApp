@@ -1,6 +1,7 @@
 package com.puertomorelosapp.puertomorelosapp.Fragments.Details.Comments;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -33,6 +34,7 @@ import com.puertomorelosapp.puertomorelosapp.Models.Request.RoutesComments;
 import com.puertomorelosapp.puertomorelosapp.Models.Response.Comments;
 import com.puertomorelosapp.puertomorelosapp.Models.Response.ProfileInfo;
 import com.puertomorelosapp.puertomorelosapp.R;
+import com.puertomorelosapp.puertomorelosapp.Register.Register_Activity;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
 import com.puertomorelosapp.puertomorelosapp.Utils.Utils;
 
@@ -135,6 +137,7 @@ public class Comments_Detail_Fragment extends Fragment implements IComments_View
                         @Override
                         public void onRegisterNow(Dialog dialog) {
                             dialog.dismiss();
+                            getActivity().startActivity(new Intent(getActivity(), Register_Activity.class));
                         }
 
                         @Override
@@ -253,6 +256,8 @@ public class Comments_Detail_Fragment extends Fragment implements IComments_View
                 @Override
                 public void onRegisterNow(Dialog dialog) {
                     dialog.dismiss();
+                    getActivity().startActivity(new Intent(getActivity(), Register_Activity.class));
+
                 }
 
                 @Override

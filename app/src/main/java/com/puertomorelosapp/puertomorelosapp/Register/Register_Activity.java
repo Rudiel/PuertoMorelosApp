@@ -134,6 +134,12 @@ public class Register_Activity extends AppCompatActivity implements IRegister_Vi
         Utils.saveUserImage(this, user.getImageURL());
 
         startActivity(new Intent(Register_Activity.this, Main_Activity.class));
+        try {
+            Main_Activity.act.finish();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         finish();
     }
 

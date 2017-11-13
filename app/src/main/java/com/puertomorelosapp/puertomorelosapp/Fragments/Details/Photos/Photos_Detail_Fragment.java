@@ -46,6 +46,7 @@ import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
 import com.puertomorelosapp.puertomorelosapp.Models.Request.Gallery;
 import com.puertomorelosapp.puertomorelosapp.Models.Request.Selfie;
 import com.puertomorelosapp.puertomorelosapp.R;
+import com.puertomorelosapp.puertomorelosapp.Register.Register_Activity;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
 import com.puertomorelosapp.puertomorelosapp.Utils.Utils;
 
@@ -172,8 +173,9 @@ public class Photos_Detail_Fragment extends Fragment implements IPhotos_View, IG
                             new IAnonymousListener() {
                                 @Override
                                 public void onRegisterNow(Dialog dialog) {
-                                    dialog.dismiss();
 
+                                    dialog.dismiss();
+                                    getActivity().startActivity(new Intent(getActivity(), Register_Activity.class));
                                 }
 
                                 @Override
@@ -203,7 +205,9 @@ public class Photos_Detail_Fragment extends Fragment implements IPhotos_View, IG
                             new IAnonymousListener() {
                                 @Override
                                 public void onRegisterNow(Dialog dialog) {
+
                                     dialog.dismiss();
+                                    getActivity().startActivity(new Intent(getActivity(), Register_Activity.class));
 
                                 }
 
@@ -294,17 +298,17 @@ public class Photos_Detail_Fragment extends Fragment implements IPhotos_View, IG
 
     @Override
     public void onGalleryClick(int position) {
-            new Gallery_Dialog_Creator().showGallery(getActivity(), this.galleryList, position);
+        new Gallery_Dialog_Creator().showGallery(getActivity(), this.galleryList, position);
     }
 
     @Override
     public void onSlefieClick(int position) {
-            new Gallery_Dialog_Creator().showSelfies(getActivity(), this.selfieList, position, false, new IDeleteSelfie() {
-                @Override
-                public void onDeleteSelfieListener(Selfie selfie) {
-                    //no hacemos nada aqui
-                }
-            });
+        new Gallery_Dialog_Creator().showSelfies(getActivity(), this.selfieList, position, false, new IDeleteSelfie() {
+            @Override
+            public void onDeleteSelfieListener(Selfie selfie) {
+                //no hacemos nada aqui
+            }
+        });
 
     }
 
