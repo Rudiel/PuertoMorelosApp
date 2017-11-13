@@ -39,6 +39,9 @@ public class PhotoDialog_Creator {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.layout_dialog_newphoto);
 
+        dialog.getWindow().getAttributes().windowAnimations = R.style.animationdialog;
+
+
         final ImageView ivNewPhoto = (ImageView) dialog.findViewById(R.id.ivNewPhoto);
         final EditText etNewPhotoComment = (EditText) dialog.findViewById(R.id.etNewPhotoComment);
         final TextView tvNewPhotoCounter = (TextView) dialog.findViewById(R.id.tvNewPhotoCounter);

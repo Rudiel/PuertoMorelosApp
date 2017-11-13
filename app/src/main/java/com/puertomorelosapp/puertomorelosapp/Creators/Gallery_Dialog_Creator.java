@@ -30,6 +30,9 @@ public class Gallery_Dialog_Creator {
         dialogGallery.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialogGallery.setContentView(R.layout.layout_dialog_gallery);
 
+        dialogGallery.getWindow().getAttributes().windowAnimations = R.style.animationdialog;
+
+
         Window window = dialogGallery.getWindow();
 
         window.setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -90,6 +93,8 @@ public class Gallery_Dialog_Creator {
         final Dialog dialogGallery = new Dialog(context);
         dialogGallery.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialogGallery.setContentView(R.layout.layout_dialog_gallery);
+
+        dialogGallery.getWindow().getAttributes().windowAnimations = R.style.animationdialog;
 
         Window window = dialogGallery.getWindow();
 

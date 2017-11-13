@@ -35,7 +35,9 @@ import com.github.clans.fab.FloatingActionMenu;
 import com.google.firebase.auth.FirebaseAuth;
 import com.puertomorelosapp.puertomorelosapp.Adpaters.Gallery_Adapter;
 import com.puertomorelosapp.puertomorelosapp.Adpaters.Selfies_Adapter;
+import com.puertomorelosapp.puertomorelosapp.Creators.AnonymousDialog_Creator;
 import com.puertomorelosapp.puertomorelosapp.Creators.Gallery_Dialog_Creator;
+import com.puertomorelosapp.puertomorelosapp.Creators.IAnonymousListener;
 import com.puertomorelosapp.puertomorelosapp.Creators.INewPhoto_Creator;
 import com.puertomorelosapp.puertomorelosapp.Creators.Loading_Creator;
 import com.puertomorelosapp.puertomorelosapp.Creators.PhotoDialog_Creator;
@@ -153,28 +155,64 @@ public class Photos_Detail_Fragment extends Fragment implements IPhotos_View, IG
 
         presenter.getSelfies(activity.category, activity.subCategory);
 
-        if (FirebaseAuth.getInstance().getCurrentUser().isAnonymous())
-            fabNew.setVisibility(View.GONE);
-
         fabCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                    requestPermissions(new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA);
-                } else {
-                    cameraIntent();
-                }
+                if (!FirebaseAuth.getInstance().getCurrentUser().isAnonymous()) {
+                    if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                        requestPermissions(new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA);
+                    } else {
+                        cameraIntent();
+                    }
+                } else
+                    new AnonymousDialog_Creator().showAnonymousDialog(
+                            getActivity(),
+                            getString(R.string.anonymous_title),
+                            getString(R.string.anonymous_message_selfie),
+                            new IAnonymousListener() {
+                                @Override
+                                public void onRegisterNow(Dialog dialog) {
+                                    dialog.dismiss();
+
+                                }
+
+                                @Override
+                                public void onRegisterLate(Dialog dialog) {
+                                    dialog.dismiss();
+                                }
+                            }
+                    ).show();
             }
         });
 
         fabGallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                    requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_GALERY);
-                } else {
-                    galleryIntent();
-                }
+
+                if (!FirebaseAuth.getInstance().getCurrentUser().isAnonymous()) {
+                    if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                        requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_GALERY);
+                    } else {
+                        galleryIntent();
+                    }
+                } else
+                    new AnonymousDialog_Creator().showAnonymousDialog(
+                            getActivity(),
+                            getString(R.string.anonymous_title),
+                            getString(R.string.anonymous_message_selfie),
+                            new IAnonymousListener() {
+                                @Override
+                                public void onRegisterNow(Dialog dialog) {
+                                    dialog.dismiss();
+
+                                }
+
+                                @Override
+                                public void onRegisterLate(Dialog dialog) {
+                                    dialog.dismiss();
+                                }
+                            }
+                    ).show();
             }
         });
 
@@ -256,17 +294,18 @@ public class Photos_Detail_Fragment extends Fragment implements IPhotos_View, IG
 
     @Override
     public void onGalleryClick(int position) {
-        new Gallery_Dialog_Creator().showGallery(getActivity(), this.galleryList, position);
+            new Gallery_Dialog_Creator().showGallery(getActivity(), this.galleryList, position);
     }
 
     @Override
     public void onSlefieClick(int position) {
-        new Gallery_Dialog_Creator().showSelfies(getActivity(), this.selfieList, position, false, new IDeleteSelfie() {
-            @Override
-            public void onDeleteSelfieListener(Selfie selfie) {
-                //no hacemos nada aqui
-            }
-        });
+            new Gallery_Dialog_Creator().showSelfies(getActivity(), this.selfieList, position, false, new IDeleteSelfie() {
+                @Override
+                public void onDeleteSelfieListener(Selfie selfie) {
+                    //no hacemos nada aqui
+                }
+            });
+
     }
 
     private void cameraIntent() {

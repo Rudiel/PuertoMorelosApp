@@ -26,6 +26,8 @@ public class Tuturial_Activity_Creator {
         dialogTutorial.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialogTutorial.setContentView(R.layout.layout_activities_tutorial);
 
+        dialogTutorial.getWindow().getAttributes().windowAnimations = R.style.animationdialog;
+
         final Window window = dialogTutorial.getWindow();
 
         window.setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));

@@ -25,6 +25,8 @@ public class Dialog_Creator {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.layout_dialog);
 
+        dialog.getWindow().getAttributes().windowAnimations = R.style.animationdialog;
+
         dialog.setCancelable(false);
         dialog.setCanceledOnTouchOutside(true);
 

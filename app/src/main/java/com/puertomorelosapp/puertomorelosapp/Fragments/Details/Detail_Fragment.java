@@ -1,5 +1,6 @@
 package com.puertomorelosapp.puertomorelosapp.Fragments.Details;
 
+import android.app.Dialog;
 import android.content.res.Resources;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
@@ -35,7 +36,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.puertomorelosapp.puertomorelosapp.Creators.AnonymousDialog_Creator;
 import com.puertomorelosapp.puertomorelosapp.Creators.Dialog_Map;
+import com.puertomorelosapp.puertomorelosapp.Creators.IAnonymousListener;
 import com.puertomorelosapp.puertomorelosapp.Creators.ServicesDialog;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Details.Comments.Comments_Detail_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Details.Photos.Photos_Detail_Fragment;
@@ -335,27 +338,44 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
 
         initMap();
 
-            ivDetailComments.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    activity.setFragment(new Comments_Detail_Fragment(), true, null);
-                }
-            });
+        ivDetailComments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.setFragment(new Comments_Detail_Fragment(), true, null);
+            }
+        });
 
-            ivDetailGalery.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    activity.setFragment(new Photos_Detail_Fragment(), true, null);
-                }
-            });
+        ivDetailGalery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.setFragment(new Photos_Detail_Fragment(), true, null);
+            }
+        });
 
-        if (!FirebaseAuth.getInstance().getCurrentUser().isAnonymous())
-            ivDetailLikes.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+        ivDetailLikes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!FirebaseAuth.getInstance().getCurrentUser().isAnonymous())
                     saveLike();
-                }
-            });
+                else
+                    new AnonymousDialog_Creator().showAnonymousDialog(
+                            getActivity(),
+                            getString(R.string.anonymous_title),
+                            getString(R.string.anonymous_message_like_comment),
+                            new IAnonymousListener() {
+                                @Override
+                                public void onRegisterNow(Dialog dialog) {
+                                    dialog.dismiss();
+                                }
+
+                                @Override
+                                public void onRegisterLate(Dialog dialog) {
+                                    dialog.dismiss();
+                                }
+                            }
+                    ).show();
+            }
+        });
 
         setTextViewDrawableColor(tvDetailDescriptionTitle);
         setTextViewDrawableColor(tvDetailUbicationTitle);

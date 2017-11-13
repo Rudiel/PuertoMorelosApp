@@ -8,7 +8,7 @@
     <string name="login_email_edittext">E-mail</string>
     <string name="login_pass_edittext">Password</string>
     <string name="login_loading">Iniciando Sesión...</string>
-    <string name="login_anonymous">Inicio de Sesión modo anónimo</string>
+    <string name="login_anonymous">Registrarme mas tarde.</string>
 
     <!--Registro-->
     <string name="registro_mensaje">¿Ya estás registrado?</string>
@@ -105,6 +105,15 @@
     <string name="tab_likes">Me gusta</string>
     <string name="tab_comments">Comentarios</string>
     <string name="tab_selfies">Selfies</string>
+
+    <!--Anonymous-->
+    <string name="anonymous_message_selfie">Para subir tus selfies necesitas registrarte</string>
+    <string name="anonymous_message_info">Para ver la informacion del usuario necesitas registrarte</string>
+    <string name="anonymous_message_like_comment">Para comentar, dar like, y subir fotos necesitas registrarte</string>
+    <string name="anonymous_title">Oops!. No estas registrado</string>
+    <string name="anonymous_resgiter">Registrarme</string>
+    <string name="anonymous_late">Más tarde</string>
+
 
 </resources>
 

@@ -67,7 +67,7 @@ public class Dialog_Map extends DialogFragment {
 
         d.requestWindowFeature(Window.FEATURE_NO_TITLE);
         d.setContentView(R.layout.layout_dialog_gallery);
-
+        
         Window window = d.getWindow();
 
         window.setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));

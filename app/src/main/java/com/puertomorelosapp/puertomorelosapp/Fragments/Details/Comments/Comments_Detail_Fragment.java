@@ -22,7 +22,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.google.firebase.auth.FirebaseAuth;
 import com.puertomorelosapp.puertomorelosapp.Adpaters.Comments_Adapter;
+import com.puertomorelosapp.puertomorelosapp.Creators.AnonymousDialog_Creator;
 import com.puertomorelosapp.puertomorelosapp.Creators.ConfirmDialog_Creator;
+import com.puertomorelosapp.puertomorelosapp.Creators.IAnonymousListener;
 import com.puertomorelosapp.puertomorelosapp.Creators.IConfirmComment_Creator;
 import com.puertomorelosapp.puertomorelosapp.Creators.ProfileDetails_Creator;
 import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
@@ -123,13 +125,25 @@ public class Comments_Detail_Fragment extends Fragment implements IComments_View
 
         rvCommentsDetail.setLayoutManager(mLayoutManager);
 
-        if (!FirebaseAuth.getInstance().getCurrentUser().isAnonymous())
-            btWriteComment.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+        btWriteComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!FirebaseAuth.getInstance().getCurrentUser().isAnonymous())
                     showWriteComment();
-                }
-            });
+                else
+                    new AnonymousDialog_Creator().showAnonymousDialog(getActivity(), getString(R.string.anonymous_title), getString(R.string.anonymous_message_like_comment), new IAnonymousListener() {
+                        @Override
+                        public void onRegisterNow(Dialog dialog) {
+                            dialog.dismiss();
+                        }
+
+                        @Override
+                        public void onRegisterLate(Dialog dialog) {
+                            dialog.dismiss();
+                        }
+                    }).show();
+            }
+        });
 
         presenter.getComments(activity.subCategory.getId());
 
@@ -232,7 +246,19 @@ public class Comments_Detail_Fragment extends Fragment implements IComments_View
 
     @Override
     public void onProfileClickListener(Comments comment) {
+        if (!FirebaseAuth.getInstance().getCurrentUser().isAnonymous())
+            presenter.getProfileInfo(comment);
+        else
+            new AnonymousDialog_Creator().showAnonymousDialog(getActivity(), getString(R.string.anonymous_title), getString(R.string.anonymous_message_info), new IAnonymousListener() {
+                @Override
+                public void onRegisterNow(Dialog dialog) {
+                    dialog.dismiss();
+                }
 
-        presenter.getProfileInfo(comment);
+                @Override
+                public void onRegisterLate(Dialog dialog) {
+                    dialog.dismiss();
+                }
+            }).show();
     }
 }

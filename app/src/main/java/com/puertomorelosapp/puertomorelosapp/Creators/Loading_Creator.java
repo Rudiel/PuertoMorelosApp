@@ -24,6 +24,8 @@ public class Loading_Creator {
 
         dialogLoading.setContentView(R.layout.layout_loading_login);
 
+        dialogLoading.getWindow().getAttributes().windowAnimations = R.style.animationdialog;
+
         Window windowLoading = dialogLoading.getWindow();
 
         //windowLoading.setBackgroundDrawable(new ColorDrawable(context.getResources().getColor(R.color.transparent)));
