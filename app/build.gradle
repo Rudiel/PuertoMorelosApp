@@ -73,6 +73,7 @@ dependencies {
     //PDF Reader
     compile 'com.github.barteksc:android-pdf-viewer:2.7.0'
 
+    //One signal notifications
     compile 'com.onesignal:OneSignal:3.4.3@aar'
     compile 'com.google.android.gms:play-services-gcm:10.2.0'
 

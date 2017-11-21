@@ -16,7 +16,6 @@
     <string name="registro_terminos_link">términos y condiciones</string>
     <string name="registro_terminos_app">de esta aplicación.</string>
     <string name="registro_hint_username">Username</string>
-    <string name="registro_hint_email">E-mail</string>
     <string name="registro_hint_passwprd">Password</string>
 
     <!--Menu-->
@@ -43,8 +42,6 @@
     <string name="dialog_accept">Aceptar</string>
     <string name="dialog_cancel">Cancelar</string>
     <string name="title_register">Registrarse</string>
-    <string name="title_login">Iniciar Sesión</string>
-    <string name="title_recover">Recuperar</string>
     <string name="facebook_app_id">975356942502889</string>
     <string name="fb_login_protocol_scheme">fb975356942502889</string>
 
@@ -62,16 +59,6 @@
 
 
     <!--Categorias-->
-    <string name="historia">Historia</string>
-    <string name="restaurantes">Restaurantes</string>
-    <string name="hoteles">Hoteles</string>
-    <string name="atractivos_turisticos">Atractivos Turisticos</string>
-    <string name="comida_rapida">Comida rapida</string>
-    <string name="servicios">Servicios</string>
-    <string name="eventos">Eventos</string>
-    <string name="lugares_de_interes">Lugares de interes</string>
-    <string name="comercios">Comercios</string>
-    <string name="transition_subcategory">transicionsubcategoria</string>
 
     <!--Photos-->
     <string name="photos_gallery_title">Galeria</string>
@@ -91,7 +78,6 @@
     <string name="tutorial_delete_subtitle">Desliza hacia la izquierda y edita o borra los comentarios del historial. O para quitar tu me gusta de algún lugar.</string>
 
     <string name="tutorial_selfie_title">¿Esa selfie ya no te gusta tanto?</string>
-    <string name="tutorial_selfie_title_emoticon">¿Esa selfie ya no te gusta tanto?😞</string>
     <string name="tutorial_selfie_subtitle">Búscala en el album, seleccionala y presiona la papeleria.</string>
 
     <!--Comments-->

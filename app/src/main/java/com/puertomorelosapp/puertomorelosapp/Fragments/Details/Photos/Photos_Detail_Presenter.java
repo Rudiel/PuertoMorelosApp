@@ -222,8 +222,8 @@ public class Photos_Detail_Presenter implements IPhotos_Presenter {
 
                         Bitmap bitmap = BitmapFactory.decodeByteArray(bytesThumb, 0, bytesThumb.length);
 
-                        selfie.setHeight((double) bitmap.getWidth());
-                        selfie.setWidth((double) bitmap.getHeight());
+                        selfie.setHeight(((double) bitmap.getWidth())/10);
+                        selfie.setWidth(((double) bitmap.getHeight())/10);
 
                         selfie.setSelfieThumb(url);
 
