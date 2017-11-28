@@ -11,6 +11,8 @@ import android.preference.PreferenceManager;
 
 public class Utils {
 
+    public static boolean isFromRegister;
+
     private static final String BASE_URL = "https://puerto-morelos-app.firebaseio.com/";
 
     public static final String CATE_URL = "PuertoMorelos/Idiomas/Español/Menu";

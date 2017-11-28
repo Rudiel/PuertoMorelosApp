@@ -28,13 +28,13 @@ import com.puertomorelosapp.puertomorelosapp.Creators.ConfirmDialog_Creator;
 import com.puertomorelosapp.puertomorelosapp.Creators.IAnonymousListener;
 import com.puertomorelosapp.puertomorelosapp.Creators.IConfirmComment_Creator;
 import com.puertomorelosapp.puertomorelosapp.Creators.ProfileDetails_Creator;
+import com.puertomorelosapp.puertomorelosapp.Login.Login_Activity;
 import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
 import com.puertomorelosapp.puertomorelosapp.Models.Request.NewComment;
 import com.puertomorelosapp.puertomorelosapp.Models.Request.RoutesComments;
 import com.puertomorelosapp.puertomorelosapp.Models.Response.Comments;
 import com.puertomorelosapp.puertomorelosapp.Models.Response.ProfileInfo;
 import com.puertomorelosapp.puertomorelosapp.R;
-import com.puertomorelosapp.puertomorelosapp.Register.Register_Activity;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
 import com.puertomorelosapp.puertomorelosapp.Utils.Utils;
 
@@ -136,8 +136,9 @@ public class Comments_Detail_Fragment extends Fragment implements IComments_View
                     new AnonymousDialog_Creator().showAnonymousDialog(getActivity(), getString(R.string.anonymous_title), getString(R.string.anonymous_message_like_comment), new IAnonymousListener() {
                         @Override
                         public void onRegisterNow(Dialog dialog) {
+                            Utils.isFromRegister = true;
                             dialog.dismiss();
-                            getActivity().startActivity(new Intent(getActivity(), Register_Activity.class));
+                            getActivity().startActivity(new Intent(getActivity(), Login_Activity.class));
                         }
 
                         @Override
@@ -255,8 +256,9 @@ public class Comments_Detail_Fragment extends Fragment implements IComments_View
             new AnonymousDialog_Creator().showAnonymousDialog(getActivity(), getString(R.string.anonymous_title), getString(R.string.anonymous_message_info), new IAnonymousListener() {
                 @Override
                 public void onRegisterNow(Dialog dialog) {
+                    Utils.isFromRegister = true;
                     dialog.dismiss();
-                    getActivity().startActivity(new Intent(getActivity(), Register_Activity.class));
+                    getActivity().startActivity(new Intent(getActivity(), Login_Activity.class));
 
                 }
 

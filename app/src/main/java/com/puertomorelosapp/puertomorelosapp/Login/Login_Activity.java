@@ -94,8 +94,11 @@ public class Login_Activity extends AppCompatActivity implements ILogin_View, Fa
         auth = FirebaseAuth.getInstance();
 
         if (auth.getCurrentUser() != null) {
-            startActivity(new Intent(Login_Activity.this, Main_Activity.class));
-            finish();
+            if (!Utils.isFromRegister) {
+                startActivity(new Intent(Login_Activity.this, Main_Activity.class));
+                finish();
+            }
+
         }
         setContentView(R.layout.layout_login);
 
@@ -157,7 +160,10 @@ public class Login_Activity extends AppCompatActivity implements ILogin_View, Fa
         tvLoginAnnonymus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.loginAnonymous(auth, Login_Activity.this);
+                if (!Utils.isFromRegister)
+                    presenter.loginAnonymous(auth, Login_Activity.this);
+                else
+                    finish();
             }
         });
 
@@ -181,6 +187,14 @@ public class Login_Activity extends AppCompatActivity implements ILogin_View, Fa
 
     @Override
     public void showMainActivity() {
+        if (Utils.isFromRegister) {
+            try {
+                Main_Activity.act.finish();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            Utils.isFromRegister = false;
+        }
         startActivity(new Intent(Login_Activity.this, Main_Activity.class));
         finish();
     }

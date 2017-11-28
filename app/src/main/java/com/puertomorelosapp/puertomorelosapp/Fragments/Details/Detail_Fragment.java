@@ -43,13 +43,13 @@ import com.puertomorelosapp.puertomorelosapp.Creators.IAnonymousListener;
 import com.puertomorelosapp.puertomorelosapp.Creators.ServicesDialog;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Details.Comments.Comments_Detail_Fragment;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Details.Photos.Photos_Detail_Fragment;
+import com.puertomorelosapp.puertomorelosapp.Login.Login_Activity;
 import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
 import com.puertomorelosapp.puertomorelosapp.Models.Categorie;
 import com.puertomorelosapp.puertomorelosapp.Models.Request.Like;
 import com.puertomorelosapp.puertomorelosapp.Models.Servicio;
 import com.puertomorelosapp.puertomorelosapp.Models.SubCategory;
 import com.puertomorelosapp.puertomorelosapp.R;
-import com.puertomorelosapp.puertomorelosapp.Register.Register_Activity;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
 import com.puertomorelosapp.puertomorelosapp.Utils.Utils;
 
@@ -367,9 +367,9 @@ public class Detail_Fragment extends Fragment implements IDetail_View {
                             new IAnonymousListener() {
                                 @Override
                                 public void onRegisterNow(Dialog dialog) {
-
+                                    Utils.isFromRegister = true;
                                     dialog.dismiss();
-                                    getActivity().startActivity(new Intent(getActivity(), Register_Activity.class));
+                                    getActivity().startActivity(new Intent(getActivity(), Login_Activity.class));
 
                                 }
 

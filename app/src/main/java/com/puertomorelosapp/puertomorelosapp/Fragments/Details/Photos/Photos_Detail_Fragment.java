@@ -42,11 +42,11 @@ import com.puertomorelosapp.puertomorelosapp.Creators.INewPhoto_Creator;
 import com.puertomorelosapp.puertomorelosapp.Creators.Loading_Creator;
 import com.puertomorelosapp.puertomorelosapp.Creators.PhotoDialog_Creator;
 import com.puertomorelosapp.puertomorelosapp.Fragments.Activities.Selfies.IDeleteSelfie;
+import com.puertomorelosapp.puertomorelosapp.Login.Login_Activity;
 import com.puertomorelosapp.puertomorelosapp.Main.Main_Activity;
 import com.puertomorelosapp.puertomorelosapp.Models.Request.Gallery;
 import com.puertomorelosapp.puertomorelosapp.Models.Request.Selfie;
 import com.puertomorelosapp.puertomorelosapp.R;
-import com.puertomorelosapp.puertomorelosapp.Register.Register_Activity;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
 import com.puertomorelosapp.puertomorelosapp.Utils.Utils;
 
@@ -173,9 +173,9 @@ public class Photos_Detail_Fragment extends Fragment implements IPhotos_View, IG
                             new IAnonymousListener() {
                                 @Override
                                 public void onRegisterNow(Dialog dialog) {
-
+                                    Utils.isFromRegister = true;
                                     dialog.dismiss();
-                                    getActivity().startActivity(new Intent(getActivity(), Register_Activity.class));
+                                    getActivity().startActivity(new Intent(getActivity(), Login_Activity.class));
                                 }
 
                                 @Override
@@ -205,10 +205,9 @@ public class Photos_Detail_Fragment extends Fragment implements IPhotos_View, IG
                             new IAnonymousListener() {
                                 @Override
                                 public void onRegisterNow(Dialog dialog) {
-
+                                    Utils.isFromRegister = true;
                                     dialog.dismiss();
-                                    getActivity().startActivity(new Intent(getActivity(), Register_Activity.class));
-
+                                    getActivity().startActivity(new Intent(getActivity(), Login_Activity.class));
                                 }
 
                                 @Override

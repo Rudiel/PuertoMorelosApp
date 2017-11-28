@@ -133,13 +133,21 @@ public class Register_Activity extends AppCompatActivity implements IRegister_Vi
         Utils.saveUserEmail(this, user.getEmail());
         Utils.saveUserImage(this, user.getImageURL());
 
-        startActivity(new Intent(Register_Activity.this, Main_Activity.class));
-        try {
-            Main_Activity.act.finish();
+        if (Utils.isFromRegister) {
+            try {
+                Main_Activity.act.finish();
 
-        } catch (Exception e) {
-            e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            Utils.isFromRegister = false;
         }
+
+        Intent intent = new Intent(Register_Activity.this, Main_Activity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+
         finish();
     }
 
