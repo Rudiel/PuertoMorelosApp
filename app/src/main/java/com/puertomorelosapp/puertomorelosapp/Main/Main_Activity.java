@@ -31,7 +31,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.facebook.login.LoginManager;
+import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.UserInfo;
 import com.puertomorelosapp.puertomorelosapp.Adpaters.Activities_Selfies_Adapter;
 import com.puertomorelosapp.puertomorelosapp.Creators.ConfirmDialog_Creator;
 import com.puertomorelosapp.puertomorelosapp.Creators.IConfirmDialog_Creator;
@@ -142,9 +144,16 @@ public class Main_Activity extends AppCompatActivity implements IMain_View {
 
         final ImageView ivProfilePicture = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.ivProfilePicture);
 
+        String url = "";
+
+        for (UserInfo profile : auth.getCurrentUser().getProviderData()) {
+            if (FacebookAuthProvider.PROVIDER_ID.equals(profile.getProviderId())) {
+                url = profile.getUid();
+            }
+        }
 
         if (auth.getCurrentUser().getPhotoUrl() != null && !auth.getCurrentUser().isAnonymous())
-            Utils.saveUserImage(this, auth.getCurrentUser().getPhotoUrl().toString());
+        Utils.saveUserImage(this, "https://graph.facebook.com/" + url + "/picture?height=500");
 
         if (!Utils.getUserImage(this).equals("SomeimageURL")) {
             Glide.with(this).load(Utils.getUserImage(this)).asBitmap().centerCrop().into(new BitmapImageViewTarget(ivProfilePicture) {

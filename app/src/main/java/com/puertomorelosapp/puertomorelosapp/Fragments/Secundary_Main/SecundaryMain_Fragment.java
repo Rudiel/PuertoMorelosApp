@@ -117,8 +117,6 @@ public class SecundaryMain_Fragment extends Fragment implements ISecundaryMain_v
     @Override
     public void showSubCategories(List<SubCategory> subCategories) {
 
-        Log.d("SHOWCATE","CATEGORIES");
-
         if (activity != null)
             activity.subCategoryList = subCategories;
 

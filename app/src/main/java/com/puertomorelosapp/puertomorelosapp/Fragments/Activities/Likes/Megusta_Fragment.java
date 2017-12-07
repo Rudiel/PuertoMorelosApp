@@ -83,6 +83,8 @@ public class Megusta_Fragment extends Fragment implements IMegusta_View, IDelete
     @Override
     public void setLikesList(List<Like> likes) {
 
+        this.likes.clear();
+
         this.likes = likes;
 
         Collections.sort(this.likes, new Comparator<Like>() {

@@ -71,7 +71,7 @@ public class SubCategories_Adapter extends RecyclerView.Adapter<SubCategories_Ad
         holder.tvComments.setText(String.valueOf(subcategoryList.get(position).getComments()));
         holder.tvLikes.setText(String.valueOf(subcategoryList.get(position).getLikes()));
         holder.tvSubcategoryName.setText(subcategoryList.get(position).getNombre());
-        Glide.with(context).load(subcategoryList.get(position).getImageBackgroundContent()).centerCrop().into(holder.ivSubcategory);
+        Glide.with(context).load(subcategoryList.get(position).getImageHeader()).centerCrop().into(holder.ivSubcategory);
 
         ViewCompat.setTransitionName(holder.ivSubcategory,subcategoryList.get(position).getNombre());
 
