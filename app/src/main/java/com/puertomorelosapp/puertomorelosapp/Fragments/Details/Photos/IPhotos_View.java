@@ -27,4 +27,6 @@ public interface IPhotos_View {
 
     void hidelUploadingSelfie();
 
+    void showErroUploadingSelfie(String message);
+
 }

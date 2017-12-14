@@ -117,8 +117,9 @@ public class SecundaryMain_Fragment extends Fragment implements ISecundaryMain_v
     @Override
     public void showSubCategories(List<SubCategory> subCategories) {
 
-        if (activity != null)
+        if (activity != null) {
             activity.subCategoryList = subCategories;
+        }
 
         List<SubCategory> list = new ArrayList<>();
 

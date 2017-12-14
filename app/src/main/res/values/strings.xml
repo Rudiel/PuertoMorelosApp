@@ -67,6 +67,7 @@
     <string name="newphoto_publicar">Publicar</string>
     <string name="newphoto_text_hint">¿Que ha pasado?</string>
     <string name="newselfie_loading">Subiendo Selfie...</string>
+    <string name="uploading_selfie_error">Ocurrió un problema tratando de subir la selfie. Intente Nuevamente.</string>
 
     <!--Activities-->
 

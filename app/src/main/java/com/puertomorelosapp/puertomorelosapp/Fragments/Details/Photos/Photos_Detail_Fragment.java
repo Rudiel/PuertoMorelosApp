@@ -36,8 +36,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.puertomorelosapp.puertomorelosapp.Adpaters.Gallery_Adapter;
 import com.puertomorelosapp.puertomorelosapp.Adpaters.Selfies_Adapter;
 import com.puertomorelosapp.puertomorelosapp.Creators.AnonymousDialog_Creator;
+import com.puertomorelosapp.puertomorelosapp.Creators.ConfirmDialog_Creator;
+import com.puertomorelosapp.puertomorelosapp.Creators.Dialog_Creator;
 import com.puertomorelosapp.puertomorelosapp.Creators.Gallery_Dialog_Creator;
 import com.puertomorelosapp.puertomorelosapp.Creators.IAnonymousListener;
+import com.puertomorelosapp.puertomorelosapp.Creators.IDialog_Creator;
 import com.puertomorelosapp.puertomorelosapp.Creators.INewPhoto_Creator;
 import com.puertomorelosapp.puertomorelosapp.Creators.Loading_Creator;
 import com.puertomorelosapp.puertomorelosapp.Creators.PhotoDialog_Creator;
@@ -292,6 +295,16 @@ public class Photos_Detail_Fragment extends Fragment implements IPhotos_View, IG
     @Override
     public void hidelUploadingSelfie() {
         loading.dismiss();
+    }
+
+    @Override
+    public void showErroUploadingSelfie(String message) {
+        new Dialog_Creator().showAlertDialog(getActivity(), "Selfie", getString(R.string.uploading_selfie_error), new IDialog_Creator() {
+            @Override
+            public void didOK(Dialog dialog) {
+                dialog.dismiss();
+            }
+        });
     }
 
 

@@ -20,6 +20,7 @@ import com.puertomorelosapp.puertomorelosapp.Models.Request.Gallery;
 import com.puertomorelosapp.puertomorelosapp.Models.Request.Selfie;
 import com.puertomorelosapp.puertomorelosapp.Models.Response.Photographer;
 import com.puertomorelosapp.puertomorelosapp.Models.SubCategory;
+import com.puertomorelosapp.puertomorelosapp.R;
 import com.puertomorelosapp.puertomorelosapp.Utils.PuertoMorelosApplication;
 import com.puertomorelosapp.puertomorelosapp.Utils.Utils;
 
@@ -192,6 +193,8 @@ public class Photos_Detail_Presenter implements IPhotos_Presenter {
             public void onFailure(@NonNull Exception e) {
 
                 //mostrar mensaje de que fallo
+                view.showErroUploadingSelfie(e.getMessage());
+                view.hidelUploadingSelfie();
 
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -212,6 +215,8 @@ public class Photos_Detail_Presenter implements IPhotos_Presenter {
                     public void onFailure(@NonNull Exception e) {
 
                         //mostrar mensaje de que fallo
+                        view.showErroUploadingSelfie(context.getString(R.string.uploading_selfie_error));
+                        view.hidelUploadingSelfie();
 
                     }
                 }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -222,8 +227,8 @@ public class Photos_Detail_Presenter implements IPhotos_Presenter {
 
                         Bitmap bitmap = BitmapFactory.decodeByteArray(bytesThumb, 0, bytesThumb.length);
 
-                        selfie.setHeight(((double) bitmap.getHeight())/10);
-                        selfie.setWidth(((double) bitmap.getWidth())/10);
+                        selfie.setHeight(((double) bitmap.getHeight()) / 10);
+                        selfie.setWidth(((double) bitmap.getWidth()) / 10);
 
                         selfie.setSelfieThumb(url);
 
