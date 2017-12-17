@@ -160,9 +160,9 @@ public class Selfies_Adapter extends RecyclerView.Adapter<Selfies_Adapter.ViewHo
 
         SimpleDateFormat out24 = new SimpleDateFormat("HH:mm");
 
-        if (currentTime.get(Calendar.DATE) == picTime.get(Calendar.DATE)) {
+        if (currentTime.get(Calendar.DAY_OF_YEAR) == picTime.get(Calendar.DAY_OF_YEAR)) {
             return context.getString(R.string.comments_today) + " " + out24.format(datePic);
-        } else if (currentTime.get(Calendar.DATE) - picTime.get(Calendar.DATE) == 1) {
+        } else if (currentTime.get(Calendar.DAY_OF_YEAR) - picTime.get(Calendar.DAY_OF_YEAR) == 1) {
             return context.getString(R.string.comments_yesterday) + " " + out24.format(datePic);
         } else {
             return output.format(datePic);
